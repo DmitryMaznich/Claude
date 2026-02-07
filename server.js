@@ -174,14 +174,19 @@ app.post('/api/chat', async (req, res) => {
         if (assistantMessage.includes('TRIGGER_OPERATOR:')) {
             session.operatorMode = true;
 
-            const summary = assistantMessage.replace('TRIGGER_OPERATOR:', '').trim();
+            // Build conversation history (last 5 messages)
+            const historyMessages = session.messages.slice(-5).map(msg => {
+                const icon = msg.role === 'user' ? '👤' : '🤖';
+                const text = msg.content.length > 100 ? msg.content.substring(0, 100) + '...' : msg.content;
+                return `${icon}: ${text}`;
+            }).join('\n');
 
             // Notify operator
             const notification = `🔔 *ZAPROS OPERATERJA*\n` +
                 `━━━━━━━━━━━━━━━━━\n` +
-                `👤 Uporabnik:\n\n` +
+                `👤 Poslednje sporočilo:\n\n` +
                 `"${message}"\n\n` +
-                `📝 AI analiza:\n${summary}\n\n` +
+                `📝 Zgodovina pogovora:\n${historyMessages}\n\n` +
                 `━━━━━━━━━━━━━━━━━\n` +
                 `Session: \`${sessionId}\``;
 
