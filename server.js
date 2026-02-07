@@ -212,11 +212,16 @@ app.post('/api/chat', async (req, res) => {
 
         // Check if in operator mode
         if (session.operatorMode) {
+            // Translate user's message to Russian if needed
+            const translatedMessage = await translateToRussian(message, session.language);
+            const showOriginal = ['Russian', 'Slovenian', 'English'].includes(session.language);
+
             // Send user's message to operator via Telegram
+            const displayMessage = showOriginal ? message : translatedMessage;
             const notification = `💬 *NOVO SPOROČILO*\n` +
                 `━━━━━━━━━━━━━━━━━\n` +
-                `👤 Uporabnik:\n\n` +
-                `"${message}"\n\n` +
+                `👤 Клиент (${session.language || 'Unknown'}):\n\n` +
+                `"${displayMessage}"\n\n` +
                 `━━━━━━━━━━━━━━━━━\n` +
                 `Session: \`${sessionId}\``;
 
@@ -546,8 +551,9 @@ app.post('/api/upload', (req, res) => {
 
         // Send photo to operator via Telegram
         if (bot && OPERATOR_CHAT_ID) {
-            const notification = `📸 *ФОТО ОД КОРИСТУВАЧА*\n` +
+            const notification = `📸 *ФОТО ОТ КЛИЕНТА*\n` +
                 `━━━━━━━━━━━━━━━━━\n` +
+                `👤 Клиент (${session.language || 'Unknown'})\n` +
                 `Session: \`${sessionId}\``;
 
             try {
