@@ -5680,16 +5680,22 @@
 
         // Chat configuration
         const API_URL = 'https://claude-production-e0ea.up.railway.app'; // Railway production server
+
+        // Generate or retrieve session ID from localStorage
+        function generateSessionId() {
+            let sessionId = localStorage.getItem('smartwash_session_id');
+            if (!sessionId) {
+                sessionId = 'session-' + Math.random().toString(36).substring(2, 15) +
+                           Math.random().toString(36).substring(2, 15);
+                localStorage.setItem('smartwash_session_id', sessionId);
+            }
+            return sessionId;
+        }
+
         const SESSION_ID = generateSessionId();
         let isOperatorMode = false;
         let lastMessageTime = new Date().toISOString();
         let pollingInterval = null;
-
-        // Generate unique session ID
-        function generateSessionId() {
-            return 'session-' + Math.random().toString(36).substring(2, 15) +
-                   Math.random().toString(36).substring(2, 15);
-        }
 
         // Send message to server
         async function sendMessage() {
