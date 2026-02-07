@@ -296,20 +296,7 @@ app.post('/api/chat', async (req, res) => {
             });
         }
 
-        // Get AI response from Claude
-        const response = await anthropic.messages.create({
-            model: 'claude-3-haiku-20240307',
-            max_tokens: 500,
-            system: getSystemPrompt(session.language),
-            messages: session.messages.map(msg => ({
-                role: msg.role,
-                content: msg.content
-            }))
-        });
-
-        const assistantMessage = response.content[0].text;
-
-        // If this is the first message, detect and save language
+        // If this is the first message, detect and save language BEFORE calling AI
         if (!session.language && session.messages.length === 1) {
             // Extract language from user's first message
             const userLanguage = message.toLowerCase().trim();
@@ -439,12 +426,25 @@ app.post('/api/chat', async (req, res) => {
                 }
             }
 
-            // If no match, try to detect from the message itself
+            // If no match, default to English
             if (!session.language) {
-                session.language = 'English'; // Default fallback
+                session.language = 'English';
                 console.log('Language not detected, defaulting to English');
             }
         }
+
+        // Get AI response from Claude
+        const response = await anthropic.messages.create({
+            model: 'claude-3-haiku-20240307',
+            max_tokens: 500,
+            system: getSystemPrompt(session.language),
+            messages: session.messages.map(msg => ({
+                role: msg.role,
+                content: msg.content
+            }))
+        });
+
+        const assistantMessage = response.content[0].text;
 
         // Check if Claude wants to trigger operator
         if (assistantMessage.includes('TRIGGER_OPERATOR:')) {
