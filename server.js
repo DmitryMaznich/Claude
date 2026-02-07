@@ -121,7 +121,7 @@ app.post('/api/chat', async (req, res) => {
 
         // Get AI response from Claude
         const response = await anthropic.messages.create({
-            model: 'claude-sonnet-4-20250514',
+            model: 'claude-sonnet-4-20241022',
             max_tokens: 500,
             system: SYSTEM_PROMPT,
             messages: session.messages.map(msg => ({
