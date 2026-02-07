@@ -2641,6 +2641,36 @@
             transform: scale(1.1);
         }
 
+        .photo-button {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border: none;
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            margin-right: 8px;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .photo-button:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-message.photo-message {
+            max-width: 80%;
+        }
+
+        .chat-message img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 8px;
+        }
+
         /* Typing indicator */
         .typing-indicator .message-bubble {
             padding: 16px 20px;
@@ -3407,6 +3437,36 @@
 
         .send-button:hover {
             transform: scale(1.1);
+        }
+
+        .photo-button {
+            background: linear-gradient(135deg, #4CAF50, #45a049);
+            border: none;
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            margin-right: 8px;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .photo-button:hover {
+            transform: scale(1.1);
+        }
+
+        .chat-message.photo-message {
+            max-width: 80%;
+        }
+
+        .chat-message img {
+            max-width: 100%;
+            border-radius: 8px;
+            margin-top: 8px;
         }
 
         /* Typing indicator */
@@ -5372,6 +5432,15 @@
 
         <div class="chat-input-container">
             <input
+                type="file"
+                id="photoInput"
+                accept="image/*"
+                style="display: none;"
+            />
+            <button id="photoButton" class="photo-button" title="Pošlji fotografijo / Send photo">
+                📷
+            </button>
+            <input
                 type="text"
                 id="chatInput"
                 class="chat-input"
@@ -5666,6 +5735,8 @@
         const chatInput = document.getElementById('chatInput');
         const sendMessageBtn = document.getElementById('sendMessage');
         const chatMessages = document.getElementById('chatMessages');
+        const photoButton = document.getElementById('photoButton');
+        const photoInput = document.getElementById('photoInput');
 
         chatButton.addEventListener('click', function() {
             chatWidget.classList.add('active');
@@ -5831,9 +5902,21 @@
                             // Add message without updating lastMessageTime
                             const messageDiv = document.createElement('div');
                             messageDiv.className = 'chat-message bot-message';
-                            messageDiv.innerHTML = `
-                                <div class="message-content">${escapeHtml(msg.content)}</div>
-                            `;
+
+                            let content = '';
+                            if (msg.photo) {
+                                content = `
+                                    <div class="message-bubble">
+                                        <img src="${API_URL}${msg.photo}" alt="Photo" style="max-width: 100%; border-radius: 8px;">
+                                        ${msg.content ? `<p>${escapeHtml(msg.content)}</p>` : ''}
+                                        <span class="message-time">${new Date().toLocaleTimeString('sl-SI', {hour: '2-digit', minute: '2-digit'})}</span>
+                                    </div>
+                                `;
+                            } else {
+                                content = `<div class="message-content">${escapeHtml(msg.content)}</div>`;
+                            }
+
+                            messageDiv.innerHTML = content;
                             chatMessages.appendChild(messageDiv);
                             chatMessages.scrollTop = chatMessages.scrollHeight;
                         });
@@ -5854,6 +5937,66 @@
                 pollingInterval = null;
             }
         }
+
+        // Photo upload function
+        async function sendPhoto(file) {
+            const formData = new FormData();
+            formData.append('photo', file);
+            formData.append('sessionId', SESSION_ID);
+
+            // Show preview in chat
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const messageDiv = document.createElement('div');
+                messageDiv.className = 'chat-message user photo-message';
+                messageDiv.innerHTML = `
+                    <div class="message-bubble">
+                        <img src="${e.target.result}" alt="Photo" style="max-width: 100%; border-radius: 8px;">
+                        <span class="message-time">${new Date().toLocaleTimeString('sl-SI', {hour: '2-digit', minute: '2-digit'})}</span>
+                    </div>
+                `;
+                chatMessages.appendChild(messageDiv);
+                chatMessages.scrollTop = chatMessages.scrollHeight;
+            };
+            reader.readAsDataURL(file);
+
+            try {
+                const response = await fetch(`${API_URL}/api/upload`, {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const data = await response.json();
+
+                if (data.error) {
+                    addMessage('Napaka pri nalaganju fotografije / Error uploading photo', 'bot');
+                    return;
+                }
+
+                // Update operator mode status
+                if (data.operatorMode && !isOperatorMode) {
+                    isOperatorMode = true;
+                    updateChatStatus('Operator');
+                    startPolling();
+                }
+            } catch (error) {
+                console.error('Error uploading photo:', error);
+                addMessage('Napaka pri pošiljanju fotografije / Error sending photo', 'bot');
+            }
+        }
+
+        // Photo button event listeners
+        photoButton.addEventListener('click', function() {
+            photoInput.click();
+        });
+
+        photoInput.addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+                sendPhoto(file);
+                photoInput.value = ''; // Reset input
+            }
+        });
 
         sendMessageBtn.addEventListener('click', sendMessage);
         chatInput.addEventListener('keypress', function(e) {
