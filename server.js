@@ -1331,6 +1331,15 @@ app.get('/reset-webhook', async (req, res) => {
     }
 });
 
+// Debug endpoint to check loaded website content
+app.get('/api/debug/content', (req, res) => {
+    res.json({
+        lastUpdated: websiteContent.lastUpdated,
+        info: websiteContent.info,
+        infoLength: websiteContent.info.length
+    });
+});
+
 // Start server
 app.listen(PORT, '0.0.0.0', async () => {
     console.log(`🚀 Server running on port ${PORT}`);
