@@ -105,6 +105,58 @@ If the user asks complex questions, needs human support, or explicitly asks to t
 Be friendly, helpful, and concise. Remember: ONLY respond in ${userLanguage}.`;
 }
 
+// Get operator connection message in user's language
+function getOperatorConnectMessage(userLanguage) {
+    const messages = {
+        'Slovenian': 'Povezujem vas z našim operaterjem. Počakajte trenutek...',
+        'English': 'Connecting you with our operator. Please wait a moment...',
+        'Russian': 'Соединяю вас с оператором. Пожалуйста, подождите...',
+        'Croatian': 'Povezujem vas s našim operatorom. Pričekajte trenutak...',
+        'Italian': 'Vi sto collegando con il nostro operatore. Attendere prego...',
+        'German': 'Ich verbinde Sie mit unserem Operator. Bitte warten Sie...',
+        'Spanish': 'Le estoy conectando con nuestro operador. Por favor espere...',
+        'French': 'Je vous connecte avec notre opérateur. Veuillez patienter...',
+        'Portuguese': 'Estou conectando você com nosso operador. Por favor aguarde...',
+        'Polish': 'Łączę z naszym operatorem. Proszę czekać...',
+        'Czech': 'Spojuji vás s naším operátorem. Počkejte prosím...',
+        'Ukrainian': 'З\'єдную вас з нашим оператором. Будь ласка, зачекайте...',
+        'Serbian': 'Povezujem vas sa našim operatorom. Molim sačekajte...',
+        'Japanese': 'オペレーターにおつなぎします。しばらくお待ちください...',
+        'Chinese': '正在为您连接我们的客服。请稍候...',
+        'Korean': '상담원과 연결 중입니다. 잠시만 기다려 주세요...',
+        'Turkish': 'Operatörümüze bağlanıyorsunuz. Lütfen bekleyin...',
+        'Arabic': 'جارٍ توصيلك بمشغلنا. يرجى الانتظار...'
+    };
+
+    return messages[userLanguage] || messages['English'];
+}
+
+// Get goodbye message in user's language
+function getGoodbyeMessage(userLanguage) {
+    const messages = {
+        'Slovenian': 'Hvala za pogovor! Zdaj se lahko ponovno pogovarjate z našim AI asistentom.',
+        'English': 'Thank you for the conversation! You can now chat with our AI assistant again.',
+        'Russian': 'Спасибо за общение! Теперь вы можете снова общаться с нашим AI ассистентом.',
+        'Croatian': 'Hvala na razgovoru! Sada se opet možete razgovarati s našim AI asistentom.',
+        'Italian': 'Grazie per la conversazione! Ora puoi chattare di nuovo con il nostro assistente AI.',
+        'German': 'Vielen Dank für das Gespräch! Sie können jetzt wieder mit unserem KI-Assistenten chatten.',
+        'Spanish': 'Gracias por la conversación. Ahora puede chatear de nuevo con nuestro asistente de IA.',
+        'French': 'Merci pour la conversation! Vous pouvez maintenant discuter à nouveau avec notre assistant IA.',
+        'Portuguese': 'Obrigado pela conversa! Agora você pode conversar novamente com nosso assistente de IA.',
+        'Polish': 'Dziękuję za rozmowę! Możesz teraz ponownie rozmawiać z naszym asystentem AI.',
+        'Czech': 'Děkuji za rozhovor! Nyní můžete znovu chatovat s naším AI asistentem.',
+        'Ukrainian': 'Дякую за розмову! Тепер ви можете знову спілкуватися з нашим AI асистентом.',
+        'Serbian': 'Hvala na razgovoru! Sada možete ponovo razgovarati sa našim AI asistentom.',
+        'Japanese': 'ご利用ありがとうございました！今すぐAIアシスタントと再度チャットできます。',
+        'Chinese': '感谢您的对话！您现在可以再次与我们的AI助手聊天。',
+        'Korean': '대화해 주셔서 감사합니다! 이제 AI 어시스턴트와 다시 채팅할 수 있습니다.',
+        'Turkish': 'Konuşma için teşekkürler! Artık AI asistanımızla tekrar sohbet edebilirsiniz.',
+        'Arabic': 'شكرا للمحادثة! يمكنك الآن الدردشة مع مساعد الذكاء الاصطناعي مرة أخرى.'
+    };
+
+    return messages[userLanguage] || messages['English'];
+}
+
 // Trigger phrases for operator handoff
 const TRIGGER_PHRASES = [
     'pogovoriti s človekom',
@@ -291,7 +343,7 @@ app.post('/api/chat', async (req, res) => {
             }
 
             return res.json({
-                response: 'Povezujem vas z našim operaterjem. Počakajte trenutek...\nConnecting you with our operator. Please wait a moment...',
+                response: getOperatorConnectMessage(session.language),
                 operatorMode: true
             });
         }
@@ -520,7 +572,7 @@ app.post('/api/chat', async (req, res) => {
             }
 
             return res.json({
-                response: 'Povezujem vas z našim operaterjem za dodatno pomoč...\nConnecting you with our operator for additional help...',
+                response: getOperatorConnectMessage(session.language),
                 operatorMode: true
             });
         }
@@ -685,7 +737,7 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 // Send goodbye message to user
                 session.messages.push({
                     role: 'assistant',
-                    content: 'Hvala za pogovor! Zdaj se lahko ponovno pogovarjate z našim AI asistentom.\n\nThank you for the conversation! You can now chat with our AI assistant again.',
+                    content: getGoodbyeMessage(session.language),
                     timestamp: new Date(),
                     fromOperator: true
                 });
@@ -986,7 +1038,7 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 // Send goodbye message to user
                 session.messages.push({
                     role: 'assistant',
-                    content: 'Hvala za pogovor! Zdaj se lahko ponovno pogovarjate z našim AI asistentom.\n\nThank you for the conversation! You can now chat with our AI assistant again.',
+                    content: getGoodbyeMessage(session.language),
                     timestamp: new Date(),
                     fromOperator: true
                 });
