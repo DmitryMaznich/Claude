@@ -2590,6 +2590,7 @@
             margin: 0;
             font-size: 0.95rem;
             line-height: 1.4;
+            white-space: pre-line;
         }
 
         .message-time {
@@ -3388,6 +3389,7 @@
             margin: 0;
             font-size: 0.95rem;
             line-height: 1.4;
+            white-space: pre-line;
         }
 
         .message-time {
@@ -6010,7 +6012,7 @@
 
         // Initial greeting message
         setTimeout(() => {
-            addMessage('👋 Dobrodošli! / Welcome! / Добро пожаловать!\\n\\n🌍 Prosimo, vnesite vaš jezik:\\nPlease enter your language:\\nПожалуйста, укажите ваш язык:\\n\\n• slovenščina\\n• english\\n• русский\\n• hrvatski\\n• italiano\\n• deutsch\\n• ...\\n\\nNapiši / Type / Введите:', 'bot');
+            addMessage('👋 Zdravo! Hello! Привет!\n\n🌍 Izberite jezik / Choose your language:\n\n🇸🇮 slovenščina • 🇬🇧 english • 🇷🇺 русский\n🇭🇷 hrvatski • 🇮🇹 italiano • 🇩🇪 deutsch\n\n...ali vaš jezik / ...or type yours!', 'bot');
         }, 500);
 
         // Cleanup on page unload

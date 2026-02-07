@@ -278,26 +278,113 @@ app.post('/api/chat', async (req, res) => {
 
             // Map common language names
             const languageMap = {
+                // Slovenian
                 'slovenščina': 'Slovenian',
                 'slovene': 'Slovenian',
                 'slovenian': 'Slovenian',
+                // English
                 'english': 'English',
                 'англи': 'English',
+                // Russian
                 'русский': 'Russian',
                 'russian': 'Russian',
                 'ruski': 'Russian',
+                // Croatian
                 'hrvatski': 'Croatian',
                 'croatian': 'Croatian',
                 'hrvatska': 'Croatian',
+                // Italian
                 'italiano': 'Italian',
                 'italian': 'Italian',
+                // German
                 'deutsch': 'German',
                 'german': 'German',
                 'nemščina': 'German',
+                // Spanish
                 'español': 'Spanish',
                 'spanish': 'Spanish',
+                'espanol': 'Spanish',
+                // French
                 'français': 'French',
-                'french': 'French'
+                'french': 'French',
+                'francais': 'French',
+                // Portuguese
+                'português': 'Portuguese',
+                'portuguese': 'Portuguese',
+                'portugues': 'Portuguese',
+                // Polish
+                'polski': 'Polish',
+                'polish': 'Polish',
+                // Czech
+                'čeština': 'Czech',
+                'czech': 'Czech',
+                'cestina': 'Czech',
+                // Ukrainian
+                'українська': 'Ukrainian',
+                'ukrainian': 'Ukrainian',
+                'ukrainski': 'Ukrainian',
+                // Serbian
+                'srpski': 'Serbian',
+                'serbian': 'Serbian',
+                // Bulgarian
+                'български': 'Bulgarian',
+                'bulgarian': 'Bulgarian',
+                // Romanian
+                'română': 'Romanian',
+                'romanian': 'Romanian',
+                'romana': 'Romanian',
+                // Greek
+                'ελληνικά': 'Greek',
+                'greek': 'Greek',
+                'ellinika': 'Greek',
+                // Turkish
+                'türkçe': 'Turkish',
+                'turkish': 'Turkish',
+                'turkce': 'Turkish',
+                // Arabic
+                'العربية': 'Arabic',
+                'arabic': 'Arabic',
+                'arabi': 'Arabic',
+                // Chinese
+                '中文': 'Chinese',
+                'chinese': 'Chinese',
+                'zhongwen': 'Chinese',
+                'mandarin': 'Chinese',
+                // Japanese
+                '日本語': 'Japanese',
+                'japanese': 'Japanese',
+                'nihongo': 'Japanese',
+                // Korean
+                '한국어': 'Korean',
+                'korean': 'Korean',
+                'hangugeo': 'Korean',
+                // Hindi
+                'हिन्दी': 'Hindi',
+                'hindi': 'Hindi',
+                // Dutch
+                'nederlands': 'Dutch',
+                'dutch': 'Dutch',
+                // Swedish
+                'svenska': 'Swedish',
+                'swedish': 'Swedish',
+                // Norwegian
+                'norsk': 'Norwegian',
+                'norwegian': 'Norwegian',
+                // Danish
+                'dansk': 'Danish',
+                'danish': 'Danish',
+                // Finnish
+                'suomi': 'Finnish',
+                'finnish': 'Finnish',
+                // Albanian
+                'shqip': 'Albanian',
+                'albanian': 'Albanian',
+                // Bosnian
+                'bosanski': 'Bosnian',
+                'bosnian': 'Bosnian',
+                // Macedonian
+                'македонски': 'Macedonian',
+                'macedonian': 'Macedonian'
             };
 
             // Find matching language
