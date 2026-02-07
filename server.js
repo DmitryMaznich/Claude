@@ -348,6 +348,42 @@ app.get('/health', (req, res) => {
     res.json({ status: 'ok', sessions: sessions.size });
 });
 
+// Reset webhook endpoint (for debugging)
+app.get('/reset-webhook', async (req, res) => {
+    if (!bot) {
+        return res.json({ error: 'Bot not configured' });
+    }
+
+    try {
+        // Delete webhook with drop_pending_updates
+        await bot.deleteWebHook({ drop_pending_updates: true });
+        console.log('Webhook deleted with pending updates dropped');
+
+        // Wait a moment
+        await new Promise(resolve => setTimeout(resolve, 1000));
+
+        // Set webhook again
+        const webhookUrl = `https://claude-production-e0ea.up.railway.app/telegram/webhook`;
+        await bot.setWebHook(webhookUrl);
+        console.log(`Webhook set to: ${webhookUrl}`);
+
+        // Get webhook info
+        const info = await bot.getWebhookInfo();
+
+        res.json({
+            success: true,
+            message: 'Webhook reset successfully',
+            webhookInfo: info
+        });
+    } catch (error) {
+        console.error('Error resetting webhook:', error);
+        res.json({
+            success: false,
+            error: error.message
+        });
+    }
+});
+
 // Start server
 app.listen(PORT, '0.0.0.0', async () => {
     console.log(`🚀 Server running on port ${PORT}`);
