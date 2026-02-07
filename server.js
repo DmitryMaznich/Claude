@@ -96,7 +96,7 @@ app.post('/api/chat', async (req, res) => {
         // Check if in operator mode
         if (session.operatorMode) {
             // Send user's message to operator via Telegram
-            const notification = `💬 *Nova poruka / New message*\n\n` +
+            const notification = `💬 *Novo sporočilo / New message*\n\n` +
                 `Session ID: \`${sessionId}\`\n` +
                 `Uporabnik / User: ${message}\n\n` +
                 `_Uporabi /reply ${sessionId} [sporočilo] za odgovor_\n` +
