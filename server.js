@@ -73,6 +73,9 @@ const OPERATOR_CHAT_ID = process.env.OPERATOR_CHAT_ID;
 // Session storage (in production, use Redis or database)
 const sessions = new Map();
 
+// Map Telegram message IDs to session IDs (for group chat threading)
+const telegramMessageToSession = new Map(); // messageId -> sessionId
+
 // Store website content (updated once per day)
 let websiteContent = {
     lastUpdated: null,
@@ -433,7 +436,7 @@ app.post('/api/chat', async (req, res) => {
 
             if (bot && OPERATOR_CHAT_ID) {
                 try {
-                    await bot.sendMessage(OPERATOR_CHAT_ID, notification, {
+                    const messageOptions = {
                         parse_mode: 'Markdown',
                         reply_markup: {
                             inline_keyboard: [[
@@ -441,7 +444,20 @@ app.post('/api/chat', async (req, res) => {
                                 { text: '🗑️ Izbriši / Delete', callback_data: `delete_${sessionId}` }
                             ]]
                         }
-                    });
+                    };
+
+                    // If this session already has a thread, reply to it
+                    if (session.telegramThreadId) {
+                        messageOptions.reply_to_message_id = session.telegramThreadId;
+                    }
+
+                    const sentMessage = await bot.sendMessage(OPERATOR_CHAT_ID, notification, messageOptions);
+
+                    // Store message ID for thread tracking (use first message as thread root)
+                    if (!session.telegramThreadId) {
+                        session.telegramThreadId = sentMessage.message_id;
+                    }
+                    telegramMessageToSession.set(sentMessage.message_id, sessionId);
                 } catch (telegramError) {
                     console.error('Telegram notification failed:', telegramError.message);
                 }
@@ -486,7 +502,7 @@ app.post('/api/chat', async (req, res) => {
 
             if (bot && OPERATOR_CHAT_ID) {
                 try {
-                    await bot.sendMessage(OPERATOR_CHAT_ID, notification, {
+                    const messageOptions = {
                         parse_mode: 'Markdown',
                         reply_markup: {
                             inline_keyboard: [[
@@ -494,7 +510,20 @@ app.post('/api/chat', async (req, res) => {
                                 { text: '🗑️ Удалить / Delete', callback_data: `delete_${sessionId}` }
                             ]]
                         }
-                    });
+                    };
+
+                    // If this session already has a thread, reply to it
+                    if (session.telegramThreadId) {
+                        messageOptions.reply_to_message_id = session.telegramThreadId;
+                    }
+
+                    const sentMessage = await bot.sendMessage(OPERATOR_CHAT_ID, notification, messageOptions);
+
+                    // Store message ID for thread tracking (use first message as thread root)
+                    if (!session.telegramThreadId) {
+                        session.telegramThreadId = sentMessage.message_id;
+                    }
+                    telegramMessageToSession.set(sentMessage.message_id, sessionId);
                 } catch (telegramError) {
                     console.error('Telegram notification failed:', telegramError.message);
                 }
@@ -728,7 +757,7 @@ app.post('/api/chat', async (req, res) => {
 
             if (bot && OPERATOR_CHAT_ID) {
                 try {
-                    await bot.sendMessage(OPERATOR_CHAT_ID, notification, {
+                    const messageOptions = {
                         parse_mode: 'Markdown',
                         reply_markup: {
                             inline_keyboard: [[
@@ -736,7 +765,20 @@ app.post('/api/chat', async (req, res) => {
                                 { text: '🗑️ Удалить / Delete', callback_data: `delete_${sessionId}` }
                             ]]
                         }
-                    });
+                    };
+
+                    // If this session already has a thread, reply to it
+                    if (session.telegramThreadId) {
+                        messageOptions.reply_to_message_id = session.telegramThreadId;
+                    }
+
+                    const sentMessage = await bot.sendMessage(OPERATOR_CHAT_ID, notification, messageOptions);
+
+                    // Store message ID for thread tracking (use first message as thread root)
+                    if (!session.telegramThreadId) {
+                        session.telegramThreadId = sentMessage.message_id;
+                    }
+                    telegramMessageToSession.set(sentMessage.message_id, sessionId);
                 } catch (telegramError) {
                     console.error('Telegram notification failed:', telegramError.message);
                 }
@@ -828,15 +870,29 @@ app.post('/api/upload', (req, res) => {
                 `Session: \`${sessionId}\``;
 
             try {
-                await bot.sendPhoto(OPERATOR_CHAT_ID, photoPath, {
+                const photoOptions = {
                     caption: notification,
                     parse_mode: 'Markdown',
                     reply_markup: {
                         inline_keyboard: [[
-                            { text: '❌ Zapri sejo / Close', callback_data: `close_${sessionId}` }
+                            { text: '🔄 V AI / To AI', callback_data: `close_${sessionId}` },
+                            { text: '🗑️ Izbriši / Delete', callback_data: `delete_${sessionId}` }
                         ]]
                     }
-                });
+                };
+
+                // If this session already has a thread, reply to it
+                if (session.telegramThreadId) {
+                    photoOptions.reply_to_message_id = session.telegramThreadId;
+                }
+
+                const sentMessage = await bot.sendPhoto(OPERATOR_CHAT_ID, photoPath, photoOptions);
+
+                // Store message ID for thread tracking (use first message as thread root)
+                if (!session.telegramThreadId) {
+                    session.telegramThreadId = sentMessage.message_id;
+                }
+                telegramMessageToSession.set(sentMessage.message_id, sessionId);
             } catch (telegramError) {
                 console.error('Telegram photo send failed:', telegramError.message);
             }
@@ -958,6 +1014,13 @@ app.post(`/telegram/webhook`, async (req, res) => {
                     fromOperator: true
                 });
 
+                // Clean up telegram message mappings for this session
+                for (const [messageId, sid] of telegramMessageToSession.entries()) {
+                    if (sid === sessionId) {
+                        telegramMessageToSession.delete(messageId);
+                    }
+                }
+
                 // Delete session from memory
                 sessions.delete(sessionId);
 
@@ -986,74 +1049,83 @@ app.post(`/telegram/webhook`, async (req, res) => {
 
             // Handle reply to notification (easy way to respond to user)
             if (msg.reply_to_message && (msg.reply_to_message.text || msg.reply_to_message.caption)) {
-                const replyText = msg.reply_to_message.text || msg.reply_to_message.caption;
-                console.log(`Reply to text/caption: ${replyText}`);
+                console.log(`Message is a reply to message ID: ${msg.reply_to_message.message_id}`);
+                console.log(`Chat type: ${msg.chat.type}, Chat ID: ${chatId}, OPERATOR_CHAT_ID: ${OPERATOR_CHAT_ID}`);
 
-                // Extract session ID from the original notification message
-                // Note: Telegram removes backticks when displaying Markdown, so we search without them
-                const sessionIdMatch = replyText.match(/Session: (session-[a-z0-9]+)/);
-                console.log(`Session ID match: ${sessionIdMatch ? sessionIdMatch[1] : 'not found'}`);
+                // Check if this is from the operator group/chat
+                const isOperatorChat = chatId.toString() === OPERATOR_CHAT_ID;
 
-                if (sessionIdMatch && chatId.toString() === OPERATOR_CHAT_ID) {
-                    const sessionId = sessionIdMatch[1];
-                    const session = sessions.get(sessionId);
+                if (isOperatorChat && msg.reply_to_message.from && msg.reply_to_message.from.is_bot) {
+                    // This is a reply to bot's message in the operator group
+                    // Find session ID from the message ID mapping
+                    const sessionId = telegramMessageToSession.get(msg.reply_to_message.message_id);
+                    console.log(`Found session ID from message map: ${sessionId}`);
 
-                    if (!session) {
-                        try {
-                            await bot.sendMessage(chatId, `❌ Seja ${sessionId} več ne obstaja / Session no longer exists`);
-                        } catch (sendError) {
-                            console.error('Error sending message:', sendError.message);
+                    if (sessionId) {
+                        const session = sessions.get(sessionId);
+
+                        if (!session) {
+                            try {
+                                await bot.sendMessage(chatId, `❌ Seja ${sessionId} več ne obstaja / Session no longer exists`, {
+                                    reply_to_message_id: msg.message_id
+                                });
+                            } catch (sendError) {
+                                console.error('Error sending message:', sendError.message);
+                            }
+                            return res.sendStatus(200);
                         }
+
+                        // Translate operator's message to user's language
+                        const userLanguage = session.language || 'English';
+                        const translatedText = await translateToLanguage(text, userLanguage);
+                        console.log(`Translating operator response from Russian to ${userLanguage}`);
+
+                        // Add operator's message to session (in user's language)
+                        session.messages.push({
+                            role: 'assistant',
+                            content: translatedText,
+                            timestamp: new Date(),
+                            fromOperator: true
+                        });
+
+                        console.log(`Reply sent to session ${sessionId} via group thread`);
+                        try {
+                            await bot.sendMessage(chatId, `✅ Sporočilo poslano / Message sent`, {
+                                reply_to_message_id: msg.message_id
+                            });
+                        } catch (sendError) {
+                            console.error('Error sending confirmation:', sendError.message);
+                        }
+
                         return res.sendStatus(200);
                     }
-
-                    // Translate operator's message to user's language
-                    const userLanguage = session.language || 'English';
-                    const translatedText = await translateToLanguage(text, userLanguage);
-                    console.log(`Translating operator response from Russian to ${userLanguage}`);
-
-                    // Add operator's message to session (in user's language)
-                    session.messages.push({
-                        role: 'assistant',
-                        content: translatedText,
-                        timestamp: new Date(),
-                        fromOperator: true
-                    });
-
-                    console.log(`Reply sent to session ${sessionId} via reply-to`);
-                    try {
-                        await bot.sendMessage(chatId, `✅ Sporočilo poslano / Message sent`);
-                    } catch (sendError) {
-                        console.error('Error sending confirmation:', sendError.message);
-                    }
-
-                    return res.sendStatus(200);
                 }
             }
 
             // Handle photo from operator
             if (msg.photo && msg.photo.length > 0) {
-                // Check if this is a reply to notification
+                const isOperatorChat = chatId.toString() === OPERATOR_CHAT_ID;
                 let sessionId = null;
 
-                if (msg.reply_to_message && msg.reply_to_message.caption) {
-                    const sessionIdMatch = msg.reply_to_message.caption.match(/Session: (session-[a-z0-9]+)/);
-                    if (sessionIdMatch) {
-                        sessionId = sessionIdMatch[1];
-                    }
+                // Try to find session ID from reply message mapping
+                if (msg.reply_to_message && msg.reply_to_message.from && msg.reply_to_message.from.is_bot) {
+                    sessionId = telegramMessageToSession.get(msg.reply_to_message.message_id);
+                    console.log(`Found session ID from photo reply: ${sessionId}`);
                 }
 
-                if (!sessionId && chatId.toString() === OPERATOR_CHAT_ID) {
+                if (!sessionId && isOperatorChat) {
                     // If not a reply, ask operator to specify session
                     try {
-                        await bot.sendMessage(chatId, '❌ Prosimo odgovorite (reply) na sporočilo uporabnika da pošljete fotografijo\n\nPlease reply to user\'s message to send photo');
+                        await bot.sendMessage(chatId, '❌ Prosimo odgovorite (reply) na sporočilo uporabnika da pošljete fotografijo\n\nPlease reply to user\'s message to send photo', {
+                            reply_to_message_id: msg.message_id
+                        });
                     } catch (sendError) {
                         console.error('Error sending message:', sendError.message);
                     }
                     return res.sendStatus(200);
                 }
 
-                if (sessionId && chatId.toString() === OPERATOR_CHAT_ID) {
+                if (sessionId && isOperatorChat) {
                     const session = sessions.get(sessionId);
                     if (!session) {
                         try {
@@ -1306,6 +1378,9 @@ app.post(`/telegram/webhook`, async (req, res) => {
                         console.error(`Error closing session ${sessionId}:`, error);
                     }
                 }
+
+                // Clean up all telegram message mappings
+                telegramMessageToSession.clear();
 
                 // Delete all sessions from memory
                 sessions.clear();
