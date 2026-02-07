@@ -95,6 +95,21 @@ app.post('/api/chat', async (req, res) => {
 
         // Check if in operator mode
         if (session.operatorMode) {
+            // Send user's message to operator via Telegram
+            const notification = `💬 *Nova poruka / New message*\n\n` +
+                `Session ID: \`${sessionId}\`\n` +
+                `Uporabnik / User: ${message}\n\n` +
+                `_Uporabi /reply ${sessionId} [sporočilo] za odgovor_\n` +
+                `_Use /reply ${sessionId} [message] to respond_`;
+
+            if (bot && OPERATOR_CHAT_ID) {
+                try {
+                    await bot.sendMessage(OPERATOR_CHAT_ID, notification, { parse_mode: 'Markdown' });
+                } catch (telegramError) {
+                    console.error('Telegram notification failed:', telegramError.message);
+                }
+            }
+
             return res.json({
                 response: 'Vaše sporočilo je bilo poslano operaterju. Kmalu boste prejeli odgovor.\nYour message has been sent to the operator. You will receive a response shortly.',
                 operatorMode: true
