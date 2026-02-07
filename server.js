@@ -305,13 +305,16 @@ app.post(`/telegram/webhook`, async (req, res) => {
             const text = msg.text || '';
 
             console.log(`Received message from ${chatId}: ${text}`);
+            console.log(`Has reply_to_message: ${!!msg.reply_to_message}`);
 
             // Handle reply to notification (easy way to respond to user)
             if (msg.reply_to_message && msg.reply_to_message.text) {
                 const replyText = msg.reply_to_message.text;
+                console.log(`Reply to text: ${replyText}`);
 
                 // Extract session ID from the original notification message
                 const sessionIdMatch = replyText.match(/Session ID: `([^`]+)`/);
+                console.log(`Session ID match: ${sessionIdMatch ? sessionIdMatch[1] : 'not found'}`);
 
                 if (sessionIdMatch && chatId.toString() === OPERATOR_CHAT_ID) {
                     const sessionId = sessionIdMatch[1];
