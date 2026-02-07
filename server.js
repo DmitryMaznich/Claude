@@ -117,7 +117,7 @@ app.post('/api/chat', async (req, res) => {
             }
 
             return res.json({
-                response: 'Vaše sporočilo je bilo poslano operaterju. Kmalu boste prejeli odgovor.\nYour message has been sent to the operator. You will receive a response shortly.',
+                response: '✓✓',
                 operatorMode: true
             });
         }
