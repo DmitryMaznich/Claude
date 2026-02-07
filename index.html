@@ -5703,8 +5703,8 @@
             const message = chatInput.value.trim();
             if (!message) return;
 
-            // Add user message
-            addMessage(message, 'user');
+            // Add user message and keep reference
+            const userMessageElement = addMessage(message, 'user');
             chatInput.value = '';
 
             // Show typing indicator
@@ -5731,7 +5731,17 @@
                     return;
                 }
 
-                addMessage(data.response, 'bot');
+                // If response is just checkmarks, add them to user's message instead of creating new message
+                if (data.response === '✓✓') {
+                    const statusSpan = userMessageElement.querySelector('.message-status');
+                    if (statusSpan) {
+                        statusSpan.textContent = ' ✓✓';
+                        statusSpan.style.color = '#34b7f1';
+                        statusSpan.style.marginLeft = '4px';
+                    }
+                } else {
+                    addMessage(data.response, 'bot');
+                }
 
                 // Update operator mode status
                 if (data.operatorMode && !isOperatorMode) {
@@ -5753,12 +5763,13 @@
             messageDiv.innerHTML = `
                 <div class="message-bubble">
                     <p>${escapeHtml(text)}</p>
-                    <span class="message-time">${new Date().toLocaleTimeString('sl-SI', {hour: '2-digit', minute: '2-digit'})}</span>
+                    <span class="message-time">${new Date().toLocaleTimeString('sl-SI', {hour: '2-digit', minute: '2-digit'})}<span class="message-status"></span></span>
                 </div>
             `;
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
             lastMessageTime = new Date().toISOString();
+            return messageDiv; // Return the created element
         }
 
         function escapeHtml(text) {
