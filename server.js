@@ -37,13 +37,27 @@ const upload = multer({
     storage: storage,
     limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
     fileFilter: function (req, file, cb) {
-        const allowedTypes = /jpeg|jpg|png|webp/;
-        const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
-        const mimetype = allowedTypes.test(file.mimetype);
-        if (extname && mimetype) {
+        console.log('File upload attempt:', {
+            originalname: file.originalname,
+            mimetype: file.mimetype,
+            size: file.size
+        });
+
+        // Check file extension
+        const allowedExtensions = /\.(jpg|jpeg|png|webp|gif)$/i;
+        const hasValidExtension = allowedExtensions.test(file.originalname);
+
+        // Check MIME type
+        const allowedMimetypes = /^image\/(jpeg|png|webp|gif)/;
+        const hasValidMimetype = allowedMimetypes.test(file.mimetype);
+
+        if (hasValidExtension || hasValidMimetype) {
+            console.log('File accepted');
             return cb(null, true);
         }
-        cb(new Error('Only image files (JPEG, PNG, WEBP) are allowed!'));
+
+        console.log('File rejected');
+        cb(new Error('Only image files (JPEG, PNG, WEBP, GIF) are allowed!'));
     }
 });
 
