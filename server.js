@@ -17,10 +17,8 @@ const anthropic = new Anthropic({
     apiKey: process.env.ANTHROPIC_API_KEY
 });
 
-// Initialize Telegram Bot (disabled for now - can be enabled later with webhooks)
-// const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
-// const bot = process.env.TELEGRAM_BOT_TOKEN ? new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: false }) : null;
-const bot = null; // Telegram notifications disabled
+// Initialize Telegram Bot with webhook
+const bot = process.env.TELEGRAM_BOT_TOKEN ? new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: false }) : null;
 const OPERATOR_CHAT_ID = process.env.OPERATOR_CHAT_ID;
 
 // Session storage (in production, use Redis or database)
@@ -277,15 +275,35 @@ if (bot) {
     });
 }
 
+// Telegram webhook endpoint
+app.post(`/telegram/webhook`, (req, res) => {
+    if (bot) {
+        bot.processUpdate(req.body);
+    }
+    res.sendStatus(200);
+});
+
 // Health check
 app.get('/health', (req, res) => {
     res.json({ status: 'ok', sessions: sessions.size });
 });
 
 // Start server
-app.listen(PORT, '0.0.0.0', () => {
+app.listen(PORT, '0.0.0.0', async () => {
     console.log(`🚀 Server running on port ${PORT}`);
-    console.log(`📱 Telegram bot: ${bot ? 'webhook mode' : 'disabled'}`);
     console.log(`💬 Chat API ready`);
     console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
+
+    // Set up Telegram webhook in production
+    if (bot && process.env.RAILWAY_ENVIRONMENT) {
+        const webhookUrl = `https://claude-production-e0ea.up.railway.app/telegram/webhook`;
+        try {
+            await bot.setWebHook(webhookUrl);
+            console.log(`📱 Telegram webhook set to: ${webhookUrl}`);
+        } catch (error) {
+            console.error('Failed to set Telegram webhook:', error.message);
+        }
+    } else {
+        console.log(`📱 Telegram bot: ${bot ? 'ready (webhook not set - local mode)' : 'disabled'}`);
+    }
 });
