@@ -318,7 +318,7 @@ app.post(`/telegram/webhook`, async (req, res) => {
 
                 // Extract session ID from the original notification message
                 // Note: Telegram removes backticks when displaying Markdown, so we search without them
-                const sessionIdMatch = replyText.match(/Session ID: (session-[a-z0-9]+)/);
+                const sessionIdMatch = replyText.match(/Session: (session-[a-z0-9]+)/);
                 console.log(`Session ID match: ${sessionIdMatch ? sessionIdMatch[1] : 'not found'}`);
 
                 if (sessionIdMatch && chatId.toString() === OPERATOR_CHAT_ID) {
