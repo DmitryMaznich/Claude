@@ -2,6 +2,9 @@ const express = require('express');
 const cors = require('cors');
 const { Anthropic } = require('@anthropic-ai/sdk');
 const TelegramBot = require('node-telegram-bot-api');
+const multer = require('multer');
+const path = require('path');
+const fs = require('fs');
 require('dotenv').config();
 
 const app = express();
@@ -11,6 +14,38 @@ const PORT = process.env.PORT || 3000;
 app.use(cors());
 app.use(express.json());
 app.use(express.static('.')); // Serve static files from current directory
+
+// Create uploads directory if it doesn't exist
+const uploadsDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadsDir)) {
+    fs.mkdirSync(uploadsDir, { recursive: true });
+}
+app.use('/uploads', express.static(uploadsDir));
+
+// Configure multer for file uploads
+const storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, uploadsDir);
+    },
+    filename: function (req, file, cb) {
+        const uniqueSuffix = Date.now() + '-' + Math.round(Math.random() * 1E9);
+        cb(null, 'photo-' + uniqueSuffix + path.extname(file.originalname));
+    }
+});
+
+const upload = multer({
+    storage: storage,
+    limits: { fileSize: 5 * 1024 * 1024 }, // 5MB limit
+    fileFilter: function (req, file, cb) {
+        const allowedTypes = /jpeg|jpg|png|webp/;
+        const extname = allowedTypes.test(path.extname(file.originalname).toLowerCase());
+        const mimetype = allowedTypes.test(file.mimetype);
+        if (extname && mimetype) {
+            return cb(null, true);
+        }
+        cb(new Error('Only image files (JPEG, PNG, WEBP) are allowed!'));
+    }
+});
 
 // Initialize Anthropic (Claude)
 const anthropic = new Anthropic({
@@ -231,6 +266,67 @@ app.post('/api/chat', async (req, res) => {
     }
 });
 
+// Upload photo endpoint
+app.post('/api/upload', upload.single('photo'), async (req, res) => {
+    try {
+        if (!req.file) {
+            return res.status(400).json({ error: 'No file uploaded' });
+        }
+
+        const { sessionId } = req.body;
+        if (!sessionId) {
+            return res.status(400).json({ error: 'Session ID is required' });
+        }
+
+        const session = getSession(sessionId);
+        const photoUrl = `/uploads/${req.file.filename}`;
+        const photoPath = req.file.path;
+
+        // Add photo message to session
+        session.messages.push({
+            role: 'user',
+            content: '[Фото]',
+            photo: photoUrl,
+            timestamp: new Date()
+        });
+
+        // Automatically switch to operator mode when photo is sent
+        if (!session.operatorMode) {
+            session.operatorMode = true;
+        }
+
+        // Send photo to operator via Telegram
+        if (bot && OPERATOR_CHAT_ID) {
+            const notification = `📸 *ФОТО ОД КОРИСТУВАЧА*\n` +
+                `━━━━━━━━━━━━━━━━━\n` +
+                `Session: \`${sessionId}\``;
+
+            try {
+                await bot.sendPhoto(OPERATOR_CHAT_ID, photoPath, {
+                    caption: notification,
+                    parse_mode: 'Markdown',
+                    reply_markup: {
+                        inline_keyboard: [[
+                            { text: '❌ Zapri sejo / Close', callback_data: `close_${sessionId}` }
+                        ]]
+                    }
+                });
+            } catch (telegramError) {
+                console.error('Telegram photo send failed:', telegramError.message);
+            }
+        }
+
+        res.json({
+            success: true,
+            photoUrl: photoUrl,
+            operatorMode: true
+        });
+    } catch (error) {
+        console.error('Photo upload error:', error);
+        res.status(500).json({ error: 'Failed to upload photo' });
+    }
+});
+
 // Get new messages for session (polling endpoint)
 app.get('/api/messages/:sessionId', (req, res) => {
     const { sessionId } = req.params;
@@ -246,6 +342,7 @@ app.get('/api/messages/:sessionId', (req, res) => {
         .filter(msg => msg.timestamp > lastTime && msg.role === 'assistant')
         .map(msg => ({
             content: msg.content,
+            photo: msg.photo || null,
             timestamp: msg.timestamp
         }));
 
@@ -360,6 +457,84 @@ app.post(`/telegram/webhook`, async (req, res) => {
                         await bot.sendMessage(chatId, `✅ Sporočilo poslano / Message sent`);
                     } catch (sendError) {
                         console.error('Error sending confirmation:', sendError.message);
+                    }
+
+                    return res.sendStatus(200);
+                }
+            }
+
+            // Handle photo from operator
+            if (msg.photo && msg.photo.length > 0) {
+                // Check if this is a reply to notification
+                let sessionId = null;
+
+                if (msg.reply_to_message && msg.reply_to_message.caption) {
+                    const sessionIdMatch = msg.reply_to_message.caption.match(/Session: (session-[a-z0-9]+)/);
+                    if (sessionIdMatch) {
+                        sessionId = sessionIdMatch[1];
+                    }
+                }
+
+                if (!sessionId && chatId.toString() === OPERATOR_CHAT_ID) {
+                    // If not a reply, ask operator to specify session
+                    try {
+                        await bot.sendMessage(chatId, '❌ Prosimo odgovorite (reply) na sporočilo uporabnika da pošljete fotografijo\n\nPlease reply to user\'s message to send photo');
+                    } catch (sendError) {
+                        console.error('Error sending message:', sendError.message);
+                    }
+                    return res.sendStatus(200);
+                }
+
+                if (sessionId && chatId.toString() === OPERATOR_CHAT_ID) {
+                    const session = sessions.get(sessionId);
+                    if (!session) {
+                        try {
+                            await bot.sendMessage(chatId, `❌ Seja ${sessionId} več ne obstaja / Session no longer exists`);
+                        } catch (sendError) {
+                            console.error('Error sending message:', sendError.message);
+                        }
+                        return res.sendStatus(200);
+                    }
+
+                    try {
+                        // Get the largest photo
+                        const photo = msg.photo[msg.photo.length - 1];
+                        const fileId = photo.file_id;
+
+                        // Download photo from Telegram
+                        const fileLink = await bot.getFileLink(fileId);
+                        const https = require('https');
+                        const photoFilename = `photo-operator-${Date.now()}.jpg`;
+                        const photoPath = path.join(uploadsDir, photoFilename);
+                        const file = fs.createWriteStream(photoPath);
+
+                        await new Promise((resolve, reject) => {
+                            https.get(fileLink, (response) => {
+                                response.pipe(file);
+                                file.on('finish', () => {
+                                    file.close();
+                                    resolve();
+                                });
+                            }).on('error', (err) => {
+                                fs.unlink(photoPath, () => {});
+                                reject(err);
+                            });
+                        });
+
+                        // Add photo to session
+                        session.messages.push({
+                            role: 'assistant',
+                            content: '[Фото од оператора]',
+                            photo: `/uploads/${photoFilename}`,
+                            timestamp: new Date(),
+                            fromOperator: true
+                        });
+
+                        console.log(`Photo sent to session ${sessionId} via operator`);
+                        await bot.sendMessage(chatId, `✅ Fotografija poslana / Photo sent`);
+                    } catch (error) {
+                        console.error('Error processing operator photo:', error);
+                        await bot.sendMessage(chatId, `❌ Napaka pri pošiljanju fotografije / Error sending photo`);
                     }
 
                     return res.sendStatus(200);
