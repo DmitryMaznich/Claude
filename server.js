@@ -294,16 +294,18 @@ app.listen(PORT, '0.0.0.0', async () => {
     console.log(`💬 Chat API ready`);
     console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
 
-    // Set up Telegram webhook in production
-    if (bot && process.env.RAILWAY_ENVIRONMENT) {
+    // Set up Telegram webhook
+    if (bot) {
         const webhookUrl = `https://claude-production-e0ea.up.railway.app/telegram/webhook`;
         try {
             await bot.setWebHook(webhookUrl);
             console.log(`📱 Telegram webhook set to: ${webhookUrl}`);
+            console.log(`💬 Bot ready to receive notifications`);
         } catch (error) {
             console.error('Failed to set Telegram webhook:', error.message);
+            console.log(`📱 Telegram bot: notifications may not work`);
         }
     } else {
-        console.log(`📱 Telegram bot: ${bot ? 'ready (webhook not set - local mode)' : 'disabled'}`);
+        console.log(`📱 Telegram bot: disabled`);
     }
 });
