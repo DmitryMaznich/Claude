@@ -1073,31 +1073,32 @@ app.post(`/telegram/webhook`, async (req, res) => {
                     return;
                 }
 
-                // Send goodbye message to all users and close all sessions
+                // Send goodbye message to all users and delete all sessions
                 let closedCount = 0;
                 for (const [sessionId, session] of sessions.entries()) {
                     try {
                         // Send goodbye message to user
                         session.messages.push({
                             role: 'assistant',
-                            content: 'Hvala za pogovor! Zdaj se lahko ponovno pogovarjate z našim AI asistentom.\n\nThank you for the conversation! You can now chat with our AI assistant again.',
+                            content: getGoodbyeMessage(session.language),
                             timestamp: new Date(),
                             fromOperator: true
                         });
 
-                        // Exit operator mode
-                        session.operatorMode = false;
                         closedCount++;
                     } catch (error) {
                         console.error(`Error closing session ${sessionId}:`, error);
                     }
                 }
 
-                console.log(`Closed ${closedCount} sessions`);
+                // Delete all sessions from memory
+                sessions.clear();
+
+                console.log(`Closed and deleted ${closedCount} sessions`);
                 try {
                     await bot.sendMessage(chatId,
-                        `✅ Zaprto ${closedCount} sej / Closed ${closedCount} sessions\n\n` +
-                        `Vsi uporabniki so vrnjeni v AI chat / All users returned to AI chat`
+                        `✅ Izbrisano ${closedCount} sej / Deleted ${closedCount} sessions\n\n` +
+                        `Vse seje so odstranjene iz spomina / All sessions removed from memory`
                     );
                 } catch (sendError) {
                     console.error('Error sending closeall confirmation:', sendError.message);
