@@ -99,12 +99,18 @@ app.post('/api/chat', async (req, res) => {
             const notification = `💬 *Novo sporočilo / New message*\n\n` +
                 `Session ID: \`${sessionId}\`\n` +
                 `Uporabnik / User: ${message}\n\n` +
-                `_Uporabi /reply ${sessionId} [sporočilo] za odgovor_\n` +
-                `_Use /reply ${sessionId} [message] to respond_`;
+                `_Odgovori na to sporočilo / Reply to this message to respond_`;
 
             if (bot && OPERATOR_CHAT_ID) {
                 try {
-                    await bot.sendMessage(OPERATOR_CHAT_ID, notification, { parse_mode: 'Markdown' });
+                    await bot.sendMessage(OPERATOR_CHAT_ID, notification, {
+                        parse_mode: 'Markdown',
+                        reply_markup: {
+                            inline_keyboard: [[
+                                { text: '❌ Zapri sejo / Close', callback_data: `close_${sessionId}` }
+                            ]]
+                        }
+                    });
                 } catch (telegramError) {
                     console.error('Telegram notification failed:', telegramError.message);
                 }
@@ -124,12 +130,18 @@ app.post('/api/chat', async (req, res) => {
             const notification = `🔔 *NOVA ZAHTEVA ZA OPERATERJA / NEW OPERATOR REQUEST*\n\n` +
                 `Session ID: \`${sessionId}\`\n` +
                 `💬 Uporabnik / User: ${message}\n\n` +
-                `_Uporabi /reply ${sessionId} [sporočilo] za odgovor_\n` +
-                `_Use /reply ${sessionId} [message] to respond_`;
+                `_Odgovori na to sporočilo / Reply to this message to respond_`;
 
             if (bot && OPERATOR_CHAT_ID) {
                 try {
-                    await bot.sendMessage(OPERATOR_CHAT_ID, notification, { parse_mode: 'Markdown' });
+                    await bot.sendMessage(OPERATOR_CHAT_ID, notification, {
+                        parse_mode: 'Markdown',
+                        reply_markup: {
+                            inline_keyboard: [[
+                                { text: '❌ Zapri sejo / Close', callback_data: `close_${sessionId}` }
+                            ]]
+                        }
+                    });
                 } catch (telegramError) {
                     console.error('Telegram notification failed:', telegramError.message);
                 }
@@ -234,6 +246,58 @@ app.post(`/telegram/webhook`, async (req, res) => {
     try {
         const update = req.body;
 
+        // Handle callback queries (button presses)
+        if (update.callback_query) {
+            const callbackQuery = update.callback_query;
+            const chatId = callbackQuery.message.chat.id;
+            const data = callbackQuery.data;
+
+            // Answer callback query to remove loading state
+            try {
+                await bot.answerCallbackQuery(callbackQuery.id);
+            } catch (err) {
+                console.error('Error answering callback query:', err.message);
+            }
+
+            // Handle close button
+            if (data.startsWith('close_')) {
+                const sessionId = data.substring(6); // Remove 'close_' prefix
+                const session = sessions.get(sessionId);
+
+                if (!session) {
+                    try {
+                        await bot.sendMessage(chatId, `❌ Seja ${sessionId} ne obstaja več / Session no longer exists`);
+                    } catch (sendError) {
+                        console.error('Error sending message:', sendError.message);
+                    }
+                    return res.sendStatus(200);
+                }
+
+                // Send goodbye message to user
+                session.messages.push({
+                    role: 'assistant',
+                    content: 'Hvala za pogovor! Zdaj se lahko ponovno pogovarjate z našim AI asistentom.\n\nThank you for the conversation! You can now chat with our AI assistant again.',
+                    timestamp: new Date(),
+                    fromOperator: true
+                });
+
+                // Exit operator mode
+                session.operatorMode = false;
+
+                console.log(`Session ${sessionId} closed via button by operator`);
+                try {
+                    await bot.sendMessage(chatId,
+                        `✅ Seja ${sessionId} zaprta / Session closed\n\n` +
+                        `Uporabnik je vrnjen v AI chat / User returned to AI chat`
+                    );
+                } catch (sendError) {
+                    console.error('Error sending close confirmation:', sendError.message);
+                }
+            }
+
+            return res.sendStatus(200);
+        }
+
         // Handle incoming messages
         if (update.message) {
             const msg = update.message;
@@ -241,6 +305,45 @@ app.post(`/telegram/webhook`, async (req, res) => {
             const text = msg.text || '';
 
             console.log(`Received message from ${chatId}: ${text}`);
+
+            // Handle reply to notification (easy way to respond to user)
+            if (msg.reply_to_message && msg.reply_to_message.text) {
+                const replyText = msg.reply_to_message.text;
+
+                // Extract session ID from the original notification message
+                const sessionIdMatch = replyText.match(/Session ID: `([^`]+)`/);
+
+                if (sessionIdMatch && chatId.toString() === OPERATOR_CHAT_ID) {
+                    const sessionId = sessionIdMatch[1];
+                    const session = sessions.get(sessionId);
+
+                    if (!session) {
+                        try {
+                            await bot.sendMessage(chatId, `❌ Seja ${sessionId} več ne obstaja / Session no longer exists`);
+                        } catch (sendError) {
+                            console.error('Error sending message:', sendError.message);
+                        }
+                        return res.sendStatus(200);
+                    }
+
+                    // Add operator's message to session
+                    session.messages.push({
+                        role: 'assistant',
+                        content: text,
+                        timestamp: new Date(),
+                        fromOperator: true
+                    });
+
+                    console.log(`Reply sent to session ${sessionId} via reply-to`);
+                    try {
+                        await bot.sendMessage(chatId, `✅ Sporočilo poslano / Message sent`);
+                    } catch (sendError) {
+                        console.error('Error sending confirmation:', sendError.message);
+                    }
+
+                    return res.sendStatus(200);
+                }
+            }
 
             // Handle /start command
             if (text === '/start') {
@@ -251,9 +354,11 @@ app.post(`/telegram/webhook`, async (req, res) => {
                         `Your Chat ID: \`${chatId}\`\n\n` +
                         `Kopirajte ta ID v .env datoteko kot OPERATOR_CHAT_ID\n` +
                         `Copy this ID to .env file as OPERATOR_CHAT_ID\n\n` +
+                        `*Kako odgovarjati / How to respond:*\n` +
+                        `📱 Enostavno odgovorite (reply) na sporočilo\n` +
+                        `📱 Simply reply to the notification message\n\n` +
                         `*Ukazi / Commands:*\n` +
-                        `/sessions - Prikaži aktivne seje / Show active sessions\n` +
-                        `/reply [sessionId] [sporočilo] - Odgovori uporabniku / Reply to user`,
+                        `/sessions - Prikaži aktivne seje / Show active sessions`,
                         { parse_mode: 'Markdown' }
                     );
                 } catch (sendError) {
