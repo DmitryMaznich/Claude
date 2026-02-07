@@ -140,6 +140,32 @@ function getSession(sessionId) {
     return sessions.get(sessionId);
 }
 
+// Translate text to Russian if needed
+async function translateToRussian(text, sourceLanguage) {
+    // Don't translate if already in Russian, Slovenian, or English
+    const noTranslateLanguages = ['Russian', 'Slovenian', 'English'];
+    if (noTranslateLanguages.includes(sourceLanguage)) {
+        return text;
+    }
+
+    try {
+        const response = await anthropic.messages.create({
+            model: 'claude-3-haiku-20240307',
+            max_tokens: 500,
+            system: `You are a translator. Translate the following text to Russian. Only output the translation, nothing else.`,
+            messages: [{
+                role: 'user',
+                content: `Translate to Russian:\n\n${text}`
+            }]
+        });
+
+        return response.content[0].text.trim();
+    } catch (error) {
+        console.error('Translation error:', error);
+        return text; // Return original if translation fails
+    }
+}
+
 // Chat endpoint
 app.post('/api/chat', async (req, res) => {
     try {
@@ -193,12 +219,22 @@ app.post('/api/chat', async (req, res) => {
         if (shouldTriggerOperator(message)) {
             session.operatorMode = true;
 
+            // Translate message if needed
+            const translatedMessage = await translateToRussian(message, session.language);
+            const showOriginal = ['Russian', 'Slovenian', 'English'].includes(session.language);
+
             // Notify operator via Telegram
-            const notification = `🔔 *ZAPROS OPERATERJA*\n` +
+            let notification = `🔔 *ЗАПРОС ОПЕРАТОРА*\n` +
                 `━━━━━━━━━━━━━━━━━\n` +
-                `👤 Uporabnik:\n\n` +
-                `"${message}"\n\n` +
-                `━━━━━━━━━━━━━━━━━\n` +
+                `👤 Клиент (${session.language || 'Unknown'}):\n\n`;
+
+            if (showOriginal) {
+                notification += `"${message}"\n\n`;
+            } else {
+                notification += `"${translatedMessage}"\n\n`;
+            }
+
+            notification += `━━━━━━━━━━━━━━━━━\n` +
                 `Session: \`${sessionId}\``;
 
             if (bot && OPERATOR_CHAT_ID) {
@@ -207,7 +243,7 @@ app.post('/api/chat', async (req, res) => {
                         parse_mode: 'Markdown',
                         reply_markup: {
                             inline_keyboard: [[
-                                { text: '❌ Zapri sejo / Close', callback_data: `close_${sessionId}` }
+                                { text: '❌ Закрыть / Close', callback_data: `close_${sessionId}` }
                             ]]
                         }
                     });
@@ -284,19 +320,30 @@ app.post('/api/chat', async (req, res) => {
         if (assistantMessage.includes('TRIGGER_OPERATOR:')) {
             session.operatorMode = true;
 
-            // Build conversation history (last 5 messages)
-            const historyMessages = session.messages.slice(-5).map(msg => {
+            // Translate message and history if needed
+            const showOriginal = ['Russian', 'Slovenian', 'English'].includes(session.language);
+            const translatedMessage = showOriginal ? message : await translateToRussian(message, session.language);
+
+            // Build conversation history (last 5 messages) - translate if needed
+            const historyPromises = session.messages.slice(-5).map(async msg => {
                 const icon = msg.role === 'user' ? '👤' : '🤖';
-                const text = msg.content.length > 100 ? msg.content.substring(0, 100) + '...' : msg.content;
+                let text = msg.content.length > 100 ? msg.content.substring(0, 100) + '...' : msg.content;
+
+                // Translate history if not in original languages
+                if (!showOriginal) {
+                    text = await translateToRussian(text, session.language);
+                }
+
                 return `${icon}: ${text}`;
-            }).join('\n');
+            });
+            const historyMessages = (await Promise.all(historyPromises)).join('\n');
 
             // Notify operator
-            const notification = `🔔 *ZAPROS OPERATERJA*\n` +
+            const notification = `🔔 *ЗАПРОС ОПЕРАТОРА*\n` +
                 `━━━━━━━━━━━━━━━━━\n` +
-                `👤 Poslednje sporočilo:\n\n` +
-                `"${message}"\n\n` +
-                `📝 Zgodovina pogovora:\n${historyMessages}\n\n` +
+                `👤 Клиент (${session.language || 'Unknown'}):\n\n` +
+                `"${translatedMessage}"\n\n` +
+                `📝 История разговора:\n${historyMessages}\n\n` +
                 `━━━━━━━━━━━━━━━━━\n` +
                 `Session: \`${sessionId}\``;
 
@@ -306,7 +353,7 @@ app.post('/api/chat', async (req, res) => {
                         parse_mode: 'Markdown',
                         reply_markup: {
                             inline_keyboard: [[
-                                { text: '❌ Zapri sejo / Close', callback_data: `close_${sessionId}` }
+                                { text: '❌ Закрыть / Close', callback_data: `close_${sessionId}` }
                             ]]
                         }
                     });
