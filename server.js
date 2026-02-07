@@ -166,6 +166,32 @@ async function translateToRussian(text, sourceLanguage) {
     }
 }
 
+// Translate operator's response to user's language
+async function translateToLanguage(text, targetLanguage) {
+    // Don't translate if target is Russian, Slovenian, or English (operator speaks Russian)
+    const noTranslateLanguages = ['Russian', 'Slovenian', 'English'];
+    if (noTranslateLanguages.includes(targetLanguage)) {
+        return text;
+    }
+
+    try {
+        const response = await anthropic.messages.create({
+            model: 'claude-3-haiku-20240307',
+            max_tokens: 500,
+            system: `You are a translator. Translate the following text to ${targetLanguage}. Only output the translation, nothing else.`,
+            messages: [{
+                role: 'user',
+                content: `Translate to ${targetLanguage}:\n\n${text}`
+            }]
+        });
+
+        return response.content[0].text.trim();
+    } catch (error) {
+        console.error('Translation error:', error);
+        return text; // Return original if translation fails
+    }
+}
+
 // Chat endpoint
 app.post('/api/chat', async (req, res) => {
     try {
@@ -668,10 +694,15 @@ app.post(`/telegram/webhook`, async (req, res) => {
                         return res.sendStatus(200);
                     }
 
-                    // Add operator's message to session
+                    // Translate operator's message to user's language
+                    const userLanguage = session.language || 'English';
+                    const translatedText = await translateToLanguage(text, userLanguage);
+                    console.log(`Translating operator response from Russian to ${userLanguage}`);
+
+                    // Add operator's message to session (in user's language)
                     session.messages.push({
                         role: 'assistant',
-                        content: text,
+                        content: translatedText,
                         timestamp: new Date(),
                         fromOperator: true
                     });
@@ -860,10 +891,15 @@ app.post(`/telegram/webhook`, async (req, res) => {
                     return;
                 }
 
-                // Add operator message to session
+                // Translate operator's message to user's language
+                const userLanguage = session.language || 'English';
+                const translatedMessage = await translateToLanguage(message, userLanguage);
+                console.log(`Translating operator response from Russian to ${userLanguage}`);
+
+                // Add operator message to session (in user's language)
                 session.messages.push({
                     role: 'assistant',
-                    content: message,
+                    content: translatedMessage,
                     timestamp: new Date(),
                     fromOperator: true
                 });
