@@ -177,16 +177,24 @@ app.post('/api/chat', async (req, res) => {
             const summary = assistantMessage.replace('TRIGGER_OPERATOR:', '').trim();
 
             // Notify operator
-            const notification = `🔔 *NOVA ZAHTEVA ZA OPERATERJA / NEW OPERATOR REQUEST*\n\n` +
-                `Session ID: \`${sessionId}\`\n` +
-                `💬 Uporabnik / User: ${message}\n` +
-                `📝 Povzetek / Summary: ${summary}\n\n` +
-                `_Uporabi /reply ${sessionId} [sporočilo] za odgovor_\n` +
-                `_Use /reply ${sessionId} [message] to respond_`;
+            const notification = `🔔 *ZAPROS OPERATERJA*\n` +
+                `━━━━━━━━━━━━━━━━━\n` +
+                `👤 Uporabnik:\n\n` +
+                `"${message}"\n\n` +
+                `📝 AI analiza:\n${summary}\n\n` +
+                `━━━━━━━━━━━━━━━━━\n` +
+                `Session: \`${sessionId}\``;
 
             if (bot && OPERATOR_CHAT_ID) {
                 try {
-                    await bot.sendMessage(OPERATOR_CHAT_ID, notification, { parse_mode: 'Markdown' });
+                    await bot.sendMessage(OPERATOR_CHAT_ID, notification, {
+                        parse_mode: 'Markdown',
+                        reply_markup: {
+                            inline_keyboard: [[
+                                { text: '❌ Zapri sejo / Close', callback_data: `close_${sessionId}` }
+                            ]]
+                        }
+                    });
                 } catch (telegramError) {
                     console.error('Telegram notification failed:', telegramError.message);
                 }
