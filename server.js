@@ -17,9 +17,10 @@ const anthropic = new Anthropic({
     apiKey: process.env.ANTHROPIC_API_KEY
 });
 
-// Initialize Telegram Bot (disabled for Railway - use webhook instead)
+// Initialize Telegram Bot (disabled for now - can be enabled later with webhooks)
 // const bot = new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: true });
-const bot = process.env.TELEGRAM_BOT_TOKEN ? new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: false }) : null;
+// const bot = process.env.TELEGRAM_BOT_TOKEN ? new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: false }) : null;
+const bot = null; // Telegram notifications disabled
 const OPERATOR_CHAT_ID = process.env.OPERATOR_CHAT_ID;
 
 // Session storage (in production, use Redis or database)
