@@ -451,9 +451,9 @@ app.post(`/telegram/webhook`, async (req, res) => {
             console.log(`Has reply_to_message: ${!!msg.reply_to_message}`);
 
             // Handle reply to notification (easy way to respond to user)
-            if (msg.reply_to_message && msg.reply_to_message.text) {
-                const replyText = msg.reply_to_message.text;
-                console.log(`Reply to text: ${replyText}`);
+            if (msg.reply_to_message && (msg.reply_to_message.text || msg.reply_to_message.caption)) {
+                const replyText = msg.reply_to_message.text || msg.reply_to_message.caption;
+                console.log(`Reply to text/caption: ${replyText}`);
 
                 // Extract session ID from the original notification message
                 // Note: Telegram removes backticks when displaying Markdown, so we search without them
