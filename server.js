@@ -308,43 +308,61 @@ app.post('/api/chat', async (req, res) => {
                 'slovenščina': 'Slovenian',
                 'slovene': 'Slovenian',
                 'slovenian': 'Slovenian',
+                'slo': 'Slovenian',
+                'slv': 'Slovenian',
                 // English
                 'english': 'English',
                 'англи': 'English',
+                'eng': 'English',
                 // Russian
                 'русский': 'Russian',
                 'russian': 'Russian',
                 'ruski': 'Russian',
+                'rus': 'Russian',
                 // Croatian
                 'hrvatski': 'Croatian',
                 'croatian': 'Croatian',
                 'hrvatska': 'Croatian',
+                'hrv': 'Croatian',
+                'cro': 'Croatian',
                 // Italian
                 'italiano': 'Italian',
                 'italian': 'Italian',
+                'ita': 'Italian',
                 // German
                 'deutsch': 'German',
                 'german': 'German',
                 'nemščina': 'German',
+                'ger': 'German',
+                'deu': 'German',
                 // Spanish
                 'español': 'Spanish',
                 'spanish': 'Spanish',
                 'espanol': 'Spanish',
+                'esp': 'Spanish',
+                'spa': 'Spanish',
                 // French
                 'français': 'French',
                 'french': 'French',
                 'francais': 'French',
+                'fra': 'French',
+                'fre': 'French',
                 // Portuguese
                 'português': 'Portuguese',
                 'portuguese': 'Portuguese',
                 'portugues': 'Portuguese',
+                'por': 'Portuguese',
+                'pt': 'Portuguese',
                 // Polish
                 'polski': 'Polish',
                 'polish': 'Polish',
+                'pol': 'Polish',
                 // Czech
                 'čeština': 'Czech',
                 'czech': 'Czech',
                 'cestina': 'Czech',
+                'cze': 'Czech',
+                'ces': 'Czech',
                 // Ukrainian
                 'українська': 'Ukrainian',
                 'ukrainian': 'Ukrainian',
@@ -353,9 +371,12 @@ app.post('/api/chat', async (req, res) => {
                 'украинский': 'Ukrainian',
                 'украінський': 'Ukrainian',
                 'ukrain': 'Ukrainian',
+                'ukr': 'Ukrainian',
                 // Serbian
                 'srpski': 'Serbian',
                 'serbian': 'Serbian',
+                'srp': 'Serbian',
+                'ser': 'Serbian',
                 // Bulgarian
                 'български': 'Bulgarian',
                 'bulgarian': 'Bulgarian',
@@ -380,17 +401,23 @@ app.post('/api/chat', async (req, res) => {
                 'chinese': 'Chinese',
                 'zhongwen': 'Chinese',
                 'mandarin': 'Chinese',
+                'chi': 'Chinese',
+                'zho': 'Chinese',
                 // Japanese
                 '日本語': 'Japanese',
                 'japanese': 'Japanese',
                 'nihongo': 'Japanese',
+                'jpn': 'Japanese',
+                'jap': 'Japanese',
                 // Korean
                 '한국어': 'Korean',
                 'korean': 'Korean',
                 'hangugeo': 'Korean',
+                'kor': 'Korean',
                 // Hindi
                 'हिन्दी': 'Hindi',
                 'hindi': 'Hindi',
+                'hin': 'Hindi',
                 // Dutch
                 'nederlands': 'Dutch',
                 'dutch': 'Dutch',
