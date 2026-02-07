@@ -229,17 +229,21 @@ app.post(`/telegram/webhook`, async (req, res) => {
 
             // Handle /start command
             if (text === '/start') {
-                await bot.sendMessage(chatId,
-                    `👋 *Smart Wash Operator Bot*\n\n` +
-                    `Vaš Chat ID: \`${chatId}\`\n` +
-                    `Your Chat ID: \`${chatId}\`\n\n` +
-                    `Kopirajte ta ID v .env datoteko kot OPERATOR_CHAT_ID\n` +
-                    `Copy this ID to .env file as OPERATOR_CHAT_ID\n\n` +
-                    `*Ukazi / Commands:*\n` +
-                    `/sessions - Prikaži aktivne seje / Show active sessions\n` +
-                    `/reply [sessionId] [sporočilo] - Odgovori uporabniku / Reply to user`,
-                    { parse_mode: 'Markdown' }
-                );
+                try {
+                    await bot.sendMessage(chatId,
+                        `👋 *Smart Wash Operator Bot*\n\n` +
+                        `Vaš Chat ID: \`${chatId}\`\n` +
+                        `Your Chat ID: \`${chatId}\`\n\n` +
+                        `Kopirajte ta ID v .env datoteko kot OPERATOR_CHAT_ID\n` +
+                        `Copy this ID to .env file as OPERATOR_CHAT_ID\n\n` +
+                        `*Ukazi / Commands:*\n` +
+                        `/sessions - Prikaži aktivne seje / Show active sessions\n` +
+                        `/reply [sessionId] [sporočilo] - Odgovori uporabniku / Reply to user`,
+                        { parse_mode: 'Markdown' }
+                    );
+                } catch (sendError) {
+                    console.error('Error sending start message:', sendError.message);
+                }
             }
             // Handle /sessions command
             else if (text === '/sessions') {
@@ -264,20 +268,24 @@ app.post(`/telegram/webhook`, async (req, res) => {
                         return `• \`${id}\` - ${lastMessage?.content.substring(0, 50)}...`;
                     });
 
-                if (allSessions.length === 0) {
-                    await bot.sendMessage(chatId, '📭 Ni aktivnih sej / No sessions in memory');
-                } else if (activeSessions.length === 0) {
-                    await bot.sendMessage(chatId,
-                        `*Vse seje / All sessions (${allSessions.length}):*\n\n${allSessions.join('\n')}\n\n` +
-                        `⚠️ Nobena seja ni v operator mode / No sessions in operator mode`,
-                        { parse_mode: 'Markdown' }
-                    );
-                } else {
-                    await bot.sendMessage(chatId,
-                        `*Vse seje / All sessions (${allSessions.length}):*\n\n${allSessions.join('\n')}\n\n` +
-                        `*Aktivne seje / Active (${activeSessions.length}):*\n\n${activeSessions.join('\n')}`,
-                        { parse_mode: 'Markdown' }
-                    );
+                try {
+                    if (allSessions.length === 0) {
+                        await bot.sendMessage(chatId, '📭 Ni aktivnih sej / No sessions in memory');
+                    } else if (activeSessions.length === 0) {
+                        await bot.sendMessage(chatId,
+                            `*Vse seje / All sessions (${allSessions.length}):*\n\n${allSessions.join('\n')}\n\n` +
+                            `⚠️ Nobena seja ni v operator mode / No sessions in operator mode`,
+                            { parse_mode: 'Markdown' }
+                        );
+                    } else {
+                        await bot.sendMessage(chatId,
+                            `*Vse seje / All sessions (${allSessions.length}):*\n\n${allSessions.join('\n')}\n\n` +
+                            `*Aktivne seje / Active (${activeSessions.length}):*\n\n${activeSessions.join('\n')}`,
+                            { parse_mode: 'Markdown' }
+                        );
+                    }
+                } catch (sendError) {
+                    console.error('Error sending sessions list:', sendError.message);
                 }
             }
             // Handle /reply command
@@ -301,10 +309,15 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 const session = sessions.get(sessionId);
                 if (!session) {
                     const availableSessions = Array.from(sessions.keys()).join(', ') || 'none';
-                    return await bot.sendMessage(chatId,
-                        `❌ Seja ${sessionId} ne obstaja / Session not found\n\n` +
-                        `Razpoložljive seje / Available sessions: ${availableSessions}`
-                    );
+                    try {
+                        await bot.sendMessage(chatId,
+                            `❌ Seja ${sessionId} ne obstaja / Session not found\n\n` +
+                            `Razpoložljive seje / Available sessions: ${availableSessions}`
+                        );
+                    } catch (sendError) {
+                        console.error('Error sending not found message:', sendError.message);
+                    }
+                    return;
                 }
 
                 // Add operator message to session
@@ -316,7 +329,11 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 });
 
                 console.log(`Message added to session ${sessionId}`);
-                await bot.sendMessage(chatId, `✅ Sporočilo poslano / Message sent to session ${sessionId}`);
+                try {
+                    await bot.sendMessage(chatId, `✅ Sporočilo poslano / Message sent to session ${sessionId}`);
+                } catch (sendError) {
+                    console.error('Error sending success message:', sendError.message);
+                }
             }
         }
     } catch (error) {
