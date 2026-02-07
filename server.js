@@ -64,6 +64,7 @@ function shouldTriggerOperator(message) {
 // Create or get session
 function getSession(sessionId) {
     if (!sessions.has(sessionId)) {
+        console.log(`Creating new session: ${sessionId}`);
         sessions.set(sessionId, {
             id: sessionId,
             messages: [],
@@ -246,6 +247,16 @@ app.post(`/telegram/webhook`, async (req, res) => {
                     return await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
                 }
 
+                console.log(`Total sessions in memory: ${sessions.size}`);
+                console.log(`All session IDs: ${Array.from(sessions.keys()).join(', ')}`);
+
+                const allSessions = Array.from(sessions.entries())
+                    .map(([id, session]) => {
+                        const lastMessage = session.messages[session.messages.length - 1];
+                        const mode = session.operatorMode ? '🔴 OPERATOR' : '🟢 AI';
+                        return `${mode} \`${id}\` - ${lastMessage?.content.substring(0, 30)}...`;
+                    });
+
                 const activeSessions = Array.from(sessions.entries())
                     .filter(([_, session]) => session.operatorMode)
                     .map(([id, session]) => {
@@ -253,11 +264,18 @@ app.post(`/telegram/webhook`, async (req, res) => {
                         return `• \`${id}\` - ${lastMessage?.content.substring(0, 50)}...`;
                     });
 
-                if (activeSessions.length === 0) {
-                    await bot.sendMessage(chatId, '📭 Ni aktivnih sej / No active sessions');
+                if (allSessions.length === 0) {
+                    await bot.sendMessage(chatId, '📭 Ni aktivnih sej / No sessions in memory');
+                } else if (activeSessions.length === 0) {
+                    await bot.sendMessage(chatId,
+                        `*Vse seje / All sessions (${allSessions.length}):*\n\n${allSessions.join('\n')}\n\n` +
+                        `⚠️ Nobena seja ni v operator mode / No sessions in operator mode`,
+                        { parse_mode: 'Markdown' }
+                    );
                 } else {
                     await bot.sendMessage(chatId,
-                        `*Aktivne seje / Active sessions:*\n\n${activeSessions.join('\n')}`,
+                        `*Vse seje / All sessions (${allSessions.length}):*\n\n${allSessions.join('\n')}\n\n` +
+                        `*Aktivne seje / Active (${activeSessions.length}):*\n\n${activeSessions.join('\n')}`,
                         { parse_mode: 'Markdown' }
                     );
                 }
@@ -276,9 +294,17 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 const sessionId = parts[1];
                 const message = parts.slice(2).join(' ');
 
+                console.log(`Looking for session: ${sessionId}`);
+                console.log(`Available sessions: ${Array.from(sessions.keys()).join(', ')}`);
+                console.log(`Total sessions: ${sessions.size}`);
+
                 const session = sessions.get(sessionId);
                 if (!session) {
-                    return await bot.sendMessage(chatId, `❌ Seja ${sessionId} ne obstaja / Session not found`);
+                    const availableSessions = Array.from(sessions.keys()).join(', ') || 'none';
+                    return await bot.sendMessage(chatId,
+                        `❌ Seja ${sessionId} ne obstaja / Session not found\n\n` +
+                        `Razpoložljive seje / Available sessions: ${availableSessions}`
+                    );
                 }
 
                 // Add operator message to session
@@ -289,6 +315,7 @@ app.post(`/telegram/webhook`, async (req, res) => {
                     fromOperator: true
                 });
 
+                console.log(`Message added to session ${sessionId}`);
                 await bot.sendMessage(chatId, `✅ Sporočilo poslano / Message sent to session ${sessionId}`);
             }
         }
