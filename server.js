@@ -113,7 +113,11 @@ app.post('/api/chat', async (req, res) => {
                 `_Use /reply ${sessionId} [message] to respond_`;
 
             if (bot && OPERATOR_CHAT_ID) {
-                await bot.sendMessage(OPERATOR_CHAT_ID, notification, { parse_mode: 'Markdown' });
+                try {
+                    await bot.sendMessage(OPERATOR_CHAT_ID, notification, { parse_mode: 'Markdown' });
+                } catch (telegramError) {
+                    console.error('Telegram notification failed:', telegramError.message);
+                }
             }
 
             return res.json({
@@ -150,7 +154,11 @@ app.post('/api/chat', async (req, res) => {
                 `_Use /reply ${sessionId} [message] to respond_`;
 
             if (bot && OPERATOR_CHAT_ID) {
-                await bot.sendMessage(OPERATOR_CHAT_ID, notification, { parse_mode: 'Markdown' });
+                try {
+                    await bot.sendMessage(OPERATOR_CHAT_ID, notification, { parse_mode: 'Markdown' });
+                } catch (telegramError) {
+                    console.error('Telegram notification failed:', telegramError.message);
+                }
             }
 
             return res.json({
