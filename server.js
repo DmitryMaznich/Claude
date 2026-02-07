@@ -965,6 +965,53 @@ app.post(`/telegram/webhook`, async (req, res) => {
                     console.error('Error sending close confirmation:', sendError.message);
                 }
             }
+            // Handle /closeall command
+            else if (text === '/closeall') {
+                if (chatId.toString() !== OPERATOR_CHAT_ID) {
+                    return await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
+                }
+
+                const sessionCount = sessions.size;
+
+                if (sessionCount === 0) {
+                    try {
+                        await bot.sendMessage(chatId, 'ℹ️ Ni aktivnih sej / No active sessions');
+                    } catch (sendError) {
+                        console.error('Error sending message:', sendError.message);
+                    }
+                    return;
+                }
+
+                // Send goodbye message to all users and close all sessions
+                let closedCount = 0;
+                for (const [sessionId, session] of sessions.entries()) {
+                    try {
+                        // Send goodbye message to user
+                        session.messages.push({
+                            role: 'assistant',
+                            content: 'Hvala za pogovor! Zdaj se lahko ponovno pogovarjate z našim AI asistentom.\n\nThank you for the conversation! You can now chat with our AI assistant again.',
+                            timestamp: new Date(),
+                            fromOperator: true
+                        });
+
+                        // Exit operator mode
+                        session.operatorMode = false;
+                        closedCount++;
+                    } catch (error) {
+                        console.error(`Error closing session ${sessionId}:`, error);
+                    }
+                }
+
+                console.log(`Closed ${closedCount} sessions`);
+                try {
+                    await bot.sendMessage(chatId,
+                        `✅ Zaprto ${closedCount} sej / Closed ${closedCount} sessions\n\n` +
+                        `Vsi uporabniki so vrnjeni v AI chat / All users returned to AI chat`
+                    );
+                } catch (sendError) {
+                    console.error('Error sending closeall confirmation:', sendError.message);
+                }
+            }
         }
     } catch (error) {
         console.error('Webhook error:', error);
