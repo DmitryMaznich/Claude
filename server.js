@@ -168,11 +168,16 @@ async function translateToRussian(text, sourceLanguage) {
 
 // Translate operator's response to user's language
 async function translateToLanguage(text, targetLanguage) {
+    console.log(`translateToLanguage called: target=${targetLanguage}`);
+
     // Don't translate if target is Russian, Slovenian, or English (operator speaks Russian)
     const noTranslateLanguages = ['Russian', 'Slovenian', 'English'];
     if (noTranslateLanguages.includes(targetLanguage)) {
+        console.log(`No translation needed for ${targetLanguage}`);
         return text;
     }
+
+    console.log(`Translating to ${targetLanguage}: "${text.substring(0, 50)}..."`);
 
     try {
         const response = await anthropic.messages.create({
@@ -185,7 +190,9 @@ async function translateToLanguage(text, targetLanguage) {
             }]
         });
 
-        return response.content[0].text.trim();
+        const translated = response.content[0].text.trim();
+        console.log(`Translation result: "${translated.substring(0, 50)}..."`);
+        return translated;
     } catch (error) {
         console.error('Translation error:', error);
         return text; // Return original if translation fails
@@ -306,6 +313,7 @@ app.post('/api/chat', async (req, res) => {
         if (!session.language && session.messages.length === 1) {
             // Extract language from user's first message
             const userLanguage = message.toLowerCase().trim();
+            console.log(`Detecting language from user input: "${userLanguage}"`);
 
             // Map common language names
             const languageMap = {
@@ -354,6 +362,10 @@ app.post('/api/chat', async (req, res) => {
                 'українська': 'Ukrainian',
                 'ukrainian': 'Ukrainian',
                 'ukrainski': 'Ukrainian',
+                'ukranian': 'Ukrainian',
+                'украинский': 'Ukrainian',
+                'украінський': 'Ukrainian',
+                'ukrain': 'Ukrainian',
                 // Serbian
                 'srpski': 'Serbian',
                 'serbian': 'Serbian',
