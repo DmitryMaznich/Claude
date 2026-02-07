@@ -87,14 +87,52 @@ async function updateWebsiteContent() {
         const response = await fetch('https://www.smart-wash.si');
         const html = await response.text();
 
-        // Use Claude to extract structured information from HTML
+        // Clean HTML: remove scripts, styles, and HTML tags to get visible text only
+        let cleanText = html
+            // Remove script tags and their content
+            .replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '')
+            // Remove style tags and their content
+            .replace(/<style\b[^<]*(?:(?!<\/style>)<[^<]*)*<\/style>/gi, '')
+            // Remove HTML comments
+            .replace(/<!--[\s\S]*?-->/g, '')
+            // Remove all HTML tags
+            .replace(/<[^>]+>/g, ' ')
+            // Decode HTML entities
+            .replace(/&nbsp;/g, ' ')
+            .replace(/&amp;/g, '&')
+            .replace(/&lt;/g, '<')
+            .replace(/&gt;/g, '>')
+            .replace(/&quot;/g, '"')
+            // Clean up whitespace
+            .replace(/\s+/g, ' ')
+            .trim();
+
+        console.log(`Cleaned text length: ${cleanText.length} characters`);
+
+        // Use Claude to extract structured information from clean text
         const extractionResponse = await anthropic.messages.create({
             model: 'claude-3-haiku-20240307',
-            max_tokens: 1000,
-            system: 'You are a content extractor. Extract key information from HTML and format it clearly.',
+            max_tokens: 2000,
+            system: 'You are a content extractor. Extract key information and format it clearly.',
             messages: [{
                 role: 'user',
-                content: `Extract the following information from this HTML (in English):\n\n1. Services offered (washing, drying, etc.) with prices\n2. Locations and addresses\n3. Opening hours\n4. Contact information\n5. Any special features or details\n\nHTML:\n${html.substring(0, 15000)}`
+                content: `Extract the following information from this text (in English):
+
+1. ALL SERVICES offered (washing, drying, disinfection/ozone treatment, etc.) with exact prices in tokens/euros
+2. ALL LOCATIONS with full addresses
+3. OPENING HOURS for each location (be very specific - different locations may have different hours!)
+4. Contact information (phone, email)
+5. Payment methods and any special features
+6. Any promotions or bonuses
+
+IMPORTANT: Look carefully for:
+- Disinfection/ozone services
+- Different operating hours for different locations (TC Jarše vs Galjevica)
+
+Format clearly with sections and bullet points.
+
+Text from website:
+${cleanText}`
             }]
         });
 
