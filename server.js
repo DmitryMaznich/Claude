@@ -207,79 +207,95 @@ app.get('/api/messages/:sessionId', (req, res) => {
     res.json({ messages: newMessages });
 });
 
-// Telegram bot commands (disabled for Railway)
-if (bot) {
-    bot.onText(/\/start/, (msg) => {
-        const chatId = msg.chat.id;
-        bot.sendMessage(chatId,
-            `👋 *Smart Wash Operator Bot*\n\n` +
-            `Vaš Chat ID: \`${chatId}\`\n` +
-            `Your Chat ID: \`${chatId}\`\n\n` +
-            `Kopirajte ta ID v .env datoteko kot OPERATOR_CHAT_ID\n` +
-            `Copy this ID to .env file as OPERATOR_CHAT_ID\n\n` +
-            `*Ukazi / Commands:*\n` +
-            `/sessions - Prikaži aktivne seje / Show active sessions\n` +
-            `/reply [sessionId] [sporočilo] - Odgovori uporabniku / Reply to user`,
-            { parse_mode: 'Markdown' }
-        );
-    });
-
-    bot.onText(/\/sessions/, (msg) => {
-        const chatId = msg.chat.id;
-
-        if (chatId.toString() !== OPERATOR_CHAT_ID) {
-            return bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
-        }
-
-        const activeSessions = Array.from(sessions.entries())
-            .filter(([_, session]) => session.operatorMode)
-            .map(([id, session]) => {
-                const lastMessage = session.messages[session.messages.length - 1];
-                return `• \`${id}\` - ${lastMessage?.content.substring(0, 50)}...`;
-            });
-
-        if (activeSessions.length === 0) {
-            bot.sendMessage(chatId, '📭 Ni aktivnih sej / No active sessions');
-        } else {
-            bot.sendMessage(chatId,
-                `*Aktivne seje / Active sessions:*\n\n${activeSessions.join('\n')}`,
-                { parse_mode: 'Markdown' }
-            );
-        }
-    });
-
-    bot.onText(/\/reply ([a-f0-9\-]+) (.+)/, async (msg, match) => {
-        const chatId = msg.chat.id;
-
-        if (chatId.toString() !== OPERATOR_CHAT_ID) {
-            return bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
-        }
-
-        const sessionId = match[1];
-        const message = match[2];
-
-        const session = sessions.get(sessionId);
-        if (!session) {
-            return bot.sendMessage(chatId, `❌ Seja ${sessionId} ne obstaja / Session not found`);
-        }
-
-        // Add operator message to session
-        session.messages.push({
-            role: 'assistant',
-            content: message,
-            timestamp: new Date(),
-            fromOperator: true
-        });
-
-        bot.sendMessage(chatId, `✅ Sporočilo poslano / Message sent to session ${sessionId}`);
-    });
-}
+// Telegram bot commands are now handled in the webhook endpoint above
 
 // Telegram webhook endpoint
-app.post(`/telegram/webhook`, (req, res) => {
-    if (bot) {
-        bot.processUpdate(req.body);
+app.post(`/telegram/webhook`, async (req, res) => {
+    if (!bot) {
+        return res.sendStatus(200);
     }
+
+    try {
+        const update = req.body;
+
+        // Handle incoming messages
+        if (update.message) {
+            const msg = update.message;
+            const chatId = msg.chat.id;
+            const text = msg.text || '';
+
+            console.log(`Received message from ${chatId}: ${text}`);
+
+            // Handle /start command
+            if (text === '/start') {
+                await bot.sendMessage(chatId,
+                    `👋 *Smart Wash Operator Bot*\n\n` +
+                    `Vaš Chat ID: \`${chatId}\`\n` +
+                    `Your Chat ID: \`${chatId}\`\n\n` +
+                    `Kopirajte ta ID v .env datoteko kot OPERATOR_CHAT_ID\n` +
+                    `Copy this ID to .env file as OPERATOR_CHAT_ID\n\n` +
+                    `*Ukazi / Commands:*\n` +
+                    `/sessions - Prikaži aktivne seje / Show active sessions\n` +
+                    `/reply [sessionId] [sporočilo] - Odgovori uporabniku / Reply to user`,
+                    { parse_mode: 'Markdown' }
+                );
+            }
+            // Handle /sessions command
+            else if (text === '/sessions') {
+                if (chatId.toString() !== OPERATOR_CHAT_ID) {
+                    return await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
+                }
+
+                const activeSessions = Array.from(sessions.entries())
+                    .filter(([_, session]) => session.operatorMode)
+                    .map(([id, session]) => {
+                        const lastMessage = session.messages[session.messages.length - 1];
+                        return `• \`${id}\` - ${lastMessage?.content.substring(0, 50)}...`;
+                    });
+
+                if (activeSessions.length === 0) {
+                    await bot.sendMessage(chatId, '📭 Ni aktivnih sej / No active sessions');
+                } else {
+                    await bot.sendMessage(chatId,
+                        `*Aktivne seje / Active sessions:*\n\n${activeSessions.join('\n')}`,
+                        { parse_mode: 'Markdown' }
+                    );
+                }
+            }
+            // Handle /reply command
+            else if (text.startsWith('/reply ')) {
+                if (chatId.toString() !== OPERATOR_CHAT_ID) {
+                    return await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
+                }
+
+                const parts = text.split(' ');
+                if (parts.length < 3) {
+                    return await bot.sendMessage(chatId, '❌ Format: /reply [sessionId] [sporočilo]');
+                }
+
+                const sessionId = parts[1];
+                const message = parts.slice(2).join(' ');
+
+                const session = sessions.get(sessionId);
+                if (!session) {
+                    return await bot.sendMessage(chatId, `❌ Seja ${sessionId} ne obstaja / Session not found`);
+                }
+
+                // Add operator message to session
+                session.messages.push({
+                    role: 'assistant',
+                    content: message,
+                    timestamp: new Date(),
+                    fromOperator: true
+                });
+
+                await bot.sendMessage(chatId, `✅ Sporočilo poslano / Message sent to session ${sessionId}`);
+            }
+        }
+    } catch (error) {
+        console.error('Webhook error:', error);
+    }
+
     res.sendStatus(200);
 });
 
