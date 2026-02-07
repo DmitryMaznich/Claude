@@ -275,7 +275,8 @@ app.get('/health', (req, res) => {
 
 // Start server
 app.listen(PORT, () => {
-    console.log(`🚀 Server running on http://localhost:${PORT}`);
-    console.log(`📱 Telegram bot active`);
-    console.log(`💬 Chat widget ready at http://localhost:${PORT}/smart_wash_clean.html`);
+    console.log(`🚀 Server running on port ${PORT}`);
+    console.log(`📱 Telegram bot: ${bot ? 'webhook mode' : 'disabled'}`);
+    console.log(`💬 Chat API ready`);
+    console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
 });
