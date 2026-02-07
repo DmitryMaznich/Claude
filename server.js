@@ -290,7 +290,8 @@ app.post('/api/chat', async (req, res) => {
                         parse_mode: 'Markdown',
                         reply_markup: {
                             inline_keyboard: [[
-                                { text: '❌ Zapri sejo / Close', callback_data: `close_${sessionId}` }
+                                { text: '🔄 V AI / To AI', callback_data: `close_${sessionId}` },
+                                { text: '🗑️ Izbriši / Delete', callback_data: `delete_${sessionId}` }
                             ]]
                         }
                     });
@@ -333,7 +334,8 @@ app.post('/api/chat', async (req, res) => {
                         parse_mode: 'Markdown',
                         reply_markup: {
                             inline_keyboard: [[
-                                { text: '❌ Закрыть / Close', callback_data: `close_${sessionId}` }
+                                { text: '🔄 В AI / To AI', callback_data: `close_${sessionId}` },
+                                { text: '🗑️ Удалить / Delete', callback_data: `delete_${sessionId}` }
                             ]]
                         }
                     });
@@ -562,7 +564,8 @@ app.post('/api/chat', async (req, res) => {
                         parse_mode: 'Markdown',
                         reply_markup: {
                             inline_keyboard: [[
-                                { text: '❌ Закрыть / Close', callback_data: `close_${sessionId}` }
+                                { text: '🔄 В AI / To AI', callback_data: `close_${sessionId}` },
+                                { text: '🗑️ Удалить / Delete', callback_data: `delete_${sessionId}` }
                             ]]
                         }
                     });
@@ -753,6 +756,42 @@ app.post(`/telegram/webhook`, async (req, res) => {
                     );
                 } catch (sendError) {
                     console.error('Error sending close confirmation:', sendError.message);
+                }
+            }
+
+            // Handle delete button
+            if (data.startsWith('delete_')) {
+                const sessionId = data.substring(7); // Remove 'delete_' prefix
+                const session = sessions.get(sessionId);
+
+                if (!session) {
+                    try {
+                        await bot.sendMessage(chatId, `❌ Seja ${sessionId} ne obstaja več / Session no longer exists`);
+                    } catch (sendError) {
+                        console.error('Error sending message:', sendError.message);
+                    }
+                    return res.sendStatus(200);
+                }
+
+                // Send goodbye message to user
+                session.messages.push({
+                    role: 'assistant',
+                    content: getGoodbyeMessage(session.language),
+                    timestamp: new Date(),
+                    fromOperator: true
+                });
+
+                // Delete session from memory
+                sessions.delete(sessionId);
+
+                console.log(`Session ${sessionId} deleted via button by operator`);
+                try {
+                    await bot.sendMessage(chatId,
+                        `🗑️ Seja ${sessionId} izbrisana / Session deleted\n\n` +
+                        `Seja je odstranjena iz spomina / Session removed from memory`
+                    );
+                } catch (sendError) {
+                    console.error('Error sending delete confirmation:', sendError.message);
                 }
             }
 
