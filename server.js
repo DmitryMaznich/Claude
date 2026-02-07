@@ -281,11 +281,25 @@ app.post('/api/chat', async (req, res) => {
 });
 
 // Upload photo endpoint
-app.post('/api/upload', upload.single('photo'), async (req, res) => {
-    try {
+app.post('/api/upload', (req, res) => {
+    upload.single('photo')(req, res, async (err) => {
+        // Handle multer errors
+        if (err) {
+            console.error('Multer error:', err.message);
+            if (err.message.includes('Only image files')) {
+                return res.status(400).json({
+                    error: 'Nepodprt format slike / Unsupported image format',
+                    message: 'Prosimo uporabite JPEG, PNG, WEBP ali GIF format.\nPlease use JPEG, PNG, WEBP or GIF format.\n\nℹ️ HEIC format ni podprt. Pretvorite v JPG.\nHEIC format not supported. Convert to JPG.'
+                });
+            }
+            return res.status(400).json({ error: err.message });
+        }
+
         if (!req.file) {
             return res.status(400).json({ error: 'No file uploaded' });
         }
+
+        try {
 
         const { sessionId } = req.body;
         if (!sessionId) {
@@ -335,10 +349,11 @@ app.post('/api/upload', upload.single('photo'), async (req, res) => {
             photoUrl: photoUrl,
             operatorMode: true
         });
-    } catch (error) {
-        console.error('Photo upload error:', error);
-        res.status(500).json({ error: 'Failed to upload photo' });
-    }
+        } catch (error) {
+            console.error('Photo upload error:', error);
+            res.status(500).json({ error: 'Failed to upload photo' });
+        }
+    });
 });
 
 // Get new messages for session (polling endpoint)

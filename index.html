@@ -5969,7 +5969,9 @@
                 const data = await response.json();
 
                 if (data.error) {
-                    addMessage('Napaka pri nalaganju fotografije / Error uploading photo', 'bot');
+                    // Show specific error message if available
+                    const errorMsg = data.message || data.error || 'Napaka pri nalaganju fotografije / Error uploading photo';
+                    addMessage(errorMsg, 'bot');
                     return;
                 }
 
