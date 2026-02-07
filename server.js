@@ -350,6 +350,54 @@ app.post(`/telegram/webhook`, async (req, res) => {
                     console.error('Error sending success message:', sendError.message);
                 }
             }
+            // Handle /close command
+            else if (text.startsWith('/close ')) {
+                if (chatId.toString() !== OPERATOR_CHAT_ID) {
+                    return await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
+                }
+
+                const parts = text.split(' ');
+                if (parts.length !== 2) {
+                    return await bot.sendMessage(chatId, '❌ Format: /close [sessionId]');
+                }
+
+                const sessionId = parts[1];
+                const session = sessions.get(sessionId);
+
+                if (!session) {
+                    const availableSessions = Array.from(sessions.keys()).join(', ') || 'none';
+                    try {
+                        await bot.sendMessage(chatId,
+                            `❌ Seja ${sessionId} ne obstaja / Session not found\n\n` +
+                            `Razpoložljive seje / Available sessions: ${availableSessions}`
+                        );
+                    } catch (sendError) {
+                        console.error('Error sending not found message:', sendError.message);
+                    }
+                    return;
+                }
+
+                // Send goodbye message to user
+                session.messages.push({
+                    role: 'assistant',
+                    content: 'Hvala za pogovor! Zdaj se lahko ponovno pogovarjate z našim AI asistentom.\n\nThank you for the conversation! You can now chat with our AI assistant again.',
+                    timestamp: new Date(),
+                    fromOperator: true
+                });
+
+                // Exit operator mode
+                session.operatorMode = false;
+
+                console.log(`Session ${sessionId} closed by operator`);
+                try {
+                    await bot.sendMessage(chatId,
+                        `✅ Seja ${sessionId} zaprta / Session closed\n\n` +
+                        `Uporabnik je vrnjen v AI chat / User returned to AI chat`
+                    );
+                } catch (sendError) {
+                    console.error('Error sending close confirmation:', sendError.message);
+                }
+            }
         }
     } catch (error) {
         console.error('Webhook error:', error);
