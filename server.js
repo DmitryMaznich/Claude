@@ -96,10 +96,12 @@ app.post('/api/chat', async (req, res) => {
         // Check if in operator mode
         if (session.operatorMode) {
             // Send user's message to operator via Telegram
-            const notification = `💬 *Novo sporočilo / New message*\n\n` +
-                `Session ID: \`${sessionId}\`\n` +
-                `Uporabnik / User: ${message}\n\n` +
-                `_Odgovori na to sporočilo / Reply to this message to respond_`;
+            const notification = `💬 *NOVO SPOROČILO*\n` +
+                `━━━━━━━━━━━━━━━━━\n` +
+                `👤 Uporabnik:\n\n` +
+                `"${message}"\n\n` +
+                `━━━━━━━━━━━━━━━━━\n` +
+                `Session: \`${sessionId}\``;
 
             if (bot && OPERATOR_CHAT_ID) {
                 try {
@@ -127,10 +129,12 @@ app.post('/api/chat', async (req, res) => {
             session.operatorMode = true;
 
             // Notify operator via Telegram
-            const notification = `🔔 *NOVA ZAHTEVA ZA OPERATERJA / NEW OPERATOR REQUEST*\n\n` +
-                `Session ID: \`${sessionId}\`\n` +
-                `💬 Uporabnik / User: ${message}\n\n` +
-                `_Odgovori na to sporočilo / Reply to this message to respond_`;
+            const notification = `🔔 *ZAPROS OPERATERJA*\n` +
+                `━━━━━━━━━━━━━━━━━\n` +
+                `👤 Uporabnik:\n\n` +
+                `"${message}"\n\n` +
+                `━━━━━━━━━━━━━━━━━\n` +
+                `Session: \`${sessionId}\``;
 
             if (bot && OPERATOR_CHAT_ID) {
                 try {
