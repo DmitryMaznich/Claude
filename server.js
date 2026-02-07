@@ -73,10 +73,24 @@ const OPERATOR_CHAT_ID = process.env.OPERATOR_CHAT_ID;
 // Session storage (in production, use Redis or database)
 const sessions = new Map();
 
-// System prompt for Claude
-const SYSTEM_PROMPT = `You are a helpful assistant for Smart Wash, a laundromat service in Ljubljana, Slovenia.
+// System prompt for Claude (dynamic based on user language)
+function getSystemPrompt(userLanguage) {
+    if (!userLanguage) {
+        return `You are a helpful assistant for Smart Wash.
 
-IMPORTANT: Respond in the same language as the user. If they write in Slovenian, respond in Slovenian. If in English, respond in English.
+IMPORTANT: The user's first message will be their preferred language (e.g., "slovenščina", "english", "русский", "hrvatski", etc.).
+
+Your response should:
+1. Detect and save their language
+2. Confirm in their language: "✓ Language set: [language]"
+3. Ask how you can help them in their chosen language
+
+Be brief and friendly.`;
+    }
+
+    return `You are a helpful assistant for Smart Wash, a laundromat service in Ljubljana, Slovenia.
+
+CRITICAL: You MUST respond ONLY in ${userLanguage}. Do not mix languages.
 
 Information about Smart Wash:
 - Two locations: Pralnica TC Jarše (Beblerjev trg 2) and Pralnica Galjevica (Galjevica 6a)
@@ -86,9 +100,10 @@ Information about Smart Wash:
 - Drying programs with temperature control (Low, Medium, High)
 
 If the user asks complex questions, needs human support, or explicitly asks to talk to an operator, respond with:
-"TRIGGER_OPERATOR: [brief summary of user's request]"
+"TRIGGER_OPERATOR: [brief summary of user's request in ${userLanguage}]"
 
-Be friendly, helpful, and concise.`;
+Be friendly, helpful, and concise. Remember: ONLY respond in ${userLanguage}.`;
+}
 
 // Trigger phrases for operator handoff
 const TRIGGER_PHRASES = [
@@ -118,6 +133,7 @@ function getSession(sessionId) {
             id: sessionId,
             messages: [],
             operatorMode: false,
+            language: null,
             createdAt: new Date()
         });
     }
@@ -210,7 +226,7 @@ app.post('/api/chat', async (req, res) => {
         const response = await anthropic.messages.create({
             model: 'claude-3-haiku-20240307',
             max_tokens: 500,
-            system: SYSTEM_PROMPT,
+            system: getSystemPrompt(session.language),
             messages: session.messages.map(msg => ({
                 role: msg.role,
                 content: msg.content
@@ -218,6 +234,51 @@ app.post('/api/chat', async (req, res) => {
         });
 
         const assistantMessage = response.content[0].text;
+
+        // If this is the first message, detect and save language
+        if (!session.language && session.messages.length === 1) {
+            // Extract language from user's first message
+            const userLanguage = message.toLowerCase().trim();
+
+            // Map common language names
+            const languageMap = {
+                'slovenščina': 'Slovenian',
+                'slovene': 'Slovenian',
+                'slovenian': 'Slovenian',
+                'english': 'English',
+                'англи': 'English',
+                'русский': 'Russian',
+                'russian': 'Russian',
+                'ruski': 'Russian',
+                'hrvatski': 'Croatian',
+                'croatian': 'Croatian',
+                'hrvatska': 'Croatian',
+                'italiano': 'Italian',
+                'italian': 'Italian',
+                'deutsch': 'German',
+                'german': 'German',
+                'nemščina': 'German',
+                'español': 'Spanish',
+                'spanish': 'Spanish',
+                'français': 'French',
+                'french': 'French'
+            };
+
+            // Find matching language
+            for (const [key, value] of Object.entries(languageMap)) {
+                if (userLanguage.includes(key)) {
+                    session.language = value;
+                    console.log(`Language set to: ${value}`);
+                    break;
+                }
+            }
+
+            // If no match, try to detect from the message itself
+            if (!session.language) {
+                session.language = 'English'; // Default fallback
+                console.log('Language not detected, defaulting to English');
+            }
+        }
 
         // Check if Claude wants to trigger operator
         if (assistantMessage.includes('TRIGGER_OPERATOR:')) {
