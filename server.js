@@ -139,6 +139,42 @@ function getOperatorConnectMessage(userLanguage) {
     return messages[userLanguage] || messages['English'];
 }
 
+// Check if operator is available (6:00-23:00 Ljubljana time)
+function isOperatorAvailable() {
+    const now = new Date();
+    const ljubljanaTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Ljubljana' }));
+    const hours = ljubljanaTime.getHours();
+
+    // Operator available from 6:00 to 23:00
+    return hours >= 6 && hours < 23;
+}
+
+// Get operator unavailable message in user's language
+function getOperatorUnavailableMessage(userLanguage) {
+    const messages = {
+        'Slovenian': 'Trenutno operator ni na voljo. Delovni čas: 6:00-23:00.\n\nVaše sporočilo lahko pustite tukaj, ali me vprašajte kaj o Smart Wash!',
+        'English': 'Operator is currently unavailable. Working hours: 6:00-23:00.\n\nYou can leave your message here, or ask me anything about Smart Wash!',
+        'Russian': 'Оператор сейчас недоступен. Рабочее время: 6:00-23:00.\n\nВы можете оставить сообщение здесь, или спросите меня что-нибудь о Smart Wash!',
+        'Croatian': 'Operator trenutno nije dostupan. Radno vrijeme: 6:00-23:00.\n\nMožete ostaviti poruku ovdje, ili me pitajte bilo što o Smart Wash!',
+        'Italian': 'L\'operatore non è attualmente disponibile. Orario di lavoro: 6:00-23:00.\n\nPuoi lasciare il tuo messaggio qui, o chiedermi qualsiasi cosa su Smart Wash!',
+        'German': 'Der Operator ist derzeit nicht verfügbar. Arbeitszeit: 6:00-23:00.\n\nSie können Ihre Nachricht hier hinterlassen oder mich etwas über Smart Wash fragen!',
+        'Spanish': 'El operador no está disponible actualmente. Horario de trabajo: 6:00-23:00.\n\n¡Puedes dejar tu mensaje aquí, o preguntarme cualquier cosa sobre Smart Wash!',
+        'French': 'L\'opérateur n\'est pas disponible actuellement. Heures de travail: 6:00-23:00.\n\nVous pouvez laisser votre message ici, ou me demander n\'importe quoi sur Smart Wash!',
+        'Portuguese': 'O operador não está disponível no momento. Horário de trabalho: 6:00-23:00.\n\nVocê pode deixar sua mensagem aqui, ou me perguntar qualquer coisa sobre Smart Wash!',
+        'Polish': 'Operator jest obecnie niedostępny. Godziny pracy: 6:00-23:00.\n\nMożesz zostawić wiadomość tutaj lub zapytać mnie o cokolwiek dotyczącego Smart Wash!',
+        'Czech': 'Operátor je momentálně nedostupný. Pracovní doba: 6:00-23:00.\n\nMůžete zanechat zprávu zde, nebo se mě zeptejte na cokoliv o Smart Wash!',
+        'Ukrainian': 'Оператор зараз недоступний. Робочий час: 6:00-23:00.\n\nВи можете залишити повідомлення тут, або запитайте мене про Smart Wash!',
+        'Serbian': 'Operator trenutno nije dostupan. Radno vreme: 6:00-23:00.\n\nMožete ostaviti poruku ovde, ili me pitajte bilo šta o Smart Wash!',
+        'Japanese': 'オペレーターは現在対応しておりません。営業時間：6:00-23:00。\n\nメッセージをここに残すか、Smart Washについて何でもお尋ねください！',
+        'Chinese': '客服人员目前不可用。工作时间：6:00-23:00。\n\n您可以在此留言，或询问我关于Smart Wash的任何问题！',
+        'Korean': '상담원이 현재 이용 불가능합니다. 근무 시간: 6:00-23:00.\n\n여기에 메시지를 남기거나 Smart Wash에 대해 무엇이든 물어보세요!',
+        'Turkish': 'Operatör şu anda müsait değil. Çalışma saatleri: 6:00-23:00.\n\nMesajınızı buraya bırakabilir veya Smart Wash hakkında bana bir şey sorabilirsiniz!',
+        'Arabic': 'المشغل غير متاح حاليًا. ساعات العمل: 6:00-23:00.\n\nيمكنك ترك رسالتك هنا، أو اسألني أي شيء عن Smart Wash!'
+    };
+
+    return messages[userLanguage] || messages['English'];
+}
+
 // Get goodbye message in user's language
 function getGoodbyeMessage(userLanguage) {
     const messages = {
@@ -316,6 +352,15 @@ app.post('/api/chat', async (req, res) => {
 
         // Check if should trigger operator
         if (shouldTriggerOperator(message)) {
+            // Check if operator is available (6:00-23:00 Ljubljana time)
+            if (!isOperatorAvailable()) {
+                console.log('Operator requested but unavailable (outside working hours)');
+                return res.json({
+                    response: getOperatorUnavailableMessage(session.language),
+                    operatorMode: false
+                });
+            }
+
             session.operatorMode = true;
 
             // Translate message if needed
@@ -537,6 +582,18 @@ app.post('/api/chat', async (req, res) => {
 
         // Check if Claude wants to trigger operator
         if (assistantMessage.includes('TRIGGER_OPERATOR:')) {
+            // Check if operator is available (6:00-23:00 Ljubljana time)
+            if (!isOperatorAvailable()) {
+                console.log('AI triggered operator but unavailable (outside working hours)');
+                // Remove assistant message with TRIGGER_OPERATOR from history
+                session.messages.pop();
+                // Return unavailability message instead
+                return res.json({
+                    response: getOperatorUnavailableMessage(session.language),
+                    operatorMode: false
+                });
+            }
+
             session.operatorMode = true;
 
             // Translate message and history if needed
@@ -648,6 +705,15 @@ app.post('/api/upload', (req, res) => {
 
         // Automatically switch to operator mode when photo is sent
         if (!session.operatorMode) {
+            // Check if operator is available
+            if (!isOperatorAvailable()) {
+                console.log('Photo sent but operator unavailable (outside working hours)');
+                return res.json({
+                    response: getOperatorUnavailableMessage(session.language),
+                    operatorMode: false
+                });
+            }
+
             session.operatorMode = true;
         }
 
