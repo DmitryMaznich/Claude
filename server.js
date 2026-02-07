@@ -73,6 +73,74 @@ const OPERATOR_CHAT_ID = process.env.OPERATOR_CHAT_ID;
 // Session storage (in production, use Redis or database)
 const sessions = new Map();
 
+// Store website content (updated once per day)
+let websiteContent = {
+    lastUpdated: null,
+    info: 'Loading...'
+};
+
+// Fetch and parse website content
+async function updateWebsiteContent() {
+    try {
+        console.log('Fetching website content from www.smart-wash.si...');
+
+        const response = await fetch('https://www.smart-wash.si');
+        const html = await response.text();
+
+        // Use Claude to extract structured information from HTML
+        const extractionResponse = await anthropic.messages.create({
+            model: 'claude-3-haiku-20240307',
+            max_tokens: 1000,
+            system: 'You are a content extractor. Extract key information from HTML and format it clearly.',
+            messages: [{
+                role: 'user',
+                content: `Extract the following information from this HTML (in English):\n\n1. Services offered (washing, drying, etc.) with prices\n2. Locations and addresses\n3. Opening hours\n4. Contact information\n5. Any special features or details\n\nHTML:\n${html.substring(0, 15000)}`
+            }]
+        });
+
+        websiteContent = {
+            lastUpdated: new Date(),
+            info: extractionResponse.content[0].text
+        };
+
+        console.log('Website content updated successfully');
+        console.log('Content preview:', websiteContent.info.substring(0, 200) + '...');
+    } catch (error) {
+        console.error('Error updating website content:', error.message);
+        // Keep old content if update fails
+    }
+}
+
+// Update website content on startup
+updateWebsiteContent();
+
+// Schedule daily update at 5:00 AM Ljubljana time
+function scheduleDailyUpdate() {
+    const now = new Date();
+    const ljubljanaTime = new Date(now.toLocaleString('en-US', { timeZone: 'Europe/Ljubljana' }));
+
+    // Calculate time until next 5:00 AM
+    const next5AM = new Date(ljubljanaTime);
+    next5AM.setHours(5, 0, 0, 0);
+
+    if (ljubljanaTime.getHours() >= 5) {
+        // If it's already past 5 AM today, schedule for tomorrow
+        next5AM.setDate(next5AM.getDate() + 1);
+    }
+
+    const msUntil5AM = next5AM - ljubljanaTime;
+
+    console.log(`Next website update scheduled at 5:00 AM (in ${Math.round(msUntil5AM / 1000 / 60 / 60)} hours)`);
+
+    setTimeout(() => {
+        updateWebsiteContent();
+        // Schedule next update (24 hours later)
+        setInterval(updateWebsiteContent, 24 * 60 * 60 * 1000);
+    }, msUntil5AM);
+}
+
+scheduleDailyUpdate();
+
 // System prompt for Claude (dynamic based on user language)
 function getSystemPrompt(userLanguage) {
     if (!userLanguage) {
@@ -92,12 +160,9 @@ Be brief and friendly.`;
 
 CRITICAL: You MUST respond ONLY in ${userLanguage}. Do not mix languages.
 
-Information about Smart Wash:
-- Two locations: Pralnica TC Jarše (Beblerjev trg 2) and Pralnica Galjevica (Galjevica 6a)
-- Services: Washing (10kg - 6 tokens, 18kg - 8 tokens), Drying (10 min - 1 token), Disinfection (1 cycle - 2 tokens)
-- Opening hours: Mon-Sat 08:00-20:00, Sun 08:00-14:00
-- Modern self-service machines with multiple washing programs (Cotton, Synthetics, Mixed, Quick wash)
-- Drying programs with temperature control (Low, Medium, High)
+Current Information about Smart Wash (updated ${websiteContent.lastUpdated ? websiteContent.lastUpdated.toLocaleDateString() : 'recently'}):
+
+${websiteContent.info}
 
 IMPORTANT SCOPE:
 - You can ONLY help with Smart Wash laundry services
