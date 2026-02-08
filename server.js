@@ -1235,7 +1235,12 @@ app.post(`/telegram/webhook`, async (req, res) => {
             // Handle /sessions command
             else if (text === '/sessions') {
                 if (chatId.toString() !== OPERATOR_CHAT_ID) {
-                    return await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
+                    try {
+                        await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
+                    } catch (err) {
+                        console.error('Error sending access denied:', err.message);
+                    }
+                    return res.sendStatus(200);
                 }
 
                 console.log(`Total sessions in memory: ${sessions.size}`);
@@ -1278,7 +1283,12 @@ app.post(`/telegram/webhook`, async (req, res) => {
             // Handle /reply command
             else if (text.startsWith('/reply ')) {
                 if (chatId.toString() !== OPERATOR_CHAT_ID) {
-                    return await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
+                    try {
+                        await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
+                    } catch (err) {
+                        console.error('Error sending access denied:', err.message);
+                    }
+                    return res.sendStatus(200);
                 }
 
                 const parts = text.split(' ');
@@ -1330,7 +1340,12 @@ app.post(`/telegram/webhook`, async (req, res) => {
             // Handle /close command
             else if (text.startsWith('/close ')) {
                 if (chatId.toString() !== OPERATOR_CHAT_ID) {
-                    return await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
+                    try {
+                        await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
+                    } catch (err) {
+                        console.error('Error sending access denied:', err.message);
+                    }
+                    return res.sendStatus(200);
                 }
 
                 const parts = text.split(' ');
@@ -1378,7 +1393,12 @@ app.post(`/telegram/webhook`, async (req, res) => {
             // Handle /closeall command
             else if (text === '/closeall') {
                 if (chatId.toString() !== OPERATOR_CHAT_ID) {
-                    return await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
+                    try {
+                        await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
+                    } catch (err) {
+                        console.error('Error sending access denied:', err.message);
+                    }
+                    return res.sendStatus(200);
                 }
 
                 const sessionCount = sessions.size;
