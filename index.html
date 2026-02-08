@@ -5778,19 +5778,8 @@
                     return;
                 }
 
-                // If response is just checkmarks, add them to user's message instead of creating new message
-                if (data.response === '✓✓') {
-                    const statusSpan = userMessageElement.querySelector('.message-status');
-                    if (statusSpan) {
-                        statusSpan.textContent = ' ✓✓';
-                        statusSpan.style.color = '#34b7f1';
-                        statusSpan.style.marginLeft = '4px';
-                    }
-                } else {
-                    addMessage(data.response, 'bot');
-                }
-
-                // Update operator mode status
+                // Update operator mode status BEFORE adding message
+                const wasOperatorMode = isOperatorMode;
                 if (data.operatorMode && !isOperatorMode) {
                     // Operator connected
                     isOperatorMode = true;
@@ -5803,6 +5792,20 @@
                     stopPolling();
                 }
 
+                // If response is just checkmarks, add them to user's message instead of creating new message
+                if (data.response === '✓✓') {
+                    const statusSpan = userMessageElement.querySelector('.message-status');
+                    if (statusSpan) {
+                        statusSpan.textContent = ' ✓✓';
+                        statusSpan.style.color = '#34b7f1';
+                        statusSpan.style.marginLeft = '4px';
+                    }
+                } else {
+                    // Don't update lastMessageTime when operator just connected (to avoid missing first operator message)
+                    const shouldUpdateTimestamp = !(data.operatorMode && !wasOperatorMode);
+                    addMessage(data.response, 'bot', shouldUpdateTimestamp);
+                }
+
             } catch (error) {
                 hideTyping();
                 console.error('Error sending message:', error);
@@ -5810,7 +5813,7 @@
             }
         }
 
-        function addMessage(text, sender) {
+        function addMessage(text, sender, updateTimestamp = true) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `chat-message ${sender}`;
             messageDiv.innerHTML = `
@@ -5821,7 +5824,9 @@
             `;
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
-            lastMessageTime = new Date().toISOString();
+            if (updateTimestamp) {
+                lastMessageTime = new Date().toISOString();
+            }
             return messageDiv; // Return the created element
         }
 
