@@ -5957,12 +5957,7 @@
                         lastMessageTime = data.messages[data.messages.length - 1].timestamp;
                     }
 
-                    // Check if operator disconnected
-                    if (!data.operatorMode && isOperatorMode) {
-                        isOperatorMode = false;
-                        updateChatStatus('AI online');
-                        stopPolling();
-                    }
+                    // Note: Operator disconnect is handled by /close command, not by polling
                 } catch (error) {
                     console.error('Polling error:', error);
                 } finally {
