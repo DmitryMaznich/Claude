@@ -253,20 +253,20 @@ Več informacij: https://smart-wash.si/#washing"`;
 // Get operator connection message in user's language
 function getOperatorConnectMessage(userLanguage) {
     const messages = {
-        'Slovenian': 'Povezujem vas z našim operaterjem. Počakajte trenutek...',
-        'English': 'Connecting you with our operator. Please wait a moment...',
-        'Russian': 'Соединяю вас с оператором. Пожалуйста, подождите...',
-        'Croatian': 'Povezujem vas s našim operatorom. Pričekajte trenutak...',
-        'Italian': 'Vi sto collegando con il nostro operatore. Attendere prego...',
-        'German': 'Ich verbinde Sie mit unserem Operator. Bitte warten Sie...',
-        'Spanish': 'Le estoy conectando con nuestro operador. Por favor espere...',
-        'French': 'Je vous connecte avec notre opérateur. Veuillez patienter...',
-        'Portuguese': 'Estou conectando você com nosso operador. Por favor aguarde...',
-        'Polish': 'Łączę z naszym operatorem. Proszę czekać...',
-        'Czech': 'Spojuji vás s naším operátorem. Počkejte prosím...',
-        'Ukrainian': 'З\'єдную вас з нашим оператором. Будь ласка, зачекайте...',
-        'Serbian': 'Povezujem vas sa našim operatorom. Molim sačekajte...',
-        'Japanese': 'オペレーターにおつなぎします。しばらくお待ちください...',
+        'Slovenian': '👨‍💼 Povezujem vas z našim operaterjem. Počakajte trenutek...\n\n💡 Tip: Napišite /ai za vrnitev na AI asistenta',
+        'English': '👨‍💼 Connecting you with our operator. Please wait a moment...\n\n💡 Tip: Type /ai to switch back to AI assistant',
+        'Russian': '👨‍💼 Соединяю вас с оператором. Пожалуйста, подождите...\n\n💡 Совет: Напишите /ai чтобы вернуться к AI ассистенту',
+        'Croatian': '👨‍💼 Povezujem vas s našim operatorom. Pričekajte trenutak...\n\n💡 Savjet: Napišite /ai za povratak na AI asistenta',
+        'Italian': '👨‍💼 Vi sto collegando con il nostro operatore. Attendere prego...\n\n💡 Suggerimento: Digita /ai per tornare all\'assistente AI',
+        'German': '👨‍💼 Ich verbinde Sie mit unserem Operator. Bitte warten Sie...\n\n💡 Tipp: Geben Sie /ai ein, um zum AI-Assistenten zurückzukehren',
+        'Spanish': '👨‍💼 Le estoy conectando con nuestro operador. Por favor espere...\n\n💡 Consejo: Escriba /ai para volver al asistente AI',
+        'French': '👨‍💼 Je vous connecte avec notre opérateur. Veuillez patienter...\n\n💡 Astuce: Tapez /ai pour revenir à l\'assistant AI',
+        'Portuguese': '👨‍💼 Estou conectando você com nosso operador. Por favor aguarde...\n\n💡 Dica: Digite /ai para voltar ao assistente AI',
+        'Polish': '👨‍💼 Łączę z naszym operatorem. Proszę czekać...\n\n💡 Wskazówka: Wpisz /ai aby wrócić do asystenta AI',
+        'Czech': '👨‍💼 Spojuji vás s naším operátorem. Počkejte prosím...\n\n💡 Tip: Napište /ai pro návrat k AI asistentovi',
+        'Ukrainian': '👨‍💼 З\'єдную вас з нашим оператором. Будь ласка, зачекайте...\n\n💡 Порада: Напишіть /ai щоб повернутися до AI асистента',
+        'Serbian': '👨‍💼 Povezujem vas sa našim operatorom. Molim sačekajte...\n\n💡 Savet: Napišite /ai za povratak na AI asistenta',
+        'Japanese': '👨‍💼 オペレーターにおつなぎします。しばらくお待ちください...\n\n💡 ヒント: /ai と入力すると AI アシスタントに戻ります',
         'Chinese': '正在为您连接我们的客服。请稍候...',
         'Korean': '상담원과 연결 중입니다. 잠시만 기다려 주세요...',
         'Turkish': 'Operatörümüze bağlanıyorsunuz. Lütfen bekleyin...',
@@ -450,6 +450,76 @@ app.post('/api/chat', async (req, res) => {
             timestamp: new Date()
         });
 
+        // Handle user commands
+        const command = message.trim().toLowerCase();
+
+        // Command: /ai or /bot - switch back to AI
+        if (command === '/ai' || command === '/bot') {
+            if (session.operatorMode) {
+                session.operatorMode = false;
+
+                const aiSwitchMessage = {
+                    'English': '🤖 Switched back to AI assistant. How can I help you?',
+                    'Slovenian': '🤖 Preklopljeno nazaj na AI asistenta. Kako vam lahko pomagam?',
+                    'Russian': '🤖 Переключено обратно на AI ассистента. Чем могу помочь?',
+                    'Ukrainian': '🤖 Перемкнуто назад на AI асистента. Чим можу допомогти?',
+                    'Croatian': '🤖 Vraćeno na AI asistenta. Kako vam mogu pomoći?',
+                    'Serbian': '🤖 Vraćeno na AI asistenta. Kako vam mogu pomoći?',
+                    'Italian': '🤖 Ritornato all\'assistente AI. Come posso aiutarti?',
+                    'German': '🤖 Zurück zum AI-Assistenten. Wie kann ich Ihnen helfen?'
+                };
+
+                session.messages.push({
+                    role: 'assistant',
+                    content: aiSwitchMessage[session.language] || aiSwitchMessage['English'],
+                    timestamp: new Date()
+                });
+
+                return res.json({
+                    response: aiSwitchMessage[session.language] || aiSwitchMessage['English'],
+                    operatorMode: false
+                });
+            } else {
+                const alreadyAiMessage = {
+                    'English': '✓ You are already chatting with AI assistant.',
+                    'Slovenian': '✓ Že klepetate z AI asistentom.',
+                    'Russian': '✓ Вы уже общаетесь с AI ассистентом.',
+                    'Ukrainian': '✓ Ви вже спілкуєтеся з AI асистентом.',
+                    'Croatian': '✓ Već razgovarate s AI asistentom.',
+                    'Serbian': '✓ Već razgovarate s AI asistentom.',
+                    'Italian': '✓ Stai già chattando con l\'assistente AI.',
+                    'German': '✓ Sie chatten bereits mit dem AI-Assistenten.'
+                };
+
+                return res.json({
+                    response: alreadyAiMessage[session.language] || alreadyAiMessage['English'],
+                    operatorMode: false
+                });
+            }
+        }
+
+        // Command: /operator - switch to operator
+        if (command === '/operator') {
+            if (session.operatorMode) {
+                const alreadyOperatorMessage = {
+                    'English': '✓ You are already connected to an operator.',
+                    'Slovenian': '✓ Že ste povezani z operaterjem.',
+                    'Russian': '✓ Вы уже подключены к оператору.',
+                    'Ukrainian': '✓ Ви вже підключені до оператора.',
+                    'Croatian': '✓ Već ste povezani s operaterom.',
+                    'Serbian': '✓ Već ste povezani s operaterom.',
+                    'Italian': '✓ Sei già connesso a un operatore.',
+                    'German': '✓ Sie sind bereits mit einem Operator verbunden.'
+                };
+
+                return res.json({
+                    response: alreadyOperatorMessage[session.language] || alreadyOperatorMessage['English'],
+                    operatorMode: true
+                });
+            }
+            // If not in operator mode, fall through to trigger operator below
+        }
+
         // Check if in operator mode
         if (session.operatorMode) {
             // Translate user's message to Russian if needed
@@ -500,8 +570,8 @@ app.post('/api/chat', async (req, res) => {
             });
         }
 
-        // Check if should trigger operator
-        if (shouldTriggerOperator(message)) {
+        // Check if should trigger operator (by keyword or command)
+        if (command === '/operator' || shouldTriggerOperator(message)) {
             // Check if operator is available (6:00-23:00 Ljubljana time)
             if (!isOperatorAvailable()) {
                 console.log('Operator requested but unavailable (outside working hours)');
