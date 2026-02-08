@@ -5910,12 +5910,17 @@
                                 content = `
                                     <div class="message-bubble">
                                         <img src="${API_URL}${msg.photo}" alt="Photo" style="max-width: 100%; border-radius: 8px;">
-                                        ${msg.content ? `<p>${escapeHtml(msg.content)}</p>` : ''}
+                                        ${msg.content ? `<p>${linkifyUrls(escapeHtml(msg.content))}</p>` : ''}
                                         <span class="message-time">${new Date().toLocaleTimeString('sl-SI', {hour: '2-digit', minute: '2-digit'})}</span>
                                     </div>
                                 `;
                             } else {
-                                content = `<div class="message-content">${escapeHtml(msg.content)}</div>`;
+                                content = `
+                                    <div class="message-bubble">
+                                        <p>${linkifyUrls(escapeHtml(msg.content))}</p>
+                                        <span class="message-time">${new Date().toLocaleTimeString('sl-SI', {hour: '2-digit', minute: '2-digit'})}</span>
+                                    </div>
+                                `;
                             }
 
                             messageDiv.innerHTML = content;
