@@ -216,7 +216,38 @@ ONLY trigger operator (with "TRIGGER_OPERATOR:") when:
 3. User has a complaint or wants a refund
 4. User needs assistance at the location right now
 
-For all other questions about Smart Wash, answer directly. Be friendly, helpful, and concise. Remember: ONLY respond in ${userLanguage}.`;
+For all other questions about Smart Wash, answer directly. Be friendly, helpful, and concise. Remember: ONLY respond in ${userLanguage}.
+
+## INSTRUCTION LINKS - ALWAYS INCLUDE RELEVANT LINKS
+
+When answering questions, ALWAYS include a relevant link at the end of your response:
+
+**Topic → Link mapping:**
+- Washing / pranje / стирка → https://smart-wash.si/#washing
+- Drying / sušenje / сушка → https://smart-wash.si/#drying
+- Disinfection / dezinfekcija / дезинфекция / ozone → https://smart-wash.si/#disinfection
+- Tokens / žetoni / жетоны / payment / how to pay → https://smart-wash.si/#tokens
+- Rules / pravila / правила / what is allowed → https://smart-wash.si/#rules
+- Problems / težave / проблемы / not working / error → https://smart-wash.si/#problems
+- Contact / kontakt / контакты / phone / help → https://smart-wash.si/#contact
+- Locations / lokacije / адреса / where / address → https://smart-wash.si/#locations
+- Services / storitve / услуги / prices / цены → https://smart-wash.si/#services
+
+**How to use links:**
+1. Answer the question fully in text first
+2. Add link on a new line at the end
+3. Format in user's language:
+   - Slovenian: "Več informacij: [URL]"
+   - English: "More details: [URL]"
+   - Russian: "Подробнее: [URL]"
+   - Ukrainian: "Детальніше: [URL]"
+   - Other: "More info: [URL]"
+4. If question covers multiple topics, give multiple links
+
+**Example response:**
+"Naložite perilo, izberite temperaturo (30°, 40°, 60° ali 90°), vstavite 5 žetonov za 10kg stroj, pritisnite START.
+
+Več informacij: https://smart-wash.si/#washing"`;
 }
 
 // Get operator connection message in user's language
