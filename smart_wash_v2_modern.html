@@ -1,0 +1,1227 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Wash - Moderna Samopostrežna Pralnica | Modern Self-Service Laundromat</title>
+    <meta name="description" content="Smart Wash - moderna samopostrežna pralnica v Ljubljani. Galjevica in TC Jarše. Hitro, učinkovito, enostavno.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2856a4;
+            --secondary: #0098d9;
+            --accent: #92d7f6;
+            --warm-white: #ffffff;
+            --shadow: 0 4px 6px rgba(0,0,0,0.1);
+            --shadow-lg: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: var(--primary);
+            background: var(--warm-white);
+            overflow-x: hidden;
+        }
+
+        /* Language Switcher */
+        .lang-switcher {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 1000;
+            background: white;
+            padding: 10px 20px;
+            border-radius: 25px;
+            box-shadow: var(--shadow);
+            display: flex;
+            gap: 10px;
+            align-items: center;
+        }
+
+        .lang-btn {
+            background: none;
+            border: none;
+            padding: 8px 15px;
+            cursor: pointer;
+            font-weight: 600;
+            color: var(--primary);
+            border-radius: 15px;
+            transition: all 0.3s ease;
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: white;
+        }
+
+        .lang-btn:hover {
+            transform: scale(1.05);
+        }
+
+        /* Hero Bento Grid */
+        .hero {
+            padding: 100px 20px 60px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .bento-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            grid-auto-rows: 200px;
+        }
+
+        .bento-item {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .bento-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .bento-logo {
+            grid-column: 1;
+            grid-row: 1;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .logo-img {
+            width: 100%;
+            height: auto;
+            max-width: 150px;
+            object-fit: contain;
+        }
+
+        .logo-text {
+            color: white;
+            font-size: 2.5rem;
+            font-weight: 800;
+            text-align: center;
+        }
+
+        .logo-subtitle {
+            color: white;
+            text-align: center;
+            font-size: 0.9rem;
+            opacity: 0.9;
+            margin-top: 5px;
+        }
+
+        .bento-tagline {
+            grid-column: 2;
+            grid-row: 1;
+        }
+
+        .tagline-text {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .tagline-sub {
+            color: #666;
+            font-size: 0.95rem;
+        }
+
+        .bento-visual {
+            grid-column: 3;
+            grid-row: 1 / 3;
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            position: relative;
+            padding: 40px;
+        }
+
+        .visual-icon {
+            font-size: 6rem;
+            text-align: center;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+
+        .bento-pricing {
+            grid-column: 1;
+            grid-row: 2;
+            background: var(--secondary);
+            color: white;
+        }
+
+        .quick-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 5px;
+        }
+
+        .price-label {
+            font-size: 0.9rem;
+            opacity: 0.9;
+        }
+
+        .bento-map {
+            grid-column: 2;
+            grid-row: 2;
+            padding: 15px;
+        }
+
+        .map-preview {
+            width: 100%;
+            height: 100%;
+            border-radius: 10px;
+            background: #e0e0e0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+        }
+
+        .bento-cta {
+            grid-column: 1 / 4;
+            grid-row: 3;
+            background: var(--accent);
+            text-align: center;
+            padding: 40px;
+            cursor: pointer;
+        }
+
+        .cta-text {
+            color: white;
+            font-size: 1.8rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .cta-sub {
+            color: white;
+            opacity: 0.9;
+        }
+
+        /* Sections */
+        section {
+            max-width: 1200px;
+            margin: 80px auto;
+            padding: 0 20px;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            color: var(--primary);
+            margin-bottom: 40px;
+            text-align: center;
+        }
+
+        /* Step Calculator */
+        .calculator {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .step {
+            margin-bottom: 40px;
+        }
+
+        .step-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 20px;
+        }
+
+        .options {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .option-btn {
+            padding: 15px 30px;
+            border: 2px solid #e0e0e0;
+            background: white;
+            border-radius: 15px;
+            cursor: pointer;
+            font-size: 1.1rem;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: var(--primary);
+        }
+
+        .option-btn:hover {
+            border-color: var(--secondary);
+            transform: scale(1.05);
+        }
+
+        .option-btn.selected {
+            background: var(--accent);
+            color: white;
+            border-color: var(--accent);
+        }
+
+        .result {
+            background: linear-gradient(135deg, var(--secondary), var(--accent));
+            padding: 30px;
+            border-radius: 15px;
+            text-align: center;
+            margin-top: 30px;
+            opacity: 0;
+            transform: translateY(20px);
+            transition: all 0.5s ease;
+        }
+
+        .result.show {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .result-text {
+            color: white;
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        /* Interactive Slider */
+        .slider-container {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .slider-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .slider-wrapper {
+            margin: 40px 0;
+        }
+
+        .slider {
+            width: 100%;
+            height: 8px;
+            border-radius: 5px;
+            background: #e0e0e0;
+            outline: none;
+            -webkit-appearance: none;
+        }
+
+        .slider::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            appearance: none;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            box-shadow: var(--shadow);
+        }
+
+        .slider::-moz-range-thumb {
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: var(--accent);
+            cursor: pointer;
+            box-shadow: var(--shadow);
+            border: none;
+        }
+
+        .slider-display {
+            text-align: center;
+            margin-top: 30px;
+        }
+
+        .slider-value {
+            font-size: 3rem;
+            font-weight: 800;
+            color: var(--accent);
+        }
+
+        .slider-info {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-top: 10px;
+        }
+
+        /* Chatbot FAQ */
+        .chatbot {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .chatbot-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .chat-questions {
+            display: grid;
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        .chat-question {
+            background: var(--warm-white);
+            padding: 20px;
+            border-radius: 15px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .chat-question:hover {
+            border-color: var(--secondary);
+            transform: translateX(10px);
+        }
+
+        .question-text {
+            font-weight: 600;
+            color: var(--primary);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .chat-answer {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease;
+            color: #666;
+            margin-top: 10px;
+            padding-left: 35px;
+        }
+
+        .chat-question.active .chat-answer {
+            max-height: 500px;
+            margin-top: 15px;
+        }
+
+        /* Locations */
+        .locations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+        }
+
+        .location-card {
+            background: white;
+            border-radius: 20px;
+            padding: 30px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+
+        .location-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .location-icon {
+            font-size: 3rem;
+            margin-bottom: 15px;
+        }
+
+        .location-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .location-address {
+            color: #666;
+            margin-bottom: 15px;
+        }
+
+        .location-btn {
+            display: inline-block;
+            padding: 10px 25px;
+            background: var(--secondary);
+            color: white;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+
+        .location-btn:hover {
+            background: var(--accent);
+            transform: scale(1.05);
+        }
+
+        /* Advantages */
+        .advantages {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .advantage-card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            box-shadow: var(--shadow);
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .advantage-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+
+        .advantage-icon {
+            font-size: 2.5rem;
+            margin-bottom: 15px;
+        }
+
+        .advantage-title {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 10px;
+        }
+
+        .advantage-text {
+            color: #666;
+            font-size: 0.9rem;
+        }
+
+        /* Instructions */
+        .instructions {
+            background: white;
+            border-radius: 20px;
+            padding: 40px;
+            box-shadow: var(--shadow);
+        }
+
+        .instruction-steps {
+            display: grid;
+            gap: 20px;
+        }
+
+        .instruction-step {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+        }
+
+        .step-number {
+            min-width: 50px;
+            height: 50px;
+            background: var(--accent);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .step-content {
+            flex: 1;
+        }
+
+        .step-heading {
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: 5px;
+        }
+
+        .step-description {
+            color: #666;
+        }
+
+        /* Contact */
+        .contact {
+            background: linear-gradient(135deg, var(--accent), var(--secondary));
+            border-radius: 20px;
+            padding: 60px 40px;
+            text-align: center;
+            color: white;
+        }
+
+        .contact-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 20px;
+        }
+
+        .contact-info {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.2rem;
+        }
+
+        .contact-icon {
+            font-size: 1.5rem;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            text-align: center;
+            padding: 40px 20px;
+            margin-top: 80px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .bento-grid {
+                grid-template-columns: 1fr;
+                grid-auto-rows: auto;
+            }
+
+            .bento-item {
+                grid-column: 1 !important;
+                grid-row: auto !important;
+            }
+
+            .bento-visual {
+                height: 200px;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+
+            .options {
+                flex-direction: column;
+            }
+
+            .option-btn {
+                width: 100%;
+            }
+
+            .lang-switcher {
+                top: 10px;
+                right: 10px;
+                padding: 8px 15px;
+            }
+        }
+
+        /* Language Toggle */
+        .lang-si,
+        .lang-en {
+            transition: opacity 0.3s ease;
+        }
+
+        body[data-lang="en"] .lang-si {
+            display: none;
+        }
+
+        body[data-lang="si"] .lang-en {
+            display: none;
+        }
+
+        /* Animations */
+        .fade-in {
+            animation: fadeIn 0.6s ease-in;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Scroll Animations */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        .scroll-animate.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body data-lang="si">
+
+    <!-- Language Switcher -->
+    <div class="lang-switcher">
+        <button class="lang-btn active" data-lang="si">SI</button>
+        <span>|</span>
+        <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+
+    <!-- Hero Bento Grid -->
+    <div class="hero">
+        <div class="bento-grid fade-in">
+            <div class="bento-item bento-logo">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMTU5LjA5MDAiIGhlaWdodD0iMTU5LjA5MDAiIHZpZXdCb3g9IjIxOC4wOTI4IDM0MS4zOTk5IDE1OS4wOTAwIDE1OS4wOTAwIj4KPGRlZnM+CjxjbGlwUGF0aCBpZD0iY2xpcF8xIj4KPHBhdGggdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMCw4NDEuODg5OCkiIGQ9Ik0yOTcuNjM3OCA0MjAuOTQ0OUgyMjAuMzI0NUMyMjAuMzI0NSAzNzguMjQ2IDI1NC45MzkyIDM0My42MzE2IDI5Ny42Mzc4IDM0My42MzE2IDM0MC4zMzY2IDM0My42MzE2IDM3NC45NTExIDM3OC4yNDYgMzc0Ljk1MTEgNDIwLjk0NDlaIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz4KPC9jbGlwUGF0aD4KPC9kZWZzPgo8ZyBpbmtzY2FwZTpncm91cG1vZGU9ImxheWVyIiBpbmtzY2FwZTpsYWJlbD0iTGF5ZXIgMSI+CjxwYXRoIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDAsODQxLjg4OTgpIiBkPSJNMjk3LjYzNzggNTAwLjQ4OTlDMzQxLjU2OTEgNTAwLjQ4OTkgMzc3LjE4MjggNDY0Ljg3NjIgMzc3LjE4MjggNDIwLjk0NDkgMzc3LjE4MjggMzc3LjAxMzUgMzQxLjU2OTEgMzQxLjM5OTkgMjk3LjYzNzggMzQxLjM5OTkgMjUzLjcwNjUgMzQxLjM5OTkgMjE4LjA5MjggMzc3LjAxMzUgMjE4LjA5MjggNDIwLjk0NDkgMjE4LjA5MjggNDY0Ljg3NjIgMjUzLjcwNjUgNTAwLjQ4OTkgMjk3LjYzNzggNTAwLjQ4OTkiIGZpbGw9IiMyODU2YTQiLz4KPHBhdGggdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMCw4NDEuODg5OCkiIGQ9Ik0yOTcuNjM3OCA0OTguMjU4MUMzNDAuMzM2NiA0OTguMjU4MSAzNzQuOTUxMSA0NjMuNjQzNCAzNzQuOTUxMSA0MjAuOTQ0OSAzNzQuOTUxMSAzNzguMjQ2IDM0MC4zMzY2IDM0My42MzE2IDI5Ny42Mzc4IDM0My42MzE2IDI1NC45MzkyIDM0My42MzE2IDIyMC4zMjQ1IDM3OC4yNDYgMjIwLjMyNDUgNDIwLjk0NDkgMjIwLjMyNDUgNDYzLjY0MzQgMjU0LjkzOTIgNDk4LjI1ODEgMjk3LjYzNzggNDk4LjI1ODEiIGZpbGw9IiMwMDk4ZDkiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcF8xKSI+CjxpbWFnZSB4PSIyMjAiIHk9IjQyMCIgd2lkdGg9IjE1NSIgaGVpZ2h0PSI3OSIgeGxpbms6aHJlZj0iZGF0YTppbWFnZS9wbmc7YmFzZTY0LAppVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBSnNBQUFCUENBWUFBQUQ4enJlMUFBQUFDWEJJV1hNQUFBN0VBQUFPCnhBR1ZLdzRiQUFBRCswbEVRVlI0bk8zVVpaZFdaUlNBNGYzdmJEQkFBY1ZFTVFrRE83RUlPMmpzQUpPaHUydGcKWUdnWWFxaWhZYkQ5TkQ3UDJmdFp2T2U4ZkhBdDJjYzM3Zy8zUDdqV0xZZTcvKzZKSFNyVTJmMVgxc0h6K1E1WQorOC9sMjVjNnErMjFPZ3J0T2ZObjF1NUN1MDVyT3d2dFNKM1N0bHZiVWlmL3lOcHFiVW1kME5xdHpZVTJIZGZhCkNtM3MwalowL1o2cjlWaSs5ZGE2MUZGdHJiVW1kVVJiZmVTM3JGV3B3OXBLYTBXaDVZZTBaWVdXZG1wTE9uL04KdGZpZ3RxalFRbXZCZ1h6enJYbjdVNzlremJYbTdNczMyNXFWMnF2TnRGcFNIZG9NNitlT0M5cWVDejBDcnYrTwpDMWpWc0dJL1dUOWFBaXl1NVlVcjljTnVUY0FGTGk5YzN4Y1NjSUhMQzlkM3U3VHBsZ0FMV0I2d1V0TjJkbWQ5Ckd4SndnY3NMVjJYZlJHemdhaHhjdFFRcjl2V09mQUl1UDF6TmRLMUw0ZnJLK25LN0pvME9xeEdPVlkrd1VsOVkKbjI4TDJMeHhOZUt4d1BYdmNHbm5zejRMU1QxZkMxeTFqU3YycWZYSjFvQU5XTUR5Z0ZYWlZFdkFCUzR2WEZPMgo1Qk53Z2NzTDEyUnJVcnNtNENvWFY3UEFtdGgrTHRlRWtBQ0xhM25oaW8zZmZERUJGN2k4Y01YR1dSOXZDdGpLCndBV3M1b01WKzZpUWNDMXdlZUg2c0UzN29PMXNsb0FMWEY2NFV1OWIwdkM0Z1BXL3dIcHZvL1p1UmRKUXNNQlYKVTdoaTcyelEzZzdKNWNRRkxHQWxXSlc5MWFvSjF3S1hGNjZ4cldkeUNiakE1WVZyakRWNnZTYjFqZ3RZdFFscgpWS0UzMXdWczlRUUxYUFdGSy9hRzlYckVCaTV3ZWVIS1duczY2N1dRQUF0WUhyQmlyMW9qTFFFWHVMeHdqVnlqCnZXSUp1TURsaGV2bDFHcE5nQVVzRDFndldTOWFMNnc2MVNQZ0FwY1hyc3FlajlpYUFSZXd5b2NWZTI2bDlxd2wKalFZTFhMV0RLL1dNSmVBQ2x4ZXVwMWRvVDFrQ0xHQjV3RW85dWZ4azFvaVFnQXRjWHJoaVQxaVBMd3ZZd0FVdQpMMXlWUFJheEFRdFlIckJpajFyRGwyb0NMbkI1NFJwbURiVUVYT0R5d2pWMHlZbXNJWllBQzFnZXNCNnhIbDZzClBSUVNjSUhMQzFmc3dZb0VYT0R5d2hWN1lKRjJmMGlBQlN3UFdMSEIxbjBMajJjSnVNRGxoU3QxcnlYQUFwWUgKckVFTHRIdXN1ME1DTG5CNTRZcmROZjlpQWk1d2VlR0szV25kRWJFQkMxZ2VzR0szeit2S0dtZ0p1TURsaGVzMgo2OWE1bW9BTFhGNjRCbGo5TFFFV3NEeGc5WnVUNzVhUWdBdGNYcmhpTjF0OVp4L3JFWENCeXd0WHJJOTFVOFFHCkxHQjV3SXJkT0V1N3dSSndnY3NMMS9WVzc1bWFBS3U1WVhuaTZtVmRab200bWd0WFdiQ3ViZEd1YVRtYWRYVkkKd0FVdUwxeXhxNndyWndSc3dBS1dCNnpZRllVRVhPRHl3bFdGRFZqQXFvUjFPWEZWWVFOWGMrUHlnblZKYk9BQwpseGV1S216Z0FwY1hyaXBzd0FKV1dRbTR3RlVhTm5DQnF6UnN3QUpXYWRqQUJhN1NzQUVMV0tWaEF4ZTRTc01HCkxuQ1ZoZzFZd0NvTkc3akFWUm8yY0lHcnJQNEI1aVord2lSRjRLd0FBQUFBU1VWT1JLNUNZSUk9Ii8+CjwvZz4KPHBhdGggdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMCw4NDEuODg5OCkiIGQ9Ik0yOTcuNjM3OCA0ODQuOTkyQzMzMy4wMDk5IDQ4NC45OTIgMzYxLjY4NDkgNDU2LjMxNjcgMzYxLjY4NDkgNDIwLjk0NDkgMzYxLjY4NDkgMzg1LjU3MjggMzMzLjAwOTkgMzU2Ljg5NzggMjk3LjYzNzggMzU2Ljg5NzggMjYyLjI2NiAzNTYuODk3OCAyMzMuNTkwNyAzODUuNTcyOCAyMzMuNTkwNyA0MjAuOTQ0OSAyMzMuNTkwNyA0NTYuMzE2NyAyNjIuMjY2IDQ4NC45OTIgMjk3LjYzNzggNDg0Ljk5MiIgZmlsbD0iIzkyZDdmNiIgZmlsbC1ydWxlPSJldmVub2RkIi8+CjxwYXRoIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDAsODQxLjg4OTgpIiBkPSJNMjYyLjEzOTIgNDQzLjY5NjNDMjYyLjEzOTIgNDQyLjc4NjcgMjYxLjk2OTcgNDQxLjk3NDggMjYxLjYzNTggNDQxLjI2MDUgMjYxLjI5NjUgNDQwLjU1MTMgMjYwLjgyOTEgNDM5Ljk0NDkgMjYwLjIzMjkgNDM5LjQ0NjMgMjU5LjYzNjggNDM4Ljk1MzEgMjU4LjkzMjcgNDM4LjU3ODEgMjU4LjEyNiA0MzguMzI2MSAyNTcuMzE0MSA0MzguMDc0NCAyNTYuNDQ1NiA0MzcuOTUxMSAyNTUuNTEwMSA0MzcuOTUxMSAyNTQuODU3NiA0MzcuOTUxMSAyNTQuMjUxMyA0MzguMDA3NSAyNTMuNjk2MyA0MzguMTE1NSAyNTMuMTM2MSA0MzguMjI4NiAyNTIuNjM3NSA0MzguMzY3MiAyNTIuMjAwNyA0MzguNTI2NSAyNTEuNzY0MiA0MzguNjg1OCAyNTEuMzk5MSA0MzguODU1NiAyNTEuMTAxMSA0MzkuMDI1MSAyNTAuODA4MyA0MzkuMTk5NyAyNTAuNTk3NCA0MzkuMzQzNyAyNTAuNDg0NiA0MzkuNDY3IDI1MC4zNjY0IDQzOS41ODUyIDI1MC4yODM5IDQzOS43Mzk0IDI1MC4yMjc1IDQzOS45MjQzIDI1MC4xNzExIDQ0MC4xMDk0IDI1MC4xNDUzIDQ0MC4zNTYgMjUwLjE0NTMgNDQwLjY2NDQgMjUwLjE0NTMgNDQwLjg4NTUgMjUwLjE1NTUgNDQxLjA3MDMgMjUwLjE3NjIgNDQxLjIxNDMgMjUwLjE5NjYgNDQxLjM1OCAyNTAuMjI3NSA0NDEuNDc2MiAyNTAuMjYzNSA0NDEuNTYzOCAyNTAuMzA0NiA0NDEuNjU2MiAyNTAuMzU1OSA0NDEuNzE3NyAyNTAuNDE3NyA0NDEuNzUzNyAyNTAuNDc5MiA0NDEuNzg5NyAyNTAuNTQ2MSA0NDEuODA1MyAyNTAuNjI4MyA0NDEuODA1MyAyNTAuNzY3MiA0NDEuODA1MyAyNTAuOTY3NiA0NDEuNzE3NyAyNTEuMjI0NCA0NDEuNTQ4MiAyNTEuNDc2MiA0NDEuMzc4NyAyNTEuODA1MyA0NDEuMTkzNiAyNTIuMjExMiA0NDAuOTkzMiAyNTIuNjEyIDQ0MC43OTc5IDI1My4wOTUgNDQwLjYwOCAyNTMuNjY1NCA0NDAuNDMzMSAyNTQuMjMwNiA0NDAuMjU4NSAyNTQuODg4NSA0NDAuMTcxMSAyNTUuNjI4MyA0NDAuMTcxMSAyNTYuMTkzNiA0NDAuMTcxMSAyNTYuNzA3NSA0NDAuMjQ4MyAyNTcuMTc1MiA0NDAuMzk3MSAyNTcuNjQyOSA0NDAuNTQ2MiAyNTguMDQzNyA0NDAuNzU2OCAyNTguMzc3NyA0NDEuMDM0MyAyNTguNzE3IDQ0MS4zMDY3IDI1OC45NzM4IDQ0MS42NDYgMjU5LjE1MzggNDQyLjA0NjggMjU5LjMzMzUgNDQyLjQ0NzcgMjU5LjQyNTkgNDQyLjkwNDkgMjU5LjQyNTkgNDQzLjQxMzcgMjU5LjQyNTkgNDQzLjk2MzYgMjU5LjMwMjYgNDQ0LjQzNjIgMjU5LjA1MDkgNDQ0LjgyNjggMjU4Ljc5OTIgNDQ1LjIxNzQgMjU4LjQ3MDEgNDQ1LjU2MTggMjU4LjA1OTEgNDQ1Ljg1OTcgMjU3LjY0MjkgNDQ2LjE1MjUgMjU3LjE3NTIgNDQ2LjQyNDkgMjU2LjY1MTEgNDQ2LjY3MTYgMjU2LjEyMTkgNDQ2LjkxODUgMjU1LjU4MjEgNDQ3LjE2NTEgMjU1LjAzMjIgNDQ3LjQyMTkgMjU0LjQ4MjYgNDQ3LjY3OSAyNTMuOTQyOSA0NDcuOTYxNiAyNTMuNDIzOCA0NDguMjc1MSAyNTIuODk5NyA0NDguNTgzMiAyNTIuNDMyIDQ0OC45NDgxIDI1Mi4wMjEgNDQ5LjM2OTYgMjUxLjYxIDQ0OS43OTA4IDI1MS4yNzU3IDQ1MC4yODQzIDI1MS4wMjQgNDUwLjg1NDYgMjUwLjc2NzIgNDUxLjQxOTkgMjUwLjYzODUgNDUyLjA5ODIgMjUwLjYzODUgNDUyLjg4OTYgMjUwLjYzODUgNDUzLjcwNjkgMjUwLjc4NzYgNDU0LjQzMTQgMjUxLjA4MDQgNDU1LjA2ODYgMjUxLjM3ODYgNDU1LjcwMDUgMjUxLjc4OTcgNDU2LjIzNTEgMjUyLjMxMzggNDU2LjY2NjggMjUyLjg0MzMgNDU3LjA5ODIgMjUzLjQ3IDQ1Ny40MjczIDI1NC4xOTQ2IDQ1Ny42NTMzIDI1NC45MjQ1IDQ1Ny44Nzk1IDI1NS43MDU0IDQ1Ny45OTI2IDI1Ni41NDgyIDQ1Ny45OTI2IDI1Ni45Nzk5IDQ1Ny45OTI2IDI1Ny40MTE2IDQ1Ny45NTY2IDI1Ny44NDg0IDQ1Ny44Nzk1IDI1OC4yODUzIDQ1Ny44MDI0IDI1OC42OTYzIDQ1Ny43MDQ5IDI1OS4wODE4IDQ1Ny41NzYyIDI1OS40NjcgNDU3LjQ1MjkgMjU5LjgxMTQgNDU3LjMwOTEgMjYwLjExNDcgNDU3LjE1NDkgMjYwLjQxMjcgNDU3LjAwMDcgMjYwLjYxMzEgNDU2Ljg3MjMgMjYwLjcwNTUgNDU2Ljc3OTYgMjYwLjgwMzMgNDU2LjY4MjEgMjYwLjg2NDggNDU2LjYxMDEgMjYwLjg5NTcgNDU2LjU1MzcgMjYwLjkyNjYgNDU2LjQ5NyAyNjAuOTQ3IDQ1Ni40MjUzIDI2MC45Njc3IDQ1Ni4zNDMxIDI2MC45ODg0IDQ1Ni4yNTU1IDI2MS4wMDM3IDQ1Ni4xNTI5IDI2MS4wMTM5IDQ1Ni4wMjk2IDI2MS4wMjQxIDQ1NS45MTE0IDI2MS4wMjk1IDQ1NS43NTcyIDI2MS4wMjk1IDQ1NS41NjE5IDI2MS4wMjk1IDQ1NS4zODE5IDI2MS4wMjQxIDQ1NS4yMjI2IDI2MS4wMDg4IDQ1NS4wNzg4IDI2MC45OTM1IDQ1NC45Mzk5IDI2MC45Njc3IDQ1NC44MjE3IDI2MC45MzY4IDQ1NC43MjQyIDI2MC45MTEzIDQ1NC42MzE4IDI2MC44NjQ4IDQ1NC41NTk4IDI2MC44MTM1IDQ1NC41MTM2IDI2MC43NTcxIDQ1NC40Njc0IDI2MC42OTUzIDQ1NC40NDY3IDI2MC42MjMzIDQ1NC40NDY3IDI2MC41MTA1IDQ1NC40NDY3IDI2MC4zNDA3IDQ1NC41MTg3IDI2MC4xMDQzIDQ1NC42NTczIDI1OS44Njc4IDQ1NC44MDEzIDI1OS41ODAxIDQ1NC45NTU1IDI1OS4yMzYgNDU1LjEzNTIgMjU4Ljg5NjcgNDU1LjMxMDEgMjU4LjQ5MDggNDU1LjQ2OTQgMjU4LjAyMzEgNDU1LjYxMzIgMjU3LjU2MDcgNDU1Ljc2MjMgMjU3LjAzNjYgNDU1LjgzNDMgMjU2LjQ1MDcgNDU1LjgzNDMgMjU1LjkxMSA0NTUuODM0MyAyNTUuNDM4NCA0NTUuNzYyMyAyNTUuMDM3NiA0NTUuNjE4MyAyNTQuNjM2NSA0NTUuNDY5NCAyNTQuMzAyNiA0NTUuMjc5MiAyNTQuMDQwNyA0NTUuMDM3NyAyNTMuNzgzNiA0NTQuNzk2MiAyNTMuNTg4MyA0NTQuNTEzNiAyNTMuNDU0NyA0NTQuMTg0OCAyNTMuMzI2MyA0NTMuODUwNiAyNTMuMjU5NCA0NTMuNTAxMSAyNTMuMjU5NCA0NTMuMTMxMSAyNTMuMjU5NCA0NTIuNTkxNyAyNTMuMzgyNyA0NTIuMTI0IDI1My42MzQ1IDQ1MS43MzM0IDI1My44ODY1IDQ1MS4zNDI4IDI1NC4yMjA0IDQ1MC45OTg2IDI1NC42MzY1IDQ1MC42OTUzIDI1NS4wNTggNDUwLjM5MjMgMjU1LjUzMDggNDUwLjExOTkgMjU2LjA2NTIgNDQ5Ljg2NzkgMjU2LjU5NDQgNDQ5LjYxNjIgMjU3LjEzOTIgNDQ5LjM2NDUgMjU3LjY5NDIgNDQ5LjEwNzQgMjU4LjI0NDIgNDQ4Ljg1MDYgMjU4Ljc4ODcgNDQ4LjU3MyAyNTkuMzE4MiA0NDguMjY0NiAyNTkuODUyNSA0NDcuOTYxNiAyNjAuMzI1NCA0NDcuNTk2OCAyNjAuNzQ2NiA0NDcuMTgwNCAyNjEuMTYzIDQ0Ni43NjQzIDI2MS40OTY5IDQ0Ni4yNzU4IDI2MS43NTQgNDQ1LjcwNTUgMjYyLjAxMDggNDQ1LjE0MDMgMjYyLjEzOTIgNDQ0LjQ3MjIgMjYyLjEzOTIgNDQzLjY5NjNaTTI4OC4yMDg2IDQzOC42MTkyQzI4OC4yMDg2IDQzOC41MzcgMjg4LjE4ODIgNDM4LjQ2NSAyODguMTQ3MSA0MzguNDA4NiAyODguMTA2IDQzOC4zNDY4IDI4OC4wMzQgNDM4LjMwMDYgMjg3LjkzMTEgNDM4LjI2NDYgMjg3LjgyODUgNDM4LjIyODYgMjg3LjY5NDcgNDM4LjE5NzcgMjg3LjUzNTQgNDM4LjE3MjIgMjg3LjM3NjEgNDM4LjE0NjQgMjg3LjE2NTUgNDM4LjEzNjIgMjg2LjkwODcgNDM4LjEzNjIgMjg2LjY2NzEgNDM4LjEzNjIgMjg2LjQ2MTQgNDM4LjE0NjQgMjg2LjI5MTggNDM4LjE3MjIgMjg2LjEyMjMgNDM4LjE5NzcgMjg1Ljk4ODggNDM4LjIyODYgMjg1Ljg5MSA0MzguMjY0NiAyODUuNzkzNSA0MzguMzAwNiAyODUuNzIxNSA0MzguMzQ2OCAyODUuNjgwNCA0MzguNDA4NiAyODUuNjM5MyA0MzguNDY1IDI4NS42MTg2IDQzOC41MzcgMjg1LjYxODYgNDM4LjYxOTJWNDU1LjU5MjhIMjg1LjU4OEwyNzguNzI3NiA0MzguNTQyMUMyNzguNzAxOCA0MzguNDcwMSAyNzguNjU1NiA0MzguNDEzNyAyNzguNjA0MyA0MzguMzYyMSAyNzguNTQ3NiA0MzguMzEwOCAyNzguNDY1NCA0MzguMjY5NyAyNzguMzYyOCA0MzguMjMzNyAyNzguMjU0OCA0MzguMTk3NyAyNzguMTMxNSA0MzguMTcyMiAyNzcuOTgyNCA0MzguMTU2NiAyNzcuODM4NiA0MzguMTQxMyAyNzcuNjYzNyA0MzguMTM2MiAyNzcuNDYzMyA0MzguMTM2MiAyNzcuMjUyNyA0MzguMTM2MiAyNzcuMDcyNyA0MzguMTQ2NCAyNzYuOTIzOSA0MzguMTY2OCAyNzYuNzc0OCA0MzguMTg3NSAyNzYuNjQ2NCA0MzguMjEzMyAyNzYuNTQ4NiA0MzguMjQ5MyAyNzYuNDQ2IDQzOC4yODUgMjc2LjM2ODkgNDM4LjMyNjEgMjc2LjMxMjIgNDM4LjM3NzcgMjc2LjI2MDkgNDM4LjQyOSAyNzYuMjE5OCA0MzguNDgwMyAyNzYuMTk5NCA0MzguNTQyMUwyNjkuNjMxOCA0NTUuNTkyOEgyNjkuNjE2NVY0MzguNjE5MkMyNjkuNjE2NSA0MzguNTM3IDI2OS41OTU4IDQzOC40NjUgMjY5LjU1NDcgNDM4LjQwODYgMjY5LjUxMzYgNDM4LjM0NjggMjY5LjQ0MTYgNDM4LjMwMDYgMjY5LjMzOSA0MzguMjY0NiAyNjkuMjM2MSA0MzguMjI4NiAyNjkuMDk3NCA0MzguMTk3NyAyNjguOTMzIDQzOC4xNzIyIDI2OC43NjgzIDQzOC4xNDY0IDI2OC41NTc3IDQzOC4xMzYyIDI2OC4zMDA5IDQzOC4xMzYyIDI2OC4wNDg5IDQzOC4xMzYyIDI2Ny44NDM0IDQzOC4xNDY0IDI2Ny42NzkgNDM4LjE3MjIgMjY3LjUxNDYgNDM4LjE5NzcgMjY3LjM4MTEgNDM4LjIyODYgMjY3LjI4MzMgNDM4LjI2NDYgMjY3LjE4NTggNDM4LjMwMDYgMjY3LjExODkgNDM4LjM0NjggMjY3LjA4MjkgNDM4LjQwODYgMjY3LjA0NjkgNDM4LjQ2NSAyNjcuMDI2NSA0MzguNTM3IDI2Ny4wMjY1IDQzOC42MTkyVjQ1Ni41MzgxQzI2Ny4wMjY1IDQ1Ni45NjQ3IDI2Ny4xMzk2IDQ1Ny4yNjI5IDI2Ny4zNjA0IDQ1Ny40NDI2IDI2Ny41ODY2IDQ1Ny42MjI2IDI2Ny44MzgzIDQ1Ny43MTUxIDI2OC4xMTA3IDQ1Ny43MTUxSDI2OS43MDM4QzI3MC4wMjc1IDQ1Ny43MTUxIDI3MC4zMTUyIDQ1Ny42ODQyIDI3MC41NTY3IDQ1Ny42MjI2IDI3MC44MDMzIDQ1Ny41NjYgMjcxLjAxNDIgNDU3LjQ2ODQgMjcxLjE5OTEgNDU3LjM0IDI3MS4zODQyIDQ1Ny4yMDYyIDI3MS41Mzg0IDQ1Ny4wNDE4IDI3MS42NTY2IDQ1Ni44NDE0IDI3MS43Nzk5IDQ1Ni42NDEgMjcxLjg4NzkgNDU2LjQwNDYgMjcxLjk4MDMgNDU2LjEzMjJMMjc3LjU1NTcgNDQyLjAyMUgyNzcuNjMyOUwyODMuNDE5MiA0NTYuMDkxMUMyODMuNTMyMyA0NTYuMzg5MyAyODMuNjU1NiA0NTYuNjQ2MSAyODMuNzg5NCA0NTYuODU2NyAyODMuOTIyOSA0NTcuMDY3NiAyODQuMDY2OSA0NTcuMjM3MSAyODQuMjI2IDQ1Ny4zNjA0IDI4NC4zODAyIDQ1Ny40ODg5IDI4NC41NjAyIDQ1Ny41NzYyIDI4NC43NTA0IDQ1Ny42MzI5IDI4NC45NDU3IDQ1Ny42ODkzIDI4NS4xNzE2IDQ1Ny43MTUxIDI4NS40MjMzIDQ1Ny43MTUxSDI4Ny4wOTM1QzI4Ny4yNDI2IDQ1Ny43MTUxIDI4Ny4zOTE3IDQ1Ny42OTQ0IDI4Ny41MzAzIDQ1Ny42NDgyIDI4Ny42NjQxIDQ1Ny42MDIgMjg3Ljc4MjMgNDU3LjUzIDI4Ny44Nzk4IDQ1Ny40Mzc1IDI4Ny45NzczIDQ1Ny4zNCAyODguMDU0NCA0NTcuMjIxOCAyODguMTE2MiA0NTcuMDcyNyAyODguMTc3NyA0NTYuOTI4NyAyODguMjA4NiA0NTYuNzQ5IDI4OC4yMDg2IDQ1Ni41MzgxWk0zMDkuMTgwMiA0MzkuMTQzM0MzMDkuMjU3MyA0MzguOTIyMiAzMDkuMzAzNSA0MzguNzQ3NiAzMDkuMzA4NiA0MzguNjA5IDMwOS4zMTM3IDQzOC40NzUyIDMwOS4yNzI2IDQzOC4zNzI2IDMwOS4xOTU4IDQzOC4zMDA2IDMwOS4xMTMzIDQzOC4yMzM3IDMwOC45Nzk4IDQzOC4xODc1IDMwOC43OTQ3IDQzOC4xNjY4IDMwOC42MDk5IDQzOC4xNDY0IDMwOC4zNjMyIDQzOC4xMzYyIDMwOC4wNDk3IDQzOC4xMzYyIDMwNy43NDEzIDQzOC4xMzYyIDMwNy40ODk2IDQzOC4xNDEzIDMwNy4zMDQ1IDQzOC4xNTY2IDMwNy4xMTk3IDQzOC4xNzIyIDMwNi45ODA4IDQzOC4xOTc3IDMwNi44ODMzIDQzOC4yMzM3IDMwNi43ODU1IDQzOC4yNjk3IDMwNi43MTg2IDQzOC4zMTU5IDMwNi42NzI0IDQzOC4zNzc3IDMwNi42MjYyIDQzOC40MzkyIDMwNi41ODUxIDQzOC41MTEyIDMwNi41NDQgNDM4LjYwMzZMMzA0Ljg3MzggNDQzLjM0NjhIMjk2Ljc3NTJMMjk1LjE3NyA0MzguNjY1NEMyOTUuMTQ2MSA0MzguNTczIDI5NS4xMTAxIDQzOC40OTU5IDI5NS4wNTg4IDQzOC40MjkgMjk1LjAwNzIgNDM4LjM2MjEgMjk0LjkzNTIgNDM4LjMxMDggMjk0LjgzNzcgNDM4LjI2NDYgMjk0Ljc0NTMgNDM4LjIxODQgMjk0LjYwNjQgNDM4LjE4NzUgMjk0LjQzMTggNDM4LjE2NjggMjk0LjI1NjkgNDM4LjE0NjQgMjk0LjAzMSA0MzguMTM2MiAyOTMuNzQ4NCA0MzguMTM2MiAyOTMuNDU1MyA0MzguMTM2MiAyOTMuMjE4OSA0MzguMTQ2NCAyOTMuMDM0IDQzOC4xNzIyIDI5Mi44NDg5IDQzOC4xOTc3IDI5Mi43MTU0IDQzOC4yNDM5IDI5Mi42NDM0IDQzOC4zMTU5IDI5Mi41NjYzIDQzOC4zODc5IDI5Mi41MzAzIDQzOC40OTA4IDI5Mi41MzU0IDQzOC42MjQzIDI5Mi41NDA4IDQzOC43NjI5IDI5Mi41ODE5IDQzOC45Mzc4IDI5Mi42NjQxIDQzOS4xNTg2TDI5OS4xOTU0IDQ1Ny4yNjI5QzI5OS4yMzY1IDQ1Ny4zNzU3IDI5OS4yOTMyIDQ1Ny40Njg0IDI5OS4zNTQ3IDQ1Ny41MzUxIDI5OS40MjE2IDQ1Ny42MDcxIDI5OS41MTQgNDU3LjY2MzcgMjk5LjY0MjUgNDU3LjY5OTcgMjk5Ljc2NTggNDU3Ljc0MDkgMjk5LjkyNTEgNDU3Ljc3MTUgMzAwLjEyNTUgNDU3Ljc4NzEgMzAwLjMyMDggNDU3LjgwMjQgMzAwLjU2NzQgNDU3LjgwNzUgMzAwLjg3MDcgNDU3LjgwNzUgMzAxLjE4OTMgNDU3LjgwNzUgMzAxLjQ1NjYgNDU3LjgwMjQgMzAxLjY2NzIgNDU3Ljc4NzEgMzAxLjg3NzkgNDU3Ljc3MTUgMzAyLjA0NzcgNDU3Ljc0MDkgMzAyLjE3NjEgNDU3LjY5OTcgMzAyLjMwOTYgNDU3LjY2MzcgMzAyLjQwNzQgNDU3LjYwMiAzMDIuNDc5MSA0NTcuNTMgMzAyLjU1MTEgNDU3LjQ1MjkgMzAyLjYwNzggNDU3LjM2MDQgMzAyLjY0MzUgNDU3LjI1MjRaTTMwMC43OTM2IDQ1NS4xMjVIMzAwLjc3ODNMMjk3LjQyMjYgNDQ1LjQxMjdIMzA0LjE5NTVaTTMyNi42MzE3IDQzOC42MTkyQzMyNi42MzE3IDQzOC41MzcgMzI2LjYxNjQgNDM4LjQ3MDEgMzI2LjU4NTUgNDM4LjQwODYgMzI2LjU1NDYgNDM4LjM0NjggMzI2LjQ5MzEgNDM4LjI5NTUgMzI2LjM5MDIgNDM4LjI1NDQgMzI2LjI5MjcgNDM4LjIxODQgMzI2LjE0ODcgNDM4LjE4NzUgMzI1Ljk2ODkgNDM4LjE2NjggMzI1Ljc4ODkgNDM4LjE0NjQgMzI1LjU0NzQgNDM4LjEzNjIgMzI1LjI0OTUgNDM4LjEzNjIgMzI0Ljk4NzMgNDM4LjEzNjIgMzI0Ljc3MTYgNDM4LjE0NjQgMzI0LjYwNzIgNDM4LjE2NjggMzI0LjQ0MjUgNDM4LjE4NzUgMzI0LjMwOSA0MzguMjE4NCAzMjQuMjA2NCA0MzguMjY0NiAzMjQuMTA4NiA0MzguMzEwOCAzMjQuMDMxNSA0MzguMzcyNiAzMjMuOTc1MSA0MzguNDU0OCAzMjMuOTE4NCA0MzguNTMxOSAzMjMuODcyMiA0MzguNjM0NSAzMjMuODMxMSA0MzguNzUyN0wzMjIuMDQyNyA0NDMuMzUxOUMzMjEuODMyMSA0NDMuODc2IDMyMS42MTEyIDQ0NC4zNTQgMzIxLjM4NSA0NDQuNzkwOCAzMjEuMTU4OCA0NDUuMjI3NiAzMjAuODkxOCA0NDUuNjAyOSAzMjAuNTc4MyA0NDUuOTIxNSAzMjAuMjY5OSA0NDYuMjQwMSAzMTkuOSA0NDYuNDgxNiAzMTkuNDc4NSA0NDYuNjYxNCAzMTkuMDU3MiA0NDYuODM2MyAzMTguNTQ4NCA0NDYuOTIzNiAzMTcuOTU3NCA0NDYuOTIzNkgzMTYuMjI1N1Y0MzguNjE5MkMzMTYuMjI1NyA0MzguNTM3IDMxNi4yMDUgNDM4LjQ3MDEgMzE2LjE1ODggNDM4LjQwODYgMzE2LjExMjYgNDM4LjM0NjggMzE2LjA0MDYgNDM4LjMwMDYgMzE1Ljk0ODIgNDM4LjI2NDYgMzE1Ljg1MDQgNDM4LjIyODYgMzE1LjcyMiA0MzguMTk3NyAzMTUuNTU3NiA0MzguMTcyMiAzMTUuMzg4MSA0MzguMTQ2NCAzMTUuMTgyNiA0MzguMTM2MiAzMTQuOTMwNiA0MzguMTM2MiAzMTQuNjc4OCA0MzguMTM2MiAzMTQuNDczMyA0MzguMTQ2NCAzMTQuMzAzOCA0MzguMTcyMiAzMTQuMTM5MSA0MzguMTk3NyAzMTQuMDA1NiA0MzguMjI4NiAzMTMuOTA4MSA0MzguMjY0NiAzMTMuODA1MiA0MzguMzAwNiAzMTMuNzM4MyA0MzguMzQ2OCAzMTMuNjk3MiA0MzguNDA4NiAzMTMuNjU2MSA0MzguNDY1IDMxMy42MzU3IDQzOC41MzcgMzEzLjYzNTcgNDM4LjYxOTJWNDU2LjY2MTdDMzEzLjYzNTcgNDU3LjA1MiAzMTMuNzM4MyA0NTcuMzI0NCAzMTMuOTQ0MSA0NTcuNDgzNyAzMTQuMTQ5NiA0NTcuNjM4IDMxNC4zNzA0IDQ1Ny43MTUxIDMxNC42MDE3IDQ1Ny43MTUxSDMxOC43NDM3QzMxOS4yMzY5IDQ1Ny43MTUxIDMxOS42NDI5IDQ1Ny43MDQ5IDMxOS45NzE3IDQ1Ny42NzkxIDMyMC4yOTU3IDQ1Ny42NTMzIDMyMC41ODg1IDQ1Ny42MjI2IDMyMC44NTA0IDQ1Ny41OTY5IDMyMS42MDU5IDQ1Ny40NjMzIDMyMi4yNjg5IDQ1Ny4yNTc1IDMyMi44NDk3IDQ1Ni45ODAzIDMyMy40MjUxIDQ1Ni42OTc0IDMyMy45MDgyIDQ1Ni4zNDMxIDMyNC4yOTg4IDQ1NS45MTE0IDMyNC42OTQ1IDQ1NS40Nzk3IDMyNC45ODczIDQ1NC45ODY0IDMyNS4xODI2IDQ1NC40MjYzIDMyNS4zNzc5IDQ1My44NzEzIDMyNS40NzU0IDQ1My4yNTQ1IDMyNS40NzU0IDQ1Mi41ODEyIDMyNS40NzU0IDQ1MS45MzM4IDMyNS4zODgxIDQ1MS4zNDc5IDMyNS4yMTM1IDQ1MC44Mjg5IDMyNS4wMzM1IDQ1MC4zMTUyIDMyNC43ODE4IDQ0OS44NTc3IDMyNC40NTMgNDQ5LjQ2MiAzMjQuMTE4OCA0NDkuMDY2MyAzMjMuNzIzMSA0NDguNzIyMSAzMjMuMjYwNyA0NDguNDI5IDMyMi43OTgxIDQ0OC4xNDEzIDMyMi4yODQyIDQ0Ny44OTQ3IDMyMS43MDg4IDQ0Ny42OTQzIDMyMi4wMzI1IDQ0Ny41NTAzIDMyMi4zMjAyIDQ0Ny4zNzU3IDMyMi41ODI0IDQ0Ny4xNiAzMjIuODQ0MyA0NDYuOTQ0IDMyMy4wODU4IDQ0Ni42ODIgMzIzLjMxMiA0NDYuMzgzOCAzMjMuNTM4MiA0NDYuMDgwOCAzMjMuNzU0IDQ0NS43MzEzIDMyMy45NTQ0IDQ0NS4zNDA3IDMyNC4xNTQ4IDQ0NC45NTAxIDMyNC4zNTUyIDQ0NC41MDgyIDMyNC41NTU2IDQ0NC4wMTQ5TDMyNi4zMDI5IDQzOS43MTg3QzMyNi40NDE1IDQzOS4zNTkgMzI2LjUzNDIgNDM5LjEwMjIgMzI2LjU3MDIgNDM4Ljk1ODIgMzI2LjYxMTMgNDM4LjgxNDUgMzI2LjYzMTcgNDM4LjcwMTQgMzI2LjYzMTcgNDM4LjYxOTJaTTMyMi43MzE1IDQ1Mi4zMTkzQzMyMi43MzE1IDQ1My4wNzk4IDMyMi41NjE3IDQ1My43MjczIDMyMi4yMTc2IDQ1NC4yNTY1IDMyMS44NzgzIDQ1NC43ODA2IDMyMS4zMDc5IDQ1NS4xNjEgMzIwLjUwMTIgNDU1LjM5MjMgMzIwLjI0OTIgNDU1LjQ2NDMgMzE5Ljk2NjYgNDU1LjUxMDYgMzE5LjY1MzQgNDU1LjU0MTIgMzE5LjMzNDcgNDU1LjU3MjEgMzE4LjkyMzQgNDU1LjU4NzcgMzE4LjQwOTUgNDU1LjU4NzdIMzE2LjIyNTdWNDQ5LjAyMDFIMzE4Ljc1MzlDMzE5LjQzNzQgNDQ5LjAyMDEgMzIwLjAyODQgNDQ5LjEwMjMgMzIwLjUyNjcgNDQ5LjI2NjcgMzIxLjAyMDIgNDQ5LjQzNjUgMzIxLjQzNjMgNDQ5LjY2NzUgMzIxLjc2NTIgNDQ5Ljk2MDYgMzIyLjA5OTQgNDUwLjI1ODUgMzIyLjM0MDkgNDUwLjYwOCAzMjIuNTAwMiA0NTEuMDA4OSAzMjIuNjU0NCA0NTEuNDA5NyAzMjIuNzMxNSA0NTEuODQ2NSAzMjIuNzMxNSA0NTIuMzE5M1pNMzQzLjQ5MjQgNDU2LjYwNUMzNDMuNDkyNCA0NTYuNDE0OCAzNDMuNDgyIDQ1Ni4yNTA0IDM0My40NjE1IDQ1Ni4xMTE4IDM0My40NDA5IDQ1NS45NzI5IDM0My40MSA0NTUuODU5OCAzNDMuMzYzNyA0NTUuNzcyNSAzNDMuMzE3NSA0NTUuNjkwMyAzNDMuMjY2MiA0NTUuNjIzNyAzNDMuMTk5MyA0NTUuNTg3NyAzNDMuMTMyNyA0NTUuNTQ2NiAzNDMuMDYwNyA0NTUuNTI1OSAzNDIuOTgzNiA0NTUuNTI1OUgzMzcuNTEwOFY0MzguNjE5MkMzMzcuNTEwOCA0MzguNTM3IDMzNy40OTAxIDQzOC40NzAxIDMzNy40NDkgNDM4LjQwODYgMzM3LjQwNzkgNDM4LjM0NjggMzM3LjM0MTMgNDM4LjMwMDYgMzM3LjIzODQgNDM4LjI2NDYgMzM3LjE0MDkgNDM4LjIyODYgMzM3LjAwNzEgNDM4LjE5NzcgMzM2Ljg0MjYgNDM4LjE3MjIgMzM2LjY3MzEgNDM4LjE0NjQgMzM2LjQ2NzYgNDM4LjEzNjIgMzM2LjIxNTYgNDM4LjEzNjIgMzM1Ljk3NDEgNDM4LjEzNjIgMzM1Ljc2ODYgNDM4LjE0NjQgMzM1LjU5OTEgNDM4LjE3MjIgMzM1LjQyOTYgNDM4LjE5NzcgMzM1LjI5MDcgNDM4LjIyODYgMzM1LjE5MzIgNDM4LjI2NDYgMzM1LjA5MDMgNDM4LjMwMDYgMzM1LjAyMzcgNDM4LjM0NjggMzM0Ljk4MjMgNDM4LjQwODYgMzM0Ljk0MTIgNDM4LjQ3MDEgMzM0LjkyMDggNDM4LjUzNyAzMzQuOTIwOCA0MzguNjE5MlY0NTUuNTI1OUgzMjkuNDQ3OUMzMjkuMzcwOCA0NTUuNTI1OSAzMjkuMjk4OCA0NTUuNTQ2NiAzMjkuMjMyMiA0NTUuNTg3NyAzMjkuMTY1MyA0NTUuNjIzNyAzMjkuMTE0IDQ1NS42OTAzIDMyOS4wNzI5IDQ1NS43NzI1IDMyOS4wMzY5IDQ1NS44NTk4IDMyOS4wMDA5IDQ1NS45NzI5IDMyOC45NzUxIDQ1Ni4xMTE4IDMyOC45NDkzIDQ1Ni4yNTA0IDMyOC45MzkxIDQ1Ni40MTQ4IDMyOC45MzkxIDQ1Ni42MDUgMzI4LjkzOTEgNDU2Ljc5NTIgMzI4Ljk0OTMgNDU2Ljk2NDcgMzI4Ljk3NTEgNDU3LjEwODcgMzI5LjAwMDkgNDU3LjI1MjQgMzI5LjAzNjkgNDU3LjM3MDYgMzI5LjA3MjkgNDU3LjQ1OCAzMjkuMTE0IDQ1Ny41NTA2IDMyOS4xNjUzIDQ1Ny42MTczIDMyOS4yMzIyIDQ1Ny42NTMzIDMyOS4yOTg4IDQ1Ny42OTQ0IDMyOS4zNzA4IDQ1Ny43MTUxIDMyOS40NDc5IDQ1Ny43MTUxSDM0Mi45ODM2QzM0My4wNjA3IDQ1Ny43MTUxIDM0My4xMzI3IDQ1Ny42OTQ0IDM0My4xOTkzIDQ1Ny42NTMzIDM0My4yNjYyIDQ1Ny42MTczIDM0My4zMTc1IDQ1Ny41NTA2IDM0My4zNjM3IDQ1Ny40NTggMzQzLjQxIDQ1Ny4zNzA2IDM0My40NDA5IDQ1Ny4yNTI0IDM0My40NjE1IDQ1Ny4xMDg3IDM0My40ODIgNDU2Ljk2NDcgMzQzLjQ5MjQgNDU2Ljc5NTIgMzQzLjQ5MjQgNDU2LjYwNSIgZmlsbD0iI2ZmZmZmZiIvPgo8cGF0aCB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwtMSwwLDg0MS44ODk4KSIgZD0iTTI1OC45MzY5IDQwNS42NzQxIDI1Ni42MDYgMzk2LjY4MjNDMjU2LjQ0NzMgMzk2LjExMTQgMjU2LjI2NSAzOTUuNzYyNSAyNTYuMDU5MiAzOTUuNjM1NSAyNTUuODUyNiAzOTUuNTA4OCAyNTUuNDY0NSAzOTUuNDQ1MyAyNTQuODkzMyAzOTUuNDQ1M0gyNDkuNjYwM0MyNDkuMTIwOSAzOTUuNDQ1MyAyNDguNzE2OSAzOTUuNTcyMyAyNDguNDQ3MSAzOTUuODI1NyAyNDguMTc3OCAzOTYuMDc5OSAyNDcuOTk0OSAzOTYuMzY1NCAyNDcuOSAzOTYuNjgyM0wyNDAuOTU0IDQyNy4wODI1QzI0MC44OTA1IDQyNy4zOTk0IDI0MC44NTkgNDI3LjY2OTIgMjQwLjg1OSA0MjcuODkwOSAyNDAuODU5IDQyOC40NjIxIDI0MS4xOTE4IDQyOC43NDc1IDI0MS44NTgyIDQyOC43NDc1SDI0Ni44NTMxQzI0Ny4yNjU2IDQyOC43NDc1IDI0Ny41ODI1IDQyOC42MDQ3IDI0Ny44MDQ3IDQyOC4zMTk1IDI0OC4wMjcgNDI4LjAzNCAyNDguMTY5MyA0MjcuNzQ4MyAyNDguMjMyOCA0MjcuNDYyOUwyNTIuNjU3NCA0MDcuMDA1OEMyNTIuNjg5MSA0MDYuODc5MSAyNTIuNzIwNiA0MDYuNzUyMSAyNTIuNzUyNiA0MDYuNjI1NCAyNTIuNzg0MSA0MDYuNDk4NyAyNTIuODQ3NiA0MDYuMzU1NSAyNTIuOTQyOCA0MDYuMTk3NCAyNTMuMDA2MyA0MDYuMTk3NCAyNTMuMDY5NSA0MDYuMjkyMyAyNTMuMTMzIDQwNi40ODI4IDI1My4xOTY1IDQwNi42NzMgMjUzLjI0NDEgNDA2LjgzMTUgMjUzLjI3NTkgNDA2Ljk1ODVMMjU1LjY1NDcgNDE3LjM3NzVDMjU1LjcxNzkgNDE3LjU5OTEgMjU1Ljc0OTQgNDE3LjkwMDIgMjU1Ljc0OTQgNDE4LjI4MTIgMjU1Ljc0OTQgNDE4LjU5ODEgMjU1LjY3MDMgNDE5LjEyMTYgMjU1LjUxMTYgNDE5Ljg1MDdMMjUzLjg0NjUgNDI3LjA4MjVDMjUzLjc4MzMgNDI3LjMzNjIgMjUzLjc1MTggNDI3LjU1ODEgMjUzLjc1MTggNDI3Ljc0ODMgMjUzLjc1MTggNDI4LjQxNDUgMjU0LjA4NDMgNDI4Ljc0NzUgMjU0Ljc1MDcgNDI4Ljc0NzVIMjU5Ljc0NkMyNjAuMjg1MSA0MjguNzQ3NSAyNjAuNjQ5NiA0MjguNjIwOCAyNjAuODQwNCA0MjguMzY2OCAyNjAuOTM1NCA0MjguMjM5OCAyNjEuMDMwNiA0MjcuOTIyOSAyNjEuMTI1NiA0MjcuNDE1MkwyNjQuODg0IDQwOS4yODk3QzI2NC45MTU1IDQwOS4xNjI3IDI2NC45NDc1IDQwOS4wNjc0IDI2NC45NzkgNDA5LjAwMzkgMjY1LjAxMDcgNDA4Ljk0MDcgMjY1LjA1ODYgNDA4Ljg5MjggMjY1LjEyMTkgNDA4Ljg2MTQgMjY1LjI4MDYgNDA5LjAxOTggMjY1LjM1OTcgNDA5LjE2MjcgMjY1LjM1OTcgNDA5LjI4OTdMMjY1LjkzMDkgNDEyLjE5MTUgMjY5LjU5MzggNDI3LjQ2MjlDMjY5LjcyMDggNDI4LjAzNCAyNjkuODcxMyA0MjguMzkwNiAyNzAuMDQ1OSA0MjguNTMzMiAyNzAuMjIwMyA0MjguNjc2NCAyNzAuNTEzNiA0MjguNzQ3NSAyNzAuOTI2MSA0MjguNzQ3NUgyNzUuODc0QzI3Ni41Mzk4IDQyOC43NDc1IDI3Ni44NzI2IDQyOC40NDYyIDI3Ni44NzI2IDQyNy44NDM4IDI3Ni44NzI2IDQyNy43NDgzIDI3Ni44NDExIDQyNy41MTA1IDI3Ni43Nzc2IDQyNy4xMjk4TDI2OS40NTEyIDM5Ny4wMTU3QzI2OS4yOTI1IDM5Ni4zODEgMjY5LjA5NDMgMzk1Ljk2MDkgMjY4Ljg1NjUgMzk1Ljc1NDUgMjY4LjYxODcgMzk1LjU0ODQgMjY4LjI5MzMgMzk1LjQ0NTMgMjY3Ljg4MDggMzk1LjQ0NTNIMjYyLjYwMDRDMjYyLjE4OCAzOTUuNDQ1MyAyNjEuODU1MiAzOTUuNjA0IDI2MS42MDEyIDM5NS45MjEyIDI2MS40NzQ1IDM5Ni4wNzk5IDI2MS4zNjM0IDM5Ni4zMzM0IDI2MS4yNjg0IDM5Ni42ODIzWk0yODYuNDM1MyA0MjguNzQ3NUgyOTIuNDI5NEMyOTIuODQxOSA0MjguNzQ3NSAyOTMuMTY2NyA0MjguNjY3OSAyOTMuNDA0NSA0MjguNTA5NyAyOTMuNjQyNCA0MjguMzUxIDI5My44NDA4IDQyNy45ODY0IDI5My45OTkyIDQyNy40MTUyTDMwMS43MDY2IDM5Ni44NzI1QzMwMS43Njk5IDM5Ni42ODIzIDMwMS44MDEzIDM5Ni40NzU5IDMwMS44MDEzIDM5Ni4yNTQzIDMwMS44MDEzIDM5NS43MTUxIDMwMS40NTI0IDM5NS40NDUzIDMwMC43NTUxIDM5NS40NDUzSDI5Ni4wOTI2QzI5NS42MTcgMzk1LjQ0NTMgMjk1LjI3NiAzOTUuNTcyMyAyOTUuMDY5OSAzOTUuODI1NyAyOTQuODYzNSAzOTYuMDc5OSAyOTQuNzEyNyAzOTYuMzk2OSAyOTQuNjE3OCAzOTYuNzc3OEwyOTMuNjY2NSA0MDAuMzkzNEMyOTMuNTM5NSA0MDAuODY5MSAyOTMuMjIyMyA0MDEuMTA2OSAyOTIuNzE0OSA0MDEuMTA2OUgyODYuMTk3NEMyODUuNjU3NyA0MDEuMTA2OSAyODUuMzQwOCA0MDAuODY5MSAyODUuMjQ1MyA0MDAuMzkzNEwyODQuMzQxNiAzOTYuNjM0N0MyODQuMjc4MSAzOTYuMzE3OCAyODQuMTQzNSAzOTYuMDQgMjgzLjkzNzEgMzk1LjgwMjEgMjgzLjczMTMgMzk1LjU2NDMgMjgzLjQwNTkgMzk1LjQ0NTMgMjgyLjk2MiAzOTUuNDQ1M0gyNzguMzQ3NUMyNzcuNzQ0OCAzOTUuNDQ1MyAyNzcuNDQzNSAzOTUuNzQ2NiAyNzcuNDQzNSAzOTYuMzQ5MiAyNzcuNDQzNSAzOTYuNDQ0NSAyNzcuNDQzNSAzOTYuNTM5NCAyNzcuNDQzNSAzOTYuNjM0NyAyNzcuNTA3IDM5Ni43NjE0IDI3Ny41Mzg1IDM5Ni44NDEgMjc3LjUzODUgMzk2Ljg3MjVMMjg0Ljg2NDkgNDI3LjQxNTJDMjg0Ljk5MTkgNDI3Ljk4NjQgMjg1LjE3NDEgNDI4LjM1MSAyODUuNDEyIDQyOC41MDk3IDI4NS42NDk4IDQyOC42Njc5IDI4NS45OTA4IDQyOC43NDc1IDI4Ni40MzUzIDQyOC43NDc1Wk0zMDQuNTEzMiAzOTcuMzAwNVY0MDEuNTgyNkMzMDQuNTEzMiA0MDEuOTYzIDMwNC42MjQzIDQwMi4yMjQ5IDMwNC44NDYzIDQwMi4zNjc1IDMwNS4wNzY1IDQwMi41MSAzMDUuMjk4MSA0MDIuNTgxOCAzMDUuNTIwMSA0MDIuNTgxOCAzMDUuNzc0NCA0MDIuNTgxOCAzMDYuMDc1NCA0MDIuNTM0MSAzMDYuNDA4MiA0MDIuNDM4NiAzMDYuNzQxNSA0MDIuMzQzOSAzMDYuOTg3IDQwMi4yODA0IDMwNy4xNTM3IDQwMi4yNDg0IDMwNy42OTI5IDQwMi4wODk3IDMwOC41MDk4IDQwMS45MzE1IDMwOS41OTU3IDQwMS43NzI4IDMxMC42ODIgNDAxLjYxNCAzMTEuNTQ2MyA0MDEuNTM0OSAzMTIuMTg4NiA0MDEuNTM0OSAzMTMuNTkyMyA0MDEuNTM0OSAzMTQuNzAyMSA0MDEuODI4MyAzMTUuNTE4NyA0MDIuNDE1MSAzMTYuMzM1NCA0MDMuMDAxOSAzMTYuNzM5OSA0MDMuODAyNiAzMTYuNzM5OSA0MDQuODE3NCAzMTYuNzM5OSA0MDYuMzA4NSAzMTUuODIwMSA0MDcuNzAzNyAzMTMuOTgwNCA0MDkuMDAzOSAzMTIuNjQ4NyA0MDkuODYwNiAzMTEuNjY1MyA0MTAuNDk0NyAzMTEuMDMwOSA0MTAuOTA2OCAzMDguNjg0MSA0MTIuNDYxNCAzMDcuMDgyNiA0MTMuNzc3NSAzMDYuMjI1OSA0MTQuODU1OCAzMDUuMDg0MSA0MTYuMjgzIDMwNC41MTMyIDQxOC4wNTg5IDMwNC41MTMyIDQyMC4xODQxIDMwNC41MTMyIDQyMy4xMDE4IDMwNS40OTY2IDQyNS4zMjIxIDMwNy40NjMgNDI2Ljg0NDYgMzA5LjQyOTEgNDI4LjM2NjggMzEyLjA5MzQgNDI5LjEyNzkgMzE1LjQ1NTIgNDI5LjEyNzkgMzE2LjkxNDUgNDI5LjEyNzkgMzE4LjM1NzQgNDI5LjAwMTIgMzE5Ljc4NDYgNDI4Ljc0NzUgMzIxLjk0MTUgNDI4LjM2NjggMzIzLjAxOTggNDI3LjgxMTggMzIzLjAxOTggNDI3LjA4MjVWNDIyLjgwMDRDMzIzLjAxOTggNDIyLjY3MzcgMzIzLjAxOTggNDIyLjU2MjYgMzIzLjAxOTggNDIyLjQ2NzcgMzIyLjkyNDUgNDIyLjA4NyAzMjIuNjU1IDQyMS44OTY4IDMyMi4yMTA4IDQyMS44OTY4TDMxOS45Mjc1IDQyMi4zMjQ4QzMxOC42MjcyIDQyMi41Nzg4IDMxNy44MTAzIDQyMi43MjkzIDMxNy40NzcyIDQyMi43NzY5IDMxNy4xNDQ0IDQyMi44MjQ1IDMxNi42NDQ3IDQyMi44NDgxIDMxNS45Nzg4IDQyMi44NDgxIDMxNC42NzgzIDQyMi44NDgxIDMxMy43MzQ5IDQyMi42NDIzIDMxMy4xNDgxIDQyMi4yMjk4IDMxMi41NjExIDQyMS44MTc3IDMxMi4yNjc3IDQyMS4zMSAzMTIuMjY3NyA0MjAuNzA3MyAzMTIuMjY3NyA0MTkuNjI5IDMxNC4wNiA0MTcuOTMyMiAzMTcuNjQzOSA0MTUuNjE2OSAzMTkuNzM3IDQxNC4yMjE0IDMyMS4yNTk1IDQxMi45MDUzIDMyMi4yMTA4IDQxMS42NjgyIDMyMy43MzMzIDQwOS43MDE4IDMyNC40OTQ2IDQwNy4zODY4IDMyNC40OTQ2IDQwNC43MjI1IDMyNC40OTQ2IDQwMS43NDEgMzIzLjQ0NzggMzk5LjM4NjMgMzIxLjM2MjYgMzk3LjY1NzQgMzE5LjI3NzUgMzk1LjkyODkgMzE2LjQxNDggMzk1LjA2NDkgMzEyLjc4MzMgMzk1LjA2NDkgMzExLjYwMTggMzk1LjA2NDkgMzEwLjI2MTYgMzk1LjE1MTkgMzA4Ljc3MTEgMzk1LjMyNjUgMzA3LjI3MjggMzk1LjUwMDggMzA2LjE3MDQgMzk1LjczMSAzMDUuNDcyNSAzOTYuMDE2NCAzMDUuMDUyNCAzOTYuMTc0NiAzMDQuNzkwNyAzOTYuMzY1NCAzMDQuNjc5OSAzOTYuNTg3MSAzMDQuNTY4OCAzOTYuODA5MyAzMDQuNTEzMiAzOTcuMDQ3MSAzMDQuNTEzMiAzOTcuMzAwNVpNMzMwLjQ0MTIgNDI4Ljc0NzVIMzM0LjE1MkMzMzQuODgxNCA0MjguNzQ3NSAzMzUuMzQxNCA0MjguNjEyOSAzMzUuNTMxNiA0MjguMzQzIDMzNS43MjI0IDQyOC4wNzMyIDMzNS44MTcxIDQyNy42NTMxIDMzNS44MTcxIDQyNy4wODI1VjQxNy45MDAyQzMzNS44MTcxIDQxNy42MTUzIDMzNS44NTcgNDE3LjM5MzEgMzM1LjkzNjEgNDE3LjIzNDMgMzM2LjAxNTggNDE3LjA3NjIgMzM2LjIxMzYgNDE2Ljk5NjUgMzM2LjUzMDggNDE2Ljk5NjVIMzQxLjcxNjVDMzQxLjg3NTMgNDE2Ljk5NjUgMzQxLjk4NTggNDE3LjAxMjEgMzQyLjA0OTMgNDE3LjA0NDEgMzQyLjMzNDggNDE3LjIwMjkgMzQyLjQ3NzYgNDE3LjUxOTggMzQyLjQ3NzYgNDE3Ljk5NTdWNDI3LjA4MjVDMzQyLjQ3NzYgNDI3LjY1MzEgMzQyLjU0MTEgNDI4LjAzNCAzNDIuNjY3OCA0MjguMjI0MyAzNDIuOTIxNSA0MjguNTczMiAzNDMuNDEzNCA0MjguNzQ3NSAzNDQuMTQyNyA0MjguNzQ3NUgzNDcuODUzOEMzNDguNTgzMiA0MjguNzQ3NSAzNDkuMDQzIDQyOC42MTI5IDM0OS4yMzMyIDQyOC4zNDMgMzQ5LjQyMzQgNDI4LjA3MzIgMzQ5LjUxODkgNDI3LjY1MzEgMzQ5LjUxODkgNDI3LjA4MjVWMzk3LjExMDNDMzQ5LjUxODkgMzk2LjUzOTQgMzQ5LjQ1NTQgMzk2LjE1OSAzNDkuMzI4MSAzOTUuOTY4OCAzNDkuMDc0NCAzOTUuNjE5OSAzNDguNTgzMiAzOTUuNDQ1MyAzNDcuODUzOCAzOTUuNDQ1M0gzNDQuMTQyN0MzNDMuNDEzNCAzOTUuNDQ1MyAzNDIuOTUzNiAzOTUuNTgwMiAzNDIuNzYzNCAzOTUuODQ5OCAzNDIuNTcyNiAzOTYuMTE5MSAzNDIuNDc3NiAzOTYuNTM5NCAzNDIuNDc3NiAzOTcuMTEwM1Y0MDkuNTc1MUMzNDIuNDc3NiA0MTAuMDgyMiAzNDIuMjIzNyA0MTAuMzM2MiAzNDEuNzE2NSA0MTAuMzM2MkgzMzYuNTMwOEMzMzYuMDU0OSA0MTAuMzM2MiAzMzUuODE3MSA0MTAuMDk4NCAzMzUuODE3MSA0MDkuNjIyN1YzOTcuMTEwM0MzMzUuODE3MSAzOTYuMzgxIDMzNS42ODI0IDM5NS45MjEyIDMzNS40MTI2IDM5NS43MzEgMzM1LjE0MzMgMzk1LjU0MDggMzM0LjcyMzIgMzk1LjQ0NTMgMzM0LjE1MiAzOTUuNDQ1M0gzMzAuNDQxMkMzMjkuODcwNiAzOTUuNDQ1MyAzMjkuNDg5NiAzOTUuNTA4OCAzMjkuMjk5NyAzOTUuNjM1NSAzMjguOTUwNyAzOTUuODg5NyAzMjguNzc2MSAzOTYuMzgxIDMyOC43NzYxIDM5Ny4xMTAzVjQyNy4wODI1QzMyOC43NzYxIDQyNy42NTMxIDMyOC44Mzk2IDQyOC4wMzQgMzI4Ljk2NjMgNDI4LjIyNDMgMzI5LjIyMDMgNDI4LjU3MzIgMzI5LjcxMTggNDI4Ljc0NzUgMzMwLjQ0MTIgNDI4Ljc0NzUiIGZpbGw9IiMyODU2YTQiLz4KPHBhdGggdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMCw4NDEuODg5OCkiIGQ9Ik0yODkuMzU1OCA0MTkuNDM4QzI5MS40NDQxIDQxNi4zOTEgMjk2LjMyODUgNDExLjM3OCAyOTIuNzM3NSA0MDcuNzg2NyAyOTAuODcwMSA0MDUuOTE5MyAyODcuODQxIDQwNS45MTkzIDI4NS45NzM1IDQwNy43ODY3IDI4Mi4zMzE4IDQxMS40Mjg0IDI4Ny4yNTg3IDQxNi40MDggMjg5LjM1NTggNDE5LjQzOCIgZmlsbD0iIzkyZDdmNiIgZmlsbC1ydWxlPSJldmVub2RkIi8+CjxwYXRoIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDAsODQxLjg4OTgpIiBkPSJNMjkxLjkxMzggNDEyLjAwNjRDMjkyLjE4ODggNDExLjk2NyAyOTIuMTcwMyA0MTEuOTY5OCAyOTIuNDQ1MyA0MTEuOTMwNCAyOTIuNTMxMiA0MTEuOTE4MiAyOTIuNTY2IDQxMS43ODk4IDI5Mi41ODc5IDQxMS42NTQ5IDI5My4xMDA5IDQwOC41Mzk5IDI5MS4yOTk4IDQwOS42NTY4IDI5MS40Mjg4IDQxMC4wNDkxIDI5MS42MDQ1IDQxMC41ODQgMjkxLjg1NjMgNDExLjEzOTMgMjkxLjc0NCA0MTEuNzc1MSAyOTEuNzIwNSA0MTEuOTA4NiAyOTEuODI3OSA0MTIuMDE4NiAyOTEuOTEzOCA0MTIuMDA2NCIgZmlsbD0iI2ZmZmZmZiIgZmlsbC1ydWxlPSJldmVub2RkIi8+CjwvZz4KPC9zdmc+Cg==" alt="Smart Wash Logo" class="logo-img">
+            </div>
+
+            <div class="bento-item bento-tagline">
+                <div class="tagline-text lang-si">Hitreje. Učinkoviteje. Enostavneje.</div>
+                <div class="tagline-text lang-en">Faster. More Efficient. Simpler.</div>
+                <div class="tagline-sub lang-si">Samopostrežna pralnica na dveh lokacijah v Ljubljani</div>
+                <div class="tagline-sub lang-en">Self-service laundromat at two locations in Ljubljana</div>
+            </div>
+
+            <div class="bento-item bento-visual">
+                <div class="visual-icon">🧺</div>
+            </div>
+
+            <div class="bento-item bento-pricing">
+                <div class="quick-price">€5-€8</div>
+                <div class="price-label lang-si">od 9kg do 18kg</div>
+                <div class="price-label lang-en">from 9kg to 18kg</div>
+            </div>
+
+            <div class="bento-item bento-map">
+                <div class="map-preview">📍</div>
+            </div>
+
+            <div class="bento-item bento-cta" onclick="document.getElementById('services').scrollIntoView({behavior: 'smooth'})">
+                <div class="cta-text lang-si">Izračunajte Ceno</div>
+                <div class="cta-text lang-en">Calculate Price</div>
+                <div class="cta-sub lang-si">Hitro in preprosto v 3 korakih</div>
+                <div class="cta-sub lang-en">Quick and simple in 3 steps</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Calculator -->
+    <section id="services" class="scroll-animate">
+        <h2 class="section-title lang-si">Izračunajte Svojo Ceno</h2>
+        <h2 class="section-title lang-en">Calculate Your Price</h2>
+
+        <div class="calculator">
+            <div class="step">
+                <div class="step-title lang-si">Korak 1: Izberite velikost stroja</div>
+                <div class="step-title lang-en">Step 1: Choose machine size</div>
+                <div class="options">
+                    <button class="option-btn" data-step="machine" data-value="9" data-price="5">
+                        <span class="lang-si">9kg - €5</span>
+                        <span class="lang-en">9kg - €5</span>
+                    </button>
+                    <button class="option-btn" data-step="machine" data-value="14" data-price="7">
+                        <span class="lang-si">14kg - €7</span>
+                        <span class="lang-en">14kg - €7</span>
+                    </button>
+                    <button class="option-btn" data-step="machine" data-value="18" data-price="8">
+                        <span class="lang-si">18kg - €8</span>
+                        <span class="lang-en">18kg - €8</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="step">
+                <div class="step-title lang-si">Korak 2: Kaj želite?</div>
+                <div class="step-title lang-en">Step 2: What do you want?</div>
+                <div class="options">
+                    <button class="option-btn" data-step="service" data-value="wash">
+                        <span class="lang-si">🧼 Samo Pranje</span>
+                        <span class="lang-en">🧼 Wash Only</span>
+                    </button>
+                    <button class="option-btn" data-step="service" data-value="dry">
+                        <span class="lang-si">🌡️ Samo Sušenje (€2)</span>
+                        <span class="lang-en">🌡️ Dry Only (€2)</span>
+                    </button>
+                    <button class="option-btn" data-step="service" data-value="both">
+                        <span class="lang-si">✨ Pranje + Sušenje</span>
+                        <span class="lang-en">✨ Wash + Dry</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="result" id="priceResult">
+                <div class="result-text lang-si">Vaša cena: <span id="finalPrice">€0</span></div>
+                <div class="result-text lang-en">Your price: <span id="finalPriceEn">€0</span></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Interactive Slider -->
+    <section class="scroll-animate">
+        <h2 class="section-title lang-si">Koliko Perila Imate?</h2>
+        <h2 class="section-title lang-en">How Much Laundry Do You Have?</h2>
+
+        <div class="slider-container">
+            <div class="slider-title lang-si">Povlecite drsnik za izbiro količine</div>
+            <div class="slider-title lang-en">Drag the slider to select amount</div>
+
+            <div class="slider-wrapper">
+                <input type="range" min="9" max="18" value="14" class="slider" id="laundrySlider">
+            </div>
+
+            <div class="slider-display">
+                <div class="slider-value" id="sliderValue">14kg</div>
+                <div class="slider-info">
+                    <span class="lang-si"><span id="sliderPrice">€7</span> / <span id="sliderTime">40</span> min</span>
+                    <span class="lang-en"><span id="sliderPriceEn">€7</span> / <span id="sliderTimeEn">40</span> min</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Chatbot -->
+    <section class="scroll-animate">
+        <h2 class="section-title lang-si">Pogosta Vprašanja</h2>
+        <h2 class="section-title lang-en">Frequently Asked Questions</h2>
+
+        <div class="chatbot">
+            <div class="chatbot-title lang-si">💬 Kako vam lahko pomagam?</div>
+            <div class="chatbot-title lang-en">💬 How can I help you?</div>
+
+            <div class="chat-questions">
+                <div class="chat-question">
+                    <div class="question-text">
+                        <span>💰</span>
+                        <span class="lang-si">Kako plačam?</span>
+                        <span class="lang-en">How do I pay?</span>
+                    </div>
+                    <div class="chat-answer lang-si">
+                        Plačujete z žetoni, ki jih dobite pri menjalnem avtomatu. Avtomat sprejema kovance in bankovce. En žeton stane €1, potrebujete pa od 5 do 8 žetonov glede na velikost stroja.
+                    </div>
+                    <div class="chat-answer lang-en">
+                        You pay with tokens that you get from the exchange machine. The machine accepts coins and banknotes. One token costs €1, and you need 5 to 8 tokens depending on machine size.
+                    </div>
+                </div>
+
+                <div class="chat-question">
+                    <div class="question-text">
+                        <span>⏰</span>
+                        <span class="lang-si">Koliko časa traja?</span>
+                        <span class="lang-en">How long does it take?</span>
+                    </div>
+                    <div class="chat-answer lang-si">
+                        Pranje traja 35-40 minut, sušenje pa približno 30-40 minut. Skupaj lahko vaše perilo operete in posušite v približno 1 uri in 20 minutah.
+                    </div>
+                    <div class="chat-answer lang-en">
+                        Washing takes 35-40 minutes, and drying approximately 30-40 minutes. In total, you can wash and dry your laundry in about 1 hour and 20 minutes.
+                    </div>
+                </div>
+
+                <div class="chat-question">
+                    <div class="question-text">
+                        <span>📍</span>
+                        <span class="lang-si">Kje ste?</span>
+                        <span class="lang-en">Where are you located?</span>
+                    </div>
+                    <div class="chat-answer lang-si">
+                        Imamo dve lokaciji v Ljubljani: TC Jarše (Ob železnici 16) in Galjevica (Center Galjevica). Obe sta enostavno dostopni z avtom in javnim prevozom.
+                    </div>
+                    <div class="chat-answer lang-en">
+                        We have two locations in Ljubljana: TC Jarše (Ob železnici 16) and Galjevica (Center Galjevica). Both are easily accessible by car and public transport.
+                    </div>
+                </div>
+
+                <div class="chat-question">
+                    <div class="question-text">
+                        <span>🧴</span>
+                        <span class="lang-si">Ali potrebujem svoj prašek?</span>
+                        <span class="lang-en">Do I need my own detergent?</span>
+                    </div>
+                    <div class="chat-answer lang-si">
+                        Ne! Naši stroji že vsebujejo profesionalni pralni prašek in mehčalec. Samo naložite perilo in vključite stroj.
+                    </div>
+                    <div class="chat-answer lang-en">
+                        No! Our machines already contain professional detergent and fabric softener. Just load your laundry and start the machine.
+                    </div>
+                </div>
+
+                <div class="chat-question">
+                    <div class="question-text">
+                        <span>🕐</span>
+                        <span class="lang-si">Kdaj ste odprti?</span>
+                        <span class="lang-en">When are you open?</span>
+                    </div>
+                    <div class="chat-answer lang-si">
+                        Odprto imamo vsak dan od 7:00 do 21:00, tudi ob vikendih in praznikih. Pridite kadarkoli vam ustreza!
+                    </div>
+                    <div class="chat-answer lang-en">
+                        We're open every day from 7:00 AM to 9:00 PM, including weekends and holidays. Come whenever it suits you!
+                    </div>
+                </div>
+
+                <div class="chat-question">
+                    <div class="question-text">
+                        <span>🎯</span>
+                        <span class="lang-si">Ali lahko operem velike kos (odeje, blazine)?</span>
+                        <span class="lang-en">Can I wash large items (blankets, pillows)?</span>
+                    </div>
+                    <div class="chat-answer lang-si">
+                        Seveda! Naši veliki stroji (18kg) so idealni za odeje, blazine, zavese in druga večja perila. Profesionalna oprema zagotavlja temeljito čiščenje.
+                    </div>
+                    <div class="chat-answer lang-en">
+                        Of course! Our large machines (18kg) are ideal for blankets, pillows, curtains and other larger items. Professional equipment ensures thorough cleaning.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations -->
+    <section class="scroll-animate">
+        <h2 class="section-title lang-si">Naše Lokacije</h2>
+        <h2 class="section-title lang-en">Our Locations</h2>
+
+        <div class="locations">
+            <div class="location-card">
+                <div class="location-icon">🏢</div>
+                <div class="location-name">TC Jarše</div>
+                <div class="location-address">
+                    <span class="lang-si">Ob železnici 16, 1000 Ljubljana</span>
+                    <span class="lang-en">Ob železnici 16, 1000 Ljubljana</span>
+                </div>
+                <a href="https://maps.google.com/?q=TC+Jarše+Ljubljana" target="_blank" class="location-btn">
+                    <span class="lang-si">📍 Prikaži na zemljevidu</span>
+                    <span class="lang-en">📍 Show on map</span>
+                </a>
+            </div>
+
+            <div class="location-card">
+                <div class="location-icon">🏪</div>
+                <div class="location-name">Center Galjevica</div>
+                <div class="location-address">
+                    <span class="lang-si">Galjevica, 1000 Ljubljana</span>
+                    <span class="lang-en">Galjevica, 1000 Ljubljana</span>
+                </div>
+                <a href="https://maps.google.com/?q=Center+Galjevica+Ljubljana" target="_blank" class="location-btn">
+                    <span class="lang-si">📍 Prikaži na zemljevidu</span>
+                    <span class="lang-en">📍 Show on map</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages -->
+    <section class="scroll-animate">
+        <h2 class="section-title lang-si">Zakaj Smart Wash?</h2>
+        <h2 class="section-title lang-en">Why Smart Wash?</h2>
+
+        <div class="advantages">
+            <div class="advantage-card">
+                <div class="advantage-icon">⚡</div>
+                <div class="advantage-title lang-si">Hitro</div>
+                <div class="advantage-title lang-en">Fast</div>
+                <div class="advantage-text lang-si">Pranje in sušenje v samo 1 uri in 20 minutah</div>
+                <div class="advantage-text lang-en">Wash and dry in just 1 hour and 20 minutes</div>
+            </div>
+
+            <div class="advantage-card">
+                <div class="advantage-icon">💪</div>
+                <div class="advantage-title lang-si">Močno</div>
+                <div class="advantage-title lang-en">Powerful</div>
+                <div class="advantage-text lang-si">Profesionalni stroji za temeljito čiščenje</div>
+                <div class="advantage-text lang-en">Professional machines for thorough cleaning</div>
+            </div>
+
+            <div class="advantage-card">
+                <div class="advantage-icon">🎯</div>
+                <div class="advantage-title lang-si">Enostavno</div>
+                <div class="advantage-title lang-en">Simple</div>
+                <div class="advantage-text lang-si">Brez registracije, samo pride in opere</div>
+                <div class="advantage-text lang-en">No registration, just come and wash</div>
+            </div>
+
+            <div class="advantage-card">
+                <div class="advantage-icon">💰</div>
+                <div class="advantage-title lang-si">Cenovno ugodno</div>
+                <div class="advantage-title lang-en">Affordable</div>
+                <div class="advantage-text lang-si">Od samo €5 za 9kg perila</div>
+                <div class="advantage-text lang-en">From only €5 for 9kg laundry</div>
+            </div>
+
+            <div class="advantage-card">
+                <div class="advantage-icon">🧴</div>
+                <div class="advantage-title lang-si">Vse vključeno</div>
+                <div class="advantage-title lang-en">All Included</div>
+                <div class="advantage-text lang-si">Prašek in mehčalec že v ceni</div>
+                <div class="advantage-text lang-en">Detergent and softener included</div>
+            </div>
+
+            <div class="advantage-card">
+                <div class="advantage-icon">✨</div>
+                <div class="advantage-title lang-si">Čisto in moderno</div>
+                <div class="advantage-title lang-en">Clean and Modern</div>
+                <div class="advantage-text lang-si">Redno vzdrževana oprema</div>
+                <div class="advantage-text lang-en">Regularly maintained equipment</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Instructions -->
+    <section class="scroll-animate">
+        <h2 class="section-title lang-si">Kako Deluje?</h2>
+        <h2 class="section-title lang-en">How Does It Work?</h2>
+
+        <div class="instructions">
+            <div class="instruction-steps">
+                <div class="instruction-step">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <div class="step-heading lang-si">Dobite žetone</div>
+                        <div class="step-heading lang-en">Get tokens</div>
+                        <div class="step-description lang-si">Pri menjalnem avtomatu zamenjajte denar za žetone (1 žeton = €1)</div>
+                        <div class="step-description lang-en">Exchange money for tokens at the machine (1 token = €1)</div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <div class="step-heading lang-si">Naložite perilo</div>
+                        <div class="step-heading lang-en">Load laundry</div>
+                        <div class="step-description lang-si">Izberite prost stroj in naložite svoje perilo. Prašek je že vključen!</div>
+                        <div class="step-description lang-en">Choose a free machine and load your laundry. Detergent is included!</div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <div class="step-heading lang-si">Vstavite žetone</div>
+                        <div class="step-heading lang-en">Insert tokens</div>
+                        <div class="step-description lang-si">Vstavite ustrezno število žetonov (5-8) glede na velikost stroja</div>
+                        <div class="step-description lang-en">Insert the appropriate number of tokens (5-8) depending on machine size</div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <div class="step-heading lang-si">Počakajte</div>
+                        <div class="step-heading lang-en">Wait</div>
+                        <div class="step-description lang-si">Stroj bo opral perilo v 35-40 minutah. Lahko počakate ali se vrnete kasneje</div>
+                        <div class="step-description lang-en">The machine will wash your laundry in 35-40 minutes. You can wait or come back later</div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <div class="step-heading lang-si">Posušite (po želji)</div>
+                        <div class="step-heading lang-en">Dry (optional)</div>
+                        <div class="step-description lang-si">Preložite perilo v sušilnik (2 žetona) za hitro sušenje v 30-40 minutah</div>
+                        <div class="step-description lang-en">Transfer laundry to dryer (2 tokens) for quick drying in 30-40 minutes</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="scroll-animate">
+        <div class="contact">
+            <div class="contact-title lang-si">Potrebujete Pomoč?</div>
+            <div class="contact-title lang-en">Need Help?</div>
+
+            <div class="contact-info">
+                <div class="contact-item">
+                    <span class="contact-icon">📞</span>
+                    <a href="tel:051201525" style="color: white; text-decoration: none;">05 120 15 25</a>
+                </div>
+                <div class="contact-item">
+                    <span class="contact-icon">✉️</span>
+                    <span>info@smartwash.si</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p class="lang-si">&copy; 2026 Smart Wash. Vse pravice pridržane.</p>
+        <p class="lang-en">&copy; 2026 Smart Wash. All rights reserved.</p>
+        <p style="margin-top: 10px; opacity: 0.7;">
+            <span class="lang-si">Moderna samopostrežna pralnica v Ljubljani</span>
+            <span class="lang-en">Modern self-service laundromat in Ljubljana</span>
+        </p>
+    </footer>
+
+    <script>
+        // Language Switcher
+        const langButtons = document.querySelectorAll('.lang-btn');
+        const body = document.body;
+
+        langButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.dataset.lang;
+                body.setAttribute('data-lang', lang);
+
+                langButtons.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Price Calculator
+        let selectedMachine = null;
+        let selectedService = null;
+        let machinePrice = 0;
+
+        const machineButtons = document.querySelectorAll('[data-step="machine"]');
+        const serviceButtons = document.querySelectorAll('[data-step="service"]');
+        const resultDiv = document.getElementById('priceResult');
+        const finalPriceSpan = document.getElementById('finalPrice');
+        const finalPriceSpanEn = document.getElementById('finalPriceEn');
+
+        machineButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                machineButtons.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedMachine = btn.dataset.value;
+                machinePrice = parseInt(btn.dataset.price);
+                calculatePrice();
+            });
+        });
+
+        serviceButtons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                serviceButtons.forEach(b => b.classList.remove('selected'));
+                btn.classList.add('selected');
+                selectedService = btn.dataset.value;
+                calculatePrice();
+            });
+        });
+
+        function calculatePrice() {
+            if (selectedMachine && selectedService) {
+                let totalPrice = 0;
+
+                if (selectedService === 'wash') {
+                    totalPrice = machinePrice;
+                } else if (selectedService === 'dry') {
+                    totalPrice = 2;
+                } else if (selectedService === 'both') {
+                    totalPrice = machinePrice + 2;
+                }
+
+                finalPriceSpan.textContent = '€' + totalPrice;
+                finalPriceSpanEn.textContent = '€' + totalPrice;
+                resultDiv.classList.add('show');
+            }
+        }
+
+        // Slider
+        const slider = document.getElementById('laundrySlider');
+        const sliderValue = document.getElementById('sliderValue');
+        const sliderPrice = document.getElementById('sliderPrice');
+        const sliderPriceEn = document.getElementById('sliderPriceEn');
+        const sliderTime = document.getElementById('sliderTime');
+        const sliderTimeEn = document.getElementById('sliderTimeEn');
+
+        slider.addEventListener('input', (e) => {
+            const kg = e.target.value;
+            sliderValue.textContent = kg + 'kg';
+
+            let price = 5;
+            let time = 35;
+
+            if (kg <= 9) {
+                price = 5;
+                time = 35;
+            } else if (kg <= 14) {
+                price = 7;
+                time = 40;
+            } else {
+                price = 8;
+                time = 40;
+            }
+
+            sliderPrice.textContent = '€' + price;
+            sliderPriceEn.textContent = '€' + price;
+            sliderTime.textContent = time;
+            sliderTimeEn.textContent = time;
+        });
+
+        // Chatbot FAQ
+        const chatQuestions = document.querySelectorAll('.chat-question');
+
+        chatQuestions.forEach(question => {
+            question.addEventListener('click', () => {
+                const wasActive = question.classList.contains('active');
+
+                chatQuestions.forEach(q => q.classList.remove('active'));
+
+                if (!wasActive) {
+                    question.classList.add('active');
+                }
+            });
+        });
+
+        // Scroll Animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.scroll-animate').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Smooth scroll for CTA button
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        });
+    </script>
+
+</body>
+</html>

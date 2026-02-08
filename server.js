@@ -946,12 +946,27 @@ app.get('/api/messages/:sessionId', (req, res) => {
     const { sessionId } = req.params;
     const { lastMessageTime } = req.query;
 
+    console.log(`📥 POLLING REQUEST for session ${sessionId}`);
+    console.log(`   - lastMessageTime: ${lastMessageTime}`);
+
     const session = sessions.get(sessionId);
     if (!session) {
+        console.log(`   ❌ Session not found`);
         return res.json({ messages: [] });
     }
 
     const lastTime = lastMessageTime ? new Date(lastMessageTime) : new Date(0);
+    console.log(`   - lastTime parsed: ${lastTime.toISOString()}`);
+    console.log(`   - Total messages in session: ${session.messages.length}`);
+
+    // Log all assistant messages with timestamps
+    const assistantMessages = session.messages.filter(msg => msg.role === 'assistant');
+    console.log(`   - Assistant messages count: ${assistantMessages.length}`);
+    assistantMessages.forEach((msg, idx) => {
+        const isNew = msg.timestamp > lastTime;
+        console.log(`     [${idx}] ${isNew ? '✅ NEW' : '⏭️ OLD'} - ${msg.timestamp.toISOString()} - ${msg.content.substring(0, 30)}...`);
+    });
+
     const newMessages = session.messages
         .filter(msg => msg.timestamp > lastTime && msg.role === 'assistant')
         .map(msg => ({
@@ -960,6 +975,7 @@ app.get('/api/messages/:sessionId', (req, res) => {
             timestamp: msg.timestamp
         }));
 
+    console.log(`   📤 Returning ${newMessages.length} new messages`);
     res.json({ messages: newMessages });
 });
 
@@ -1112,14 +1128,19 @@ app.post(`/telegram/webhook`, async (req, res) => {
                         console.log(`Translating operator response from Russian to ${userLanguage}`);
 
                         // Add operator's message to session (in user's language)
+                        const messageTimestamp = new Date();
                         session.messages.push({
                             role: 'assistant',
                             content: translatedText,
-                            timestamp: new Date(),
+                            timestamp: messageTimestamp,
                             fromOperator: true
                         });
 
-                        console.log(`Reply sent to session ${sessionId} via group thread`);
+                        console.log(`✅ OPERATOR MESSAGE ADDED TO SESSION ${sessionId}`);
+                        console.log(`   - Content: ${translatedText.substring(0, 50)}...`);
+                        console.log(`   - Timestamp: ${messageTimestamp.toISOString()}`);
+                        console.log(`   - Role: assistant`);
+                        console.log(`   - Total messages in session: ${session.messages.length}`);
                         try {
                             await bot.sendMessage(chatId, `✅ Sporočilo poslano / Message sent`, {
                                 reply_to_message_id: msg.message_id

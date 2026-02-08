@@ -5,9 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Primary Meta Tags -->
-    <title>Smart Wash - Samopostrežna Pralnica Ljubljana | Odprto Vsak Dan</title>
-    <meta name="title" content="Smart Wash - Samopostrežna Pralnica Ljubljana | Odprto Vsak Dan">
-    <meta name="description" content="Smart Wash samopostrežna pralnica v Ljubljani. Galjevica in TC Jarše. Odprto vsak dan z zgodnjimi in poznimi urami. Stroji do 20 kg, detergent vključen, parking brezplačen.">
+    <title>Smart Wash - Samopostrežna Pralnica Ljubljana | Odprto 6-23</title>
+    <meta name="title" content="Smart Wash - Samopostrežna Pralnica Ljubljana | Odprto 6-23">
+    <meta name="description" content="Smart Wash samopostrežna pralnica v Ljubljani. Galjevica in TC Jarše. Odprto vsak dan 6-23. Stroji do 20 kg, detergent vključen, parking brezplačen.">
     <meta name="keywords" content="pralnica Ljubljana, samopostrežna pralnica, pranje perila, sušenje perila, Smart Wash, Galjevica, TC Jarše, laundromat Ljubljana">
     <meta name="author" content="Smart Wash">
     <meta name="robots" content="index, follow">
@@ -21,7 +21,7 @@
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://smart-wash.si">
     <meta property="og:title" content="Smart Wash - Samopostrežna Pralnica Ljubljana">
-    <meta property="og:description" content="Moderna samopostrežna pralnica v Ljubljani. Stroji do 20 kg, detergent vključen, parking brezplačen. Odprto vsak dan z zgodnjimi in poznimi urami.">
+    <meta property="og:description" content="Moderna samopostrežna pralnica v Ljubljani. Stroji do 20 kg, detergent vključen, parking brezplačen. Odprto vsak dan 6-23.">
     <meta property="og:image" content="https://smart-wash.si/og-image.jpg">
     <meta property="og:locale" content="sl_SI">
     <meta property="og:locale:alternate" content="en_GB">
@@ -147,7 +147,6 @@
             color: var(--navy);
             line-height: 1.2;
             text-align: left;
-            margin-left: -20px;
         }
 
         .logo-text-light {
@@ -520,13 +519,10 @@
             display: flex;
             align-items: flex-start;
             justify-content: flex-start;
-            gap: 12px;
-            padding: 10px 16px;
-            background: linear-gradient(135deg, rgba(0, 151, 218, 0.03) 0%, rgba(255, 107, 90, 0.02) 100%);
-            border-left: 4px solid var(--coral);
-            border-radius: 8px;
+            gap: 16px;
+            padding: 0;
             opacity: 0;
-            animation: carouselFade 20s ease-in-out infinite;
+            animation: carouselFade 16s ease-in-out infinite;
             pointer-events: none;
             z-index: 1;
         }
@@ -548,34 +544,27 @@
             animation-delay: 12s;
         }
 
-        .benefit-item:nth-child(5) {
-            animation-delay: 16s;
-        }
-
         .benefit-icon {
-            font-size: 32px;
+            font-size: 40px;
             line-height: 1;
             flex-shrink: 0;
-            margin-top: 4px;
-            filter: grayscale(0.2);
+            margin-top: 2px;
+            animation: subtlePulse 3s ease-in-out infinite;
         }
 
         .benefit-text {
-            font-size: 18px;
-            line-height: 1.4;
-            color: var(--text-light);
+            font-size: 22px;
+            line-height: 1.6;
+            color: var(--text-dark);
             flex: 1;
             width: 100%;
         }
 
         .benefit-text strong {
             color: var(--navy);
-            font-weight: 700;
-            font-size: 20px;
-            line-height: 1.3;
+            font-weight: 600;
             display: block;
-            margin-bottom: 3px;
-            letter-spacing: -0.3px;
+            margin-bottom: 4px;
         }
 
         .hero-cta {
@@ -934,10 +923,10 @@
         @keyframes carouselFade {
             0% { opacity: 0; transform: translateY(20px); z-index: 1; }
             2% { opacity: 0; transform: translateY(20px); z-index: 10; }
-            4% { opacity: 1; transform: translateY(0); z-index: 10; }
-            18% { opacity: 1; transform: translateY(0); z-index: 10; }
-            20% { opacity: 0; transform: translateY(-20px); z-index: 10; }
-            22% { opacity: 0; transform: translateY(-20px); z-index: 1; }
+            5% { opacity: 1; transform: translateY(0); z-index: 10; }
+            23% { opacity: 1; transform: translateY(0); z-index: 10; }
+            25% { opacity: 0; transform: translateY(-20px); z-index: 10; }
+            27% { opacity: 0; transform: translateY(-20px); z-index: 1; }
             100% { opacity: 0; transform: translateY(-20px); z-index: 1; }
         }
 
@@ -1025,6 +1014,18 @@
         #contact .shape-8 { background: var(--mint); bottom: 48%; right: 7%; animation: float 20s ease-in-out infinite 6s; }
         #contact .shape-9 { background: var(--sage); top: 30%; left: 52%; animation: float 24s ease-in-out infinite 1s; }
         #contact .shape-10 { background: var(--ocean); bottom: 22%; right: 38%; animation: float 16s ease-in-out infinite 10s; }
+
+        /* Reviews Section - Mixed colors theme */
+        #reviews .shape-1 { background: var(--mint); top: 10%; left: 7%; animation: float 15s ease-in-out infinite; }
+        #reviews .shape-2 { background: var(--coral); top: 16%; right: 11%; animation: float 18s ease-in-out infinite 3s; }
+        #reviews .shape-3 { background: var(--ocean); top: 40%; left: 14%; animation: float 20s ease-in-out infinite 5s; }
+        #reviews .shape-4 { background: var(--sage); bottom: 28%; right: 16%; animation: float 17s ease-in-out infinite 7s; }
+        #reviews .shape-5 { background: var(--mint); bottom: 12%; left: 24%; animation: float 22s ease-in-out infinite 2s; }
+        #reviews .shape-6 { background: var(--coral); top: 50%; right: 22%; animation: float 16s ease-in-out infinite 8s; }
+        #reviews .shape-7 { background: var(--ocean); top: 66%; left: 38%; animation: float 21s ease-in-out infinite 4s; }
+        #reviews .shape-8 { background: var(--sage); bottom: 44%; right: 8%; animation: float 19s ease-in-out infinite 6s; }
+        #reviews .shape-9 { background: var(--mint); top: 34%; left: 48%; animation: float 23s ease-in-out infinite 1s; }
+        #reviews .shape-10 { background: var(--coral); bottom: 18%; right: 34%; animation: float 14s ease-in-out infinite 9s; }
 
         /* SECTION GENERAL */
         section {
@@ -1475,12 +1476,8 @@
             display: block;
         }
 
-        .location-header {
-            padding: 20px 20px 0 20px;
-        }
-
         .location-content {
-            padding: 0 20px 20px 20px;
+            padding: 20px;
         }
 
         .location-name {
@@ -1690,6 +1687,111 @@
             font-size: 14px;
             color: var(--text-light);
             font-weight: 700;
+        }
+
+        /* REVIEWS */
+        #reviews {
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 100%);
+            padding-top: 5px;
+        }
+
+        #reviews .section-header {
+            margin-bottom: 48px;
+        }
+
+        .reviews-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .reviews-rating-summary {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 12px;
+        }
+
+        .reviews-stars {
+            font-size: 24px;
+            color: #FFA500;
+        }
+
+        .reviews-rating-text {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .reviews-count {
+            font-size: 16px;
+            color: var(--text-light);
+        }
+
+        .reviews-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        .review-card {
+            background: white;
+            padding: 13px;
+            border-radius: 16px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            gap: 13px;
+        }
+
+        .review-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+        }
+
+        .review-stars {
+            font-size: 20px;
+            color: #FFA500;
+        }
+
+        .review-text {
+            font-size: 16px;
+            line-height: 1.5;
+            color: var(--text-dark);
+            font-style: italic;
+            flex: 1;
+        }
+
+        .review-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 13px;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .review-author {
+            font-size: 14px;
+            font-weight: 600;
+            color: var(--navy);
+        }
+
+        .review-location {
+            font-size: 12px;
+            color: var(--text-light);
+            background: var(--bg-light);
+            padding: 4px 8px;
+            border-radius: 4px;
+        }
+
+        .review-date {
+            font-size: 12px;
+            color: var(--text-light);
+            font-style: italic;
         }
 
         /* INSTRUCTIONS */
@@ -2353,36 +2455,11 @@
             align-items: center;
             justify-content: center;
             transition: transform 0.3s, box-shadow 0.3s;
-            animation: chatPulse 2s ease-in-out infinite;
-        }
-
-        .chat-button::before {
-            content: 'AI';
-            position: absolute;
-            top: -8px;
-            right: -8px;
-            background: var(--coral);
-            color: white;
-            font-size: 11px;
-            font-weight: 700;
-            padding: 3px 6px;
-            border-radius: 10px;
-            box-shadow: 0 2px 8px rgba(255, 107, 90, 0.4);
-        }
-
-        @keyframes chatPulse {
-            0%, 100% {
-                box-shadow: 0 4px 16px rgba(0, 151, 218, 0.4);
-            }
-            50% {
-                box-shadow: 0 4px 20px rgba(0, 151, 218, 0.7), 0 0 0 8px rgba(0, 151, 218, 0.1);
-            }
         }
 
         .chat-button:hover {
             transform: scale(1.1);
             box-shadow: 0 6px 20px rgba(0, 151, 218, 0.6);
-            animation: none;
         }
 
         .chat-widget {
@@ -2512,23 +2589,6 @@
             margin: 0;
             font-size: 0.95rem;
             line-height: 1.4;
-            white-space: pre-line;
-        }
-
-        .message-bubble a {
-            color: var(--primary-blue);
-            text-decoration: underline;
-            word-break: break-all;
-            transition: opacity 0.2s;
-        }
-
-        .message-bubble a:hover {
-            opacity: 0.8;
-        }
-
-        .chat-message.user .message-bubble a {
-            color: white;
-            text-decoration: underline;
         }
 
         .message-time {
@@ -2578,40 +2638,6 @@
 
         .send-button:hover {
             transform: scale(1.1);
-        }
-
-        .photo-button {
-            background: #f1f3f4;
-            border: none;
-            color: #8e8e93;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-        }
-
-        .photo-button:hover {
-            background: #e4e6e8;
-        }
-
-        .photo-button svg {
-            width: 22px;
-            height: 22px;
-        }
-
-        .chat-message.photo-message {
-            max-width: 80%;
-        }
-
-        .chat-message img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-top: 8px;
         }
 
         /* Typing indicator */
@@ -2686,7 +2712,6 @@
             .logo-text {
                 font-size: 24px;
                 line-height: 1.3;
-                margin-top: -10px;
             }
 
             nav { display: none; }
@@ -2721,38 +2746,23 @@
 
             .hero-title {
                 font-size: 38px;
-                margin-bottom: 6px;
             }
 
             .hero-subtitle {
                 font-size: 18px;
-                margin-bottom: 8px;
             }
 
             .hero-benefits {
-                margin-bottom: 3px;
+                margin-bottom: 6px;
                 min-height: 100px;
             }
 
             .benefit-item {
-                gap: 10px;
-                padding: 8px 12px;
-                border-left-width: 3px;
+                gap: 12px;
             }
 
             .benefit-icon {
-                font-size: 26px;
-            }
-
-            .benefit-text {
-                font-size: 15px;
-                line-height: 1.35;
-            }
-
-            .benefit-text strong {
-                font-size: 17px;
-                line-height: 1.25;
-                margin-bottom: 2px;
+                font-size: 32px;
             }
 
             .benefit-text {
@@ -2760,19 +2770,7 @@
             }
 
             .hero-card {
-                padding: 8px;
-            }
-
-            .hero-card-title {
-                margin-bottom: 8px;
-            }
-
-            .hero-card-features {
-                gap: 8px;
-            }
-
-            .hero-footnote {
-                margin-top: 4px;
+                padding: 16px;
             }
 
             .hero-stats {
@@ -3020,13 +3018,8 @@
                 border-radius: 16px;
             }
 
-            .location-header {
-                padding: 16px 16px 0 16px;
-                margin-bottom: 12px !important;
-            }
-
             .location-content {
-                padding: 0 16px 16px 16px;
+                padding: 10px 8px;
             }
 
             .location-name {
@@ -3059,7 +3052,7 @@
             }
 
             .location-map {
-                height: 350px;
+                height: 200px;
             }
 
             /* Mobile: Reviews */
@@ -3364,23 +3357,6 @@
             margin: 0;
             font-size: 0.95rem;
             line-height: 1.4;
-            white-space: pre-line;
-        }
-
-        .message-bubble a {
-            color: var(--primary-blue);
-            text-decoration: underline;
-            word-break: break-all;
-            transition: opacity 0.2s;
-        }
-
-        .message-bubble a:hover {
-            opacity: 0.8;
-        }
-
-        .chat-message.user .message-bubble a {
-            color: white;
-            text-decoration: underline;
         }
 
         .message-time {
@@ -3430,40 +3406,6 @@
 
         .send-button:hover {
             transform: scale(1.1);
-        }
-
-        .photo-button {
-            background: #f1f3f4;
-            border: none;
-            color: #8e8e93;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            margin-right: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: background 0.2s;
-        }
-
-        .photo-button:hover {
-            background: #e4e6e8;
-        }
-
-        .photo-button svg {
-            width: 22px;
-            height: 22px;
-        }
-
-        .chat-message.photo-message {
-            max-width: 80%;
-        }
-
-        .chat-message img {
-            max-width: 100%;
-            border-radius: 8px;
-            margin-top: 8px;
         }
 
         /* Typing indicator */
@@ -3522,19 +3464,26 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "LocalBusiness",
-        "@id": "https://smart-wash.si",
+        "@type": "LaundryService",
         "name": "Smart Wash",
         "description": "Samopostrežna pralnica perila v Ljubljani z modernimi stroji do 20 kg",
         "url": "https://smart-wash.si",
-        "image": "https://smart-wash.si/logo_smart_wash.svg",
         "telephone": "+386-1-777-82-70",
         "priceRange": "€€",
-        "address": {
-            "@type": "PostalAddress",
-            "addressLocality": "Ljubljana",
-            "addressCountry": "SI"
-        },
+        "address": [
+            {
+                "@type": "PostalAddress",
+                "streetAddress": "Galjevica",
+                "addressLocality": "Ljubljana",
+                "addressCountry": "SI"
+            },
+            {
+                "@type": "PostalAddress",
+                "streetAddress": "TC Jarše",
+                "addressLocality": "Ljubljana",
+                "addressCountry": "SI"
+            }
+        ],
         "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",
             "dayOfWeek": [
@@ -3548,6 +3497,13 @@
             ],
             "opens": "06:00",
             "closes": "23:00"
+        },
+        "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.5",
+            "reviewCount": "52",
+            "bestRating": "5",
+            "worstRating": "1"
         },
         "amenityFeature": [
             {
@@ -3584,6 +3540,7 @@
                     <a href="#services"><span class="lang-si">Storitve in Cenik</span><span class="lang-en">Services & Pricing</span></a>
                     <a href="#locations"><span class="lang-si">Lokacije</span><span class="lang-en">Locations</span></a>
                     <a href="#instructions"><span class="lang-si">Navodila</span><span class="lang-en">Instructions</span></a>
+                    <a href="#reviews"><span class="lang-si">Mnenja strank</span><span class="lang-en">Customer Reviews</span></a>
                     <a href="#contact"><span class="lang-si">Kontakt</span><span class="lang-en">Contact</span></a>
                 </nav>
             </div>
@@ -3624,6 +3581,7 @@
                     <a href="#services" onclick="toggleMobileMenu()"><span class="lang-si">Storitve in Cenik</span><span class="lang-en">Services & Pricing</span></a>
                     <a href="#locations" onclick="toggleMobileMenu()"><span class="lang-si">Lokacije</span><span class="lang-en">Locations</span></a>
                     <a href="#instructions" onclick="toggleMobileMenu()"><span class="lang-si">Navodila</span><span class="lang-en">Instructions</span></a>
+                    <a href="#reviews" onclick="toggleMobileMenu()"><span class="lang-si">Mnenja strank</span><span class="lang-en">Customer Reviews</span></a>
                     <a href="#contact" onclick="toggleMobileMenu()"><span class="lang-si">Kontakt</span><span class="lang-en">Contact</span></a>
                 </nav>
                 <div class="lang-switcher">
@@ -3662,8 +3620,8 @@
                     <div class="benefit-item">
                         <span class="benefit-icon">❓</span>
                         <div class="benefit-text">
-                            <span class="lang-si"><strong>Stroj doma se je pokvaril?</strong> Pralnica Smart Wash je odprta vsak dan z zgodnjimi in poznimi urami</span>
-                            <span class="lang-en"><strong>Machine at home broke?</strong> Smart Wash laundry is open every day with early and late hours</span>
+                            <span class="lang-si"><strong>Stroj doma se je pokvaril?</strong> Pralnica Smart Wash je odprta vsak dan od 6 do 23</span>
+                            <span class="lang-en"><strong>Machine at home broke?</strong> Smart Wash laundry is open every day from 6 AM to 11 PM</span>
                         </div>
                     </div>
                     <div class="benefit-item">
@@ -3685,13 +3643,6 @@
                         <div class="benefit-text">
                             <span class="lang-si"><strong>Želiš prihraniti čas in denar?</strong> V Smart Wash: 1-2 uri za celoten cikel, že od 5€</span>
                             <span class="lang-en"><strong>Want to save time and money?</strong> At Smart Wash: 1-2 hours for full cycle, starting from 5€</span>
-                        </div>
-                    </div>
-                    <div class="benefit-item">
-                        <span class="benefit-icon">💬</span>
-                        <div class="benefit-text">
-                            <span class="lang-si"><strong>Potrebuješ pomoč ali nasvete?</strong> AI asistent 24/7 + operater v delovnem času</span>
-                            <span class="lang-en"><strong>Need help or advice?</strong> AI assistant 24/7 + operator during business hours</span>
                         </div>
                     </div>
                 </div>
@@ -3954,8 +3905,8 @@
                     </h3>
                 </div>
                 <p class="service-description">
-                    <span class="lang-si">Profesionalni pralni stroji za popolno čistočo vašega perila. 4 univerzalni programi, ki se razlikujejo po temperaturi (30°, 40°, 60°, 90°) - primerni za vse vrste tkanin in stopnje umazanije. <strong>Detergenti (za pranje in mehčanje) so vključeni v ceno in se dodajajo samodejno.</strong></span>
-                    <span class="lang-en">Professional washing machines for perfect cleanliness of your laundry. 4 universal programs that differ by temperature (30°, 40°, 60°, 90°) - suitable for all fabric types and soiling levels. <strong>Detergents (for washing and softening) are included in the price and dispensed automatically.</strong></span>
+                    <span class="lang-si">Profesionalni pralni stroji za popolno čistočo vašega perila. Velika izbira programov in temperatur za različne vrste tkanin in stopnje umazanije. <strong>Detergenti (za pranje in mehčanje) so vključeni v ceno in se dodajajo samodejno.</strong></span>
+                    <span class="lang-en">Professional washing machines for perfect cleanliness of your laundry. Wide selection of programs and temperatures for different fabric types and soiling levels. <strong>Detergents (for washing and softening) are included in the price and dispensed automatically.</strong></span>
                 </p>
                 <div class="service-features">
                     <div class="service-features-title">
@@ -3982,7 +3933,7 @@
                     </div>
                     <div class="price-row">
                         <span class="price-capacity">10 kg</span>
-                        <span class="price-value">5 <small><span class="lang-si">žetonov</span><span class="lang-en">tokens</span></small></span>
+                        <span class="price-value">6 <small><span class="lang-si">žetonov</span><span class="lang-en">tokens</span></small></span>
                     </div>
                     <div class="price-row">
                         <span class="price-capacity">18 kg</span>
@@ -4415,26 +4366,26 @@
         <div class="locations-grid">
             <!-- TC JARŠE -->
             <div class="location-card">
-                <div class="location-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-                    <h3 class="location-name" style="margin-bottom: 0;">
-                        <span class="lang-si">Pralnica TC Jarše</span>
-                        <span class="lang-en">Laundromat TC Jarše</span>
-                    </h3>
-                    <a href="https://www.google.com/maps/dir/?api=1&destination=Smart+Wash,+Beblerjev+trg+2,+Ljubljana"
-                       target="_blank"
-                       class="location-btn">
-                        <span class="lang-si">Pokaži pot →</span>
-                        <span class="lang-en">Get directions →</span>
-                    </a>
-                </div>
                 <iframe
                     class="location-map"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3294.2414335563235!2d14.543860476815!3d46.07048497109051!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x476532432d2a0721%3A0xa4e73988563b47e8!2sSmart%20Wash%20Nove%20Jar%C5%A1e%20samopostre%C5%BEna%20pralnica%20perila!5e0!3m2!1sru!2ssi!4v1770500956971!5m2!1sru!2ssi"
+                    src="https://www.google.com/maps?q=Smart+Wash,+Beblerjev+trg+2,+Ljubljana&output=embed"
                     allowfullscreen=""
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
                 <div class="location-content">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                        <h3 class="location-name" style="margin-bottom: 0;">
+                            <span class="lang-si">Pralnica TC Jarše</span>
+                            <span class="lang-en">Laundromat TC Jarše</span>
+                        </h3>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Smart+Wash,+Beblerjev+trg+2,+Ljubljana"
+                           target="_blank"
+                           class="location-btn">
+                            <span class="lang-si">Pokaži pot →</span>
+                            <span class="lang-en">Get directions →</span>
+                        </a>
+                    </div>
                     <div class="location-info">
                         <div class="location-info-item">
                             <div class="location-info-icon">📍</div>
@@ -4577,26 +4528,26 @@
 
             <!-- GALJEVICA -->
             <div class="location-card">
-                <div class="location-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
-                    <h3 class="location-name" style="margin-bottom: 0;">
-                        <span class="lang-si">Pralnica Galjevica</span>
-                        <span class="lang-en">Laundromat Galjevica</span>
-                    </h3>
-                    <a href="https://www.google.com/maps/dir/?api=1&destination=Smart+Wash,+Galjevica+6a,+Ljubljana"
-                       target="_blank"
-                       class="location-btn">
-                        <span class="lang-si">Pokaži pot →</span>
-                        <span class="lang-en">Get directions →</span>
-                    </a>
-                </div>
                 <iframe
                     class="location-map"
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3296.326576951253!2d14.519708876813281!3d46.035538871088995!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x47652d40cdba0281%3A0xf69f2d5e1071214a!2sSmart%20Wash%20Galjevica!5e0!3m2!1sru!2ssi!4v1770501015702!5m2!1sru!2ssi"
+                    src="https://www.google.com/maps?q=Smart+Wash,+Galjevica+6a,+Ljubljana&output=embed"
                     allowfullscreen=""
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade">
                 </iframe>
                 <div class="location-content">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                        <h3 class="location-name" style="margin-bottom: 0;">
+                            <span class="lang-si">Pralnica Galjevica</span>
+                            <span class="lang-en">Laundromat Galjevica</span>
+                        </h3>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Smart+Wash,+Galjevica+6a,+Ljubljana"
+                           target="_blank"
+                           class="location-btn">
+                            <span class="lang-si">Pokaži pot →</span>
+                            <span class="lang-en">Get directions →</span>
+                        </a>
+                    </div>
                     <div class="location-info">
                         <div class="location-info-item">
                             <div class="location-info-icon">📍</div>
@@ -4749,6 +4700,39 @@
         </div>
     </section>
 
+    <!-- REVIEWS -->
+    <section id="reviews">
+        <div class="section-bg-shape shape-1 size-lg"></div>
+        <div class="section-bg-shape shape-2 size-md"></div>
+        <div class="section-bg-shape shape-3 size-xl"></div>
+        <div class="section-bg-shape shape-4 size-sm"></div>
+        <div class="section-bg-shape shape-5 size-xs"></div>
+        <div class="section-bg-shape shape-6 size-lg"></div>
+        <div class="section-bg-shape shape-7 size-md"></div>
+        <div class="section-bg-shape shape-8 size-sm"></div>
+        <div class="section-bg-shape shape-9 size-xs"></div>
+        <div class="section-bg-shape shape-10 size-lg"></div>
+
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="lang-si">Mnenja strank</span>
+                <span class="lang-en">Customer Reviews</span>
+            </h2>
+            <div class="reviews-rating-summary">
+                <div class="reviews-stars">⭐⭐⭐⭐</div>
+                <div class="reviews-rating-text">4.2/5</div>
+                <div class="reviews-count">
+                    <span class="lang-si">na osnovi 40+ mnenj iz Google Maps</span>
+                    <span class="lang-en">based on 40+ Google Maps reviews</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="reviews-grid" id="reviews-container">
+            <!-- Reviews will be loaded here by JavaScript -->
+        </div>
+    </section>
+
     <!-- INSTRUCTIONS -->
     <section id="instructions">
         <div class="section-bg-shape shape-1 size-lg"></div>
@@ -4847,8 +4831,8 @@
                             <span class="lang-en">Insert tokens and press START</span>
                         </div>
                         <div class="instruction-description">
-                            <span class="lang-si">10 kg stroj = 5 žetonov • 18 kg stroj = 8 žetonov. Vstavite žetone v režo. <strong>Pritisnite gumb START za zagon.</strong> Detergent in mehčalec se dodajata samodejno.</span>
-                            <span class="lang-en">10 kg machine = 5 tokens • 18 kg machine = 8 tokens. Insert tokens into slot. <strong>Press START button to begin.</strong> Detergent and softener are added automatically.</span>
+                            <span class="lang-si">10 kg stroj = 6 žetonov • 18 kg stroj = 8 žetonov. Vstavite žetone v režo. <strong>Pritisnite gumb START za zagon.</strong> Detergent in mehčalec se dodajata samodejno.</span>
+                            <span class="lang-en">10 kg machine = 6 tokens • 18 kg machine = 8 tokens. Insert tokens into slot. <strong>Press START button to begin.</strong> Detergent and softener are added automatically.</span>
                         </div>
                     </div>
                 </div>
@@ -5098,22 +5082,22 @@
                             <span class="lang-en">Laundry not washed well</span>
                         </div>
                         <div class="instruction-description">
-                            <span class="lang-si">• Ne prenapolnite stroja - najboljša kvaliteta pri polovični polnosti<br>• Izberite višjo temperaturo za močno umazano perilo<br>• Ločite belo in barvno perilo<br>• Programi so univerzalni in primerni za vse vrste tkanin</span>
-                            <span class="lang-en">• Don't overload machine - best quality at half full<br>• Select higher temperature for heavily soiled laundry<br>• Separate white and colored laundry<br>• Programs are universal and suitable for all fabric types</span>
+                            <span class="lang-si">• Ne prenapolnite stroja - najboljša kvaliteta pri polovični polnosti<br>• Izberite višjo temperaturo za močno umazano perilo<br>• Ločite belo in barvno perilo<br>• Za zelo umazano perilo uporabite cikel z predpranjem</span>
+                            <span class="lang-en">• Don't overload machine - best quality at half full<br>• Select higher temperature for heavily soiled laundry<br>• Separate white and colored laundry<br>• For very dirty laundry use cycle with pre-wash</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="instruction-step">
-                    <div class="instruction-number">💬</div>
+                    <div class="instruction-number">📞</div>
                     <div class="instruction-content">
                         <div class="instruction-title">
-                            <span class="lang-si">Potrebujete pomoč?</span>
-                            <span class="lang-en">Need help?</span>
+                            <span class="lang-si">Druga težava?</span>
+                            <span class="lang-en">Other problem?</span>
                         </div>
                         <div class="instruction-description">
-                            <span class="lang-si"><strong>💬 AI Chat s podporo operaterja</strong><br>Odprite chat v desnem spodnjem kotu za takojšen odgovor AI pomočnika. Če je potrebno, vas lahko povežemo z operaterjem.<br><br><strong>📱 Telefon: +386 1 777 82 70</strong><br>Če ne morete uporabiti chata, nas pokličite v delovnem času.</span>
-                            <span class="lang-en"><strong>💬 AI Chat with operator support</strong><br>Open chat in bottom right corner for instant AI assistant response. If needed, we can connect you with an operator.<br><br><strong>📱 Phone: +386 1 777 82 70</strong><br>If you can't use chat, call us during business hours.</span>
+                            <span class="lang-si">Če vaše težave ni na tem seznamu ali potrebujete dodatno pomoč, nas takoj pokličite:<br><strong>📱 +386 1 777 82 70</strong><br>Na voljo smo 24/7 za vašo podporo.</span>
+                            <span class="lang-en">If your problem isn't on this list or you need additional help, call us immediately:<br><strong>📱 +386 1 777 82 70</strong><br>We're available 24/7 for your support.</span>
                         </div>
                     </div>
                 </div>
@@ -5142,8 +5126,8 @@
                             <span class="lang-en">Check garment care labels</span>
                         </div>
                         <div class="instruction-description">
-                            <span class="lang-si">Pred pranjem vedno preverite navodila na etiketah oblačil. Upoštevajte priporočene temperature. Izberite temperaturo glede na vrsto tkanine.</span>
-                            <span class="lang-en">Always check care labels before washing. Follow recommended temperatures. Choose temperature according to fabric type.</span>
+                            <span class="lang-si">Pred pranjem vedno preverite navodila na etiketah oblačil. Upoštevajte priporočene temperature in način pranja. Nekatere tkanine zahtevajo posebno nego.</span>
+                            <span class="lang-en">Always check care labels before washing. Follow recommended temperatures and washing methods. Some fabrics require special care.</span>
                         </div>
                     </div>
                 </div>
@@ -5280,32 +5264,13 @@
                 <span class="lang-en">Get in touch</span>
             </h2>
             <p class="section-subtitle">
-                <span class="lang-si">AI asistent vam pomaga 24/7. Če je potrebno, vas povežemo z operaterjem v delovnem času.</span>
-                <span class="lang-en">AI assistant helps you 24/7. If needed, we connect you with an operator during business hours.</span>
+                <span class="lang-si">Smo tu za vas. Pišite ali pokličite.</span>
+                <span class="lang-en">We're here for you. Write or call.</span>
             </p>
         </div>
 
         <div class="contact-content">
             <div class="contact-methods">
-                <div class="contact-method" style="background: linear-gradient(135deg, rgba(0, 151, 218, 0.05) 0%, rgba(255, 107, 90, 0.05) 100%); border-left: 3px solid var(--coral);">
-                    <div class="contact-icon">💬</div>
-                    <div class="contact-info">
-                        <div class="contact-label">
-                            <span class="lang-si">AI Chat (priporočeno)</span>
-                            <span class="lang-en">AI Chat (recommended)</span>
-                        </div>
-                        <div class="contact-value">
-                            <a href="#" onclick="event.preventDefault(); document.querySelector('.chat-button').click();" style="color: var(--coral); font-weight: 600;">
-                                <span class="lang-si">Odpri chat →</span>
-                                <span class="lang-en">Open chat →</span>
-                            </a>
-                        </div>
-                        <div style="font-size: 13px; color: var(--text-light); margin-top: 4px;">
-                            <span class="lang-si">Takojšen odgovor + možnost povezave z operaterjem</span>
-                            <span class="lang-en">Instant response + operator connection option</span>
-                        </div>
-                    </div>
-                </div>
                 <div class="contact-method">
                     <div class="contact-icon">📞</div>
                     <div class="contact-info">
@@ -5395,7 +5360,7 @@
         <div class="chat-header">
             <div class="chat-header-info">
                 <h3>Smart Wash Chat</h3>
-                <span class="chat-status">AI online</span>
+                <span class="chat-status">Online</span>
             </div>
             <button id="closeChat" class="close-chat">×</button>
         </div>
@@ -5405,17 +5370,6 @@
         </div>
 
         <div class="chat-input-container">
-            <input
-                type="file"
-                id="photoInput"
-                accept="image/*"
-                style="display: none;"
-            />
-            <button id="photoButton" class="photo-button" title="Pripni sliko / Attach image">
-                <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M18.5 14.5L9.5 23.5C7.29086 25.7091 3.70914 25.7091 1.5 23.5C-0.709139 21.2909 -0.709139 17.7091 1.5 15.5L13.5 3.5C14.8807 2.11929 17.1193 2.11929 18.5 3.5C19.8807 4.88071 19.8807 7.11929 18.5 8.5L7.5 19.5C6.67157 20.3284 5.32843 20.3284 4.5 19.5C3.67157 18.6716 3.67157 17.3284 4.5 16.5L14 7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-            </button>
             <input
                 type="text"
                 id="chatInput"
@@ -5711,8 +5665,6 @@
         const chatInput = document.getElementById('chatInput');
         const sendMessageBtn = document.getElementById('sendMessage');
         const chatMessages = document.getElementById('chatMessages');
-        const photoButton = document.getElementById('photoButton');
-        const photoInput = document.getElementById('photoInput');
 
         chatButton.addEventListener('click', function() {
             chatWidget.classList.add('active');
@@ -5726,32 +5678,25 @@
         });
 
         // Chat configuration
-        const API_URL = 'https://claude-production-e0ea.up.railway.app'; // Railway production server
-
-        // Generate or retrieve session ID from localStorage
-        function generateSessionId() {
-            let sessionId = localStorage.getItem('smartwash_session_id');
-            if (!sessionId) {
-                sessionId = 'session-' + Math.random().toString(36).substring(2, 15) +
-                           Math.random().toString(36).substring(2, 15);
-                localStorage.setItem('smartwash_session_id', sessionId);
-            }
-            return sessionId;
-        }
-
+        const API_URL = 'http://localhost:3000'; // Change to your server URL in production
         const SESSION_ID = generateSessionId();
         let isOperatorMode = false;
         let lastMessageTime = new Date().toISOString();
         let pollingInterval = null;
-        let isPolling = false; // Prevent concurrent polling requests
+
+        // Generate unique session ID
+        function generateSessionId() {
+            return 'session-' + Math.random().toString(36).substring(2, 15) +
+                   Math.random().toString(36).substring(2, 15);
+        }
 
         // Send message to server
         async function sendMessage() {
             const message = chatInput.value.trim();
             if (!message) return;
 
-            // Add user message and keep reference
-            const userMessageElement = addMessage(message, 'user');
+            // Add user message
+            addMessage(message, 'user');
             chatInput.value = '';
 
             // Show typing indicator
@@ -5778,41 +5723,13 @@
                     return;
                 }
 
-                // Update operator mode status BEFORE adding message
-                const wasOperatorMode = isOperatorMode;
+                addMessage(data.response, 'bot');
+
+                // Update operator mode status
                 if (data.operatorMode && !isOperatorMode) {
-                    // Operator connected
-                    console.log('🟢 OPERATOR MODE: Activated');
-                    console.log(`   - lastMessageTime before: ${lastMessageTime}`);
                     isOperatorMode = true;
                     updateChatStatus('Operator');
                     startPolling(); // Start polling for operator messages
-                    console.log('🔄 POLLING: Started');
-                } else if (!data.operatorMode && isOperatorMode) {
-                    // Operator disconnected
-                    console.log('🔴 OPERATOR MODE: Deactivated');
-                    isOperatorMode = false;
-                    updateChatStatus('AI online');
-                    stopPolling();
-                }
-
-                // If response is just checkmarks, add them to user's message instead of creating new message
-                if (data.response === '✓✓') {
-                    const statusSpan = userMessageElement.querySelector('.message-status');
-                    if (statusSpan) {
-                        statusSpan.textContent = ' ✓✓';
-                        statusSpan.style.color = '#34b7f1';
-                        statusSpan.style.marginLeft = '4px';
-                    }
-                } else {
-                    // Don't update lastMessageTime when operator just connected (to avoid missing first operator message)
-                    const shouldUpdateTimestamp = !(data.operatorMode && !wasOperatorMode);
-                    console.log(`💬 Adding bot message, updateTimestamp: ${shouldUpdateTimestamp}`);
-                    if (!shouldUpdateTimestamp) {
-                        console.log('⚠️ NOT updating lastMessageTime to prevent missing operator messages');
-                    }
-                    addMessage(data.response, 'bot', shouldUpdateTimestamp);
-                    console.log(`   - lastMessageTime after: ${lastMessageTime}`);
                 }
 
             } catch (error) {
@@ -5822,53 +5739,24 @@
             }
         }
 
-        function addMessage(text, sender, updateTimestamp = true) {
+        function addMessage(text, sender) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `chat-message ${sender}`;
             messageDiv.innerHTML = `
                 <div class="message-bubble">
-                    <p>${linkifyUrls(text)}</p>
-                    <span class="message-time">${new Date().toLocaleTimeString('sl-SI', {hour: '2-digit', minute: '2-digit'})}<span class="message-status"></span></span>
+                    <p>${escapeHtml(text)}</p>
+                    <span class="message-time">${new Date().toLocaleTimeString('sl-SI', {hour: '2-digit', minute: '2-digit'})}</span>
                 </div>
             `;
             chatMessages.appendChild(messageDiv);
             chatMessages.scrollTop = chatMessages.scrollHeight;
-            if (updateTimestamp) {
-                lastMessageTime = new Date().toISOString();
-            }
-            return messageDiv; // Return the created element
+            lastMessageTime = new Date().toISOString();
         }
 
         function escapeHtml(text) {
             const div = document.createElement('div');
             div.textContent = text;
             return div.innerHTML;
-        }
-
-        function linkifyUrls(text) {
-            // Find all URLs first
-            const urlRegex = /(https?:\/\/[^\s]+)/g;
-            const parts = [];
-            let lastIndex = 0;
-            let match;
-
-            while ((match = urlRegex.exec(text)) !== null) {
-                // Add escaped text before URL
-                if (match.index > lastIndex) {
-                    parts.push(escapeHtml(text.substring(lastIndex, match.index)));
-                }
-                // Add URL as link (escaped)
-                const url = match[0];
-                parts.push(`<a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" style="color: var(--primary-blue); text-decoration: underline; word-break: break-all;">${escapeHtml(url)}</a>`);
-                lastIndex = urlRegex.lastIndex;
-            }
-
-            // Add remaining text
-            if (lastIndex < text.length) {
-                parts.push(escapeHtml(text.substring(lastIndex)));
-            }
-
-            return parts.join('');
         }
 
         let typingIndicator = null;
@@ -5908,65 +5796,17 @@
             if (pollingInterval) return;
 
             pollingInterval = setInterval(async () => {
-                // Prevent concurrent requests
-                if (isPolling) {
-                    console.log('Skipping poll - previous request still in progress');
-                    return;
-                }
-
-                isPolling = true;
                 try {
-                    console.log(`🔄 POLLING: Requesting messages since ${lastMessageTime}`);
                     const response = await fetch(`${API_URL}/api/messages/${SESSION_ID}?lastMessageTime=${lastMessageTime}`);
                     const data = await response.json();
 
-                    console.log(`📥 POLLING: Received ${data.messages ? data.messages.length : 0} messages`);
                     if (data.messages && data.messages.length > 0) {
-                        console.log('📨 Messages:', data.messages.map(m => ({
-                            content: m.content.substring(0, 30) + '...',
-                            timestamp: m.timestamp
-                        })));
                         data.messages.forEach(msg => {
-                            // Add message without updating lastMessageTime
-                            const messageDiv = document.createElement('div');
-                            messageDiv.className = 'chat-message bot-message';
-
-                            let content = '';
-                            if (msg.photo) {
-                                content = `
-                                    <div class="message-bubble">
-                                        <img src="${API_URL}${msg.photo}" alt="Photo" style="max-width: 100%; border-radius: 8px;">
-                                        ${msg.content ? `<p>${linkifyUrls(msg.content)}</p>` : ''}
-                                        <span class="message-time">${new Date().toLocaleTimeString('sl-SI', {hour: '2-digit', minute: '2-digit'})}</span>
-                                    </div>
-                                `;
-                            } else {
-                                content = `
-                                    <div class="message-bubble">
-                                        <p>${linkifyUrls(msg.content)}</p>
-                                        <span class="message-time">${new Date().toLocaleTimeString('sl-SI', {hour: '2-digit', minute: '2-digit'})}</span>
-                                    </div>
-                                `;
-                            }
-
-                            messageDiv.innerHTML = content;
-                            chatMessages.appendChild(messageDiv);
-                            chatMessages.scrollTop = chatMessages.scrollHeight;
+                            addMessage(msg.content, 'bot');
                         });
-                        // Update lastMessageTime to the last message's timestamp
-                        lastMessageTime = data.messages[data.messages.length - 1].timestamp;
-                    }
-
-                    // Check if operator disconnected
-                    if (!data.operatorMode && isOperatorMode) {
-                        isOperatorMode = false;
-                        updateChatStatus('AI online');
-                        stopPolling();
                     }
                 } catch (error) {
                     console.error('Polling error:', error);
-                } finally {
-                    isPolling = false; // Always reset the flag
                 }
             }, 2000); // Poll every 2 seconds
         }
@@ -5978,74 +5818,6 @@
             }
         }
 
-        // Photo upload function
-        async function sendPhoto(file) {
-            const formData = new FormData();
-            formData.append('photo', file);
-            formData.append('sessionId', SESSION_ID);
-
-            // Show preview in chat
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                const messageDiv = document.createElement('div');
-                messageDiv.className = 'chat-message user photo-message';
-                messageDiv.innerHTML = `
-                    <div class="message-bubble">
-                        <img src="${e.target.result}" alt="Photo" style="max-width: 100%; border-radius: 8px;">
-                        <span class="message-time">${new Date().toLocaleTimeString('sl-SI', {hour: '2-digit', minute: '2-digit'})}</span>
-                    </div>
-                `;
-                chatMessages.appendChild(messageDiv);
-                chatMessages.scrollTop = chatMessages.scrollHeight;
-            };
-            reader.readAsDataURL(file);
-
-            try {
-                const response = await fetch(`${API_URL}/api/upload`, {
-                    method: 'POST',
-                    body: formData
-                });
-
-                const data = await response.json();
-
-                if (data.error) {
-                    // Show specific error message if available
-                    const errorMsg = data.message || data.error || 'Napaka pri nalaganju fotografije / Error uploading photo';
-                    addMessage(errorMsg, 'bot');
-                    return;
-                }
-
-                // Update operator mode status
-                if (data.operatorMode && !isOperatorMode) {
-                    // Operator connected
-                    isOperatorMode = true;
-                    updateChatStatus('Operator');
-                    startPolling();
-                } else if (!data.operatorMode && isOperatorMode) {
-                    // Operator disconnected
-                    isOperatorMode = false;
-                    updateChatStatus('AI online');
-                    stopPolling();
-                }
-            } catch (error) {
-                console.error('Error uploading photo:', error);
-                addMessage('Napaka pri pošiljanju fotografije / Error sending photo', 'bot');
-            }
-        }
-
-        // Photo button event listeners
-        photoButton.addEventListener('click', function() {
-            photoInput.click();
-        });
-
-        photoInput.addEventListener('change', function(e) {
-            const file = e.target.files[0];
-            if (file) {
-                sendPhoto(file);
-                photoInput.value = ''; // Reset input
-            }
-        });
-
         sendMessageBtn.addEventListener('click', sendMessage);
         chatInput.addEventListener('keypress', function(e) {
             if (e.key === 'Enter' && !e.shiftKey) {
@@ -6056,7 +5828,7 @@
 
         // Initial greeting message
         setTimeout(() => {
-            addMessage('👋 Zdravo! Hello! Привет!\n\n🌍 Izberite jezik / Choose your language:\n\n🇸🇮 slovenščina • 🇬🇧 english • 🇷🇺 русский\n🇭🇷 hrvatski • 🇮🇹 italiano • 🇩🇪 deutsch\n\n...ali vaš jezik / ...or type yours!', 'bot');
+            addMessage('Pozdravljeni! Kako vam lahko pomagamo? 👋\\nHello! How can we help you? 👋', 'bot');
         }, 500);
 
         // Cleanup on page unload
@@ -6074,66 +5846,192 @@
             tabContents.forEach(content => content.classList.remove('active'));
 
             // Add active class to clicked tab and corresponding content
-            if (event && event.currentTarget) {
-                event.currentTarget.classList.add('active');
-            } else {
-                // If called programmatically, find the button for this tab
-                const targetButton = Array.from(tabButtons).find(btn =>
-                    btn.getAttribute('onclick')?.includes(`'${tabId}'`)
-                );
-                if (targetButton) targetButton.classList.add('active');
-            }
+            event.currentTarget.classList.add('active');
             document.getElementById(tabId).classList.add('active');
         }
 
-        // QR Code Handler - Auto-open tabs from URL hash
-        function handleQRCodeNavigation() {
-            const hash = window.location.hash.substring(1); // Remove #
-            const validTabs = ['washing', 'drying', 'disinfection', 'tokens', 'rules', 'problems'];
+        // Reviews data (embedded - real reviews from Google Maps)
+        const reviewsData = {
+            overall_rating: 4.5,
+            total_reviews: 52,
+            reviews: [
+                {
+                    author: "Mateja",
+                    rating: 5,
+                    text_si: "Odlična pralnica, zelo čisto in stroji delujejo perfektno. Priporočam!",
+                    text_en: "Excellent laundromat, very clean and machines work perfectly. Highly recommend!",
+                    date: "2026-01-28",
+                    location: "Galjevica"
+                },
+                {
+                    author: "Luka",
+                    rating: 5,
+                    text_si: "Sušilni stroj je super hitro posušil mojo debelo odejo. Zelo zadovoljen.",
+                    text_en: "The dryer dried my thick blanket super fast. Very satisfied.",
+                    date: "2026-01-15",
+                    location: "Galjevica"
+                },
+                {
+                    author: "Eva",
+                    rating: 4,
+                    text_si: "Priročna lokacija in všeč mi je da je 24/7 odprto.",
+                    text_en: "Convenient location and I like that it's open 24/7.",
+                    date: "2025-12-22",
+                    location: "Galjevica"
+                },
+                {
+                    author: "Janez",
+                    rating: 5,
+                    text_si: "Odlično za velike stvari kot so zavese in posteljnina. Stroji so zmogljivi.",
+                    text_en: "Excellent for large items like curtains and bedding. Machines are powerful.",
+                    date: "2025-12-08",
+                    location: "Galjevica"
+                },
+                {
+                    author: "Tina",
+                    rating: 5,
+                    text_si: "Čista pralnica, vse deluje brezhibno. Prihranim veliko časa.",
+                    text_en: "Clean laundry, everything works flawlessly. Save a lot of time.",
+                    date: "2025-11-19",
+                    location: "Galjevica"
+                },
+                {
+                    author: "Aleš",
+                    rating: 4,
+                    text_si: "Dobre cene in kvalitetno pranje. Manjka mi samo brezstično plačilo.",
+                    text_en: "Good prices and quality washing. I just miss contactless payment.",
+                    date: "2025-10-30",
+                    location: "Galjevica"
+                },
+                {
+                    author: "Marko",
+                    rating: 5,
+                    text_si: "Super, lahko na enkrat posušiš in opereš 20 kg",
+                    text_en: "Great, you can wash and dry 20 kg at once",
+                    date: "2024-07-23",
+                    location: "Galjevica"
+                },
+                {
+                    author: "Ana",
+                    rating: 5,
+                    text_si: "Ponavadi perem in sušim 2x2m sedežne prevleke. Brez zapletov. Priporočam.",
+                    text_en: "I usually wash and dry 2x2m seat covers. No complications. Highly recommend.",
+                    date: "2024-07-06",
+                    location: "Galjevica"
+                },
+                {
+                    author: "David",
+                    rating: 5,
+                    text_si: "Imel sem težavo z žetoni in lastnik je takoj prišel in uredil mojo težavo.",
+                    text_en: "I had an issue with the coins and the owner came and sorted out my issue.",
+                    date: "2024-05-29",
+                    location: "Galjevica"
+                },
+                {
+                    author: "Michael",
+                    rating: 5,
+                    text_si: "Res najboljše mesto za pranje in sušenje v Ljubljani. Preizkusil sem vse, ta je 4.8/5 po mojem mnenju.",
+                    text_en: "Really the best wash & dry place in Ljubljana. Have tried them all, this one is 4.8/5 in my opinion.",
+                    date: "2024-04-30",
+                    location: "Galjevica"
+                },
+                {
+                    author: "Nina",
+                    rating: 5,
+                    text_si: "Je čisto. Jaz hodim v pralnico samo za sušenje perila.",
+                    text_en: "It's clean. I only go to the laundry for drying clothes.",
+                    date: "2023-10-30",
+                    location: "Galjevica"
+                },
+                {
+                    author: "Peter",
+                    rating: 5,
+                    text_si: "Super stroji, super pranje.",
+                    text_en: "Great machines, great washing.",
+                    date: "2023-09-16",
+                    location: "Galjevica"
+                },
+                {
+                    author: "Sarah",
+                    rating: 5,
+                    text_si: "Čist prostor, z lepim vonjem mehčalca. Učinkovite naprave.",
+                    text_en: "Clean space, with nice fabric softener smell. Efficient devices.",
+                    date: "2023-04-14",
+                    location: "Galjevica"
+                }
+            ]
+        };
 
-            console.log('QR Handler: hash =', hash);
+        // Format date for display
+        function formatDate(dateStr, lang) {
+            const date = new Date(dateStr);
+            const months_si = ['jan', 'feb', 'mar', 'apr', 'maj', 'jun', 'jul', 'avg', 'sep', 'okt', 'nov', 'dec'];
+            const months_en = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
-            if (validTabs.includes(hash)) {
-                console.log('QR Handler: Activating tab:', hash);
+            const day = date.getDate();
+            const month = lang === 'en' ? months_en[date.getMonth()] : months_si[date.getMonth()];
+            const year = date.getFullYear();
 
-                // Wait for DOM to be ready, then activate tab
-                setTimeout(() => {
-                    switchTab(null, hash);
-
-                    // Verify tab was activated
-                    const tabContent = document.getElementById(hash);
-                    console.log('Tab element:', tabContent);
-                    console.log('Has active class:', tabContent?.classList.contains('active'));
-
-                    // Scroll to instructions section
-                    setTimeout(() => {
-                        const instructionsSection = document.getElementById('instructions');
-                        if (instructionsSection) {
-                            instructionsSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                        }
-                    }, 100);
-                }, 100);
-            }
+            return `${day} ${month} ${year}`;
         }
 
-        // Handle QR codes on page load
-        window.addEventListener('DOMContentLoaded', () => {
-            console.log('DOM loaded, checking hash...');
-            handleQRCodeNavigation();
-        });
+        // Load and display reviews
+        (function loadReviews() {
+            const container = document.getElementById('reviews-container');
+            const currentLang = document.body.getAttribute('data-lang') || 'si';
 
-        // Also try on full load as backup
-        window.addEventListener('load', () => {
-            console.log('Window loaded, checking hash again...');
-            handleQRCodeNavigation();
-        });
+            // Sort reviews by date (newest first)
+            const sortedReviews = [...reviewsData.reviews].sort((a, b) => {
+                return new Date(b.date) - new Date(a.date);
+            });
 
-        // Handle QR codes when hash changes (e.g., clicking links)
-        window.addEventListener('hashchange', () => {
-            console.log('Hash changed');
-            handleQRCodeNavigation();
-        });
+            // Display reviews (show max 6)
+            sortedReviews.slice(0, 6).forEach(review => {
+                const reviewCard = document.createElement('div');
+                reviewCard.className = 'review-card';
+
+                const stars = '⭐'.repeat(review.rating);
+                const textKey = currentLang === 'en' ? 'text_en' : 'text_si';
+                const formattedDate = formatDate(review.date, currentLang);
+
+                reviewCard.innerHTML = `
+                    <div class="review-stars">${stars}</div>
+                    <p class="review-text">"${review[textKey]}"</p>
+                    <div class="review-footer">
+                        <div class="review-author">${review.author}</div>
+                        <div class="review-date">${formattedDate}</div>
+                        <div class="review-location">${review.location}</div>
+                    </div>
+                `;
+
+                container.appendChild(reviewCard);
+            });
+
+            // Update reviews when language changes
+            const existingLangBtns = document.querySelectorAll('.lang-btn');
+            existingLangBtns.forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const lang = btn.dataset.lang;
+                    const textKey = lang === 'en' ? 'text_en' : 'text_si';
+
+                    // Update all review texts
+                    const reviewTexts = container.querySelectorAll('.review-text');
+                    reviewTexts.forEach((text, index) => {
+                        if (sortedReviews[index]) {
+                            text.textContent = `"${sortedReviews[index][textKey]}"`;
+                        }
+                    });
+
+                    // Update all review dates
+                    const reviewDates = container.querySelectorAll('.review-date');
+                    reviewDates.forEach((dateElem, index) => {
+                        if (sortedReviews[index]) {
+                            dateElem.textContent = formatDate(sortedReviews[index].date, lang);
+                        }
+                    });
+                });
+            });
+        })();
     </script>
-
 </body>
 </html>

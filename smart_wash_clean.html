@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Wash - Samopostrežna Pralnica Ljubljana</title>
+    <meta name="description" content="Smart Wash samopostrežna pralnica v Ljubljani. Galjevica in TC Jarše. Odprto vsak dan 0-24h. Kakovostna italijanska detergenta vključena.">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary: #2856a4;
+            --secondary: #0098d9;
+            --accent: #92d7f6;
+            --wash-blue: #4472B8;
+            --wash-light: #8FD8F8;
+            --dry-orange: #F5842A;
+            --dry-red: #ED282E;
+            --gold-accent: #D7CC72;
+            --green-accent: #7BC47F;
+            --divider: #454546;
+            --text: #333;
+            --light-bg: #f8f9fa;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: var(--text);
+            background: white;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header & Navigation */
+        header {
+            background: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-top {
+            padding: 25px 0;
+            background: var(--primary);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .header-content {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 30px;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .header-left {
+            display: flex;
+            align-items: center;
+            gap: 25px;
+            flex: 1;
+        }
+
+        .logo {
+            max-width: 140px;
+            height: auto;
+            position: relative;
+            z-index: 10;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            filter: brightness(1.1) drop-shadow(0 0 15px rgba(146, 215, 246, 0.6));
+            flex-shrink: 0;
+        }
+
+        .logo:hover {
+            filter: brightness(1.3) drop-shadow(0 0 25px rgba(146, 215, 246, 1));
+            transform: scale(1.05);
+        }
+
+        .header-info {
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            color: white;
+            text-align: left;
+        }
+
+        .header-title {
+            font-size: 2rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            margin: 0;
+            color: white;
+        }
+
+        .header-slogan {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            font-weight: 400;
+            margin: 0;
+        }
+
+        .header-hours {
+            font-size: calc(0.9rem + 3px);
+            opacity: 0.85;
+            font-weight: 600;
+            color: var(--accent);
+            margin: 0;
+        }
+
+        nav {
+            background: white;
+            border-top: 3px solid var(--secondary);
+        }
+
+        nav ul {
+            list-style: none;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        nav ul li {
+            margin: 0;
+        }
+
+        nav ul li a {
+            display: block;
+            padding: 15px 25px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            border-bottom: 3px solid transparent;
+        }
+
+        nav ul li a:hover {
+            color: var(--secondary);
+            border-bottom-color: var(--secondary);
+        }
+
+        /* Mobile Menu Toggle */
+        .menu-toggle {
+            display: none;
+            background: var(--primary);
+            border: none;
+            padding: 10px;
+            cursor: pointer;
+            position: absolute;
+            left: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            z-index: 1000;
+        }
+
+        .menu-toggle span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 5px 0;
+            transition: 0.3s;
+        }
+
+        .menu-toggle.active span:nth-child(1) {
+            transform: rotate(-45deg) translate(-5px, 6px);
+        }
+
+        .menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .menu-toggle.active span:nth-child(3) {
+            transform: rotate(45deg) translate(-5px, -6px);
+        }
+
+        /* Language Switcher */
+        .lang-switch {
+            display: flex;
+            gap: 8px;
+            position: relative;
+            z-index: 10;
+            flex-shrink: 0;
+        }
+
+        .lang-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            padding: 6px 16px;
+            cursor: pointer;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        .lang-btn:hover {
+            background: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 255, 255, 0.5);
+        }
+
+        .lang-btn.active {
+            background: var(--accent);
+            color: var(--primary);
+            border-color: var(--accent);
+        }
+
+        /* Sections */
+        section {
+            padding: 60px 0;
+            scroll-margin-top: 120px;
+            position: relative;
+        }
+
+        section:nth-child(even) {
+            background: var(--light-bg);
+        }
+
+        section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 90%;
+            height: 1px;
+            background: linear-gradient(to right, transparent 0%, var(--divider) 50%, transparent 100%);
+        }
+
+        section:first-of-type::before {
+            display: none;
+        }
+
+        h2 {
+            color: var(--primary);
+            font-size: 2rem;
+            margin-bottom: 30px;
+            text-align: center;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .divider {
+            width: 80px;
+            height: 3px;
+            background: var(--divider);
+            margin: 0 auto 40px;
+        }
+
+        /* Services Grid */
+        .services-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-top: 40px;
+        }
+
+        .service-card {
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            transition: all 0.3s;
+            border-left: 8px solid var(--secondary);
+            cursor: pointer;
+            overflow: hidden;
+        }
+
+        .service-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 6px 20px rgba(0,0,0,0.2);
+        }
+
+        .service-card-header {
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            gap: 30px;
+            position: relative;
+        }
+
+        .service-card-title {
+            flex: 1;
+            min-width: 0;
+        }
+
+        .service-card-header h3 {
+            text-align: left;
+            font-size: 2rem;
+            margin: 0;
+        }
+
+        .service-card-header::after {
+            content: 'OPIS in CENE  ▼';
+            font-size: 0.9rem;
+            font-weight: 300;
+            opacity: 0.7;
+            transition: all 0.3s;
+            flex-shrink: 0;
+            margin-left: auto;
+            color: var(--primary);
+            position: relative;
+            top: 40px;
+            letter-spacing: 0.05em;
+        }
+
+        .service-card:hover .service-card-header::after {
+            opacity: 1;
+        }
+
+        .service-card.active .service-card-header::after {
+            transform: rotate(180deg);
+            opacity: 1;
+        }
+
+        .service-card-content {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease-out, opacity 0.3s ease-out, margin-top 0.3s ease-out;
+            opacity: 0;
+            margin-top: 0;
+            text-align: left;
+            padding-left: 115px;
+        }
+
+        .service-card.active .service-card-content {
+            max-height: 300px;
+            opacity: 1;
+            margin-top: 25px;
+        }
+
+        .service-card-content p {
+            font-size: 1.2rem;
+            line-height: 1.6;
+        }
+
+        /* Color coding: Wash services */
+        .service-card.wash {
+            border-left-color: var(--wash-blue);
+            background: linear-gradient(to right, rgba(136, 212, 248, 0.05) 0%, white 30%);
+        }
+
+        .service-card.wash h3 {
+            color: var(--wash-blue);
+        }
+
+        .service-card.wash .service-icon {
+            filter: drop-shadow(0 2px 8px rgba(68, 114, 184, 0.4));
+        }
+
+        /* Color coding: Dry services */
+        .service-card.dry {
+            border-left-color: var(--dry-orange);
+            background: linear-gradient(to right, rgba(245, 132, 42, 0.05) 0%, white 30%);
+        }
+
+        .service-card.dry h3 {
+            color: var(--dry-orange);
+        }
+
+        .service-card.dry .service-icon {
+            filter: drop-shadow(0 2px 8px rgba(245, 132, 42, 0.4));
+        }
+
+        /* Color coding: Additional services */
+        .service-card.extra {
+            border-left-color: var(--green-accent);
+            background: linear-gradient(to right, rgba(123, 196, 127, 0.05) 0%, white 30%);
+        }
+
+        .service-card.extra h3 {
+            color: var(--green-accent);
+        }
+
+        .service-card.extra .service-icon {
+            filter: drop-shadow(0 2px 8px rgba(123, 196, 127, 0.4));
+        }
+
+        .service-icon {
+            font-size: 4.5rem;
+            flex-shrink: 0;
+            width: 85px;
+            height: 85px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* Service Card Expanded Content */
+        .service-card-expanded {
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.4s ease-out, padding 0.4s ease-out;
+            padding: 0;
+        }
+
+        .service-card.active .service-card-expanded {
+            max-height: 1000px;
+            padding: 25px 0 0 0;
+        }
+
+        .service-description {
+            margin-bottom: 20px;
+        }
+
+        .service-description p {
+            font-size: 1rem;
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+
+        .service-programs {
+            margin-bottom: 20px;
+        }
+
+        .service-programs h4 {
+            font-size: 1.1rem;
+            margin: 0 0 12px 0;
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .service-programs ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .service-programs li {
+            font-size: 0.95rem;
+            color: #555;
+            padding: 5px 0;
+        }
+
+        .service-programs li::before {
+            content: "✓ ";
+            color: var(--green-accent);
+            font-weight: bold;
+            margin-right: 8px;
+        }
+
+        .service-prices {
+            background: #f8f9fa;
+            border-radius: 8px;
+            padding: 15px;
+            margin-top: 20px;
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+        }
+
+        .price-row:not(:last-child) {
+            border-bottom: 1px solid #e0e0e0;
+        }
+
+        .price-capacity {
+            font-size: 1.05rem;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .price-value {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .price-value small {
+            font-size: 0.75rem;
+            color: #666;
+            font-weight: 500;
+            margin-left: 6px;
+        }
+
+
+        @media (max-width: 768px) {
+            .service-programs ul {
+                grid-template-columns: 1fr;
+            }
+
+            .service-card {
+                padding: 25px;
+            }
+
+            .service-card-expanded {
+                padding-left: 0;
+            }
+
+            .service-card.active .service-card-expanded {
+                padding: 20px 0 0 0;
+            }
+
+            .service-card-content {
+                padding-left: 0;
+            }
+        }
+
+        /* Locations */
+        .locations {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(400px, 1fr));
+            gap: 40px;
+            margin-top: 40px;
+        }
+
+        .location-card {
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .location-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 8px 30px rgba(0,152,217,0.15);
+        }
+
+        .location-map {
+            width: 100%;
+            height: 280px;
+            border: none;
+            display: block;
+        }
+
+        .location-content {
+            padding: 30px;
+        }
+
+        .location-card h3 {
+            color: var(--primary);
+            margin-bottom: 20px;
+            font-size: 1.8rem;
+            font-weight: 700;
+        }
+
+        .location-info {
+            margin-bottom: 25px;
+        }
+
+        .location-info p {
+            margin-bottom: 12px;
+            line-height: 1.8;
+            font-size: 1rem;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .location-info strong {
+            color: var(--primary);
+            min-width: 120px;
+            font-weight: 600;
+        }
+
+        .location-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
+            color: white;
+            padding: 14px 28px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 4px 15px rgba(0,152,217,0.3);
+        }
+
+        .location-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(0,152,217,0.4);
+        }
+
+        .location-btn::before {
+            content: '📍';
+            font-size: 1.2rem;
+        }
+
+        @media (max-width: 768px) {
+            .locations {
+                grid-template-columns: 1fr;
+            }
+
+            .location-map {
+                height: 220px;
+            }
+
+            .location-content {
+                padding: 20px;
+            }
+
+            .location-info p {
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .location-info strong {
+                min-width: auto;
+            }
+        }
+
+        /* Contact Section */
+        .contact-info {
+            text-align: center;
+            font-size: 1.2rem;
+        }
+
+        .contact-info p {
+            margin-bottom: 15px;
+        }
+
+        .contact-info a {
+            color: var(--secondary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-info a:hover {
+            text-decoration: underline;
+        }
+
+        /* Footer */
+        footer {
+            background: var(--primary);
+            color: white;
+            padding: 30px 0;
+            text-align: center;
+        }
+
+        footer p {
+            margin-bottom: 10px;
+        }
+
+        /* Language Toggle */
+        .lang-si, .lang-en {
+            display: none;
+        }
+
+        body[data-lang="si"] .lang-si {
+            display: block;
+        }
+
+        body[data-lang="en"] .lang-en {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-top {
+                padding: 15px 0;
+            }
+
+            .header-content {
+                flex-direction: column;
+                gap: 15px;
+            }
+
+            .header-left {
+                flex-direction: column;
+                text-align: center;
+                gap: 15px;
+            }
+
+            .header-info {
+                text-align: center;
+            }
+
+            .header-title {
+                font-size: 1.2rem;
+            }
+
+            .header-slogan {
+                font-size: 0.85rem;
+            }
+
+            .header-hours {
+                font-size: 0.8rem;
+            }
+
+            .logo {
+                max-width: 100px;
+            }
+
+            .menu-toggle {
+                display: block;
+            }
+
+            nav ul {
+                flex-direction: column;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height 0.3s ease;
+            }
+
+            nav ul.active {
+                max-height: 500px;
+            }
+
+            nav ul li a {
+                border-bottom: 1px solid #e0e0e0;
+                padding: 12px 20px;
+            }
+
+
+            .lang-switch {
+                position: static;
+                justify-content: center;
+                margin-top: 10px;
+            }
+        }
+
+        /* Chat Widget */
+        .chat-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--wash-blue), var(--primary));
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0, 152, 217, 0.4);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 152, 217, 0.6);
+        }
+
+        .chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 380px;
+            height: 550px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .chat-widget.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: all;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--wash-blue), var(--primary));
+            color: white;
+            padding: 20px;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header-info h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .chat-status {
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        .chat-status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            margin-right: 6px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .close-chat:hover {
+            transform: rotate(90deg);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .chat-message {
+            margin-bottom: 16px;
+            display: flex;
+        }
+
+        .chat-message.user {
+            justify-content: flex-end;
+        }
+
+        .chat-message.bot {
+            justify-content: flex-start;
+        }
+
+        .message-bubble {
+            max-width: 75%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .chat-message.user .message-bubble {
+            background: linear-gradient(135deg, var(--wash-blue), var(--primary));
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-message.bot .message-bubble {
+            background: white;
+            color: #333;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-bubble p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .chat-input-container {
+            display: flex;
+            padding: 16px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            border-radius: 0 0 16px 16px;
+        }
+
+        .chat-input {
+            flex: 1;
+            border: 1px solid #e0e0e0;
+            border-radius: 24px;
+            padding: 12px 16px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary);
+        }
+
+        .send-button {
+            background: linear-gradient(135deg, var(--wash-blue), var(--primary));
+            border: none;
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            margin-left: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .send-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Typing indicator */
+        .typing-indicator .message-bubble {
+            padding: 16px 20px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: #999;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.7;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chat-widget {
+                width: calc(100vw - 20px);
+                height: calc(100vh - 100px);
+                right: 10px;
+                bottom: 10px;
+            }
+
+            .chat-button {
+                right: 20px;
+                bottom: 20px;
+            }
+        }
+
+        /* Advantages List */
+        .advantages-list {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .advantages-list ul {
+            list-style: none;
+        }
+
+        .advantages-list li {
+            padding: 15px 0;
+            padding-left: 40px;
+            position: relative;
+            font-size: 1.1rem;
+        }
+
+        .advantages-list li {
+            transition: transform 0.2s;
+        }
+
+        .advantages-list li:hover {
+            transform: translateX(5px);
+        }
+
+        .advantages-list li:before {
+            content: "✓";
+            position: absolute;
+            left: 0;
+            color: var(--gold-accent);
+            font-weight: bold;
+            font-size: 1.5rem;
+            text-shadow: 0 2px 4px rgba(215, 204, 114, 0.3);
+        }
+    </style>
+</head>
+<body data-lang="si">
+    <header>
+        <div class="header-top">
+            <div class="header-content">
+                <div class="header-left">
+                    <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8IS0tIENyZWF0b3I6IENvcmVsRFJBVyAoRXZhbHVhdGlvbiBWZXJzaW9uKSAtLT4NCjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTA1LjAxM21tIiBoZWlnaHQ9IjUwNS4wMTNtbSIgdmVyc2lvbj0iMS4xIiBzdHlsZT0ic2hhcGUtcmVuZGVyaW5nOmdlb21ldHJpY1ByZWNpc2lvbjsgdGV4dC1yZW5kZXJpbmc6Z2VvbWV0cmljUHJlY2lzaW9uOyBpbWFnZS1yZW5kZXJpbmc6b3B0aW1pemVRdWFsaXR5OyBmaWxsLXJ1bGU6ZXZlbm9kZDsgY2xpcC1ydWxlOmV2ZW5vZGQiDQp2aWV3Qm94PSIwIDAgNDM3OS42NCA0Mzc5LjY0Ig0KIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIg0KIHhtbG5zOnhvZG09Imh0dHA6Ly93d3cuY29yZWwuY29tL2NvcmVsZHJhdy9vZG0vMjAwMyI+DQogPGRlZnM+DQogIDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQogICA8IVtDREFUQVsNCiAgICAuZmlsNSB7ZmlsbDp3aGl0ZX0NCiAgICAuZmlsMyB7ZmlsbDojOEZEOEY4fQ0KICAgIC5maWwxIHtmaWxsOiMwMDk3REF9DQogICAgLmZpbDQge2ZpbGw6d2hpdGU7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDAge2ZpbGw6IzFENTFBMjtmaWxsLXJ1bGU6bm9uemVyb30NCiAgICAuZmlsMiB7ZmlsbDp1cmwoI2lkMCl9DQogICBdXT4NCiAgPC9zdHlsZT4NCiAgPGxpbmVhckdyYWRpZW50IGlkPSJpZDAiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMjc2Ni43IiB5MT0iNDIxMy43OCIgeDI9IjIwNjYuNTgiIHkyPSIxMTYxLjY3Ij4NCiAgIDxzdG9wIG9mZnNldD0iMCIgc3R5bGU9InN0b3Atb3BhY2l0eToxOyBzdG9wLWNvbG9yOiM0M0IwRTQiLz4NCiAgIDxzdG9wIG9mZnNldD0iMSIgc3R5bGU9InN0b3Atb3BhY2l0eToxOyBzdG9wLWNvbG9yOndoaXRlIi8+DQogIDwvbGluZWFyR3JhZGllbnQ+DQogPC9kZWZzPg0KIDxnIGlkPSJMYXllcl94MDAyMF8xIj4NCiAgPG1ldGFkYXRhIGlkPSJDb3JlbENvcnBJRF8wQ29yZWwtTGF5ZXIiLz4NCiAgPGcgaWQ9Il8zOTA4OTE3MjgiPg0KICAgPHBhdGggY2xhc3M9ImZpbDAiIGQ9Ik0yMTg5LjgyIDBjMTIwOS40LDAgMjE4OS44Miw5ODAuNDIgMjE4OS44MiwyMTg5LjgyIDAsMTIwOS40IC05ODAuNDIsMjE4OS44MiAtMjE4OS44MiwyMTg5LjgyIC0xMjA5LjQsMCAtMjE4OS44MiwtOTgwLjQyIC0yMTg5LjgyLC0yMTg5LjgyIDAsLTEyMDkuNCA5ODAuNDIsLTIxODkuODIgMjE4OS44MiwtMjE4OS44MnoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwxIiBkPSJNMjE4OS44MiA2MS40NGMxMTc1LjQ3LDAgMjEyOC4zOCw5NTIuOTIgMjEyOC4zOCwyMTI4LjM4IDAsMTE3NS40NyAtOTUyLjkxLDIxMjguMzggLTIxMjguMzgsMjEyOC4zOCAtMTE3NS40NiwwIC0yMTI4LjM4LC05NTIuOTEgLTIxMjguMzgsLTIxMjguMzggMCwtMTE3NS40NiA5NTIuOTIsLTIxMjguMzggMjEyOC4zOCwtMjEyOC4zOHoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwyIiBkPSJNMjE4OS44MiAyMTg5LjgybC0yMTI4LjM4IDBjMCwxMTc1LjQ3IDk1Mi45MiwyMTI4LjM4IDIxMjguMzgsMjEyOC4zOCAxMTc1LjQ3LDAgMjEyOC4zOCwtOTUyLjkxIDIxMjguMzgsLTIxMjguMzhsLTIxMjguMzggMHoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwzIiBkPSJNMjE4OS44MiA0MjYuNjVjOTczLjc3LDAgMTc2My4xNyw3ODkuNDEgMTc2My4xNywxNzYzLjE3IDAsOTczLjc3IC03ODkuNCwxNzYzLjE3IC0xNzYzLjE3LDE3NjMuMTcgLTk3My43NiwwIC0xNzYzLjE3LC03ODkuNCAtMTc2My4xNywtMTc2My4xNyAwLC05NzMuNzYgNzg5LjQxLC0xNzYzLjE3IDE3NjMuMTcsLTE3NjMuMTd6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsNCIgZD0iTTEyMTIuNTcgMTU2My40OWMwLDI1LjA0IC00LjY3LDQ3LjM5IC0xMy44Niw2Ny4wNiAtOS4zNCwxOS41MiAtMjIuMjEsMzYuMjIgLTM4LjYyLDQ5Ljk0IC0xNi40MSwxMy41OCAtMzUuOCwyMy45IC01OCwzMC44NCAtMjIuMzUsNi45MyAtNDYuMjYsMTAuMzIgLTcyLjAxLDEwLjMyIC0xNy45NiwwIC0zNC42NiwtMS41NSAtNDkuOTQsLTQuNTMgLTE1LjQyLC0zLjExIC0yOS4xNSwtNi45MyAtNDEuMTcsLTExLjMxIC0xMi4wMiwtNC4zOSAtMjIuMDcsLTkuMDYgLTMwLjI3LC0xMy43MyAtOC4wNiwtNC44MSAtMTMuODcsLTguNzcgLTE2Ljk3LC0xMi4xNyAtMy4yNSwtMy4yNSAtNS41MywtNy41IC03LjA4LC0xMi41OSAtMS41NSwtNS4xIC0yLjI2LC0xMS44OCAtMi4yNiwtMjAuMzcgMCwtNi4wOSAwLjI4LC0xMS4xOCAwLjg1LC0xNS4xNCAwLjU2LC0zLjk2IDEuNDEsLTcuMjEgMi40LC05LjYyIDEuMTMsLTIuNTQgMi41NCwtNC4yNCA0LjI1LC01LjIzIDEuNjksLTAuOTkgMy41MywtMS40MiA1LjgsLTEuNDIgMy44MiwwIDkuMzQsMi40MSAxNi40MSw3LjA4IDYuOTMsNC42NyAxNS45OSw5Ljc2IDI3LjE2LDE1LjI4IDExLjAzLDUuMzggMjQuMzMsMTAuNiA0MC4wMywxNS40MiAxNS41Niw0LjgxIDMzLjY3LDcuMjEgNTQuMDQsNy4yMSAxNS41NiwwIDI5LjcxLC0yLjEyIDQyLjU4LC02LjIyIDEyLjg4LC00LjEgMjMuOTEsLTkuOSAzMy4xLC0xNy41NCA5LjM0LC03LjUgMTYuNDEsLTE2Ljg0IDIxLjM3LC0yNy44NyA0Ljk1LC0xMS4wMyA3LjQ5LC0yMy42MiA3LjQ5LC0zNy42MyAwLC0xNS4xNCAtMy40LC0yOC4xNSAtMTAuMzIsLTM4LjkgLTYuOTMsLTEwLjc1IC0xNS45OSwtMjAuMjMgLTI3LjMsLTI4LjQ0IC0xMS40NiwtOC4wNiAtMjQuMzMsLTE1LjU2IC0zOC43NiwtMjIuMzUgLTE0LjU3LC02LjggLTI5LjQzLC0xMy41OSAtNDQuNTcsLTIwLjY2IC0xNS4xMywtNy4wOCAtMjkuOTksLTE0Ljg2IC00NC4yOCwtMjMuNDkgLTE0LjQzLC04LjQ4IC0yNy4zLC0xOC41MyAtMzguNjIsLTMwLjEzIC0xMS4zMSwtMTEuNiAtMjAuNTIsLTI1LjE4IC0yNy40NSwtNDAuODggLTcuMDcsLTE1LjU2IC0xMC42MSwtMzQuMjMgLTEwLjYxLC01Ni4wMiAwLC0yMi41IDQuMSwtNDIuNDQgMTIuMTcsLTU5Ljk5IDguMjEsLTE3LjM5IDE5LjUyLC0zMi4xMSAzMy45NSwtNDQgMTQuNTgsLTExLjg4IDMxLjgzLC0yMC45NCA1MS43OCwtMjcuMTYgMjAuMDksLTYuMjMgNDEuNTksLTkuMzQgNjQuNzksLTkuMzQgMTEuODksMCAyMy43NywwLjk5IDM1LjgsMy4xMSAxMi4wMywyLjEyIDIzLjM0LDQuODEgMzMuOTUsOC4zNSAxMC42LDMuMzkgMjAuMDksNy4zNSAyOC40NCwxMS42IDguMiw0LjI1IDEzLjcyLDcuNzggMTYuMjYsMTAuMzMgMi42OSwyLjY4IDQuMzksNC42NyA1LjI0LDYuMjIgMC44NSwxLjU2IDEuNDEsMy41MyAxLjk4LDUuOCAwLjU3LDIuNDEgMC45OSw1LjI0IDEuMjcsOC42MyAwLjI4LDMuMjUgMC40Myw3LjUgMC40MywxMi44OCAwLDQuOTUgLTAuMTUsOS4zNCAtMC41NywxMy4zIC0wLjQyLDMuODIgLTEuMTMsNy4wOCAtMS45OCw5Ljc2IC0wLjcsMi41NCAtMS45OCw0LjUzIC0zLjM5LDUuOCAtMS41NSwxLjI3IC0zLjI1LDEuODQgLTUuMjQsMS44NCAtMy4xMSwwIC03Ljc4LC0xLjk4IC0xNC4yOSwtNS44IC02LjUxLC0zLjk2IC0xNC40MywtOC4yMSAtMjMuOSwtMTMuMTYgLTkuMzQsLTQuODEgLTIwLjUyLC05LjIgLTMzLjM5LC0xMy4xNiAtMTIuNzMsLTQuMSAtMjcuMTYsLTYuMDkgLTQzLjI5LC02LjA5IC0xNC44NiwwIC0yNy44NywxLjk4IC0zOC45LDUuOTUgLTExLjA0LDQuMSAtMjAuMjQsOS4zMyAtMjcuNDUsMTUuOTggLTcuMDgsNi42NSAtMTIuNDUsMTQuNDMgLTE2LjEzLDIzLjQ4IC0zLjUzLDkuMiAtNS4zOCwxOC44MiAtNS4zOCwyOS4wMSAwLDE0Ljg1IDMuMzksMjcuNzMgMTAuMzIsMzguNDggNi45NCwxMC43NSAxNi4xMywyMC4yMyAyNy41OSwyOC41OCAxMS42LDguMzQgMjQuNjIsMTUuODQgMzkuMzMsMjIuNzggMTQuNTcsNi45MyAyOS41NywxMy44NiA0NC44NSwyMC45NCAxNS4xNCw3LjA3IDMwLjEzLDE0LjcxIDQ0LjcxLDIzLjIgMTQuNzEsOC4zNCAyNy43MywxOC4zOSAzOS4zMiwyOS44NSAxMS40NiwxMS40NiAyMC42NiwyNC45IDI3LjczLDQwLjYgNy4wNywxNS41NiAxMC42MSwzMy45NSAxMC42MSw1NS4zMXptNzE3LjY3IDEzOS43N2MwLDIuMjYgLTAuNTYsNC4yNSAtMS42OSw1LjggLTEuMTMsMS43IC0zLjExLDIuOTcgLTUuOTUsMy45NiAtMi44MiwwLjk5IC02LjUxLDEuODQgLTEwLjg5LDIuNTQgLTQuMzksMC43MSAtMTAuMTgsMC45OSAtMTcuMjUsMC45OSAtNi42NSwwIC0xMi4zMSwtMC4yOCAtMTYuOTgsLTAuOTkgLTQuNjcsLTAuNyAtOC4zNCwtMS41NSAtMTEuMDMsLTIuNTQgLTIuNjgsLTAuOTkgLTQuNjcsLTIuMjYgLTUuOCwtMy45NiAtMS4xMywtMS41NSAtMS43LC0zLjUzIC0xLjcsLTUuOGwwIC00NjcuMjcgLTAuODQgMCAtMTg4Ljg2IDQ2OS4zOWMtMC43MSwxLjk4IC0xLjk4LDMuNTMgLTMuMzksNC45NiAtMS41NiwxLjQxIC0zLjgyLDIuNTQgLTYuNjUsMy41MyAtMi45NywwLjk5IC02LjM3LDEuNjkgLTEwLjQ3LDIuMTIgLTMuOTYsMC40MiAtOC43NywwLjU2IC0xNC4yOSwwLjU2IC01LjgsMCAtMTAuNzUsLTAuMjggLTE0Ljg1LC0wLjg0IC00LjEsLTAuNTcgLTcuNjQsLTEuMjggLTEwLjMzLC0yLjI3IC0yLjgyLC0wLjk4IC00Ljk1LC0yLjEyIC02LjUxLC0zLjUzIC0xLjQxLC0xLjQxIC0yLjU0LC0yLjgzIC0zLjExLC00LjUzbC0xODAuOCAtNDY5LjM5IC0wLjQyIDAgMCA0NjcuMjdjMCwyLjI2IC0wLjU3LDQuMjUgLTEuNyw1LjggLTEuMTMsMS43IC0zLjExLDIuOTcgLTUuOTQsMy45NiAtMi44MywwLjk5IC02LjY1LDEuODQgLTExLjE4LDIuNTQgLTQuNTMsMC43MSAtMTAuMzMsMC45OSAtMTcuNCwwLjk5IC02Ljk0LDAgLTEyLjU5LC0wLjI4IC0xNy4xMiwtMC45OSAtNC41MywtMC43IC04LjIsLTEuNTUgLTEwLjg5LC0yLjU0IC0yLjY4LC0wLjk5IC00LjUzLC0yLjI2IC01LjUyLC0zLjk2IC0wLjk5LC0xLjU1IC0xLjU1LC0zLjUzIC0xLjU1LC01LjhsMCAtNDkzLjNjMCwtMTEuNzQgMy4xMSwtMTkuOTUgOS4xOSwtMjQuOSA2LjIzLC00Ljk2IDEzLjE2LC03LjUgMjAuNjYsLTcuNWw0My44NiAwYzguOTEsMCAxNi44MywwLjg1IDIzLjQ4LDIuNTQgNi43OSwxLjU2IDEyLjU5LDQuMjUgMTcuNjgsNy43OCA1LjEsMy42OCA5LjM0LDguMjEgMTIuNTksMTMuNzMgMy40LDUuNTIgNi4zNywxMi4wMyA4LjkxLDE5LjUybDE1My40OSAzODguNDcgMi4xMiAwIDE1OS4yOSAtMzg3LjM0YzMuMTEsLTguMjEgNi41MSwtMTUuMjggMTAuMTksLTIxLjA4IDMuNjgsLTUuODEgNy42NCwtMTAuNDcgMTIuMDIsLTEzLjg3IDQuMjUsLTMuNTQgOS4yLC01Ljk0IDE0LjQ0LC03LjUgNS4zOCwtMS41NSAxMS42LC0yLjI2IDE4LjUzLC0yLjI2bDQ1Ljk4IDBjNC4xLDAgOC4yMSwwLjU3IDEyLjAzLDEuODQgMy42OCwxLjI3IDYuOTQsMy4yNSA5LjYyLDUuOCAyLjY4LDIuNjggNC44MSw1Ljk0IDYuNTEsMTAuMDQgMS42OSwzLjk2IDIuNTQsOC45MSAyLjU0LDE0LjcybDAgNDkzLjN6bTU3Ny4zMyAtMTQuNDNjMi4xMiw2LjA5IDMuNCwxMC44OSAzLjU0LDE0LjcxIDAuMTQsMy42OCAtMC45OSw2LjUxIC0zLjExLDguNDkgLTIuMjcsMS44NCAtNS45NSwzLjExIC0xMS4wNCwzLjY4IC01LjA5LDAuNTYgLTExLjg4LDAuODQgLTIwLjUxLDAuODQgLTguNDksMCAtMTUuNDIsLTAuMTQgLTIwLjUyLC0wLjU2IC01LjA5LC0wLjQzIC04LjkxLC0xLjEzIC0xMS42LC0yLjEyIC0yLjY5LC0wLjk5IC00LjUzLC0yLjI2IC01LjgxLC0zLjk2IC0xLjI3LC0xLjY5IC0yLjQsLTMuNjggLTMuNTMsLTYuMjJsLTQ1Ljk4IC0xMzAuNTggLTIyMi45NSAwIC00NCAxMjguODhjLTAuODUsMi41NCAtMS44NCw0LjY3IC0zLjI1LDYuNTEgLTEuNDIsMS44NCAtMy40LDMuMjUgLTYuMDksNC41MyAtMi41NCwxLjI3IC02LjM3LDIuMTIgLTExLjE4LDIuNjkgLTQuODEsMC41NiAtMTEuMDMsMC44NCAtMTguODEsMC44NCAtOC4wNywwIC0xNC41OCwtMC4yOCAtMTkuNjYsLTAuOTkgLTUuMSwtMC43IC04Ljc3LC0xLjk3IC0xMC43NSwtMy45NiAtMi4xMiwtMS45OCAtMy4xMSwtNC44MSAtMi45NywtOC40OSAwLjE1LC0zLjgyIDEuMjgsLTguNjMgMy41NCwtMTQuNzFsMTc5LjggLTQ5OC40YzEuMTMsLTMuMTEgMi42OSwtNS42NiA0LjM5LC03LjQ5IDEuODQsLTEuOTggNC4zOSwtMy41NCA3LjkyLC00LjUzIDMuMzksLTEuMTMgNy43OCwtMS45NyAxMy4zLC0yLjQgNS4zOCwtMC40MiAxMi4xNywtMC41NiAyMC41MiwtMC41NiA4Ljc3LDAgMTYuMTMsMC4xNCAyMS45MywwLjU2IDUuOCwwLjQzIDEwLjQ3LDEuMjcgMTQuMDEsMi40IDMuNjgsMC45OSA2LjM3LDIuNjkgOC4zNCw0LjY3IDEuOTgsMi4xMiAzLjU0LDQuNjcgNC41Myw3LjY0bDE3OS45NSA0OTguNTN6bS0yMzAuODggLTQzOS45N2wtMC40MiAwIC05Mi4zOCAyNjcuMzcgMTg2LjQ1IDAgLTkzLjY1IC0yNjcuMzd6bTcxMS4zMSA0NTQuMzljMCwyLjI2IC0wLjQyLDQuMSAtMS4yNyw1LjggLTAuODUsMS43IC0yLjU0LDMuMTEgLTUuMzgsNC4yNSAtMi42OCwwLjk5IC02LjY1LDEuODQgLTExLjYsMi40MSAtNC45NiwwLjU2IC0xMS42LDAuODQgLTE5LjgxLDAuODQgLTcuMjIsMCAtMTMuMTYsLTAuMjggLTE3LjY4LC0wLjg0IC00LjUzLC0wLjU3IC04LjIxLC0xLjQyIC0xMS4wMywtMi42OSAtMi42OSwtMS4yNyAtNC44MSwtMi45NyAtNi4zNywtNS4yNCAtMS41NiwtMi4xMiAtMi44MywtNC45NSAtMy45NiwtOC4ybC00OS4yMyAtMTI2LjYxYy01LjgsLTE0LjQzIC0xMS44OCwtMjcuNTggLTE4LjEsLTM5LjYxIC02LjIzLC0xMi4wMyAtMTMuNTgsLTIyLjM2IC0yMi4yMSwtMzEuMTMgLTguNDksLTguNzcgLTE4LjY3LC0xNS40MiAtMzAuMjgsLTIwLjM3IC0xMS42LC00LjgxIC0yNS42LC03LjIyIC00MS44NywtNy4yMmwtNDcuNjcgMCAwIDIyOC42MWMwLDIuMjYgLTAuNTcsNC4xIC0xLjg0LDUuOCAtMS4yNywxLjcgLTMuMjUsMi45NyAtNS44LDMuOTYgLTIuNjksMC45OSAtNi4yMywxLjg0IC0xMC43NSwyLjU0IC00LjY3LDAuNzEgLTEwLjMyLDAuOTkgLTE3LjI2LDAuOTkgLTYuOTMsMCAtMTIuNTksLTAuMjggLTE3LjI1LC0wLjk5IC00LjUzLC0wLjcgLTguMjEsLTEuNTUgLTEwLjg5LC0yLjU0IC0yLjgzLC0wLjk5IC00LjY3LC0yLjI2IC01LjgxLC0zLjk2IC0xLjEzLC0xLjU1IC0xLjY5LC0zLjUzIC0xLjY5LC01LjhsMCAtNDk2LjdjMCwtMTAuNzUgMi44MiwtMTguMjQgOC40OSwtMjIuNjMgNS42NiwtNC4yNSAxMS43NCwtNi4zNyAxOC4xLC02LjM3bDExNC4wMyAwYzEzLjU4LDAgMjQuNzUsMC4yOCAzMy44MSwwLjk5IDguOTIsMC43MSAxNi45OCwxLjU1IDI0LjE5LDIuMjYgMjAuOCwzLjY4IDM5LjA1LDkuMzQgNTUuMDQsMTYuOTcgMTUuODQsNy43OSAyOS4xNCwxNy41NCAzOS44OSwyOS40MyAxMC44OSwxMS44OCAxOC45NiwyNS40NiAyNC4zMyw0MC44OCA1LjM4LDE1LjI4IDguMDYsMzIuMjYgOC4wNiw1MC43OSAwLDE3LjgyIC0yLjQsMzMuOTUgLTcuMjEsNDguMjQgLTQuOTYsMTQuMTQgLTExLjg5LDI2Ljc0IC0yMC45NCwzNy42MyAtOS4yLDEwLjg5IC0yMC4wOSwyMC4zNyAtMzIuODIsMjguNDQgLTEyLjc0LDcuOTIgLTI2Ljg4LDE0LjcxIC00Mi43MywyMC4yMyA4LjkxLDMuOTYgMTYuODMsOC43NyAyNC4wNSwxNC43MSA3LjIxLDUuOTUgMTMuODYsMTMuMTYgMjAuMDksMjEuMzcgNi4yMyw4LjM0IDEyLjE3LDE3Ljk2IDE3LjY4LDI4LjcyIDUuNTIsMTAuNzUgMTEuMDMsMjIuOTIgMTYuNTUsMzYuNWw0OC4xIDExOC4yN2MzLjgyLDkuOSA2LjM3LDE2Ljk3IDcuMzYsMjAuOTQgMS4xMywzLjk2IDEuNjksNy4wNyAxLjY5LDkuMzN6bS0xMDcuMzcgLTM3Ny4xNWMwLC0yMC45NCAtNC42NywtMzguNzYgLTE0LjE1LC01My4zMyAtOS4zNCwtMTQuNDMgLTI1LjA0LC0yNC45IC00Ny4yNSwtMzEuMjcgLTYuOTQsLTEuOTggLTE0LjcyLC0zLjI1IC0yMy4zNCwtNC4xIC04Ljc3LC0wLjg1IC0yMC4wOSwtMS4yOCAtMzQuMjQsLTEuMjhsLTYwLjEyIDAgMCAxODAuOCA2OS42IDBjMTguODEsMCAzNS4wOSwtMi4yNiA0OC44LC02Ljc5IDEzLjU5LC00LjY3IDI1LjA0LC0xMS4wMyAzNC4wOSwtMTkuMSA5LjIsLTguMiAxNS44NSwtMTcuODIgMjAuMjMsLTI4Ljg2IDQuMjUsLTExLjAzIDYuMzcsLTIzLjA2IDYuMzcsLTM2LjA4em01NzEuNTMgLTExNy45OGMwLDUuMjQgLTAuMjksOS43NiAtMC44NSwxMy41OCAtMC41NywzLjgyIC0xLjQyLDYuOTQgLTIuNjksOS4zNCAtMS4yNywyLjI2IC0yLjY4LDQuMSAtNC41Myw1LjA5IC0xLjgzLDEuMTMgLTMuODIsMS43IC01Ljk0LDEuN2wtMTUwLjY2IDAgMCA0NjUuNDNjMCwyLjI2IC0wLjU3LDQuMSAtMS43LDUuOCAtMS4xMywxLjcgLTIuOTcsMi45NyAtNS44LDMuOTYgLTIuNjgsMC45OSAtNi4zNywxLjg0IC0xMC44OSwyLjU0IC00LjY3LDAuNzEgLTEwLjMyLDAuOTkgLTE3LjI2LDAuOTkgLTYuNjUsMCAtMTIuMzEsLTAuMjggLTE2Ljk3LC0wLjk5IC00LjY3LC0wLjcgLTguNDksLTEuNTUgLTExLjE4LC0yLjU0IC0yLjgzLC0wLjk5IC00LjY3LC0yLjI2IC01LjgxLC0zLjk2IC0xLjEzLC0xLjY5IC0xLjY5LC0zLjUzIC0xLjY5LC01LjhsMCAtNDY1LjQzIC0xNTAuNjYgMGMtMi4xMiwwIC00LjEsLTAuNTcgLTUuOTQsLTEuNyAtMS44NCwtMC45OSAtMy4yNSwtMi44MyAtNC4zOSwtNS4wOSAtMC45OSwtMi40IC0xLjk4LC01LjUyIC0yLjY5LC05LjM0IC0wLjcxLC0zLjgyIC0wLjk5LC04LjM0IC0wLjk5LC0xMy41OCAwLC01LjI0IDAuMjgsLTkuOSAwLjk5LC0xMy44NyAwLjcxLC0zLjk2IDEuNywtNy4yMSAyLjY5LC05LjYxIDEuMTMsLTIuNTUgMi41NCwtNC4zOSA0LjM5LC01LjM4IDEuODMsLTEuMTMgMy44MiwtMS43IDUuOTQsLTEuN2wzNzIuNjMgMGMyLjEyLDAgNC4xLDAuNTcgNS45NCwxLjcgMS44NCwwLjk5IDMuMjUsMi44MyA0LjUzLDUuMzggMS4yNywyLjQgMi4xMiw1LjY2IDIuNjksOS42MSAwLjU2LDMuOTYgMC44NSw4LjYzIDAuODUsMTMuODd6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMCIgZD0iTTExMjQuNDEgMjYxMC4yMmwtNjQuMTcgMjQ3LjUzYy00LjM3LDE1LjcyIC05LjM5LDI1LjMzIC0xNS4wNiwyOC44MiAtNS42OCwzLjQ5IC0xNi4zNyw1LjI0IC0zMi4wOSw1LjI0bC0xNDQuMDYgMGMtMTQuODUsMCAtMjUuOTgsLTMuNDkgLTMzLjQsLTEwLjQ3IC03LjQxLC02Ljk5IC0xMi40NSwtMTQuODUgLTE1LjA2LC0yMy41OGwtMTkxLjIyIC04MzYuOWMtMS43NSwtOC43MyAtMi42MSwtMTYuMTUgLTIuNjEsLTIyLjI2IDAsLTE1LjcyIDkuMTYsLTIzLjU4IDI3LjUxLC0yMy41OGwxMzcuNTEgMGMxMS4zNSwwIDIwLjA4LDMuOTQgMjYuMTksMTEuNzggNi4xMSw3Ljg2IDEwLjA0LDE1LjcyIDExLjc4LDIzLjU4bDEyMS44IDU2My4xN2MwLjg4LDMuNDkgMS43NCw2Ljk4IDIuNjIsMTAuNDcgMC44NywzLjQ5IDIuNjEsNy40MyA1LjI0LDExLjc4IDEuNzQsMCAzLjQ5LC0yLjYxIDUuMjQsLTcuODYgMS43NSwtNS4yNCAzLjA2LC05LjU5IDMuOTQsLTEzLjFsNjUuNDggLTI4Ni44MmMxLjc1LC02LjEgMi42MSwtMTQuNCAyLjYxLC0yNC44OCAwLC04LjczIC0yLjE4LC0yMy4xNCAtNi41NSwtNDMuMjFsLTQ1Ljg0IC0xOTkuMDhjLTEuNzQsLTYuOTggLTIuNjEsLTEzLjEgLTIuNjEsLTE4LjMzIDAsLTE4LjMzIDkuMTYsLTI3LjUgMjcuNTEsLTI3LjVsMTM3LjUxIDBjMTQuODQsMCAyNC44OCwzLjQ5IDMwLjEzLDEwLjQ4IDIuNjEsMy40OSA1LjI0LDEyLjIyIDcuODUsMjYuMTlsMTAzLjQ3IDQ5OC45OWMwLjg3LDMuNDkgMS43NSw2LjEyIDIuNjEsNy44NiAwLjg4LDEuNzUgMi4xOSwzLjA2IDMuOTQsMy45MiA0LjM3LC00LjM2IDYuNTUsLTguMjkgNi41NSwtMTEuNzhsMTUuNzIgLTc5Ljg5IDEwMC44NCAtNDIwLjQxYzMuNSwtMTUuNzIgNy42NCwtMjUuNTQgMTIuNDUsLTI5LjQ3IDQuOCwtMy45NCAxMi44OCwtNS45IDI0LjIzLC01LjlsMTM2LjIxIDBjMTguMzMsMCAyNy40OSw4LjI5IDI3LjQ5LDI0Ljg4IDAsMi42MiAtMC44Nyw5LjE3IC0yLjYxLDE5LjY2bC0yMDEuNyA4MjkuMDJjLTQuMzcsMTcuNDcgLTkuODIsMjkuMDMgLTE2LjM3LDM0LjcyIC02LjU1LDUuNjcgLTE1LjUsOC41MSAtMjYuODUsOC41MWwtMTQ1LjM3IDBjLTExLjM1LDAgLTIwLjUxLC00LjM3IC0yNy41MSwtMTMuMSAtMy40OSwtNC4zNyAtNi41NSwtMTEuMzUgLTkuMTYsLTIwLjk2bC02NC4xOCAtMjQ3LjUzem03NTcgLTYzNS4ybDE2NS4wMiAwYzExLjM1LDAgMjAuMjksMi4xOSAyNi44NCw2LjU1IDYuNTUsNC4zNyAxMi4wMSwxNC40MSAxNi4zNywzMC4xM2wyMTIuMTggODQwLjgyYzEuNzUsNS4yNCAyLjYxLDEwLjkyIDIuNjEsMTcuMDIgMCwxNC44NCAtOS42MSwyMi4yNyAtMjguODEsMjIuMjdsLTEyOC4zNSAwYy0xMy4xLDAgLTIyLjQ5LC0zLjQ5IC0yOC4xNSwtMTAuNDcgLTUuNjgsLTYuOTkgLTkuODMsLTE1LjcyIC0xMi40NSwtMjYuMjFsLTI2LjE5IC05OS41NGMtMy40OSwtMTMuMSAtMTIuMjMsLTE5LjY0IC0yNi4xOSwtMTkuNjRsLTE3OS40MyAwYy0xNC44NSwwIC0yMy41OCw2LjU1IC0yNi4yMSwxOS42NGwtMjQuODggMTAzLjQ3Yy0xLjc0LDguNzMgLTUuNDUsMTYuMzcgLTExLjEzLDIyLjkyIC01LjY3LDYuNTUgLTE0LjYzLDkuODIgLTI2Ljg0LDkuODJsLTEyNy4wNCAwYy0xNi41OSwwIC0yNC44OCwtOC4yOSAtMjQuODgsLTI0Ljg4IDAsLTIuNjIgMCwtNS4yNCAwLC03Ljg2IDEuNzQsLTMuNDkgMi42MSwtNS42OCAyLjYxLC02LjU1bDIwMS43IC04NDAuODJjMy40OSwtMTUuNzIgOC41MSwtMjUuNzYgMTUuMDYsLTMwLjEzIDYuNTUsLTQuMzYgMTUuOTQsLTYuNTUgMjguMTcsLTYuNTV6bTQ5Ny42OCA4NjUuNzFsMCAtMTE3Ljg4YzAsLTEwLjQ3IDMuMDYsLTE3LjY4IDkuMTcsLTIxLjYxIDYuMzMsLTMuOTIgMTIuNDMsLTUuOSAxOC41NSwtNS45IDYuOTksMCAxNS4yOSwxLjMxIDI0LjQ1LDMuOTQgOS4xNywyLjYxIDE1Ljk0LDQuMzYgMjAuNTIsNS4yNCAxNC44NCw0LjM3IDM3LjMzLDguNzMgNjcuMjMsMTMuMSAyOS45LDQuMzcgNTMuNyw2LjU1IDcxLjM4LDYuNTUgMzguNjQsMCA2OS4xOSwtOC4wOCA5MS42OCwtMjQuMjMgMjIuNDgsLTE2LjE1IDMzLjYyLC0zOC4xOSAzMy42MiwtNjYuMTMgMCwtNDEuMDUgLTI1LjMzLC03OS40NiAtNzUuOTcsLTExNS4yNiAtMzYuNjYsLTIzLjU4IC02My43NCwtNDEuMDMgLTgxLjIsLTUyLjM5IC02NC42LC00Mi43OSAtMTA4LjcsLTc5LjAyIC0xMzIuMjgsLTEwOC43MSAtMzEuNDMsLTM5LjI5IC00Ny4xNSwtODguMTggLTQ3LjE1LC0xNDYuNjggMCwtODAuMzIgMjcuMDcsLTE0MS40NSA4MS4yLC0xODMuMzYgNTQuMTMsLTQxLjkgMTI3LjQ3LC02Mi44NiAyMjAuMDMsLTYyLjg2IDQwLjE3LDAgNzkuODksMy40OSAxMTkuMTgsMTAuNDcgNTkuMzgsMTAuNDggODkuMDYsMjUuNzYgODkuMDYsNDUuODRsMCAxMTcuODhjMCwzLjQ5IDAsNi41NSAwLDkuMTYgLTIuNjIsMTAuNDggLTEwLjA0LDE1LjcyIC0yMi4yNywxNS43MmwtNjIuODYgLTExLjc4Yy0zNS44LC02Ljk5IC01OC4yOCwtMTEuMTMgLTY3LjQ2LC0xMi40NSAtOS4xNiwtMS4zMSAtMjIuOTIsLTEuOTYgLTQxLjI1LC0xLjk2IC0zNS44LDAgLTYxLjc3LDUuNjcgLTc3LjkzLDE3LjAyIC0xNi4xNSwxMS4zNSAtMjQuMjMsMjUuMzMgLTI0LjIzLDQxLjkxIDAsMjkuNjggNDkuMzQsNzYuNCAxNDgsMTQwLjE0IDU3LjYyLDM4LjQyIDk5LjU0LDc0LjY1IDEyNS43MywxMDguNzEgNDEuOTEsNTQuMTMgNjIuODcsMTE3Ljg3IDYyLjg3LDE5MS4yMSAwLDgyLjA4IC0yOC44MiwxNDYuOSAtODYuMjIsMTk0LjUgLTU3LjQsNDcuNTggLTEzNi4yMSw3MS4zNyAtMjM2LjE4LDcxLjM3IC0zMi41MiwwIC02OS40MiwtMi40IC0xMTAuNDUsLTcuMiAtNDEuMjUsLTQuOCAtNzEuNiwtMTEuMTMgLTkwLjgxLC0xOSAtMTEuNTcsLTQuMzYgLTE4Ljc3LC05LjYxIC0yMS44MiwtMTUuNzEgLTMuMDYsLTYuMTEgLTQuNTksLTEyLjY2IC00LjU5LC0xOS42NHptNzEzLjc4IC04NjUuNzFsMTAyLjE2IDBjMjAuMDgsMCAzMi43NCwzLjcxIDM3Ljk4LDExLjEzIDUuMjUsNy40MyA3Ljg2LDE5IDcuODYsMzQuN2wwIDI1Mi43OGMwLDcuODUgMS4xLDEzLjk2IDMuMjcsMTguMzMgMi4xOSw0LjM2IDcuNjQsNi41NSAxNi4zNyw2LjU1bDE0Mi43NiAwYzQuMzcsMCA3LjQxLC0wLjQzIDkuMTYsLTEuMzEgNy44NiwtNC4zNyAxMS44LC0xMy4xIDExLjgsLTI2LjE5bDAgLTI1MC4xNmMwLC0xNS43MSAxLjc1LC0yNi4xOSA1LjI0LC0zMS40MyA2Ljk4LC05LjYxIDIwLjUyLC0xNC40MSA0MC42LC0xNC40MWwxMDIuMTYgMGMyMC4wOCwwIDMyLjc0LDMuNzEgMzcuOTgsMTEuMTMgNS4yNCw3LjQzIDcuODYsMTkgNy44NiwzNC43bDAgODI1LjExYzAsMTUuNzIgLTEuNzUsMjYuMTkgLTUuMjUsMzEuNDMgLTYuOTgsOS42MSAtMjAuNTEsMTQuNDEgLTQwLjU5LDE0LjQxbC0xMDIuMTYgMGMtMjAuMDgsMCAtMzIuNzQsLTMuNzEgLTM3Ljk4LC0xMS4xNCAtNS4yNSwtNy40MSAtNy44NiwtMTguOTggLTcuODYsLTM0LjdsMCAtMzQzLjE0YzAsLTEzLjk2IC02Ljk5LC0yMC45NiAtMjAuOTYsLTIwLjk2bC0xNDIuNzYgMGMtMTMuMSwwIC0xOS42NCw2LjU1IC0xOS42NCwxOS42NGwwIDM0NC40NmMwLDIwLjA4IC0zLjcxLDMyLjc0IC0xMS4xMywzNy45OCAtNy40MSw1LjI0IC0xOC45OCw3Ljg2IC0zNC43LDcuODZsLTEwMi4xNiAwYy0xNS43MSwwIC0yNi4xOSwtMS43NSAtMzEuNDMsLTUuMjQgLTkuNjEsLTYuOTkgLTE0LjQxLC0yMC41MiAtMTQuNDEsLTQwLjZsMCAtODI1LjExYzAsLTE1LjcxIDEuNzQsLTI2LjE5IDUuMjQsLTMxLjQzIDYuOTksLTkuNjEgMjAuNTIsLTE0LjQxIDQwLjYsLTE0LjQxeiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDMiIGQ9Ik0xOTYxLjgyIDIyMzEuM2M1Ny40OSw4My44OSAxOTEuOTYsMjIxLjg5IDkzLjEsMzIwLjc1IC01MS40MSw1MS40MSAtMTM0LjgsNTEuNDEgLTE4Ni4yMSwwIC0xMDAuMjUsLTEwMC4yNSAzNS4zOCwtMjM3LjMzIDkzLjExLC0zMjAuNzV6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsNSIgZD0iTTIwMzIuMjQgMjQzNS44OWM3LjU3LDEuMDggNy4wNiwxLjAxIDE0LjYzLDIuMDkgMi4zNiwwLjM0IDMuMzIsMy44OCAzLjkyLDcuNTkgMTQuMTMsODUuNzUgLTM1LjQ2LDU1LjAxIC0zMS45MSw0NC4yIDQuODQsLTE0LjczIDExLjc3LC0zMC4wMSA4LjY4LC00Ny41MiAtMC42NSwtMy42OCAyLjMxLC02LjcgNC42OCwtNi4zN3oiLz4NCiAgPC9nPg0KIDwvZz4NCjwvc3ZnPg0K" alt="Smart Wash Logo" class="logo">
+                    <div class="header-info">
+                        <h1 class="header-title">
+                            <span class="lang-si">Samopostrežne Pralnice v Ljubljani</span>
+                            <span class="lang-en">Self-Service Laundromat in Ljubljana</span>
+                        </h1>
+                        <p class="header-slogan">
+                            <span class="lang-si">Operin in posuši v dobri uri</span>
+                            <span class="lang-en">Washed and dried in just over an hour</span>
+                        </p>
+                    </div>
+                </div>
+                <div class="lang-switch">
+                    <button class="lang-btn active" data-lang="si">SI</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </div>
+        </div>
+        <button class="menu-toggle" id="menuToggle">
+            <span></span>
+            <span></span>
+            <span></span>
+        </button>
+        <nav>
+            <ul id="navMenu">
+                <li><a href="#usluge" class="lang-si">STORITVE</a><a href="#usluge" class="lang-en">SERVICES</a></li>
+                <li><a href="#navodila" class="lang-si">NAVODILA</a><a href="#navodila" class="lang-en">INSTRUCTIONS</a></li>
+                <li><a href="#usluge" class="cenik-link lang-si">CENIK</a><a href="#usluge" class="cenik-link lang-en">PRICING</a></li>
+                <li><a href="#lokacije" class="lang-si">LOKACIJE</a><a href="#lokacije" class="lang-en">LOCATIONS</a></li>
+                <li><a href="#prednosti" class="lang-si">PREDNOSTI</a><a href="#prednosti" class="lang-en">ADVANTAGES</a></li>
+                <li><a href="#kontakt" class="lang-si">KONTAKT</a><a href="#kontakt" class="lang-en">CONTACT</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Services -->
+    <section id="usluge">
+        <div class="container">
+            <h2 class="lang-si">NAŠE STORITVE</h2>
+            <h2 class="lang-en">OUR SERVICES</h2>
+            <div class="divider"></div>
+
+            <div class="services-grid">
+                <div class="service-card wash">
+                    <div class="service-card-header">
+                        <div class="service-icon">🫧</div>
+                        <div class="service-card-title">
+                            <h3 class="lang-si">Pranje</h3>
+                            <h3 class="lang-en">Washing</h3>
+                        </div>
+                    </div>
+                    <div class="service-card-content">
+                        <p class="lang-si">Profesionalni stroji različnih velikosti (6-18 kg)</p>
+                        <p class="lang-en">Professional machines of various sizes (6-18 kg)</p>
+                    </div>
+                    <div class="service-card-expanded">
+                        <div class="service-description">
+                            <p class="lang-si">Profesionalne pralne storitve z modernimi stroji za popolno čistočo vašega perila.</p>
+                            <p class="lang-en">Professional washing services with modern machines for perfect cleanliness of your laundry.</p>
+                        </div>
+                        <div class="service-programs">
+                            <h4 class="lang-si">Programi pranja:</h4>
+                            <h4 class="lang-en">Washing programs:</h4>
+                            <ul>
+                                <li class="lang-si">Bombaž (Cotton)</li>
+                                <li class="lang-en">Cotton</li>
+                                <li class="lang-si">Sintetika (Synthetics)</li>
+                                <li class="lang-en">Synthetics</li>
+                                <li class="lang-si">Mešano (Mixed)</li>
+                                <li class="lang-en">Mixed</li>
+                                <li class="lang-si">Hitro pranje (Quick wash)</li>
+                                <li class="lang-en">Quick wash</li>
+                            </ul>
+                        </div>
+                        <div class="service-prices">
+                            <div class="price-row">
+                                <span class="price-capacity">10 kg</span>
+                                <span class="price-value">6 <small>žetonov / tokens</small></span>
+                            </div>
+                            <div class="price-row">
+                                <span class="price-capacity">18 kg</span>
+                                <span class="price-value">8 <small>žetonov / tokens</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card dry">
+                    <div class="service-card-header">
+                        <div class="service-icon">🌪️</div>
+                        <div class="service-card-title">
+                            <h3 class="lang-si">Sušenje</h3>
+                            <h3 class="lang-en">Drying</h3>
+                        </div>
+                    </div>
+                    <div class="service-card-content">
+                        <p class="lang-si">Hitro in učinkovito sušenje</p>
+                        <p class="lang-en">Fast and efficient drying</p>
+                    </div>
+                    <div class="service-card-expanded">
+                        <div class="service-description">
+                            <p class="lang-si">Hitro in učinkovito sušenje perila z regulacijo temperature in časa.</p>
+                            <p class="lang-en">Fast and efficient laundry drying with temperature and time control.</p>
+                        </div>
+                        <div class="service-programs">
+                            <h4 class="lang-si">Programi sušenja:</h4>
+                            <h4 class="lang-en">Drying programs:</h4>
+                            <ul>
+                                <li class="lang-si">Nizka temperatura (Low temp)</li>
+                                <li class="lang-en">Low temperature</li>
+                                <li class="lang-si">Srednja temperatura (Medium temp)</li>
+                                <li class="lang-en">Medium temperature</li>
+                                <li class="lang-si">Visoka temperatura (High temp)</li>
+                                <li class="lang-en">High temperature</li>
+                            </ul>
+                        </div>
+                        <div class="service-prices">
+                            <div class="price-row">
+                                <span class="price-capacity">10 <span class="lang-si">minut</span><span class="lang-en">minutes</span></span>
+                                <span class="price-value">1 <small>žeton / token</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-card extra">
+                    <div class="service-card-header">
+                        <div class="service-icon">🧼</div>
+                        <div class="service-card-title">
+                            <h3 class="lang-si">Dezinfekcija</h3>
+                            <h3 class="lang-en">Disinfection</h3>
+                        </div>
+                    </div>
+                    <div class="service-card-content">
+                        <p class="lang-si">Profesionalna dezinfekcija perila</p>
+                        <p class="lang-en">Professional laundry disinfection</p>
+                    </div>
+                    <div class="service-card-expanded">
+                        <div class="service-description">
+                            <p class="lang-si">Temeljita dezinfekcija bobna in perila za maksimalno higieno.</p>
+                            <p class="lang-en">Thorough disinfection of drum and laundry for maximum hygiene.</p>
+                        </div>
+                        <div class="service-programs">
+                            <h4 class="lang-si">Vključuje:</h4>
+                            <h4 class="lang-en">Includes:</h4>
+                            <ul>
+                                <li class="lang-si">Dezinfekcija bobna</li>
+                                <li class="lang-en">Drum disinfection</li>
+                                <li class="lang-si">Antibakterijska obdelava</li>
+                                <li class="lang-en">Antibacterial treatment</li>
+                                <li class="lang-si">Odstranjevanje alerganov</li>
+                                <li class="lang-en">Allergen removal</li>
+                            </ul>
+                        </div>
+                        <div class="service-prices">
+                            <div class="price-row">
+                                <span class="price-capacity">1 <span class="lang-si">cikel</span><span class="lang-en">cycle</span></span>
+                                <span class="price-value">2 <small>žetona / tokens</small></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations -->
+    <section id="lokacije">
+        <div class="container">
+            <h2 class="lang-si">NAŠE LOKACIJE</h2>
+            <h2 class="lang-en">OUR LOCATIONS</h2>
+            <div class="divider"></div>
+
+            <div class="locations">
+                <div class="location-card">
+                    <iframe
+                        class="location-map"
+                        src="https://www.google.com/maps?q=Beblerjev+trg+2,+1000+Ljubljana&output=embed"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    <div class="location-content">
+                        <h3>Pralnica TC Jarše</h3>
+                        <div class="location-info">
+                            <p>
+                                <strong class="lang-si">Naslov:</strong>
+                                <strong class="lang-en">Address:</strong>
+                                <span>Beblerjev trg 2, 1000 Ljubljana</span>
+                            </p>
+                            <p>
+                                <strong class="lang-si">Odpiralni čas:</strong>
+                                <strong class="lang-en">Opening hours:</strong>
+                                <span class="lang-si">Pon-Sob 08:00-20:00, Ned 08:00-14:00</span>
+                                <span class="lang-en">Mon-Sat 08:00-20:00, Sun 08:00-14:00</span>
+                            </p>
+                            <p>
+                                <strong class="lang-si">Parking:</strong>
+                                <strong class="lang-en">Parking:</strong>
+                                <span class="lang-si">Brezplačen</span>
+                                <span class="lang-en">Free</span>
+                            </p>
+                        </div>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Beblerjev+trg+2,+1000+Ljubljana"
+                           target="_blank"
+                           class="location-btn">
+                            <span class="lang-si">Pokaži pot</span>
+                            <span class="lang-en">Get Directions</span>
+                        </a>
+                    </div>
+                </div>
+                <div class="location-card">
+                    <iframe
+                        class="location-map"
+                        src="https://www.google.com/maps?q=Galjevica+6a,+1000+Ljubljana&output=embed"
+                        allowfullscreen=""
+                        loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade">
+                    </iframe>
+                    <div class="location-content">
+                        <h3>Pralnica Galjevica</h3>
+                        <div class="location-info">
+                            <p>
+                                <strong class="lang-si">Naslov:</strong>
+                                <strong class="lang-en">Address:</strong>
+                                <span>Galjevica 6a, 1000 Ljubljana</span>
+                            </p>
+                            <p>
+                                <strong class="lang-si">Odpiralni čas:</strong>
+                                <strong class="lang-en">Opening hours:</strong>
+                                <span>24/7</span>
+                            </p>
+                            <p>
+                                <strong class="lang-si">Parking:</strong>
+                                <strong class="lang-en">Parking:</strong>
+                                <span class="lang-si">Brezplačen</span>
+                                <span class="lang-en">Free</span>
+                            </p>
+                        </div>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Galjevica+6a,+1000+Ljubljana"
+                           target="_blank"
+                           class="location-btn">
+                            <span class="lang-si">Pokaži pot</span>
+                            <span class="lang-en">Get Directions</span>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages -->
+    <section id="prednosti">
+        <div class="container">
+            <h2 class="lang-si">ZAKAJ SMART WASH?</h2>
+            <h2 class="lang-en">WHY SMART WASH?</h2>
+            <div class="divider"></div>
+
+            <div class="advantages-list">
+                <ul>
+                    <li class="lang-si">Odprto 24 ur na dan, 7 dni v tednu, 365 dni na leto</li>
+                    <li class="lang-en">Open 24 hours a day, 7 days a week, 365 days a year</li>
+
+                    <li class="lang-si">Kakovostni italijanski detergenti vključeni v ceno</li>
+                    <li class="lang-en">Quality Italian detergents included in price</li>
+
+                    <li class="lang-si">Brezplačno parkiranje na obeh lokacijah</li>
+                    <li class="lang-en">Free parking at both locations</li>
+
+                    <li class="lang-si">Hitro - oprano in posušeno v dobri uri</li>
+                    <li class="lang-en">Fast - washed and dried in just over an hour</li>
+
+                    <li class="lang-si">Profesionalni stroji različnih velikosti</li>
+                    <li class="lang-en">Professional machines of various sizes</li>
+
+                    <li class="lang-si">Enostavna uporaba - plačilo z gotovino ali kartico</li>
+                    <li class="lang-en">Easy to use - payment by cash or card</li>
+                </ul>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="kontakt">
+        <div class="container">
+            <h2 class="lang-si">KONTAKT</h2>
+            <h2 class="lang-en">CONTACT</h2>
+            <div class="divider"></div>
+
+            <div class="contact-info">
+                <p><strong class="lang-si">Telefon:</strong><strong class="lang-en">Phone:</strong> <a href="tel:+38651369177">+386 51 369 177</a></p>
+                <p><strong>Email:</strong> <a href="mailto:info@smartwash.si">info@smartwash.si</a></p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <p>&copy; 2025 Smart Wash. <span class="lang-si">Vse pravice pridržane.</span><span class="lang-en">All rights reserved.</span></p>
+            <p>TC Jarše · Galjevica · Ljubljana</p>
+        </div>
+    </footer>
+
+    <script>
+        // Language Switcher
+        const langBtns = document.querySelectorAll('.lang-btn');
+        const body = document.body;
+
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.dataset.lang;
+                body.setAttribute('data-lang', lang);
+
+                langBtns.forEach(b => b.classList.remove('active'));
+                btn.classList.add('active');
+            });
+        });
+
+        // Smooth Scroll with header offset
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = document.querySelector('header').offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Mobile Menu Toggle
+        const menuToggle = document.getElementById('menuToggle');
+        const navMenu = document.getElementById('navMenu');
+
+        menuToggle.addEventListener('click', function() {
+            this.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        });
+
+        // Close menu when clicking on a menu item
+        navMenu.querySelectorAll('a').forEach(link => {
+            link.addEventListener('click', function() {
+                menuToggle.classList.remove('active');
+                navMenu.classList.remove('active');
+            });
+        });
+
+        // Service Cards Toggle
+        const serviceCards = document.querySelectorAll('.service-card');
+
+        serviceCards.forEach(card => {
+            card.addEventListener('click', function() {
+                // Close other cards
+                serviceCards.forEach(otherCard => {
+                    if (otherCard !== card) {
+                        otherCard.classList.remove('active');
+                    }
+                });
+
+                // Toggle current card
+                this.classList.toggle('active');
+            });
+        });
+
+        // Open all service cards when clicking on CENIK menu item
+        document.querySelectorAll('.cenik-link').forEach(link => {
+            link.addEventListener('click', function(e) {
+                // Open all service cards
+                setTimeout(() => {
+                    serviceCards.forEach(card => {
+                        card.classList.add('active');
+                    });
+                }, 500);
+            });
+        });
+        // Chat Widget Toggle
+        const chatButton = document.getElementById('chatButton');
+        const chatWidget = document.getElementById('chatWidget');
+        const closeChatBtn = document.getElementById('closeChat');
+        const chatInput = document.getElementById('chatInput');
+        const sendMessageBtn = document.getElementById('sendMessage');
+        const chatMessages = document.getElementById('chatMessages');
+
+        chatButton.addEventListener('click', function() {
+            chatWidget.classList.add('active');
+            chatButton.style.display = 'none';
+            chatInput.focus();
+        });
+
+        closeChatBtn.addEventListener('click', function() {
+            chatWidget.classList.remove('active');
+            chatButton.style.display = 'flex';
+        });
+
+        // Chat configuration
+        const API_URL = 'http://localhost:3000'; // Change to your server URL in production
+        const SESSION_ID = generateSessionId();
+        let isOperatorMode = false;
+        let lastMessageTime = new Date().toISOString();
+        let pollingInterval = null;
+
+        // Generate unique session ID
+        function generateSessionId() {
+            return 'session-' + Math.random().toString(36).substring(2, 15) +
+                   Math.random().toString(36).substring(2, 15);
+        }
+
+        // Send message to server
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, 'user');
+            chatInput.value = '';
+
+            // Show typing indicator
+            showTyping();
+
+            try {
+                const response = await fetch(`${API_URL}/api/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        sessionId: SESSION_ID
+                    })
+                });
+
+                const data = await response.json();
+
+                hideTyping();
+
+                if (data.error) {
+                    addMessage('Prišlo je do napake. Prosimo, poskusite znova.\nAn error occurred. Please try again.', 'bot');
+                    return;
+                }
+
+                addMessage(data.response, 'bot');
+
+                // Update operator mode status
+                if (data.operatorMode && !isOperatorMode) {
+                    isOperatorMode = true;
+                    updateChatStatus('Operator');
+                    startPolling(); // Start polling for operator messages
+                }
+
+            } catch (error) {
+                hideTyping();
+                console.error('Error sending message:', error);
+                addMessage('Povezava s strežnikom ni uspela. Prosimo, preverite ali je strežnik zagnan.\nConnection to server failed. Please check if server is running.', 'bot');
+            }
+        }
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender}`;
+            messageDiv.innerHTML = `
+                <div class="message-bubble">
+                    <p>${escapeHtml(text)}</p>
+                    <span class="message-time">${new Date().toLocaleTimeString('sl-SI', {hour: '2-digit', minute: '2-digit'})}</span>
+                </div>
+            `;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            lastMessageTime = new Date().toISOString();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        let typingIndicator = null;
+
+        function showTyping() {
+            if (typingIndicator) return;
+
+            typingIndicator = document.createElement('div');
+            typingIndicator.className = 'chat-message bot typing-indicator';
+            typingIndicator.innerHTML = `
+                <div class="message-bubble">
+                    <div class="typing-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+            `;
+            chatMessages.appendChild(typingIndicator);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTyping() {
+            if (typingIndicator) {
+                typingIndicator.remove();
+                typingIndicator = null;
+            }
+        }
+
+        function updateChatStatus(status) {
+            const statusElement = document.querySelector('.chat-status');
+            if (statusElement) {
+                statusElement.textContent = status;
+            }
+        }
+
+        // Poll for new messages from operator
+        function startPolling() {
+            if (pollingInterval) return;
+
+            pollingInterval = setInterval(async () => {
+                try {
+                    const response = await fetch(`${API_URL}/api/messages/${SESSION_ID}?lastMessageTime=${lastMessageTime}`);
+                    const data = await response.json();
+
+                    if (data.messages && data.messages.length > 0) {
+                        data.messages.forEach(msg => {
+                            addMessage(msg.content, 'bot');
+                        });
+                    }
+                } catch (error) {
+                    console.error('Polling error:', error);
+                }
+            }, 2000); // Poll every 2 seconds
+        }
+
+        function stopPolling() {
+            if (pollingInterval) {
+                clearInterval(pollingInterval);
+                pollingInterval = null;
+            }
+        }
+
+        sendMessageBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Initial greeting message
+        setTimeout(() => {
+            addMessage('Pozdravljeni! Kako vam lahko pomagamo? 👋\nHello! How can we help you? 👋', 'bot');
+        }, 500);
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            stopPolling();
+        });
+    </script>
+
+    <!-- Chat Widget -->
+    <button id="chatButton" class="chat-button">
+        💬
+    </button>
+
+    <div id="chatWidget" class="chat-widget">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <h3>Smart Wash Chat</h3>
+                <span class="chat-status">Online</span>
+            </div>
+            <button id="closeChat" class="close-chat">×</button>
+        </div>
+
+        <div id="chatMessages" class="chat-messages">
+            <!-- Messages will be added here -->
+        </div>
+
+        <div class="chat-input-container">
+            <input
+                type="text"
+                id="chatInput"
+                class="chat-input"
+                placeholder="Napišite sporočilo..."
+                autocomplete="off"
+            />
+            <button id="sendMessage" class="send-button">
+                ➤
+            </button>
+        </div>
+    </div>
+</body>
+</html>
