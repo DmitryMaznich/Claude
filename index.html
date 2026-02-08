@@ -3522,26 +3522,18 @@
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
-        "@type": "LaundryService",
+        "@type": "LocalBusiness",
+        "@id": "https://smart-wash.si",
         "name": "Smart Wash",
         "description": "Samopostrežna pralnica perila v Ljubljani z modernimi stroji do 20 kg",
         "url": "https://smart-wash.si",
         "telephone": "+386-1-777-82-70",
         "priceRange": "€€",
-        "address": [
-            {
-                "@type": "PostalAddress",
-                "streetAddress": "Galjevica",
-                "addressLocality": "Ljubljana",
-                "addressCountry": "SI"
-            },
-            {
-                "@type": "PostalAddress",
-                "streetAddress": "TC Jarše",
-                "addressLocality": "Ljubljana",
-                "addressCountry": "SI"
-            }
-        ],
+        "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Ljubljana",
+            "addressCountry": "SI"
+        },
         "openingHoursSpecification": {
             "@type": "OpeningHoursSpecification",
             "dayOfWeek": [
@@ -3555,13 +3547,6 @@
             ],
             "opens": "06:00",
             "closes": "23:00"
-        },
-        "aggregateRating": {
-            "@type": "AggregateRating",
-            "ratingValue": "4.5",
-            "reviewCount": "52",
-            "bestRating": "5",
-            "worstRating": "1"
         },
         "amenityFeature": [
             {
