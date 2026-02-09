@@ -1073,6 +1073,128 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 console.error('Error answering callback query:', err.message);
             }
 
+            // Handle menu button - sessions
+            if (data === 'menu_sessions') {
+                if (chatId.toString() !== OPERATOR_CHAT_ID) {
+                    return res.sendStatus(200);
+                }
+
+                const allSessions = Array.from(sessions.entries())
+                    .map(([id, session]) => {
+                        const lastMessage = session.messages[session.messages.length - 1];
+                        const mode = session.operatorMode ? '🔴 OPERATOR' : '🟢 AI';
+                        return `${mode} \`${id}\` - ${lastMessage?.content.substring(0, 30)}...`;
+                    });
+
+                const activeSessions = Array.from(sessions.entries())
+                    .filter(([_, session]) => session.operatorMode)
+                    .map(([id, session]) => {
+                        const lastMessage = session.messages[session.messages.length - 1];
+                        return `• \`${id}\` - ${lastMessage?.content.substring(0, 50)}...`;
+                    });
+
+                let message = '';
+                if (allSessions.length === 0) {
+                    message = '📭 Ni aktivnih sej / No sessions in memory';
+                } else if (activeSessions.length === 0) {
+                    message = `*Vse seje / All sessions (${allSessions.length}):*\n\n${allSessions.join('\n')}\n\n` +
+                        `⚠️ Nobena seja ni v operator mode / No sessions in operator mode`;
+                } else {
+                    message = `*Vse seje / All sessions (${allSessions.length}):*\n\n${allSessions.join('\n')}\n\n` +
+                        `*Aktivne seje / Active (${activeSessions.length}):*\n\n${activeSessions.join('\n')}`;
+                }
+
+                try {
+                    await bot.sendMessage(chatId, message, { parse_mode: 'Markdown' });
+                } catch (sendError) {
+                    console.error('Error sending sessions list:', sendError.message);
+                }
+                return res.sendStatus(200);
+            }
+
+            // Handle menu button - closeall
+            if (data === 'menu_closeall') {
+                if (chatId.toString() !== OPERATOR_CHAT_ID) {
+                    return res.sendStatus(200);
+                }
+
+                const sessionCount = sessions.size;
+                if (sessionCount === 0) {
+                    try {
+                        await bot.sendMessage(chatId, 'ℹ️ Ni aktivnih sej / No active sessions');
+                    } catch (sendError) {
+                        console.error('Error sending message:', sendError.message);
+                    }
+                    return res.sendStatus(200);
+                }
+
+                // Send goodbye message to all users and delete all sessions
+                let closedCount = 0;
+                for (const [sessionId, session] of sessions.entries()) {
+                    try {
+                        session.messages.push({
+                            role: 'assistant',
+                            content: getGoodbyeMessage(session.language),
+                            timestamp: new Date(),
+                            fromOperator: true
+                        });
+                        closedCount++;
+                    } catch (error) {
+                        console.error(`Error closing session ${sessionId}:`, error);
+                    }
+                }
+
+                telegramMessageToSession.clear();
+                sessions.clear();
+
+                try {
+                    await bot.sendMessage(chatId,
+                        `✅ Izbrisano ${closedCount} sej / Deleted ${closedCount} sessions\n\n` +
+                        `Vse seje so odstranjene iz spomina / All sessions removed from memory`
+                    );
+                } catch (sendError) {
+                    console.error('Error sending closeall confirmation:', sendError.message);
+                }
+                return res.sendStatus(200);
+            }
+
+            // Handle menu button - refresh
+            if (data === 'menu_refresh') {
+                if (chatId.toString() !== OPERATOR_CHAT_ID) {
+                    return res.sendStatus(200);
+                }
+
+                try {
+                    await bot.editMessageText(
+                        `🎛️ *Operator Control Panel / Панель оператора*\n\n` +
+                        `Используйте кнопки ниже для управления сессиями:\n` +
+                        `Use buttons below to manage sessions:\n\n` +
+                        `🔄 Обновлено / Refreshed: ${new Date().toLocaleTimeString('sl-SI', { timeZone: 'Europe/Ljubljana' })}`,
+                        {
+                            chat_id: chatId,
+                            message_id: callbackQuery.message.message_id,
+                            parse_mode: 'Markdown',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: '📋 Активные сессии / Sessions', callback_data: 'menu_sessions' }
+                                    ],
+                                    [
+                                        { text: '🗑️ Закрыть все / Close All', callback_data: 'menu_closeall' }
+                                    ],
+                                    [
+                                        { text: '🔄 Обновить меню / Refresh', callback_data: 'menu_refresh' }
+                                    ]
+                                ]
+                            }
+                        }
+                    );
+                } catch (sendError) {
+                    console.error('Error refreshing menu:', sendError.message);
+                }
+                return res.sendStatus(200);
+            }
+
             // Handle close button
             if (data.startsWith('close_')) {
                 const sessionId = data.substring(6); // Remove 'close_' prefix
@@ -1306,25 +1428,6 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 }
             }
 
-            // Create permanent keyboard for operator (reusable)
-            const operatorKeyboard = {
-                keyboard: [
-                    [
-                        { text: '📋 Активные сессии / Sessions' },
-                        { text: '🗑️ Закрыть все / Close All' }
-                    ]
-                ],
-                resize_keyboard: true,
-                persistent: true
-            };
-
-            // Handle quick action buttons (redirect to commands)
-            if (text === '📋 Активные сессии / Sessions') {
-                text = '/sessions';
-            }
-            if (text === '🗑️ Закрыть все / Close All') {
-                text = '/closeall';
-            }
 
             // Handle /start command
             if (text === '/start') {
@@ -1339,15 +1442,53 @@ app.post(`/telegram/webhook`, async (req, res) => {
                         `📱 Enostavno odgovorite (reply) na sporočilo\n` +
                         `📱 Simply reply to the notification message\n\n` +
                         `*Быстрые команды:*\n` +
-                        `Используйте кнопки внизу экрана ⤵️\n` +
-                        `Use buttons at the bottom of the screen ⤵️`,
+                        `Используйте команду /menu для панели управления\n` +
+                        `Use /menu command for control panel`,
                         {
-                            parse_mode: 'Markdown',
-                            reply_markup: operatorKeyboard
+                            parse_mode: 'Markdown'
                         }
                     );
                 } catch (sendError) {
                     console.error('Error sending start message:', sendError.message);
+                }
+                return res.sendStatus(200);
+            }
+
+            // Handle /menu command - show control panel with inline buttons
+            if (text === '/menu') {
+                if (chatId.toString() !== OPERATOR_CHAT_ID) {
+                    try {
+                        await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
+                    } catch (err) {
+                        console.error('Error sending access denied:', err.message);
+                    }
+                    return res.sendStatus(200);
+                }
+
+                try {
+                    await bot.sendMessage(chatId,
+                        `🎛️ *Operator Control Panel / Панель оператора*\n\n` +
+                        `Используйте кнопки ниже для управления сессиями:\n` +
+                        `Use buttons below to manage sessions:`,
+                        {
+                            parse_mode: 'Markdown',
+                            reply_markup: {
+                                inline_keyboard: [
+                                    [
+                                        { text: '📋 Активные сессии / Sessions', callback_data: 'menu_sessions' }
+                                    ],
+                                    [
+                                        { text: '🗑️ Закрыть все / Close All', callback_data: 'menu_closeall' }
+                                    ],
+                                    [
+                                        { text: '🔄 Обновить меню / Refresh', callback_data: 'menu_refresh' }
+                                    ]
+                                ]
+                            }
+                        }
+                    );
+                } catch (sendError) {
+                    console.error('Error sending menu:', sendError.message);
                 }
                 return res.sendStatus(200);
             }
@@ -1382,26 +1523,18 @@ app.post(`/telegram/webhook`, async (req, res) => {
 
                 try {
                     if (allSessions.length === 0) {
-                        await bot.sendMessage(chatId, '📭 Ni aktivnih sej / No sessions in memory', {
-                            reply_markup: operatorKeyboard
-                        });
+                        await bot.sendMessage(chatId, '📭 Ni aktivnih sej / No sessions in memory');
                     } else if (activeSessions.length === 0) {
                         await bot.sendMessage(chatId,
                             `*Vse seje / All sessions (${allSessions.length}):*\n\n${allSessions.join('\n')}\n\n` +
                             `⚠️ Nobena seja ni v operator mode / No sessions in operator mode`,
-                            {
-                                parse_mode: 'Markdown',
-                                reply_markup: operatorKeyboard
-                            }
+                            { parse_mode: 'Markdown' }
                         );
                     } else {
                         await bot.sendMessage(chatId,
                             `*Vse seje / All sessions (${allSessions.length}):*\n\n${allSessions.join('\n')}\n\n` +
                             `*Aktivne seje / Active (${activeSessions.length}):*\n\n${activeSessions.join('\n')}`,
-                            {
-                                parse_mode: 'Markdown',
-                                reply_markup: operatorKeyboard
-                            }
+                            { parse_mode: 'Markdown' }
                         );
                     }
                 } catch (sendError) {
@@ -1574,10 +1707,7 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 try {
                     await bot.sendMessage(chatId,
                         `✅ Izbrisano ${closedCount} sej / Deleted ${closedCount} sessions\n\n` +
-                        `Vse seje so odstranjene iz spomina / All sessions removed from memory`,
-                        {
-                            reply_markup: operatorKeyboard
-                        }
+                        `Vse seje so odstranjene iz spomina / All sessions removed from memory`
                     );
                 } catch (sendError) {
                     console.error('Error sending closeall confirmation:', sendError.message);
@@ -1658,6 +1788,7 @@ app.listen(PORT, '0.0.0.0', async () => {
             // Set bot commands menu
             await bot.setMyCommands([
                 { command: 'start', description: 'Начать / Start bot' },
+                { command: 'menu', description: '🎛️ Панель управления / Control panel' },
                 { command: 'sessions', description: 'Активные сессии / Active sessions' },
                 { command: 'closeall', description: 'Закрыть все / Close all sessions' }
             ]);
