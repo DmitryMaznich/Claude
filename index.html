@@ -2998,8 +2998,18 @@
                 margin-top: 0;
             }
 
+            /* Hide the old "Opening hours" label on mobile for schedule items */
+            .location-info-item:has(.schedule-visual) .location-info-label {
+                display: none;
+            }
+
+            /* Reduce top padding on schedule items */
+            .location-info-item:has(.schedule-visual) {
+                padding-top: 8px;
+            }
+
             .schedule-text {
-                padding: 12px 0;
+                padding: 8px 0 12px 0;
                 text-align: center;
             }
 
