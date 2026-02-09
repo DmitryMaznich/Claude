@@ -5940,11 +5940,11 @@
 
                 isPolling = true;
                 try {
-                    console.log(`🔄 POLLING: Requesting messages since ${lastMessageTime}`);
+                    console.log(`🔄 POLLING: Requesting messages since ${lastMessageTime}, current operatorMode: ${isOperatorMode}`);
                     const response = await fetch(`${API_URL}/api/messages/${SESSION_ID}?lastMessageTime=${lastMessageTime}`);
                     const data = await response.json();
 
-                    console.log(`📥 POLLING: Received ${data.messages ? data.messages.length : 0} messages`);
+                    console.log(`📥 POLLING: Received ${data.messages ? data.messages.length : 0} messages, operatorMode from server: ${data.operatorMode}`);
                     if (data.messages && data.messages.length > 0) {
                         console.log('📨 Messages:', data.messages.map(m => ({
                             content: m.content.substring(0, 30) + '...',
@@ -5983,6 +5983,8 @@
 
                     // Check if operator mode changed
                     if (typeof data.operatorMode !== 'undefined') {
+                        console.log(`🔍 POLLING: Checking operatorMode - server: ${data.operatorMode}, client: ${isOperatorMode}`);
+
                         if (data.operatorMode && !isOperatorMode) {
                             // Operator connected
                             console.log('🟢 POLLING: Operator connected');
@@ -5990,11 +5992,15 @@
                             updateChatStatus('Operator');
                         } else if (!data.operatorMode && isOperatorMode) {
                             // Operator disconnected
-                            console.log('🔴 POLLING: Operator disconnected');
+                            console.log('🔴 POLLING: Operator disconnected - updating status and stopping polling');
                             isOperatorMode = false;
                             updateChatStatus('AI online');
                             stopPolling();
+                        } else {
+                            console.log(`✓ POLLING: Operator mode unchanged (${data.operatorMode})`);
                         }
+                    } else {
+                        console.log('⚠️ POLLING: operatorMode not in response');
                     }
                 } catch (error) {
                     console.error('Polling error:', error);
