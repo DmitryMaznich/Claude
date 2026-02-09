@@ -1791,14 +1791,9 @@ app.listen(PORT, '0.0.0.0', async () => {
             await bot.setWebHook(webhookUrl);
             console.log(`📱 Telegram webhook set to: ${webhookUrl}`);
 
-            // Set bot commands menu
-            await bot.setMyCommands([
-                { command: 'start', description: 'Начать / Start bot' },
-                { command: 'menu', description: '🎛️ Панель управления / Control panel' },
-                { command: 'sessions', description: 'Активные сессии / Active sessions' },
-                { command: 'closeall', description: 'Закрыть все / Close all sessions' }
-            ]);
-            console.log(`📋 Bot commands menu configured`);
+            // Clear bot commands menu (remove / button)
+            await bot.setMyCommands([]);
+            console.log(`📋 Bot commands menu cleared`);
             console.log(`💬 Bot ready to receive notifications`);
         } catch (error) {
             console.error('Failed to set Telegram webhook:', error.message);
