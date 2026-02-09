@@ -1460,14 +1460,9 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 return res.sendStatus(200);
             }
 
-            // Handle /menu command - show control panel with inline buttons
-            if (text === '/menu') {
+            // Handle menu command (without /) - show control panel with inline buttons
+            if (text === 'menu' || text === 'Menu' || text === 'MENU') {
                 if (chatId.toString() !== OPERATOR_CHAT_ID) {
-                    try {
-                        await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
-                    } catch (err) {
-                        console.error('Error sending access denied:', err.message);
-                    }
                     return res.sendStatus(200);
                 }
 
@@ -1499,14 +1494,9 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 return res.sendStatus(200);
             }
 
-            // Handle /sessions command
-            if (text === '/sessions') {
+            // Handle sessions command (without /)
+            if (text === 'sessions' || text === 'Sessions' || text === 'SESSIONS') {
                 if (chatId.toString() !== OPERATOR_CHAT_ID) {
-                    try {
-                        await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
-                    } catch (err) {
-                        console.error('Error sending access denied:', err.message);
-                    }
                     return res.sendStatus(200);
                 }
 
@@ -1663,14 +1653,9 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 return res.sendStatus(200);
             }
 
-            // Handle /closeall command
-            if (text === '/closeall') {
+            // Handle closeall command (without /)
+            if (text === 'closeall' || text === 'Closeall' || text === 'CLOSEALL' || text === 'close all') {
                 if (chatId.toString() !== OPERATOR_CHAT_ID) {
-                    try {
-                        await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
-                    } catch (err) {
-                        console.error('Error sending access denied:', err.message);
-                    }
                     return res.sendStatus(200);
                 }
 
@@ -1744,6 +1729,15 @@ app.get('/reset-webhook', async (req, res) => {
         await bot.deleteWebHook({ drop_pending_updates: true });
         console.log('Webhook deleted with pending updates dropped');
 
+        // Clear all bot commands for all scopes
+        await bot.setMyCommands([]);
+        await bot.setMyCommands([], { scope: { type: 'all_private_chats' } });
+        await bot.setMyCommands([], { scope: { type: 'all_group_chats' } });
+        if (OPERATOR_CHAT_ID) {
+            await bot.setMyCommands([], { scope: { type: 'chat', chat_id: OPERATOR_CHAT_ID } });
+        }
+        console.log('All bot commands cleared for all scopes');
+
         // Wait a moment
         await new Promise(resolve => setTimeout(resolve, 1000));
 
@@ -1757,7 +1751,7 @@ app.get('/reset-webhook', async (req, res) => {
 
         res.json({
             success: true,
-            message: 'Webhook reset successfully',
+            message: 'Webhook reset successfully, all commands cleared',
             webhookInfo: info
         });
     } catch (error) {
@@ -1791,9 +1785,24 @@ app.listen(PORT, '0.0.0.0', async () => {
             await bot.setWebHook(webhookUrl);
             console.log(`📱 Telegram webhook set to: ${webhookUrl}`);
 
-            // Clear bot commands menu (remove / button)
+            // Clear bot commands menu completely (remove / button) for all scopes
             await bot.setMyCommands([]);
-            console.log(`📋 Bot commands menu cleared`);
+            console.log(`📋 Bot commands cleared: default scope`);
+
+            // Clear for all private chats
+            await bot.setMyCommands([], { scope: { type: 'all_private_chats' } });
+            console.log(`📋 Bot commands cleared: all_private_chats`);
+
+            // Clear for all group chats
+            await bot.setMyCommands([], { scope: { type: 'all_group_chats' } });
+            console.log(`📋 Bot commands cleared: all_group_chats`);
+
+            // Clear specifically for operator chat
+            if (OPERATOR_CHAT_ID) {
+                await bot.setMyCommands([], { scope: { type: 'chat', chat_id: OPERATOR_CHAT_ID } });
+                console.log(`📋 Bot commands cleared: operator chat ${OPERATOR_CHAT_ID}`);
+            }
+
             console.log(`💬 Bot ready to receive notifications`);
         } catch (error) {
             console.error('Failed to set Telegram webhook:', error.message);
