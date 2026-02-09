@@ -367,7 +367,8 @@ function getSession(sessionId) {
             messages: [],
             operatorMode: false,
             language: null,
-            createdAt: new Date()
+            createdAt: new Date(),
+            lastUserMessageTime: new Date()
         });
     }
     return sessions.get(sessionId);
@@ -442,6 +443,9 @@ app.post('/api/chat', async (req, res) => {
         }
 
         const session = getSession(sessionId);
+
+        // Update last user message time for inactivity tracking
+        session.lastUserMessageTime = new Date();
 
         // Add user message to session
         session.messages.push({
@@ -940,6 +944,9 @@ app.post('/api/upload', (req, res) => {
         const session = getSession(sessionId);
         const photoUrl = `/uploads/${req.file.filename}`;
         const photoPath = req.file.path;
+
+        // Update last user message time for inactivity tracking
+        session.lastUserMessageTime = new Date();
 
         // Add photo message to session
         session.messages.push({
@@ -1775,6 +1782,66 @@ app.get('/api/debug/content', (req, res) => {
     });
 });
 
+// Auto-close inactive sessions after 5 minutes of user inactivity
+const INACTIVITY_TIMEOUT = 5 * 60 * 1000; // 5 minutes in milliseconds
+
+async function checkInactiveSessions() {
+    const now = new Date();
+    console.log(`⏰ Checking for inactive sessions... (${sessions.size} total sessions)`);
+
+    for (const [sessionId, session] of sessions.entries()) {
+        // Only check sessions in operator mode
+        if (!session.operatorMode) continue;
+
+        // Check if session has been inactive for more than 5 minutes
+        const inactiveTime = now - session.lastUserMessageTime;
+
+        if (inactiveTime >= INACTIVITY_TIMEOUT) {
+            console.log(`⏰ Session ${sessionId} inactive for ${Math.floor(inactiveTime / 1000 / 60)} minutes - closing...`);
+
+            // Send timeout message to user
+            const timeoutMessage = {
+                'English': '⏰ Session closed due to inactivity. Type /operator if you need help.',
+                'Slovenian': '⏰ Seja zaprta zaradi neaktivnosti. Vnesite /operator če potrebujete pomoč.',
+                'Russian': '⏰ Сессия закрыта из-за неактивности. Введите /operator если нужна помощь.',
+                'Ukrainian': '⏰ Сесію закрито через неактивність. Введіть /operator якщо потрібна допомога.',
+                'Croatian': '⏰ Sesija zatvorena zbog neaktivnosti. Unesite /operator ako trebate pomoć.',
+                'Serbian': '⏰ Sesija zatvorena zbog neaktivnosti. Unesite /operator ako trebate pomoć.',
+                'Italian': '⏰ Sessione chiusa per inattività. Digita /operator se hai bisogno di aiuto.',
+                'German': '⏰ Sitzung wegen Inaktivität geschlossen. Geben Sie /operator ein, wenn Sie Hilfe benötigen.'
+            };
+
+            session.messages.push({
+                role: 'assistant',
+                content: timeoutMessage[session.language] || timeoutMessage['English'],
+                timestamp: new Date(),
+                fromOperator: true
+            });
+
+            // Notify operator in Telegram
+            if (bot && OPERATOR_CHAT_ID) {
+                try {
+                    await bot.sendMessage(OPERATOR_CHAT_ID,
+                        `⏰ *СЕССИЯ ЗАКРЫТА - НЕАКТИВНОСТЬ*\n` +
+                        `━━━━━━━━━━━━━━━━━\n` +
+                        `📝 Session ID: \`${sessionId}\`\n` +
+                        `⏱️ Неактивность: ${Math.floor(inactiveTime / 1000 / 60)} минут\n\n` +
+                        `Сессия автоматически закрыта из-за отсутствия сообщений от пользователя.\n` +
+                        `Session automatically closed - no messages from user.`,
+                        { parse_mode: 'Markdown' }
+                    );
+                } catch (error) {
+                    console.error('Error notifying operator about timeout:', error);
+                }
+            }
+
+            // Exit operator mode
+            session.operatorMode = false;
+            console.log(`✅ Session ${sessionId} closed due to inactivity`);
+        }
+    }
+}
+
 // Start server
 app.listen(PORT, '0.0.0.0', async () => {
     console.log(`🚀 Server running on port ${PORT}`);
@@ -1814,4 +1881,8 @@ app.listen(PORT, '0.0.0.0', async () => {
     } else {
         console.log(`📱 Telegram bot: disabled`);
     }
+
+    // Start checking for inactive sessions every minute
+    setInterval(checkInactiveSessions, 60 * 1000);
+    console.log(`⏰ Inactivity checker started: sessions will auto-close after 5 minutes of user inactivity`);
 });
