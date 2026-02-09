@@ -2999,13 +2999,32 @@
             }
 
             .schedule-text {
-                padding: 12px 16px;
-                background: rgba(0, 151, 218, 0.08);
-                border-radius: 8px;
-                font-size: 21px;
+                padding: 12px 0;
+                text-align: center;
+            }
+
+            .schedule-header {
+                font-size: 12px;
                 font-weight: 600;
-                color: #1a1a1a;
-                line-height: 1.4;
+                color: #666;
+                text-transform: uppercase;
+                letter-spacing: 0.5px;
+                margin-bottom: 8px;
+            }
+
+            .schedule-hours-large {
+                font-size: 32px;
+                font-weight: 700;
+                color: #0097da;
+                margin-bottom: 8px;
+                letter-spacing: 1px;
+            }
+
+            .schedule-days-small {
+                font-size: 13px;
+                font-weight: 500;
+                color: #666;
+                line-height: 1.5;
             }
 
             .time-display {
@@ -4531,8 +4550,15 @@
                                     <!-- Hours Display -->
                                     <div class="schedule-hours">
                                         <div class="schedule-text">
-                                            <span class="lang-si">Pon, Tor, Sre, Čet, Pet, Sob, <span style="color: #dc3545; text-decoration: line-through;">Ned</span>, <span style="color: #dc3545; text-decoration: line-through;">prazniki</span><br>08:00 - 21:00</span>
-                                            <span class="lang-en">Mon, Tue, Wed, Thu, Fri, Sat, <span style="color: #dc3545; text-decoration: line-through;">Sun</span>, <span style="color: #dc3545; text-decoration: line-through;">holidays</span><br>08:00 - 21:00</span>
+                                            <div class="schedule-header">
+                                                <span class="lang-si">Odpiralni čas</span>
+                                                <span class="lang-en">Opening hours</span>
+                                            </div>
+                                            <div class="schedule-hours-large">08:00 - 21:00</div>
+                                            <div class="schedule-days-small">
+                                                <span class="lang-si">Pon • Tor • Sre • Čet • Pet • Sob • <span style="color: #dc3545; text-decoration: line-through;">Ned</span> • <span style="color: #dc3545; text-decoration: line-through;">prazniki</span></span>
+                                                <span class="lang-en">Mon • Tue • Wed • Thu • Fri • Sat • <span style="color: #dc3545; text-decoration: line-through;">Sun</span> • <span style="color: #dc3545; text-decoration: line-through;">holidays</span></span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -4692,8 +4718,15 @@
                                     <!-- Hours Display -->
                                     <div class="schedule-hours">
                                         <div class="schedule-text">
-                                            <span class="lang-si">Pon, Tor, Sre, Čet, Pet, Sob, Ned, prazniki<br>06:00 - 23:00</span>
-                                            <span class="lang-en">Mon, Tue, Wed, Thu, Fri, Sat, Sun, holidays<br>06:00 - 23:00</span>
+                                            <div class="schedule-header">
+                                                <span class="lang-si">Odprto vsak dan</span>
+                                                <span class="lang-en">Open daily</span>
+                                            </div>
+                                            <div class="schedule-hours-large">06:00 - 23:00</div>
+                                            <div class="schedule-days-small">
+                                                <span class="lang-si">Pon • Tor • Sre • Čet • Pet • Sob • Ned • prazniki</span>
+                                                <span class="lang-en">Mon • Tue • Wed • Thu • Fri • Sat • Sun • holidays</span>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
