@@ -1636,17 +1636,11 @@
             gap: 8px;
         }
 
-        .amenity-group > div:first-child {
-            display: flex;
-            gap: 4px;
-            align-items: flex-end;
-            height: 62px;
-        }
-
         .amenity-icon-animated {
             flex-shrink: 0;
             display: flex;
             align-items: flex-end;
+            height: 62px;
         }
 
         .amenity-icon-large {
@@ -1660,6 +1654,17 @@
             color: #0097DA;
             text-align: center;
             margin-top: 4px;
+            white-space: nowrap;
+        }
+
+        /* Individual icon sizing */
+        .amenity-icon-animated svg {
+            display: block;
+        }
+
+        .amenity-icon-large svg {
+            width: 58px !important;
+            height: 58px !important;
         }
 
         @keyframes drumRotate {
