@@ -1283,6 +1283,12 @@ app.post(`/telegram/webhook`, async (req, res) => {
             const chatId = msg.chat.id;
             let text = msg.text || '';
 
+            // Ignore messages from the bot itself
+            if (msg.from && msg.from.is_bot) {
+                console.log(`Ignoring message from bot`);
+                return res.sendStatus(200);
+            }
+
             // Remove bot mention from commands (e.g., /sessions@botname -> /sessions)
             text = text.replace(/@\w+/, '');
 
