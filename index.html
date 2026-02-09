@@ -1605,6 +1605,60 @@
             line-height: 1.2;
         }
 
+        /* NEW AMENITIES LAYOUT */
+        .location-amenities-new {
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
+            gap: 16px;
+            padding: 16px 0;
+            flex-wrap: wrap;
+        }
+
+        .amenity-group {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .amenity-group > div:first-child {
+            display: flex;
+            gap: 4px;
+            align-items: flex-end;
+        }
+
+        .amenity-icon-animated {
+            flex-shrink: 0;
+        }
+
+        .amenity-icon-large {
+            transform: scale(1.2);
+        }
+
+        .amenity-label-new {
+            font-size: 14px;
+            font-weight: 700;
+            color: #0097DA;
+            text-align: center;
+            margin-top: 4px;
+        }
+
+        @keyframes drumRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes tumbleTop {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        @keyframes tumbleBottom {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(-360deg); }
+        }
+
         /* SCHEDULE VISUALIZATION */
         .schedule-visual {
             display: flex;
@@ -4601,49 +4655,182 @@
                                     <span class="lang-si">Storitve</span>
                                     <span class="lang-en">Services</span>
                                 </div>
-                                <div class="location-amenities">
-                                    <!-- Washing 9kg -->
-                                    <div class="amenity-item">
-                                        <div class="amenity-icon">
-                                            <img src="washing.png" alt="Washing">
-                                        </div>
-                                        <div class="amenity-label">3×9kg</div>
-                                    </div>
-                                    <!-- Washing 18kg -->
-                                    <div class="amenity-item">
-                                        <div class="amenity-icon">
-                                            <img src="washing.png" alt="Washing">
-                                        </div>
-                                        <div class="amenity-label">1×18kg</div>
-                                    </div>
-                                    <!-- Drying 18kg -->
-                                    <div class="amenity-item">
-                                        <div class="amenity-icon">
-                                            <img src="drying.png" alt="Drying">
-                                        </div>
-                                        <div class="amenity-label">4×18kg</div>
-                                    </div>
-                                    <!-- Payment -->
-                                    <div class="amenity-item" style="justify-content: center;">
-                                        <div style="line-height: 1; text-align: center; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; height: 60px;">
-                                            <span style="font-size: 28px;">🪙</span>
-                                            <span style="font-size: 28px;">💳</span>
-                                        </div>
-                                    </div>
-                                    <!-- Parking -->
-                                    <div class="amenity-item">
-                                        <div class="amenity-icon">
-                                            <svg width="100%" height="100%" viewBox="0 0 100 100" style="max-height: 50px;">
-                                                <!-- Road sign background -->
-                                                <rect x="5" y="5" width="90" height="90" rx="8" fill="#0066CC" stroke="white" stroke-width="3"/>
-                                                <!-- P letter -->
-                                                <text x="50" y="73" text-anchor="middle" font-family="Arial, sans-serif" font-size="70" font-weight="bold" fill="white">P</text>
+                                <div class="location-amenities-new">
+                                    <!-- Three 10kg washing machines -->
+                                    <div class="amenity-group">
+                                        <div class="amenity-icon-animated">
+                                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="6" y="4" width="36" height="40" rx="3" fill="white" stroke="#0097DA" stroke-width="2.5"/>
+                                                <rect x="6" y="4" width="36" height="8" rx="3" fill="#0097DA" opacity="0.15"/>
+                                                <circle cx="12" cy="8" r="1.5" fill="#0097DA"/>
+                                                <circle cx="17" cy="8" r="1.5" fill="#0097DA"/>
+                                                <circle cx="22" cy="8" r="1.5" fill="#0097DA"/>
+                                                <rect x="28" y="6" width="10" height="4" rx="1" fill="#0097DA" opacity="0.3"/>
+                                                <circle cx="24" cy="28" r="13" fill="white" stroke="#0097DA" stroke-width="2.5"/>
+                                                <circle cx="24" cy="28" r="10" fill="#8FD8F8" opacity="0.3"/>
+                                                <g style="transform-origin: 24px 28px; animation: drumRotate 3s linear infinite;">
+                                                    <circle cx="24" cy="22" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="29" cy="25" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="29" cy="31" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="24" cy="34" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="19" cy="31" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="19" cy="25" r="1" fill="#0097DA" opacity="0.4"/>
+                                                </g>
+                                                <g opacity="0.6">
+                                                    <circle cx="21" cy="30" r="1.5" fill="#43B0E4">
+                                                        <animate attributeName="cy" values="30;26;30" dur="2s" repeatCount="indefinite"/>
+                                                    </circle>
+                                                    <circle cx="27" cy="26" r="1.2" fill="#43B0E4">
+                                                        <animate attributeName="cy" values="26;22;26" dur="2.5s" repeatCount="indefinite"/>
+                                                    </circle>
+                                                </g>
                                             </svg>
                                         </div>
-                                        <div class="amenity-label">
-                                            <span class="lang-si">Brezplačno</span>
-                                            <span class="lang-en">Free</span>
+                                        <div class="amenity-icon-animated">
+                                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="6" y="4" width="36" height="40" rx="3" fill="white" stroke="#0097DA" stroke-width="2.5"/>
+                                                <rect x="6" y="4" width="36" height="8" rx="3" fill="#0097DA" opacity="0.15"/>
+                                                <circle cx="12" cy="8" r="1.5" fill="#0097DA"/>
+                                                <circle cx="17" cy="8" r="1.5" fill="#0097DA"/>
+                                                <circle cx="22" cy="8" r="1.5" fill="#0097DA"/>
+                                                <rect x="28" y="6" width="10" height="4" rx="1" fill="#0097DA" opacity="0.3"/>
+                                                <circle cx="24" cy="28" r="13" fill="white" stroke="#0097DA" stroke-width="2.5"/>
+                                                <circle cx="24" cy="28" r="10" fill="#8FD8F8" opacity="0.3"/>
+                                                <g style="transform-origin: 24px 28px; animation: drumRotate 3s linear infinite;">
+                                                    <circle cx="24" cy="22" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="29" cy="25" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="29" cy="31" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="24" cy="34" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="19" cy="31" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="19" cy="25" r="1" fill="#0097DA" opacity="0.4"/>
+                                                </g>
+                                                <g opacity="0.6">
+                                                    <circle cx="21" cy="30" r="1.5" fill="#43B0E4">
+                                                        <animate attributeName="cy" values="30;26;30" dur="2s" repeatCount="indefinite"/>
+                                                    </circle>
+                                                    <circle cx="27" cy="26" r="1.2" fill="#43B0E4">
+                                                        <animate attributeName="cy" values="26;22;26" dur="2.5s" repeatCount="indefinite"/>
+                                                    </circle>
+                                                </g>
+                                            </svg>
                                         </div>
+                                        <div class="amenity-icon-animated">
+                                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="6" y="4" width="36" height="40" rx="3" fill="white" stroke="#0097DA" stroke-width="2.5"/>
+                                                <rect x="6" y="4" width="36" height="8" rx="3" fill="#0097DA" opacity="0.15"/>
+                                                <circle cx="12" cy="8" r="1.5" fill="#0097DA"/>
+                                                <circle cx="17" cy="8" r="1.5" fill="#0097DA"/>
+                                                <circle cx="22" cy="8" r="1.5" fill="#0097DA"/>
+                                                <rect x="28" y="6" width="10" height="4" rx="1" fill="#0097DA" opacity="0.3"/>
+                                                <circle cx="24" cy="28" r="13" fill="white" stroke="#0097DA" stroke-width="2.5"/>
+                                                <circle cx="24" cy="28" r="10" fill="#8FD8F8" opacity="0.3"/>
+                                                <g style="transform-origin: 24px 28px; animation: drumRotate 3s linear infinite;">
+                                                    <circle cx="24" cy="22" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="29" cy="25" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="29" cy="31" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="24" cy="34" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="19" cy="31" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="19" cy="25" r="1" fill="#0097DA" opacity="0.4"/>
+                                                </g>
+                                                <g opacity="0.6">
+                                                    <circle cx="21" cy="30" r="1.5" fill="#43B0E4">
+                                                        <animate attributeName="cy" values="30;26;30" dur="2s" repeatCount="indefinite"/>
+                                                    </circle>
+                                                    <circle cx="27" cy="26" r="1.2" fill="#43B0E4">
+                                                        <animate attributeName="cy" values="26;22;26" dur="2.5s" repeatCount="indefinite"/>
+                                                    </circle>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="amenity-label-new">10kg</div>
+                                    </div>
+
+                                    <!-- One 20kg washing machine (20% larger) -->
+                                    <div class="amenity-group">
+                                        <div class="amenity-icon-animated amenity-icon-large">
+                                            <svg width="58" height="58" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="6" y="4" width="36" height="40" rx="3" fill="white" stroke="#0097DA" stroke-width="2.5"/>
+                                                <rect x="6" y="4" width="36" height="8" rx="3" fill="#0097DA" opacity="0.15"/>
+                                                <circle cx="12" cy="8" r="1.5" fill="#0097DA"/>
+                                                <circle cx="17" cy="8" r="1.5" fill="#0097DA"/>
+                                                <circle cx="22" cy="8" r="1.5" fill="#0097DA"/>
+                                                <rect x="28" y="6" width="10" height="4" rx="1" fill="#0097DA" opacity="0.3"/>
+                                                <circle cx="24" cy="28" r="13" fill="white" stroke="#0097DA" stroke-width="2.5"/>
+                                                <circle cx="24" cy="28" r="10" fill="#8FD8F8" opacity="0.3"/>
+                                                <g style="transform-origin: 24px 28px; animation: drumRotate 3s linear infinite;">
+                                                    <circle cx="24" cy="22" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="29" cy="25" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="29" cy="31" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="24" cy="34" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="19" cy="31" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="19" cy="25" r="1" fill="#0097DA" opacity="0.4"/>
+                                                </g>
+                                                <g opacity="0.6">
+                                                    <circle cx="21" cy="30" r="1.5" fill="#43B0E4">
+                                                        <animate attributeName="cy" values="30;26;30" dur="2s" repeatCount="indefinite"/>
+                                                    </circle>
+                                                    <circle cx="27" cy="26" r="1.2" fill="#43B0E4">
+                                                        <animate attributeName="cy" values="26;22;26" dur="2.5s" repeatCount="indefinite"/>
+                                                    </circle>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="amenity-label-new">20kg</div>
+                                    </div>
+
+                                    <!-- Two 20kg dryers -->
+                                    <div class="amenity-group">
+                                        <div class="amenity-icon-animated">
+                                            <svg width="48" height="62" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="6" y="2" width="36" height="21" rx="2" fill="white" stroke="#FF9B71" stroke-width="2"/>
+                                                <rect x="6" y="2" width="36" height="4.5" rx="2" fill="#FF9B71" opacity="0.15"/>
+                                                <circle cx="10" cy="4.2" r="0.8" fill="#FF9B71"/>
+                                                <circle cx="13.5" cy="4.2" r="0.8" fill="#FF9B71"/>
+                                                <circle cx="24" cy="14" r="7" fill="white" stroke="#FF9B71" stroke-width="2"/>
+                                                <circle cx="24" cy="14" r="5.5" fill="#FF9B71" opacity="0.2"/>
+                                                <g style="transform-origin: 24px 14px; animation: tumbleTop 4s linear infinite;">
+                                                    <ellipse cx="24" cy="11" rx="2" ry="1.2" fill="#FF9B71" opacity="0.5"/>
+                                                    <ellipse cx="26.5" cy="13" rx="1.5" ry="2" fill="#FF6B35" opacity="0.5"/>
+                                                </g>
+                                                <line x1="6" y1="23" x2="42" y2="23" stroke="#FF9B71" stroke-width="1.5" opacity="0.3"/>
+                                                <rect x="6" y="23" width="36" height="21" rx="2" fill="white" stroke="#FF9B71" stroke-width="2"/>
+                                                <rect x="6" y="23" width="36" height="4.5" rx="2" fill="#FF9B71" opacity="0.15"/>
+                                                <circle cx="10" cy="25.2" r="0.8" fill="#FF9B71"/>
+                                                <circle cx="13.5" cy="25.2" r="0.8" fill="#FF9B71"/>
+                                                <circle cx="24" cy="35" r="7" fill="white" stroke="#FF9B71" stroke-width="2"/>
+                                                <circle cx="24" cy="35" r="5.5" fill="#FF9B71" opacity="0.2"/>
+                                                <g style="transform-origin: 24px 35px; animation: tumbleBottom 5s linear infinite;">
+                                                    <ellipse cx="24" cy="32" rx="2" ry="1.2" fill="#FF9B71" opacity="0.5"/>
+                                                    <ellipse cx="26.5" cy="34" rx="1.5" ry="2" fill="#FF6B35" opacity="0.5"/>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="amenity-icon-animated">
+                                            <svg width="48" height="62" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="6" y="2" width="36" height="21" rx="2" fill="white" stroke="#FF9B71" stroke-width="2"/>
+                                                <rect x="6" y="2" width="36" height="4.5" rx="2" fill="#FF9B71" opacity="0.15"/>
+                                                <circle cx="10" cy="4.2" r="0.8" fill="#FF9B71"/>
+                                                <circle cx="13.5" cy="4.2" r="0.8" fill="#FF9B71"/>
+                                                <circle cx="24" cy="14" r="7" fill="white" stroke="#FF9B71" stroke-width="2"/>
+                                                <circle cx="24" cy="14" r="5.5" fill="#FF9B71" opacity="0.2"/>
+                                                <g style="transform-origin: 24px 14px; animation: tumbleTop 4s linear infinite;">
+                                                    <ellipse cx="24" cy="11" rx="2" ry="1.2" fill="#FF9B71" opacity="0.5"/>
+                                                    <ellipse cx="26.5" cy="13" rx="1.5" ry="2" fill="#FF6B35" opacity="0.5"/>
+                                                </g>
+                                                <line x1="6" y1="23" x2="42" y2="23" stroke="#FF9B71" stroke-width="1.5" opacity="0.3"/>
+                                                <rect x="6" y="23" width="36" height="21" rx="2" fill="white" stroke="#FF9B71" stroke-width="2"/>
+                                                <rect x="6" y="23" width="36" height="4.5" rx="2" fill="#FF9B71" opacity="0.15"/>
+                                                <circle cx="10" cy="25.2" r="0.8" fill="#FF9B71"/>
+                                                <circle cx="13.5" cy="25.2" r="0.8" fill="#FF9B71"/>
+                                                <circle cx="24" cy="35" r="7" fill="white" stroke="#FF9B71" stroke-width="2"/>
+                                                <circle cx="24" cy="35" r="5.5" fill="#FF9B71" opacity="0.2"/>
+                                                <g style="transform-origin: 24px 35px; animation: tumbleBottom 5s linear infinite;">
+                                                    <ellipse cx="24" cy="32" rx="2" ry="1.2" fill="#FF9B71" opacity="0.5"/>
+                                                    <ellipse cx="26.5" cy="34" rx="1.5" ry="2" fill="#FF6B35" opacity="0.5"/>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="amenity-label-new">4×20kg</div>
                                     </div>
                                 </div>
                             </div>
@@ -4769,59 +4956,182 @@
                                     <span class="lang-si">Storitve</span>
                                     <span class="lang-en">Services</span>
                                 </div>
-                                <div class="location-amenities">
-                                    <!-- Washing 9kg -->
-                                    <div class="amenity-item">
-                                        <div class="amenity-icon">
-                                            <img src="washing.png" alt="Washing">
-                                        </div>
-                                        <div class="amenity-label">3×9kg</div>
-                                    </div>
-                                    <!-- Washing 18kg -->
-                                    <div class="amenity-item">
-                                        <div class="amenity-icon">
-                                            <img src="washing.png" alt="Washing">
-                                        </div>
-                                        <div class="amenity-label">1×18kg</div>
-                                    </div>
-                                    <!-- Drying 18kg -->
-                                    <div class="amenity-item">
-                                        <div class="amenity-icon">
-                                            <img src="drying.png" alt="Drying">
-                                        </div>
-                                        <div class="amenity-label">4×18kg</div>
-                                    </div>
-                                    <!-- Disinfection -->
-                                    <div class="amenity-item">
-                                        <div class="amenity-icon">
-                                            <img src="disinfection.png" alt="Disinfection">
-                                        </div>
-                                        <div class="amenity-label">
-                                            <span class="lang-si">Ozon 1</span>
-                                            <span class="lang-en">Ozone 1</span>
-                                        </div>
-                                    </div>
-                                    <!-- Payment -->
-                                    <div class="amenity-item" style="justify-content: center;">
-                                        <div style="line-height: 1; text-align: center; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; height: 60px;">
-                                            <span style="font-size: 28px;">🪙</span>
-                                            <span style="font-size: 28px;">💳</span>
-                                        </div>
-                                    </div>
-                                    <!-- Parking -->
-                                    <div class="amenity-item">
-                                        <div class="amenity-icon">
-                                            <svg width="100%" height="100%" viewBox="0 0 100 100" style="max-height: 50px;">
-                                                <!-- Road sign background -->
-                                                <rect x="5" y="5" width="90" height="90" rx="8" fill="#0066CC" stroke="white" stroke-width="3"/>
-                                                <!-- P letter -->
-                                                <text x="50" y="73" text-anchor="middle" font-family="Arial, sans-serif" font-size="70" font-weight="bold" fill="white">P</text>
+                                <div class="location-amenities-new">
+                                    <!-- Three 10kg washing machines -->
+                                    <div class="amenity-group">
+                                        <div class="amenity-icon-animated">
+                                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="6" y="4" width="36" height="40" rx="3" fill="white" stroke="#0097DA" stroke-width="2.5"/>
+                                                <rect x="6" y="4" width="36" height="8" rx="3" fill="#0097DA" opacity="0.15"/>
+                                                <circle cx="12" cy="8" r="1.5" fill="#0097DA"/>
+                                                <circle cx="17" cy="8" r="1.5" fill="#0097DA"/>
+                                                <circle cx="22" cy="8" r="1.5" fill="#0097DA"/>
+                                                <rect x="28" y="6" width="10" height="4" rx="1" fill="#0097DA" opacity="0.3"/>
+                                                <circle cx="24" cy="28" r="13" fill="white" stroke="#0097DA" stroke-width="2.5"/>
+                                                <circle cx="24" cy="28" r="10" fill="#8FD8F8" opacity="0.3"/>
+                                                <g style="transform-origin: 24px 28px; animation: drumRotate 3s linear infinite;">
+                                                    <circle cx="24" cy="22" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="29" cy="25" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="29" cy="31" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="24" cy="34" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="19" cy="31" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="19" cy="25" r="1" fill="#0097DA" opacity="0.4"/>
+                                                </g>
+                                                <g opacity="0.6">
+                                                    <circle cx="21" cy="30" r="1.5" fill="#43B0E4">
+                                                        <animate attributeName="cy" values="30;26;30" dur="2s" repeatCount="indefinite"/>
+                                                    </circle>
+                                                    <circle cx="27" cy="26" r="1.2" fill="#43B0E4">
+                                                        <animate attributeName="cy" values="26;22;26" dur="2.5s" repeatCount="indefinite"/>
+                                                    </circle>
+                                                </g>
                                             </svg>
                                         </div>
-                                        <div class="amenity-label">
-                                            <span class="lang-si">Brezplačno</span>
-                                            <span class="lang-en">Free</span>
+                                        <div class="amenity-icon-animated">
+                                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="6" y="4" width="36" height="40" rx="3" fill="white" stroke="#0097DA" stroke-width="2.5"/>
+                                                <rect x="6" y="4" width="36" height="8" rx="3" fill="#0097DA" opacity="0.15"/>
+                                                <circle cx="12" cy="8" r="1.5" fill="#0097DA"/>
+                                                <circle cx="17" cy="8" r="1.5" fill="#0097DA"/>
+                                                <circle cx="22" cy="8" r="1.5" fill="#0097DA"/>
+                                                <rect x="28" y="6" width="10" height="4" rx="1" fill="#0097DA" opacity="0.3"/>
+                                                <circle cx="24" cy="28" r="13" fill="white" stroke="#0097DA" stroke-width="2.5"/>
+                                                <circle cx="24" cy="28" r="10" fill="#8FD8F8" opacity="0.3"/>
+                                                <g style="transform-origin: 24px 28px; animation: drumRotate 3s linear infinite;">
+                                                    <circle cx="24" cy="22" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="29" cy="25" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="29" cy="31" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="24" cy="34" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="19" cy="31" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="19" cy="25" r="1" fill="#0097DA" opacity="0.4"/>
+                                                </g>
+                                                <g opacity="0.6">
+                                                    <circle cx="21" cy="30" r="1.5" fill="#43B0E4">
+                                                        <animate attributeName="cy" values="30;26;30" dur="2s" repeatCount="indefinite"/>
+                                                    </circle>
+                                                    <circle cx="27" cy="26" r="1.2" fill="#43B0E4">
+                                                        <animate attributeName="cy" values="26;22;26" dur="2.5s" repeatCount="indefinite"/>
+                                                    </circle>
+                                                </g>
+                                            </svg>
                                         </div>
+                                        <div class="amenity-icon-animated">
+                                            <svg width="48" height="48" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="6" y="4" width="36" height="40" rx="3" fill="white" stroke="#0097DA" stroke-width="2.5"/>
+                                                <rect x="6" y="4" width="36" height="8" rx="3" fill="#0097DA" opacity="0.15"/>
+                                                <circle cx="12" cy="8" r="1.5" fill="#0097DA"/>
+                                                <circle cx="17" cy="8" r="1.5" fill="#0097DA"/>
+                                                <circle cx="22" cy="8" r="1.5" fill="#0097DA"/>
+                                                <rect x="28" y="6" width="10" height="4" rx="1" fill="#0097DA" opacity="0.3"/>
+                                                <circle cx="24" cy="28" r="13" fill="white" stroke="#0097DA" stroke-width="2.5"/>
+                                                <circle cx="24" cy="28" r="10" fill="#8FD8F8" opacity="0.3"/>
+                                                <g style="transform-origin: 24px 28px; animation: drumRotate 3s linear infinite;">
+                                                    <circle cx="24" cy="22" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="29" cy="25" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="29" cy="31" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="24" cy="34" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="19" cy="31" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="19" cy="25" r="1" fill="#0097DA" opacity="0.4"/>
+                                                </g>
+                                                <g opacity="0.6">
+                                                    <circle cx="21" cy="30" r="1.5" fill="#43B0E4">
+                                                        <animate attributeName="cy" values="30;26;30" dur="2s" repeatCount="indefinite"/>
+                                                    </circle>
+                                                    <circle cx="27" cy="26" r="1.2" fill="#43B0E4">
+                                                        <animate attributeName="cy" values="26;22;26" dur="2.5s" repeatCount="indefinite"/>
+                                                    </circle>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="amenity-label-new">10kg</div>
+                                    </div>
+
+                                    <!-- One 20kg washing machine (20% larger) -->
+                                    <div class="amenity-group">
+                                        <div class="amenity-icon-animated amenity-icon-large">
+                                            <svg width="58" height="58" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="6" y="4" width="36" height="40" rx="3" fill="white" stroke="#0097DA" stroke-width="2.5"/>
+                                                <rect x="6" y="4" width="36" height="8" rx="3" fill="#0097DA" opacity="0.15"/>
+                                                <circle cx="12" cy="8" r="1.5" fill="#0097DA"/>
+                                                <circle cx="17" cy="8" r="1.5" fill="#0097DA"/>
+                                                <circle cx="22" cy="8" r="1.5" fill="#0097DA"/>
+                                                <rect x="28" y="6" width="10" height="4" rx="1" fill="#0097DA" opacity="0.3"/>
+                                                <circle cx="24" cy="28" r="13" fill="white" stroke="#0097DA" stroke-width="2.5"/>
+                                                <circle cx="24" cy="28" r="10" fill="#8FD8F8" opacity="0.3"/>
+                                                <g style="transform-origin: 24px 28px; animation: drumRotate 3s linear infinite;">
+                                                    <circle cx="24" cy="22" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="29" cy="25" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="29" cy="31" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="24" cy="34" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="19" cy="31" r="1" fill="#0097DA" opacity="0.4"/>
+                                                    <circle cx="19" cy="25" r="1" fill="#0097DA" opacity="0.4"/>
+                                                </g>
+                                                <g opacity="0.6">
+                                                    <circle cx="21" cy="30" r="1.5" fill="#43B0E4">
+                                                        <animate attributeName="cy" values="30;26;30" dur="2s" repeatCount="indefinite"/>
+                                                    </circle>
+                                                    <circle cx="27" cy="26" r="1.2" fill="#43B0E4">
+                                                        <animate attributeName="cy" values="26;22;26" dur="2.5s" repeatCount="indefinite"/>
+                                                    </circle>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="amenity-label-new">20kg</div>
+                                    </div>
+
+                                    <!-- Two 20kg dryers -->
+                                    <div class="amenity-group">
+                                        <div class="amenity-icon-animated">
+                                            <svg width="48" height="62" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="6" y="2" width="36" height="21" rx="2" fill="white" stroke="#FF9B71" stroke-width="2"/>
+                                                <rect x="6" y="2" width="36" height="4.5" rx="2" fill="#FF9B71" opacity="0.15"/>
+                                                <circle cx="10" cy="4.2" r="0.8" fill="#FF9B71"/>
+                                                <circle cx="13.5" cy="4.2" r="0.8" fill="#FF9B71"/>
+                                                <circle cx="24" cy="14" r="7" fill="white" stroke="#FF9B71" stroke-width="2"/>
+                                                <circle cx="24" cy="14" r="5.5" fill="#FF9B71" opacity="0.2"/>
+                                                <g style="transform-origin: 24px 14px; animation: tumbleTop 4s linear infinite;">
+                                                    <ellipse cx="24" cy="11" rx="2" ry="1.2" fill="#FF9B71" opacity="0.5"/>
+                                                    <ellipse cx="26.5" cy="13" rx="1.5" ry="2" fill="#FF6B35" opacity="0.5"/>
+                                                </g>
+                                                <line x1="6" y1="23" x2="42" y2="23" stroke="#FF9B71" stroke-width="1.5" opacity="0.3"/>
+                                                <rect x="6" y="23" width="36" height="21" rx="2" fill="white" stroke="#FF9B71" stroke-width="2"/>
+                                                <rect x="6" y="23" width="36" height="4.5" rx="2" fill="#FF9B71" opacity="0.15"/>
+                                                <circle cx="10" cy="25.2" r="0.8" fill="#FF9B71"/>
+                                                <circle cx="13.5" cy="25.2" r="0.8" fill="#FF9B71"/>
+                                                <circle cx="24" cy="35" r="7" fill="white" stroke="#FF9B71" stroke-width="2"/>
+                                                <circle cx="24" cy="35" r="5.5" fill="#FF9B71" opacity="0.2"/>
+                                                <g style="transform-origin: 24px 35px; animation: tumbleBottom 5s linear infinite;">
+                                                    <ellipse cx="24" cy="32" rx="2" ry="1.2" fill="#FF9B71" opacity="0.5"/>
+                                                    <ellipse cx="26.5" cy="34" rx="1.5" ry="2" fill="#FF6B35" opacity="0.5"/>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="amenity-icon-animated">
+                                            <svg width="48" height="62" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <rect x="6" y="2" width="36" height="21" rx="2" fill="white" stroke="#FF9B71" stroke-width="2"/>
+                                                <rect x="6" y="2" width="36" height="4.5" rx="2" fill="#FF9B71" opacity="0.15"/>
+                                                <circle cx="10" cy="4.2" r="0.8" fill="#FF9B71"/>
+                                                <circle cx="13.5" cy="4.2" r="0.8" fill="#FF9B71"/>
+                                                <circle cx="24" cy="14" r="7" fill="white" stroke="#FF9B71" stroke-width="2"/>
+                                                <circle cx="24" cy="14" r="5.5" fill="#FF9B71" opacity="0.2"/>
+                                                <g style="transform-origin: 24px 14px; animation: tumbleTop 4s linear infinite;">
+                                                    <ellipse cx="24" cy="11" rx="2" ry="1.2" fill="#FF9B71" opacity="0.5"/>
+                                                    <ellipse cx="26.5" cy="13" rx="1.5" ry="2" fill="#FF6B35" opacity="0.5"/>
+                                                </g>
+                                                <line x1="6" y1="23" x2="42" y2="23" stroke="#FF9B71" stroke-width="1.5" opacity="0.3"/>
+                                                <rect x="6" y="23" width="36" height="21" rx="2" fill="white" stroke="#FF9B71" stroke-width="2"/>
+                                                <rect x="6" y="23" width="36" height="4.5" rx="2" fill="#FF9B71" opacity="0.15"/>
+                                                <circle cx="10" cy="25.2" r="0.8" fill="#FF9B71"/>
+                                                <circle cx="13.5" cy="25.2" r="0.8" fill="#FF9B71"/>
+                                                <circle cx="24" cy="35" r="7" fill="white" stroke="#FF9B71" stroke-width="2"/>
+                                                <circle cx="24" cy="35" r="5.5" fill="#FF9B71" opacity="0.2"/>
+                                                <g style="transform-origin: 24px 35px; animation: tumbleBottom 5s linear infinite;">
+                                                    <ellipse cx="24" cy="32" rx="2" ry="1.2" fill="#FF9B71" opacity="0.5"/>
+                                                    <ellipse cx="26.5" cy="34" rx="1.5" ry="2" fill="#FF6B35" opacity="0.5"/>
+                                                </g>
+                                            </svg>
+                                        </div>
+                                        <div class="amenity-label-new">4×20kg</div>
                                     </div>
                                 </div>
                             </div>
