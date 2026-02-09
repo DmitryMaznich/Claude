@@ -1747,7 +1747,7 @@ app.get('/reset-webhook', async (req, res) => {
         console.log(`Webhook set to: ${webhookUrl}`);
 
         // Get webhook info
-        const info = await bot.getWebhookInfo();
+        const info = await bot.getWebHookInfo();
 
         res.json({
             success: true,
