@@ -2998,18 +2998,29 @@
                 margin-top: 0;
             }
 
-            /* Hide the old "Opening hours" label on mobile for schedule items */
+            /* Hide the old "Opening hours" label and icon on mobile for schedule items */
             .location-info-item:has(.schedule-visual) .location-info-label {
                 display: none;
             }
 
-            /* Reduce top padding on schedule items */
+            .location-info-item:has(.schedule-visual) .location-info-icon {
+                display: none;
+            }
+
+            /* Center schedule content across full card width */
+            .location-info-item:has(.schedule-visual) .location-info-content {
+                flex: 1;
+                width: 100%;
+            }
+
+            /* Reduce padding by half on schedule items */
             .location-info-item:has(.schedule-visual) {
-                padding-top: 8px;
+                padding-top: 4px;
+                padding-bottom: 4px;
             }
 
             .schedule-text {
-                padding: 8px 0 12px 0;
+                padding: 4px 0 6px 0;
                 text-align: center;
             }
 
@@ -3020,6 +3031,15 @@
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
                 margin-bottom: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: 6px;
+            }
+
+            .schedule-header::before {
+                content: '🕐';
+                font-size: 14px;
             }
 
             .schedule-hours-large {
