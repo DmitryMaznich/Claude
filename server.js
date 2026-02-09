@@ -1045,8 +1045,11 @@ app.get('/api/messages/:sessionId', (req, res) => {
             timestamp: msg.timestamp
         }));
 
-    console.log(`   📤 Returning ${newMessages.length} new messages`);
-    res.json({ messages: newMessages });
+    console.log(`   📤 Returning ${newMessages.length} new messages, operatorMode: ${session.operatorMode}`);
+    res.json({
+        messages: newMessages,
+        operatorMode: session.operatorMode
+    });
 });
 
 // Telegram bot commands are now handled in the webhook endpoint above

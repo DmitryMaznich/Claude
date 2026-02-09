@@ -74,7 +74,12 @@
       "WebFetch(domain:www.google.com)",
       "WebFetch(domain:www.smart-wash.si)",
       "Bash(powershell:*)",
-      "Bash(xargs:*)"
+      "Bash(xargs:*)",
+      "Bash(node:*)",
+      "Bash(timeout 3 tail:*)",
+      "Bash(exit:*)",
+      "Bash(netstat:*)",
+      "Bash(python -m json.tool:*)"
     ]
   }
 }
