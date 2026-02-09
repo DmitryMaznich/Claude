@@ -182,19 +182,24 @@ function scheduleDailyUpdate() {
 
 scheduleDailyUpdate();
 
-// System prompt for Claude (dynamic based on user language)
-function getSystemPrompt(userLanguage) {
-    if (!userLanguage) {
-        return `You are a helpful assistant for Smart Wash.
+// System prompt for Claude (dynamic based on user language and name status)
+function getSystemPrompt(userLanguage, userName, askedForName) {
+    // Prompt for asking user's name (after first message)
+    if (!askedForName && !userName) {
+        return `You are a helpful assistant for Smart Wash, a laundromat service in Ljubljana, Slovenia.
 
-IMPORTANT: The user's first message will be their preferred language (e.g., "slovenščina", "english", "русский", "hrvatski", etc.).
+IMPORTANT: You MUST respond ONLY in ${userLanguage}.
 
-Your response should:
-1. Detect and save their language
-2. Confirm in their language: "✓ Language set: [language]"
-3. Ask how you can help them in their chosen language
+This is the user's FIRST message. Your response should:
+1. Briefly acknowledge their question/message
+2. Ask for their name in ${userLanguage}
 
-Be brief and friendly.`;
+Examples:
+- Slovenian: "Kako vam lahko pomagam? Kako se lahko obračam na vas?"
+- English: "How can I help you? What is your name?"
+- Russian: "Чем могу помочь? Как к вам обращаться?"
+
+Be friendly and brief.`;
     }
 
     return `You are a helpful assistant for Smart Wash, a laundromat service in Ljubljana, Slovenia.
@@ -359,14 +364,21 @@ function shouldTriggerOperator(message) {
 }
 
 // Create or get session
+// Counter for auto-generated customer names
+let customerCounter = 0;
+
 function getSession(sessionId) {
     if (!sessions.has(sessionId)) {
         console.log(`Creating new session: ${sessionId}`);
+        customerCounter++;
         sessions.set(sessionId, {
             id: sessionId,
             messages: [],
             operatorMode: false,
-            language: null,
+            language: 'Slovenian', // Default language is Slovenian
+            userName: null,
+            askedForName: false,
+            customerNumber: customerCounter,
             createdAt: new Date(),
             lastUserMessageTime: new Date()
         });
@@ -532,9 +544,10 @@ app.post('/api/chat', async (req, res) => {
 
             // Send user's message to operator via Telegram
             const displayMessage = showOriginal ? message : translatedMessage;
+            const clientInfo = session.userName || `Customer${session.customerNumber}`;
             const notification = `💬 *NOVO SPOROČILO*\n` +
                 `━━━━━━━━━━━━━━━━━\n` +
-                `👤 Клиент (${session.language || 'Unknown'}):\n\n` +
+                `👤 ${clientInfo} (${session.language || 'Slovenian'}):\n\n` +
                 `"${displayMessage}"\n\n` +
                 `━━━━━━━━━━━━━━━━━\n` +
                 `Session: \`${sessionId}\``;
@@ -592,9 +605,10 @@ app.post('/api/chat', async (req, res) => {
             const showOriginal = ['Russian', 'Slovenian', 'English'].includes(session.language);
 
             // Notify operator via Telegram
+            const clientInfo = session.userName || `Customer${session.customerNumber}`;
             let notification = `🔔 *ЗАПРОС ОПЕРАТОРА*\n` +
                 `━━━━━━━━━━━━━━━━━\n` +
-                `👤 Клиент (${session.language || 'Unknown'}):\n\n`;
+                `👤 ${clientInfo} (${session.language || 'Slovenian'}):\n\n`;
 
             if (showOriginal) {
                 notification += `"${message}"\n\n`;
@@ -640,175 +654,32 @@ app.post('/api/chat', async (req, res) => {
             });
         }
 
-        // If this is the first message, detect and save language BEFORE calling AI
-        if (!session.language && session.messages.length === 1) {
-            // Extract language from user's first message
-            const userLanguage = message.toLowerCase().trim();
-            console.log(`Detecting language from user input: "${userLanguage}"`);
+        // Handle user name after first message
+        if (!session.askedForName && session.messages.length === 2) {
+            // This is the second message - save user's name
+            const userName = message.trim();
 
-            // Map common language names
-            const languageMap = {
-                // Slovenian
-                'slovenščina': 'Slovenian',
-                'slovene': 'Slovenian',
-                'slovenian': 'Slovenian',
-                'slo': 'Slovenian',
-                'slv': 'Slovenian',
-                // English
-                'english': 'English',
-                'англи': 'English',
-                'eng': 'English',
-                // Russian
-                'русский': 'Russian',
-                'russian': 'Russian',
-                'ruski': 'Russian',
-                'rus': 'Russian',
-                // Croatian
-                'hrvatski': 'Croatian',
-                'croatian': 'Croatian',
-                'hrvatska': 'Croatian',
-                'hrv': 'Croatian',
-                'cro': 'Croatian',
-                // Italian
-                'italiano': 'Italian',
-                'italian': 'Italian',
-                'ita': 'Italian',
-                // German
-                'deutsch': 'German',
-                'german': 'German',
-                'nemščina': 'German',
-                'ger': 'German',
-                'deu': 'German',
-                // Spanish
-                'español': 'Spanish',
-                'spanish': 'Spanish',
-                'espanol': 'Spanish',
-                'esp': 'Spanish',
-                'spa': 'Spanish',
-                // French
-                'français': 'French',
-                'french': 'French',
-                'francais': 'French',
-                'fra': 'French',
-                'fre': 'French',
-                // Portuguese
-                'português': 'Portuguese',
-                'portuguese': 'Portuguese',
-                'portugues': 'Portuguese',
-                'por': 'Portuguese',
-                'pt': 'Portuguese',
-                // Polish
-                'polski': 'Polish',
-                'polish': 'Polish',
-                'pol': 'Polish',
-                // Czech
-                'čeština': 'Czech',
-                'czech': 'Czech',
-                'cestina': 'Czech',
-                'cze': 'Czech',
-                'ces': 'Czech',
-                // Ukrainian
-                'українська': 'Ukrainian',
-                'ukrainian': 'Ukrainian',
-                'ukrainski': 'Ukrainian',
-                'ukranian': 'Ukrainian',
-                'украинский': 'Ukrainian',
-                'украінський': 'Ukrainian',
-                'ukrain': 'Ukrainian',
-                'ukr': 'Ukrainian',
-                // Serbian
-                'srpski': 'Serbian',
-                'serbian': 'Serbian',
-                'srp': 'Serbian',
-                'ser': 'Serbian',
-                // Bulgarian
-                'български': 'Bulgarian',
-                'bulgarian': 'Bulgarian',
-                // Romanian
-                'română': 'Romanian',
-                'romanian': 'Romanian',
-                'romana': 'Romanian',
-                // Greek
-                'ελληνικά': 'Greek',
-                'greek': 'Greek',
-                'ellinika': 'Greek',
-                // Turkish
-                'türkçe': 'Turkish',
-                'turkish': 'Turkish',
-                'turkce': 'Turkish',
-                // Arabic
-                'العربية': 'Arabic',
-                'arabic': 'Arabic',
-                'arabi': 'Arabic',
-                // Chinese
-                '中文': 'Chinese',
-                'chinese': 'Chinese',
-                'zhongwen': 'Chinese',
-                'mandarin': 'Chinese',
-                'chi': 'Chinese',
-                'zho': 'Chinese',
-                // Japanese
-                '日本語': 'Japanese',
-                'japanese': 'Japanese',
-                'nihongo': 'Japanese',
-                'jpn': 'Japanese',
-                'jap': 'Japanese',
-                // Korean
-                '한국어': 'Korean',
-                'korean': 'Korean',
-                'hangugeo': 'Korean',
-                'kor': 'Korean',
-                // Hindi
-                'हिन्दी': 'Hindi',
-                'hindi': 'Hindi',
-                'hin': 'Hindi',
-                // Dutch
-                'nederlands': 'Dutch',
-                'dutch': 'Dutch',
-                // Swedish
-                'svenska': 'Swedish',
-                'swedish': 'Swedish',
-                // Norwegian
-                'norsk': 'Norwegian',
-                'norwegian': 'Norwegian',
-                // Danish
-                'dansk': 'Danish',
-                'danish': 'Danish',
-                // Finnish
-                'suomi': 'Finnish',
-                'finnish': 'Finnish',
-                // Albanian
-                'shqip': 'Albanian',
-                'albanian': 'Albanian',
-                // Bosnian
-                'bosanski': 'Bosnian',
-                'bosnian': 'Bosnian',
-                // Macedonian
-                'македонски': 'Macedonian',
-                'macedonian': 'Macedonian'
-            };
-
-            // Find matching language
-            for (const [key, value] of Object.entries(languageMap)) {
-                if (userLanguage.includes(key)) {
-                    session.language = value;
-                    console.log(`Language set to: ${value}`);
-                    break;
-                }
+            if (userName && userName.length > 0 && userName.length < 50) {
+                // User provided a name
+                session.userName = userName;
+                console.log(`User name set to: ${userName}`);
+            } else {
+                // No valid name provided, use default
+                session.userName = `Customer${session.customerNumber}`;
+                console.log(`Using default name: ${session.userName}`);
             }
+        }
 
-            // If no match, default to English
-            if (!session.language) {
-                session.language = 'English';
-                console.log('Language not detected, defaulting to English');
-            }
+        // Mark that we asked for name after first message
+        if (session.messages.length === 1 && !session.askedForName) {
+            session.askedForName = true;
         }
 
         // Get AI response from Claude
         const response = await anthropic.messages.create({
             model: 'claude-3-haiku-20240307',
             max_tokens: 500,
-            system: getSystemPrompt(session.language),
+            system: getSystemPrompt(session.language, session.userName, session.askedForName),
             messages: session.messages.map(msg => ({
                 role: msg.role,
                 content: msg.content
@@ -852,9 +723,10 @@ app.post('/api/chat', async (req, res) => {
             const historyMessages = (await Promise.all(historyPromises)).join('\n');
 
             // Notify operator
+            const clientInfo = session.userName || `Customer${session.customerNumber}`;
             const notification = `🔔 *ЗАПРОС ОПЕРАТОРА*\n` +
                 `━━━━━━━━━━━━━━━━━\n` +
-                `👤 Клиент (${session.language || 'Unknown'}):\n\n` +
+                `👤 ${clientInfo} (${session.language || 'Slovenian'}):\n\n` +
                 `"${translatedMessage}"\n\n` +
                 `📝 История разговора:\n${historyMessages}\n\n` +
                 `━━━━━━━━━━━━━━━━━\n` +
@@ -972,9 +844,10 @@ app.post('/api/upload', (req, res) => {
 
         // Send photo to operator via Telegram
         if (bot && OPERATOR_CHAT_ID) {
+            const clientInfo = session.userName || `Customer${session.customerNumber}`;
             const notification = `📸 *ФОТО ОТ КЛИЕНТА*\n` +
                 `━━━━━━━━━━━━━━━━━\n` +
-                `👤 Клиент (${session.language || 'Unknown'})\n` +
+                `👤 ${clientInfo} (${session.language || 'Slovenian'})\n` +
                 `Session: \`${sessionId}\``;
 
             try {
