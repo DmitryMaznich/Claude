@@ -1318,6 +1318,14 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 persistent: true
             };
 
+            // Handle quick action buttons (redirect to commands)
+            if (text === '📋 Активные сессии / Sessions') {
+                text = '/sessions';
+            }
+            if (text === '🗑️ Закрыть все / Close All') {
+                text = '/closeall';
+            }
+
             // Handle /start command
             if (text === '/start') {
                 try {
@@ -1341,21 +1349,11 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 } catch (sendError) {
                     console.error('Error sending start message:', sendError.message);
                 }
-            }
-            // Handle quick action buttons
-            else if (text === '📋 Активные сессии / Sessions') {
-                // Redirect to /sessions command
-                msg.text = '/sessions';
-                // Fall through to /sessions handler
-            }
-            else if (text === '🗑️ Закрыть все / Close All') {
-                // Redirect to /closeall command
-                msg.text = '/closeall';
-                // Fall through to /closeall handler
+                return res.sendStatus(200);
             }
 
             // Handle /sessions command
-            if (text === '/sessions' || msg.text === '/sessions') {
+            if (text === '/sessions') {
                 if (chatId.toString() !== OPERATOR_CHAT_ID) {
                     try {
                         await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
@@ -1409,9 +1407,11 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 } catch (sendError) {
                     console.error('Error sending sessions list:', sendError.message);
                 }
+                return res.sendStatus(200);
             }
+
             // Handle /reply command
-            else if (text.startsWith('/reply ')) {
+            if (text.startsWith('/reply ')) {
                 if (chatId.toString() !== OPERATOR_CHAT_ID) {
                     try {
                         await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
@@ -1466,9 +1466,11 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 } catch (sendError) {
                     console.error('Error sending success message:', sendError.message);
                 }
+                return res.sendStatus(200);
             }
+
             // Handle /close command
-            else if (text.startsWith('/close ')) {
+            if (text.startsWith('/close ')) {
                 if (chatId.toString() !== OPERATOR_CHAT_ID) {
                     try {
                         await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
@@ -1519,9 +1521,11 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 } catch (sendError) {
                     console.error('Error sending close confirmation:', sendError.message);
                 }
+                return res.sendStatus(200);
             }
+
             // Handle /closeall command
-            if (text === '/closeall' || msg.text === '/closeall') {
+            if (text === '/closeall') {
                 if (chatId.toString() !== OPERATOR_CHAT_ID) {
                     try {
                         await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
@@ -1578,6 +1582,7 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 } catch (sendError) {
                     console.error('Error sending closeall confirmation:', sendError.message);
                 }
+                return res.sendStatus(200);
             }
         }
     } catch (error) {
