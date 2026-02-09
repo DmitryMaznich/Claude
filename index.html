@@ -1613,6 +1613,20 @@
             gap: 16px;
             padding: 16px 0;
             flex-wrap: wrap;
+            position: relative;
+            padding-bottom: 20px;
+        }
+
+        .location-amenities-new::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, #0097DA 20%, #0097DA 80%, transparent);
+            opacity: 0.3;
         }
 
         .amenity-group {
@@ -1626,14 +1640,18 @@
             display: flex;
             gap: 4px;
             align-items: flex-end;
+            height: 62px;
         }
 
         .amenity-icon-animated {
             flex-shrink: 0;
+            display: flex;
+            align-items: flex-end;
         }
 
         .amenity-icon-large {
             transform: scale(1.2);
+            transform-origin: bottom center;
         }
 
         .amenity-label-new {
