@@ -1159,7 +1159,10 @@ app.post(`/telegram/webhook`, async (req, res) => {
         if (update.message) {
             const msg = update.message;
             const chatId = msg.chat.id;
-            const text = msg.text || '';
+            let text = msg.text || '';
+
+            // Remove bot mention from commands (e.g., /sessions@botname -> /sessions)
+            text = text.replace(/@\w+/, '');
 
             console.log(`Received message from ${chatId}: ${text}`);
             console.log(`Has reply_to_message: ${!!msg.reply_to_message}`);
@@ -1303,6 +1306,18 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 }
             }
 
+            // Create permanent keyboard for operator (reusable)
+            const operatorKeyboard = {
+                keyboard: [
+                    [
+                        { text: '📋 Активные сессии / Sessions' },
+                        { text: '🗑️ Закрыть все / Close All' }
+                    ]
+                ],
+                resize_keyboard: true,
+                persistent: true
+            };
+
             // Handle /start command
             if (text === '/start') {
                 try {
@@ -1315,16 +1330,32 @@ app.post(`/telegram/webhook`, async (req, res) => {
                         `*Kako odgovarjati / How to respond:*\n` +
                         `📱 Enostavno odgovorite (reply) na sporočilo\n` +
                         `📱 Simply reply to the notification message\n\n` +
-                        `*Ukazi / Commands:*\n` +
-                        `/sessions - Prikaži aktivne seje / Show active sessions`,
-                        { parse_mode: 'Markdown' }
+                        `*Быстрые команды:*\n` +
+                        `Используйте кнопки внизу экрана ⤵️\n` +
+                        `Use buttons at the bottom of the screen ⤵️`,
+                        {
+                            parse_mode: 'Markdown',
+                            reply_markup: operatorKeyboard
+                        }
                     );
                 } catch (sendError) {
                     console.error('Error sending start message:', sendError.message);
                 }
             }
+            // Handle quick action buttons
+            else if (text === '📋 Активные сессии / Sessions') {
+                // Redirect to /sessions command
+                msg.text = '/sessions';
+                // Fall through to /sessions handler
+            }
+            else if (text === '🗑️ Закрыть все / Close All') {
+                // Redirect to /closeall command
+                msg.text = '/closeall';
+                // Fall through to /closeall handler
+            }
+
             // Handle /sessions command
-            else if (text === '/sessions') {
+            if (text === '/sessions' || msg.text === '/sessions') {
                 if (chatId.toString() !== OPERATOR_CHAT_ID) {
                     try {
                         await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
@@ -1353,18 +1384,26 @@ app.post(`/telegram/webhook`, async (req, res) => {
 
                 try {
                     if (allSessions.length === 0) {
-                        await bot.sendMessage(chatId, '📭 Ni aktivnih sej / No sessions in memory');
+                        await bot.sendMessage(chatId, '📭 Ni aktivnih sej / No sessions in memory', {
+                            reply_markup: operatorKeyboard
+                        });
                     } else if (activeSessions.length === 0) {
                         await bot.sendMessage(chatId,
                             `*Vse seje / All sessions (${allSessions.length}):*\n\n${allSessions.join('\n')}\n\n` +
                             `⚠️ Nobena seja ni v operator mode / No sessions in operator mode`,
-                            { parse_mode: 'Markdown' }
+                            {
+                                parse_mode: 'Markdown',
+                                reply_markup: operatorKeyboard
+                            }
                         );
                     } else {
                         await bot.sendMessage(chatId,
                             `*Vse seje / All sessions (${allSessions.length}):*\n\n${allSessions.join('\n')}\n\n` +
                             `*Aktivne seje / Active (${activeSessions.length}):*\n\n${activeSessions.join('\n')}`,
-                            { parse_mode: 'Markdown' }
+                            {
+                                parse_mode: 'Markdown',
+                                reply_markup: operatorKeyboard
+                            }
                         );
                     }
                 } catch (sendError) {
@@ -1482,7 +1521,7 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 }
             }
             // Handle /closeall command
-            else if (text === '/closeall') {
+            if (text === '/closeall' || msg.text === '/closeall') {
                 if (chatId.toString() !== OPERATOR_CHAT_ID) {
                     try {
                         await bot.sendMessage(chatId, '⛔ Nimate dostopa / Access denied');
@@ -1531,7 +1570,10 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 try {
                     await bot.sendMessage(chatId,
                         `✅ Izbrisano ${closedCount} sej / Deleted ${closedCount} sessions\n\n` +
-                        `Vse seje so odstranjene iz spomina / All sessions removed from memory`
+                        `Vse seje so odstranjene iz spomina / All sessions removed from memory`,
+                        {
+                            reply_markup: operatorKeyboard
+                        }
                     );
                 } catch (sendError) {
                     console.error('Error sending closeall confirmation:', sendError.message);
@@ -1607,6 +1649,14 @@ app.listen(PORT, '0.0.0.0', async () => {
         try {
             await bot.setWebHook(webhookUrl);
             console.log(`📱 Telegram webhook set to: ${webhookUrl}`);
+
+            // Set bot commands menu
+            await bot.setMyCommands([
+                { command: 'start', description: 'Начать / Start bot' },
+                { command: 'sessions', description: 'Активные сессии / Active sessions' },
+                { command: 'closeall', description: 'Закрыть все / Close all sessions' }
+            ]);
+            console.log(`📋 Bot commands menu configured`);
             console.log(`💬 Bot ready to receive notifications`);
         } catch (error) {
             console.error('Failed to set Telegram webhook:', error.message);
