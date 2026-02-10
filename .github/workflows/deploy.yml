@@ -7,26 +7,21 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to cPanel via FTP
+    name: Deploy to cPanel via SFTP
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy to cPanel via FTP
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: Deploy to cPanel via SFTP
+        uses: wlixcc/SFTP-Deploy-Action@v1.2.4
         with:
           server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          server-dir: /public_html/
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            .env
-            .env.*
-            deploy.bat
-            DEPLOY_GUIDE.md
-            .cpanel.yml
+          port: 22
+          local_path: './*'
+          remote_path: '/public_html/'
+          sftp_only: true
+          args: '-o ConnectTimeout=5'
