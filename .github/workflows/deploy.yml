@@ -23,7 +23,8 @@ jobs:
           port: 21
           protocol: ftps
           server-dir: /public_html/
-          dangerous-unsafe-skip-ssl-validation: true
+          security: loose
+          timeout: 300000
           log-level: verbose
           exclude: |
             **/.git*
