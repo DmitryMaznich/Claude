@@ -1343,8 +1343,8 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 return res.sendStatus(200);
             }
 
-            // Handle menu command (without /) - show control panel with inline buttons
-            if (text === 'menu' || text === 'Menu' || text === 'MENU') {
+            // Handle menu command - show control panel with inline buttons
+            if (text === '/menu' || text === 'menu' || text === 'Menu' || text === 'MENU') {
                 if (chatId.toString() !== OPERATOR_CHAT_ID) {
                     return res.sendStatus(200);
                 }
@@ -1377,8 +1377,8 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 return res.sendStatus(200);
             }
 
-            // Handle sessions command (without /)
-            if (text === 'sessions' || text === 'Sessions' || text === 'SESSIONS') {
+            // Handle sessions command
+            if (text === '/sessions' || text === 'sessions' || text === 'Sessions' || text === 'SESSIONS') {
                 if (chatId.toString() !== OPERATOR_CHAT_ID) {
                     return res.sendStatus(200);
                 }
@@ -1536,8 +1536,8 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 return res.sendStatus(200);
             }
 
-            // Handle closeall command (without /)
-            if (text === 'closeall' || text === 'Closeall' || text === 'CLOSEALL' || text === 'close all') {
+            // Handle closeall command
+            if (text === '/closeall' || text === 'closeall' || text === 'Closeall' || text === 'CLOSEALL' || text === 'close all') {
                 if (chatId.toString() !== OPERATOR_CHAT_ID) {
                     return res.sendStatus(200);
                 }
