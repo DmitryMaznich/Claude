@@ -436,14 +436,13 @@ async function translateToRussian(text, sourceLanguage) {
 async function translateToLanguage(text, targetLanguage) {
     console.log(`translateToLanguage called: target=${targetLanguage}`);
 
-    // Don't translate if target is Russian, Slovenian, or English (operator speaks Russian)
-    const noTranslateLanguages = ['Russian', 'Slovenian', 'English'];
-    if (noTranslateLanguages.includes(targetLanguage)) {
-        console.log(`No translation needed for ${targetLanguage}`);
+    // Don't translate if user's language is Russian (same as operator)
+    if (targetLanguage === 'Russian') {
+        console.log(`No translation needed - user speaks Russian`);
         return text;
     }
 
-    console.log(`Translating to ${targetLanguage}: "${text.substring(0, 50)}..."`);
+    console.log(`Translating from Russian to ${targetLanguage}: "${text.substring(0, 50)}..."`);
 
     try {
         const response = await anthropic.messages.create({
