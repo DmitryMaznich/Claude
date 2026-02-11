@@ -1072,6 +1072,18 @@
             margin: 0 auto;
         }
 
+        /* Increase locations section header by 15% */
+        #locations .section-title {
+            font-size: 42px;
+            margin-bottom: 15px;
+            line-height: 1.25;
+        }
+
+        #locations .section-subtitle {
+            font-size: 20px;
+            line-height: 1.15;
+        }
+
         /* SERVICES / PRICING */
         #services {
             background: var(--bg-light);
@@ -1655,7 +1667,7 @@
         .location-amenities-new::after {
             content: '';
             position: absolute;
-            bottom: 20px;
+            bottom: 23px;
             left: 50%;
             transform: translateX(-50%);
             width: 80%;
@@ -1731,42 +1743,20 @@
             margin-top: 8px;
         }
 
-        /* DEBUG BORDERS - All containers */
-        .locations-grid {
-            border: 3px solid red !important;
+        /* Background colors for location cards */
+        .location-card:nth-child(1) {
+            background-color: rgba(211, 211, 211, 0.2) !important;
+            border-bottom: 1px solid #555 !important;
         }
-        .location-card {
-            border: 3px solid blue !important;
+        .location-card:nth-child(2) {
+            background-color: rgba(173, 216, 230, 0.2) !important;
         }
-        .location-header {
-            border: 2px solid green !important;
+        .location-card:nth-child(1) .location-header {
+            background-color: rgba(211, 211, 211, 0.3) !important;
         }
-        .location-content {
-            border: 2px solid orange !important;
+        .location-card:nth-child(2) .location-header {
+            background-color: rgba(173, 216, 230, 0.3) !important;
         }
-        .location-info {
-            border: 2px solid pink !important;
-        }
-        .location-info-item {
-            border: 1px solid brown !important;
-        }
-        .location-amenities-new {
-            border: 2px solid purple !important;
-        }
-        .location-amenities-new > div {
-            border: 2px solid cyan !important;
-            margin-bottom: 16px !important;
-        }
-        .location-amenities-new > div:last-child {
-            margin-bottom: 0 !important;
-        }
-        .amenity-group {
-            border: 1px solid magenta !important;
-        }
-        .amenity-label-new {
-            border: 1px solid yellow !important;
-        }
-        /* END DEBUG BORDERS */
 
         @keyframes drumRotate {
             from { transform: rotate(0deg); }
@@ -3263,7 +3253,7 @@
             /* Mobile: Location Cards */
             .locations-grid {
                 grid-template-columns: 1fr;
-                padding: 5px 5px 900px 5px;
+                padding: 5px 5px 820px 5px;
                 gap: 32px !important;
             }
 
@@ -3271,13 +3261,18 @@
                 border-radius: 16px;
             }
 
+            .location-card:nth-child(2) {
+                border-top: 3px solid #222 !important;
+                padding-top: 20px !important;
+            }
+
             .location-header {
                 padding: 15px 5px 0px 5px;
-                margin-bottom: 12px !important;
+                margin-bottom: 5px !important;
             }
 
             .location-content {
-                padding: 0 0px 5px 0px !important;
+                padding: 0 0px 0px 0px !important;
             }
 
             .location-name {
@@ -3297,7 +3292,7 @@
                 margin-top: -15px !important;
                 margin-bottom: auto !important;
                 flex-wrap: nowrap !important;
-                padding: 0 !important;
+                padding: 0!important;
                 gap: 0 !important;
                 justify-content: center !important;
                 width: 100% !important;
@@ -3313,6 +3308,10 @@
                 margin: 0 !important;
             }
 
+            .location-amenities-new > div:nth-child(2) {
+                margin-left: 5px !important;
+            }
+
             .location-info-item {
                 padding: 10px 0;
                 border-bottom: 1px solid rgba(0, 151, 218, 0.1);
@@ -3324,7 +3323,7 @@
 
             .location-info-label {
                 font-size: 12px;
-                margin-bottom: 8px;
+                margin-bottom: 0px;
             }
 
             .location-info-value {
@@ -4675,11 +4674,11 @@
 
         <div class="locations-grid">
             <!-- TC JARŠE -->
-            <div class="location-card" style="overflow: visible; height: 910px;">
+            <div class="location-card" style="overflow: visible; height: 800px;">
                 <div class="location-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
                     <h3 class="location-name" style="margin-bottom: 0;">
-                        <span class="lang-si">Pralnica TC Jarše</span>
-                        <span class="lang-en">Laundromat TC Jarše</span>
+                        <span class="lang-si">1. Pralnica TC Jarše</span>
+                        <span class="lang-en">1. Laundromat TC Jarše</span>
                     </h3>
                     <a href="https://www.google.com/maps/dir/?api=1&destination=Smart+Wash,+Beblerjev+trg+2,+Ljubljana"
                        target="_blank"
@@ -5016,7 +5015,7 @@
                                     </div>
                                     </div>
                                     <div style="position: relative; display: flex; flex-wrap: nowrap; justify-content: center; align-items: flex-end;">
-                                        <div style="position: absolute; top: -50px; left: 0; right: 0; text-align: center; z-index: 10; pointer-events: none;">
+                                        <div style="position: absolute; top: 10px; left: 0; right: 0; text-align: center; z-index: 10; pointer-events: none;">
                                             <span style="display: inline-block; padding: 5px 13px; background-color: #FF9B71; color: white; border-radius: 50px; font-size: 11px; font-weight: 600;">
                                                 <span class="lang-si">Sušenje</span><span class="lang-en">Drying</span>
                                             </span>
@@ -5199,11 +5198,11 @@
             </div>
 
             <!-- THIRD LOCATION -->
-            <div class="location-card" style="height: 910px; margin-top: 80px;">
+            <div class="location-card" style="height: 800px; margin-top: 30px;">
                 <div class="location-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                     <h3 class="location-name" style="margin-bottom: 0;">
-                        <span class="lang-si">Pralnica Galjevica</span>
-                        <span class="lang-en">Laundromat Galjevica</span>
+                        <span class="lang-si">2. Pralnica Galjevica</span>
+                        <span class="lang-en">2. Laundromat Galjevica</span>
                     </h3>
                     <a href="https://www.google.com/maps/dir/?api=1&destination=Smart+Wash,+Galjevica+6a,+Ljubljana"
                        target="_blank"
@@ -5540,7 +5539,7 @@
                                     </div>
                                     </div>
                                     <div style="position: relative; display: flex; flex-wrap: nowrap; justify-content: center; align-items: flex-end;">
-                                        <div style="position: absolute; top: -10px; left: 0; right: 0; text-align: center; z-index: 10; pointer-events: none;">
+                                        <div style="position: absolute; top: 10px; left: 0; right: 0; text-align: center; z-index: 10; pointer-events: none;">
                                             <span style="display: inline-block; padding: 5px 13px; background-color: #FF9B71; color: white; border-radius: 50px; font-size: 11px; font-weight: 600;">
                                                 <span class="lang-si">Sušenje</span><span class="lang-en">Drying</span>
                                             </span>
@@ -6356,16 +6355,12 @@
                     </div>
                 </div>
                 </div>
-                <div class="video-placeholder">
-                    <div class="video-placeholder-icon">🎥</div>
-                    <div class="video-placeholder-text">
-                        <span class="lang-si">Video: Pravila uporabe</span>
-                        <span class="lang-en">Video: Usage rules</span>
-                    </div>
-                    <div class="video-placeholder-subtext">
-                        <span class="lang-si">Kmalu na voljo</span>
-                        <span class="lang-en">Coming soon</span>
-                    </div>
+                <div class="video-container">
+                    <video controls loop style="width: 100%; height: 100%; object-fit: cover;">
+                        <source src="video.mp4" type="video/mp4">
+                        <span class="lang-si">Vaš brskalnik ne podpira predvajanja videa.</span>
+                        <span class="lang-en">Your browser does not support video playback.</span>
+                    </video>
                 </div>
             </div>
         </div>
@@ -7145,7 +7140,10 @@
                             chatMessages.scrollTop = chatMessages.scrollHeight;
                         });
                         // Update lastMessageTime to the last message's timestamp
-                        lastMessageTime = data.messages[data.messages.length - 1].timestamp;
+                        const newLastMessageTime = data.messages[data.messages.length - 1].timestamp;
+                        console.log(`⏰ UPDATING lastMessageTime: ${lastMessageTime} → ${newLastMessageTime}`);
+                        lastMessageTime = newLastMessageTime;
+                        console.log(`✅ lastMessageTime updated to: ${lastMessageTime}`);
                     }
 
                     // Check if operator mode changed
