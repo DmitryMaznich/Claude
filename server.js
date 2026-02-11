@@ -675,6 +675,38 @@ app.post('/api/chat', async (req, res) => {
             session.askedForName = true;
         }
 
+        // Detect language from first user message
+        if (session.messages.length === 1) {
+            try {
+                const languageDetectionResponse = await anthropic.messages.create({
+                    model: 'claude-3-haiku-20240307',
+                    max_tokens: 50,
+                    messages: [{
+                        role: 'user',
+                        content: `Detect the language of this text and respond with ONLY the language name in English (e.g., "Slovenian", "English", "Russian", "Croatian", "Serbian", "Italian", "German", "Spanish", "French", "Ukrainian", "Polish", "Czech", etc.):\n\n"${message}"`
+                    }]
+                });
+
+                const detectedLanguage = languageDetectionResponse.content[0].text.trim();
+                console.log(`Detected language: ${detectedLanguage} from message: "${message}"`);
+
+                // Validate and set language
+                const validLanguages = ['Slovenian', 'English', 'Russian', 'Croatian', 'Serbian', 'Italian',
+                                       'German', 'Spanish', 'French', 'Ukrainian', 'Polish', 'Czech', 'Portuguese'];
+
+                if (validLanguages.includes(detectedLanguage)) {
+                    session.language = detectedLanguage;
+                    console.log(`Language set to: ${detectedLanguage}`);
+                } else {
+                    console.log(`Unknown language "${detectedLanguage}", defaulting to Slovenian`);
+                    session.language = 'Slovenian';
+                }
+            } catch (error) {
+                console.error('Language detection error:', error);
+                session.language = 'Slovenian'; // Fallback to default
+            }
+        }
+
         // Get AI response from Claude
         const response = await anthropic.messages.create({
             model: 'claude-3-haiku-20240307',
