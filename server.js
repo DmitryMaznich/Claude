@@ -1227,7 +1227,8 @@ app.post(`/telegram/webhook`, async (req, res) => {
             console.log(`Has reply_to_message: ${!!msg.reply_to_message}`);
 
             // Handle reply to notification (easy way to respond to user)
-            if (msg.reply_to_message && (msg.reply_to_message.text || msg.reply_to_message.caption)) {
+            // Skip if message is a command (starts with /)
+            if (msg.reply_to_message && (msg.reply_to_message.text || msg.reply_to_message.caption) && !text.startsWith('/')) {
                 console.log(`Message is a reply to message ID: ${msg.reply_to_message.message_id}`);
                 console.log(`Chat type: ${msg.chat.type}, Chat ID: ${chatId}, OPERATOR_CHAT_ID: ${OPERATOR_CHAT_ID}`);
 
@@ -1301,8 +1302,8 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 }
             }
 
-            // Handle photo from operator
-            if (msg.photo && msg.photo.length > 0) {
+            // Handle photo from operator (skip if caption is a command)
+            if (msg.photo && msg.photo.length > 0 && !text.startsWith('/')) {
                 const isOperatorChat = chatId.toString() === OPERATOR_CHAT_ID;
                 let sessionId = null;
 
