@@ -1728,23 +1728,27 @@ app.listen(PORT, '0.0.0.0', async () => {
             await bot.setWebHook(webhookUrl);
             console.log(`📱 Telegram webhook set to: ${webhookUrl}`);
 
-            // Clear bot commands menu completely (remove / button) for all scopes
-            await bot.setMyCommands([]);
-            console.log(`📋 Bot commands cleared: default scope`);
-
-            // Clear for all private chats
-            await bot.setMyCommands([], { scope: { type: 'all_private_chats' } });
-            console.log(`📋 Bot commands cleared: all_private_chats`);
-
-            // Clear for all group chats
-            await bot.setMyCommands([], { scope: { type: 'all_group_chats' } });
-            console.log(`📋 Bot commands cleared: all_group_chats`);
-
-            // Clear specifically for operator chat
+            // Set up bot commands for operator chat (group)
             if (OPERATOR_CHAT_ID) {
-                await bot.setMyCommands([], { scope: { type: 'chat', chat_id: OPERATOR_CHAT_ID } });
-                console.log(`📋 Bot commands cleared: operator chat ${OPERATOR_CHAT_ID}`);
+                const operatorCommands = [
+                    { command: 'start', description: 'Show bot info and Chat ID' },
+                    { command: 'menu', description: 'Open operator control panel' },
+                    { command: 'sessions', description: 'Show active sessions' },
+                    { command: 'reply', description: 'Reply to user: /reply [sessionId] [message]' },
+                    { command: 'close', description: 'Close session: /close [sessionId]' },
+                    { command: 'closeall', description: 'Close all sessions' }
+                ];
+
+                await bot.setMyCommands(operatorCommands, {
+                    scope: { type: 'chat', chat_id: OPERATOR_CHAT_ID }
+                });
+                console.log(`📋 Bot commands set for operator chat: ${OPERATOR_CHAT_ID}`);
+                console.log(`   Commands: ${operatorCommands.map(c => '/' + c.command).join(', ')}`);
             }
+
+            // Clear commands for other chats (so menu button doesn't appear there)
+            await bot.setMyCommands([]);
+            console.log(`📋 Bot commands cleared for other chats`);
 
             console.log(`💬 Bot ready to receive notifications`);
         } catch (error) {
