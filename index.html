@@ -2562,6 +2562,26 @@
             animation: none;
         }
 
+        /* Bounce animation for new message notification */
+        .chat-button.bounce {
+            animation: chatBounce 0.5s ease-in-out 3;
+        }
+
+        @keyframes chatBounce {
+            0%, 100% {
+                transform: translateY(0) scale(1);
+            }
+            25% {
+                transform: translateY(-15px) scale(1.1);
+            }
+            50% {
+                transform: translateY(0) scale(1);
+            }
+            75% {
+                transform: translateY(-8px) scale(1.05);
+            }
+        }
+
         .chat-widget {
             position: fixed;
             bottom: 30px;
@@ -3285,11 +3305,16 @@
             }
 
             .amenity-group {
-                height: 215px !important;
+                height: 215x !important;
+            }
+
+            .location-amenities-new > div {
+                align-items: flex-end !important;
+                margin: 0 !important;
             }
 
             .location-info-item {
-                padding: 12px 0;
+                padding: 10px 0;
                 border-bottom: 1px solid rgba(0, 151, 218, 0.1);
             }
 
@@ -4997,7 +5022,7 @@
                                             </span>
                                         </div>
                                         <!-- Dryers wrapper -->
-                                        <div style="display: flex; flex-direction: column; align-items: center; transform: translateY(-15px);">
+                                        <div style="display: flex; flex-direction: column; align-items: center; transform: translateY(0px);">
                                         <!-- First 20kg dryer -->
                                         <div style="display: flex; gap: 5px;">
                                         <div class="amenity-group">
@@ -5079,7 +5104,7 @@
                                                 <circle cx="42" cy="72.5" r="1.5" fill="#3B82F6" opacity="0.8"/>
                                             </svg>
                                         </div>
-                                        <div class="amenity-label-new" style="text-align: right; margin-top: -50px;">4x</div>
+                                        <div class="amenity-label-new" style="text-align: right; margin-top: -50px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4x</div>
                                     </div>
 
                                     <!-- Second 20kg dryer -->
@@ -5162,7 +5187,7 @@
                                                 <circle cx="42" cy="72.5" r="1.5" fill="#3B82F6" opacity="0.8"/>
                                             </svg>
                                         </div>
-                                        <div class="amenity-label-new" style="text-align: left; margin-top: -50px;">20kg</div>
+                                        <div class="amenity-label-new" style="text-align: left; margin-top: -50px;">20kg&nbsp;&nbsp;&nbsp;</div>
                                     </div>
                                     </div>
                                     </div>
@@ -5515,13 +5540,13 @@
                                     </div>
                                     </div>
                                     <div style="position: relative; display: flex; flex-wrap: nowrap; justify-content: center; align-items: flex-end;">
-                                        <div style="position: absolute; top: -50px; left: 0; right: 0; text-align: center; z-index: 10; pointer-events: none;">
+                                        <div style="position: absolute; top: -10px; left: 0; right: 0; text-align: center; z-index: 10; pointer-events: none;">
                                             <span style="display: inline-block; padding: 5px 13px; background-color: #FF9B71; color: white; border-radius: 50px; font-size: 11px; font-weight: 600;">
                                                 <span class="lang-si">Sušenje</span><span class="lang-en">Drying</span>
                                             </span>
                                         </div>
                                         <!-- Dryers wrapper -->
-                                        <div style="display: flex; flex-direction: column; align-items: center; transform: translateY(-15px);">
+                                        <div style="display: flex; flex-direction: column; align-items: center; transform: translateY(0px);">
                                         <!-- First 20kg dryer -->
                                         <div style="display: flex; gap: 5px;">
                                         <div class="amenity-group">
@@ -5603,7 +5628,7 @@
                                                 <circle cx="42" cy="72.5" r="1.5" fill="#3B82F6" opacity="0.8"/>
                                             </svg>
                                         </div>
-                                        <div class="amenity-label-new" style="text-align: right; margin-top: -50px;">4x</div>
+                                        <div class="amenity-label-new" style="text-align: right; margin-top: -50px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4x</div>
                                     </div>
 
                                     <!-- Second 20kg dryer -->
@@ -5686,7 +5711,7 @@
                                                 <circle cx="42" cy="72.5" r="1.5" fill="#3B82F6" opacity="0.8"/>
                                             </svg>
                                         </div>
-                                        <div class="amenity-label-new" style="text-align: left; margin-top: -50px;">20kg</div>
+                                        <div class="amenity-label-new" style="text-align: left; margin-top: -50px;">20kg&nbsp;&nbsp;&nbsp;</div>
                                     </div>
                                     </div>
                                     </div>
@@ -5695,7 +5720,7 @@
                                     <!-- Disinfection icon -->
                                     <div style="position: relative; display: flex; margin-left: 0; margin-right: 0; align-items: flex-end;">
                                         <div style="position: absolute; top: 51px; left: 0; right: 0; text-align: center; z-index: 10; pointer-events: none;">
-                                            <span style="display: inline-block; background-color: #10B981; color: white; border-radius: 50px; font-size: 9px; font-weight: 600; line-height: 1.3; padding: 3px 5px;">
+                                            <span style="display: inline-block; background-color: #10B981; color: white; border-radius: 50px; font-size: 9px; font-weight: 600; line-height: 1.3; padding: 3px 9px;">
                                                 <span class="lang-si">dez-<br>infekcija</span><span class="lang-en">disin-<br>fection</span>
                                             </span>
                                         </div>
@@ -6829,11 +6854,80 @@
         let lastMessageTime = new Date().toISOString();
         let pollingInterval = null;
         let isPolling = false; // Prevent concurrent polling requests
+        let notificationPermission = 'default';
+
+        // Notification sound (notification beep)
+        const notificationSound = new Audio('data:audio/wav;base64,UklGRnoGAABXQVZFZm10IBAAAAABAAEAQB8AAEAfAAABAAgAZGF0YQoGAACBhYqFbF1fdJivrJBhNjVgodDbq2EcBj+a2/LDciUFLIHO8tiJNwgZaLvt559NEAxQp+PwtmMcBjiR1/LMeSwFJHfH8N2QQAoUXrTp66hVFApGn+DyvmwhBjaQ1fPPejAFI3PD8t6UTAsRVrDl6KZUE');
+
+        // Request notification permission
+        async function requestNotificationPermission() {
+            if ('Notification' in window && Notification.permission === 'default') {
+                try {
+                    notificationPermission = await Notification.requestPermission();
+                    console.log('Notification permission:', notificationPermission);
+                } catch (error) {
+                    console.error('Error requesting notification permission:', error);
+                }
+            } else if ('Notification' in window) {
+                notificationPermission = Notification.permission;
+            }
+        }
+
+        // Show browser notification
+        function showNotification(title, body, icon = null) {
+            if ('Notification' in window && notificationPermission === 'granted') {
+                const notification = new Notification(title, {
+                    body: body,
+                    icon: icon || 'https://smart-wash.si/logo_smart_wash.svg',
+                    badge: 'https://smart-wash.si/logo_smart_wash.svg',
+                    tag: 'smartwash-message',
+                    requireInteraction: false,
+                    silent: false
+                });
+
+                // Auto close after 5 seconds
+                setTimeout(() => notification.close(), 5000);
+
+                // Click on notification opens/focuses chat
+                notification.onclick = function() {
+                    window.focus();
+                    if (!chatWidget.classList.contains('active')) {
+                        chatWidget.classList.add('active');
+                        chatButton.style.display = 'none';
+                    }
+                    notification.close();
+                };
+            }
+        }
+
+        // Play notification sound
+        function playNotificationSound() {
+            try {
+                notificationSound.currentTime = 0;
+                notificationSound.volume = 0.5;
+                notificationSound.play().catch(e => console.log('Could not play sound:', e));
+            } catch (error) {
+                console.error('Error playing notification sound:', error);
+            }
+        }
+
+        // Animate chat button (bounce effect)
+        function animateChatButton() {
+            if (!chatWidget.classList.contains('active')) {
+                chatButton.classList.add('bounce');
+                setTimeout(() => chatButton.classList.remove('bounce'), 1000);
+            }
+        }
 
         // Send message to server
         async function sendMessage() {
             const message = chatInput.value.trim();
             if (!message) return;
+
+            // Request notification permission on first message
+            if (notificationPermission === 'default') {
+                requestNotificationPermission();
+            }
 
             // Add user message and keep reference
             const userMessageElement = addMessage(message, 'user');
@@ -7011,6 +7105,18 @@
                             content: m.content.substring(0, 30) + '...',
                             timestamp: m.timestamp
                         })));
+
+                        // Show notification for new operator messages
+                        playNotificationSound();
+                        animateChatButton();
+
+                        const firstMessage = data.messages[0].content.substring(0, 100);
+                        showNotification(
+                            '💬 Smart Wash',
+                            `Novo sporočilo od operaterja\n${firstMessage}${firstMessage.length >= 100 ? '...' : ''}`,
+                            'https://smart-wash.si/logo_smart_wash.svg'
+                        );
+
                         data.messages.forEach(msg => {
                             // Add message without updating lastMessageTime
                             const messageDiv = document.createElement('div');
