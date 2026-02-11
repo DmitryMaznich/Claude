@@ -538,12 +538,13 @@ app.post('/api/chat', async (req, res) => {
 
         // Check if in operator mode
         if (session.operatorMode) {
-            // Translate user's message to Russian if needed
-            const translatedMessage = await translateToRussian(message, session.language);
-            const showOriginal = ['Russian', 'Slovenian', 'English'].includes(session.language);
+            // Always translate to Russian for operator (except if already Russian)
+            const translatedMessage = session.language === 'Russian'
+                ? message
+                : await translateToRussian(message, session.language);
 
-            // Send user's message to operator via Telegram
-            const displayMessage = showOriginal ? message : translatedMessage;
+            // Always show Russian translation to operator
+            const displayMessage = translatedMessage;
             const clientInfo = session.userName || `Customer${session.customerNumber}`;
             const notification = `💬 *NOVO SPOROČILO*\n` +
                 `━━━━━━━━━━━━━━━━━\n` +
@@ -600,23 +601,18 @@ app.post('/api/chat', async (req, res) => {
 
             session.operatorMode = true;
 
-            // Translate message if needed
-            const translatedMessage = await translateToRussian(message, session.language);
-            const showOriginal = ['Russian', 'Slovenian', 'English'].includes(session.language);
+            // Always translate to Russian for operator (except if already Russian)
+            const translatedMessage = session.language === 'Russian'
+                ? message
+                : await translateToRussian(message, session.language);
 
-            // Notify operator via Telegram
+            // Notify operator via Telegram (always in Russian)
             const clientInfo = session.userName || `Customer${session.customerNumber}`;
-            let notification = `🔔 *ЗАПРОС ОПЕРАТОРА*\n` +
+            const notification = `🔔 *ЗАПРОС ОПЕРАТОРА*\n` +
                 `━━━━━━━━━━━━━━━━━\n` +
-                `👤 ${clientInfo} (${session.language || 'Slovenian'}):\n\n`;
-
-            if (showOriginal) {
-                notification += `"${message}"\n\n`;
-            } else {
-                notification += `"${translatedMessage}"\n\n`;
-            }
-
-            notification += `━━━━━━━━━━━━━━━━━\n` +
+                `👤 ${clientInfo} (${session.language || 'Slovenian'}):\n\n` +
+                `"${translatedMessage}"\n\n` +
+                `━━━━━━━━━━━━━━━━━\n` +
                 `Session: \`${sessionId}\``;
 
             if (bot && OPERATOR_CHAT_ID) {
@@ -736,17 +732,18 @@ app.post('/api/chat', async (req, res) => {
 
             session.operatorMode = true;
 
-            // Translate message and history if needed
-            const showOriginal = ['Russian', 'Slovenian', 'English'].includes(session.language);
-            const translatedMessage = showOriginal ? message : await translateToRussian(message, session.language);
+            // Always translate to Russian for operator (except if already Russian)
+            const translatedMessage = session.language === 'Russian'
+                ? message
+                : await translateToRussian(message, session.language);
 
-            // Build conversation history (last 5 messages) - translate if needed
+            // Build conversation history (last 5 messages) - always translate to Russian
             const historyPromises = session.messages.slice(-5).map(async msg => {
                 const icon = msg.role === 'user' ? '👤' : '🤖';
                 let text = msg.content.length > 100 ? msg.content.substring(0, 100) + '...' : msg.content;
 
-                // Translate history if not in original languages
-                if (!showOriginal) {
+                // Always translate history to Russian (except if already Russian)
+                if (session.language !== 'Russian') {
                     text = await translateToRussian(text, session.language);
                 }
 
