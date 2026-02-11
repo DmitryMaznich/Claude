@@ -1235,11 +1235,26 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 // Check if this is from the operator group/chat
                 const isOperatorChat = chatId.toString() === OPERATOR_CHAT_ID;
 
-                if (isOperatorChat && msg.reply_to_message.from && msg.reply_to_message.from.is_bot) {
-                    // This is a reply to bot's message in the operator group
-                    // Find session ID from the message ID mapping
-                    const sessionId = telegramMessageToSession.get(msg.reply_to_message.message_id);
-                    console.log(`Found session ID from message map: ${sessionId}`);
+                if (isOperatorChat) {
+                    let sessionId = null;
+
+                    // Method 1: Try to get session ID from message ID mapping (for threaded group messages)
+                    if (msg.reply_to_message.from && msg.reply_to_message.from.is_bot) {
+                        sessionId = telegramMessageToSession.get(msg.reply_to_message.message_id);
+                        console.log(`Method 1 (message map): ${sessionId || 'not found'}`);
+                    }
+
+                    // Method 2: Fallback to extracting session ID from reply text (backward compatibility)
+                    if (!sessionId) {
+                        const replyText = msg.reply_to_message.text || msg.reply_to_message.caption;
+                        if (replyText) {
+                            const sessionIdMatch = replyText.match(/Session: `?(session-[a-z0-9]+)`?/);
+                            if (sessionIdMatch) {
+                                sessionId = sessionIdMatch[1];
+                                console.log(`Method 2 (regex from text): ${sessionId}`);
+                            }
+                        }
+                    }
 
                     if (sessionId) {
                         const session = sessions.get(sessionId);
