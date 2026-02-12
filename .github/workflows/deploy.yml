@@ -7,33 +7,19 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to cPanel via FTP
+    name: Deploy via cPanel API
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v3
+      - name: Trigger cPanel Git Deployment
+        run: |
+          # Pull latest changes from GitHub
+          curl -k -X POST "https://${{ secrets.FTP_SERVER }}:2083/execute/VersionControl/update" \
+            -u "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" \
+            -d "repository_root=/home/smartw01/repositories/Claude"
 
-      - name: Deploy via FTP (plain, no SSL)
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          port: 21
-          protocol: ftp
-          server-dir: /public_html/
-          security: loose
-          timeout: 300000
-          log-level: verbose
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/.github/**
-            .env
-            .env.*
-            deploy.bat
-            DEPLOY_GUIDE.md
-            .cpanel.yml
-            **/.claude/**
+          # Deploy to public_html
+          curl -k -X POST "https://${{ secrets.FTP_SERVER }}:2083/execute/VersionControlDeployment/create" \
+            -u "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" \
+            -d "repository_root=/home/smartw01/repositories/Claude" \
+            -d "deployment_root=/home/smartw01/public_html"
