@@ -7,32 +7,22 @@ on:
 
 jobs:
   deploy:
-    name: Deploy to cPanel via FTPS
+    name: Deploy to cPanel via SCP
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Deploy to cPanel via FTPS
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+      - name: Deploy via SCP (SSH port 22)
+        uses: appleboy/scp-action@v0.1.7
         with:
-          server: ${{ secrets.FTP_SERVER }}
+          host: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          port: 21
-          protocol: ftps
-          server-dir: /public_html/
-          security: loose
-          timeout: 300000
-          log-level: verbose
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/.github/**
-            .env
-            .env.*
-            deploy.bat
-            DEPLOY_GUIDE.md
-            .cpanel.yml
+          port: 22
+          source: "index.html,*.js,*.css,*.svg,*.png,*.jpg,*.jpeg,*.mp4,*.webp,bot.js,package.json,washing.png,drying.png,disinfection.png"
+          target: /home/${{ secrets.FTP_USERNAME }}/public_html/
+          strip_components: 0
+          overwrite: true
+          timeout: 300s
