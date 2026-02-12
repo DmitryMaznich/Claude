@@ -1,0 +1,34 @@
+name: Deploy via SSH/Rsync
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
+
+jobs:
+  deploy:
+    name: Deploy to cPanel via SSH
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy to Server via rsync
+        uses: easingthemes/ssh-deploy@v4.1.10
+        with:
+          SSH_PRIVATE_KEY: ${{ secrets.SSH_PRIVATE_KEY }}
+          REMOTE_HOST: ${{ secrets.FTP_SERVER }}
+          REMOTE_USER: ${{ secrets.FTP_USERNAME }}
+          REMOTE_PORT: 22
+          TARGET: /home/${{ secrets.FTP_USERNAME }}/public_html/
+          EXCLUDE: |
+            .git*
+            node_modules/
+            .github/
+            .env
+            .env.*
+            deploy.bat
+            DEPLOY_GUIDE.md
+            .cpanel.yml
