@@ -13,20 +13,20 @@ jobs:
     steps:
       - name: 🚚 Get latest code
         uses: actions/checkout@v4
-
-      - name: 🧹 Cleanup hidden files
-        run: rm -rf .git .github
-
-      - name: 📂 Sync files (SCP)
-        uses: appleboy/scp-action@v0.1.7
+      
+      - name: 📂 Sync files (FTP)
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
         with:
-          host: ${{ secrets.FTP_SERVER }}
+          server: ${{ secrets.FTP_SERVER }}
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
-          port: 22
-          source: "."
-          target: "/home/${{ secrets.FTP_USERNAME }}/public_html/"
-          strip_components: 0
-          overwrite: true
+          server-dir: /public_html/
+          port: 21
+          security: loose
+          exclude: |
+            **/.git*
+            **/.github*
+            **/node_modules/**
+            .env
 
 
