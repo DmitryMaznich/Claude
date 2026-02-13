@@ -8614,6 +8614,98 @@
         });
     </script>
 
+    <script>
+        // Mobile Menu Swipe Gesture
+        document.addEventListener('DOMContentLoaded', function () {
+            const menuTab = document.getElementById('menuTab');
+            const mobileMenu = document.getElementById('mobileMenu');
+            const mobileMenuContent = mobileMenu ? mobileMenu.querySelector('.mobile-menu-content') : null;
+            const mobileMenuBtn = document.querySelector('.mobile-menu-btn');
+
+            let startY = 0;
+            let currentY = 0;
+            let isDragging = false;
+            const threshold = 100; // px to snap open
+
+            if (!menuTab || !mobileMenu || !mobileMenuContent) return;
+
+            // Prevent default touch actions to allow custom drag
+            menuTab.style.touchAction = 'none';
+
+            menuTab.addEventListener('touchstart', function (e) {
+                // If menu is already open, ignore (or implement close swipe later)
+                if (mobileMenu.classList.contains('active')) return;
+
+                startY = e.touches[0].clientY;
+                isDragging = true;
+
+                // Disable transitions for instant follow
+                mobileMenuContent.style.transition = 'none';
+                menuTab.style.transition = 'none';
+
+                // Make menu visible so we can see it sliding in
+                mobileMenu.style.visibility = 'visible';
+                mobileMenu.style.height = 'auto';
+                mobileMenu.style.pointerEvents = 'auto';
+            }, { passive: false });
+
+            menuTab.addEventListener('touchmove', function (e) {
+                if (!isDragging) return;
+
+                // Prevent browser scrolling
+                if (e.cancelable) e.preventDefault();
+
+                currentY = e.touches[0].clientY;
+                const deltaY = currentY - startY;
+
+                // Only allow pulling down (positive delta)
+                if (deltaY < 0) return;
+
+                // Move menu content (starts at -100%)
+                mobileMenuContent.style.transform = `translateY(calc(-100% + ${deltaY}px))`;
+
+                // Move tab (starts at translateY(100%) relative to header)
+                // We add deltaY to its initial position
+                menuTab.style.transform = `translateY(calc(100% + ${deltaY}px))`;
+
+            }, { passive: false });
+
+            menuTab.addEventListener('touchend', function (e) {
+                if (!isDragging) return;
+                isDragging = false;
+
+                // Restore transitions
+                mobileMenuContent.style.transition = '';
+                menuTab.style.transition = '';
+
+                // Clear manual transforms
+                mobileMenuContent.style.transform = '';
+                menuTab.style.transform = '';
+
+                const deltaY = currentY - startY;
+
+                if (deltaY > threshold) {
+                    // Trigger open
+                    if (typeof toggleMobileMenu === 'function') {
+                        toggleMobileMenu();
+                    } else {
+                        // Fallback manual toggle
+                        mobileMenu.classList.add('active');
+                        menuTab.classList.add('active');
+                        if (mobileMenuBtn) mobileMenuBtn.classList.add('active');
+                        document.body.style.overflow = 'hidden';
+                    }
+                } else {
+                    // Revert to closed state
+                    if (!mobileMenu.classList.contains('active')) {
+                        mobileMenu.style.visibility = '';
+                        mobileMenu.style.height = '';
+                        mobileMenu.style.pointerEvents = '';
+                    }
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>
