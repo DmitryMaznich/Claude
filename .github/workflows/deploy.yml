@@ -13,13 +13,35 @@ jobs:
     steps:
       - name: Trigger cPanel Git Deployment
         run: |
-          # Pull latest changes from GitHub
-          curl -k -X POST "https://${{ secrets.FTP_SERVER }}:2083/execute/VersionControl/update" \
+          echo "🔄 Step 1: Pulling latest changes from GitHub..."
+          RESPONSE=$(curl -k -s -X POST "https://${{ secrets.FTP_SERVER }}:2083/execute/VersionControl/update" \
             -u "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" \
-            -d "repository_root=/home/smartw01/repositories/Claude"
+            -d "repository_root=/home/smartw01/repositories/Claude")
 
-          # Deploy to public_html
-          curl -k -X POST "https://${{ secrets.FTP_SERVER }}:2083/execute/VersionControlDeployment/create" \
+          echo "Response: $RESPONSE"
+
+          # Check if response contains error
+          if echo "$RESPONSE" | grep -q '"status":0'; then
+            echo "❌ ERROR: Git pull failed!"
+            echo "$RESPONSE"
+            exit 1
+          fi
+
+          echo "✅ Git pull successful"
+
+          echo "🚀 Step 2: Deploying to public_html..."
+          DEPLOY_RESPONSE=$(curl -k -s -X POST "https://${{ secrets.FTP_SERVER }}:2083/execute/VersionControlDeployment/create" \
             -u "${{ secrets.FTP_USERNAME }}:${{ secrets.FTP_PASSWORD }}" \
             -d "repository_root=/home/smartw01/repositories/Claude" \
-            -d "deployment_root=/home/smartw01/public_html"
+            -d "deployment_root=/home/smartw01/public_html")
+
+          echo "Deploy Response: $DEPLOY_RESPONSE"
+
+          # Check if deployment response contains error
+          if echo "$DEPLOY_RESPONSE" | grep -q '"status":0'; then
+            echo "❌ ERROR: Deployment failed!"
+            echo "$DEPLOY_RESPONSE"
+            exit 1
+          fi
+
+          echo "✅ Deployment successful!"
