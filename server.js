@@ -536,8 +536,8 @@ app.post('/api/chat', async (req, res) => {
             }
         }
 
-        // Command: /operator - switch to operator
-        if (command === '/operator') {
+        // Command: /operator or /live - switch to operator
+        if (command === '/operator' || command === '/live') {
             if (session.operatorMode) {
                 const alreadyOperatorMessage = {
                     'English': '✓ You are already connected to an operator.',
@@ -611,7 +611,7 @@ app.post('/api/chat', async (req, res) => {
         }
 
         // Check if should trigger operator (by keyword or command)
-        if (command === '/operator' || shouldTriggerOperator(message)) {
+        if (command === '/operator' || command === '/live' || shouldTriggerOperator(message)) {
             // Check if operator is available (6:00-23:00 Ljubljana time)
             if (!isOperatorAvailable()) {
                 console.log('Operator requested but unavailable (outside working hours)');
@@ -1766,14 +1766,14 @@ async function checkInactiveSessions() {
 
             // Send timeout message to user
             const timeoutMessage = {
-                'English': '⏰ Session closed due to inactivity. Type /operator if you need help.',
-                'Slovenian': '⏰ Seja zaprta zaradi neaktivnosti. Vnesite /operator če potrebujete pomoč.',
-                'Russian': '⏰ Сессия закрыта из-за неактивности. Введите /operator если нужна помощь.',
-                'Ukrainian': '⏰ Сесію закрито через неактивність. Введіть /operator якщо потрібна допомога.',
-                'Croatian': '⏰ Sesija zatvorena zbog neaktivnosti. Unesite /operator ako trebate pomoć.',
-                'Serbian': '⏰ Sesija zatvorena zbog neaktivnosti. Unesite /operator ako trebate pomoć.',
-                'Italian': '⏰ Sessione chiusa per inattività. Digita /operator se hai bisogno di aiuto.',
-                'German': '⏰ Sitzung wegen Inaktivität geschlossen. Geben Sie /operator ein, wenn Sie Hilfe benötigen.'
+                'English': '⏰ Session closed due to inactivity. Type /live if you need help.',
+                'Slovenian': '⏰ Seja zaprta zaradi neaktivnosti. Vnesite /live če potrebujete pomoč.',
+                'Russian': '⏰ Сессия закрыта из-за неактивности. Введите /live если нужна помощь.',
+                'Ukrainian': '⏰ Сесію закрито через неактивність. Введіть /live якщо потрібна допомога.',
+                'Croatian': '⏰ Sesija zatvorena zbog neaktivnosti. Unesite /live ako trebate pomoć.',
+                'Serbian': '⏰ Sesija zatvorena zbog neaktivnosti. Unesite /live ako trebate pomoć.',
+                'Italian': '⏰ Sessione chiusa per inattività. Digita /live se hai bisogno di aiuto.',
+                'German': '⏰ Sitzung wegen Inaktivität geschlossen. Geben Sie /live ein, wenn Sie Hilfe benötigen.'
             };
 
             session.messages.push({
