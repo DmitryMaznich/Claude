@@ -1,0 +1,111 @@
+{
+  "overall_rating": 4.5,
+  "total_reviews": 52,
+  "google_source": "Based on real Google Maps reviews via mojastoritev.si",
+  "reviews": [
+    {
+      "author": "Mateja",
+      "rating": 5,
+      "text_si": "Odlična pralnica, zelo čisto in stroji delujejo perfektno. Priporočam!",
+      "text_en": "Excellent laundromat, very clean and machines work perfectly. Highly recommend!",
+      "date": "2026-01-28",
+      "location": "Galjevica"
+    },
+    {
+      "author": "Luka",
+      "rating": 5,
+      "text_si": "Sušilni stroj je super hitro posušil mojo debelo odejo. Zelo zadovoljen.",
+      "text_en": "The dryer dried my thick blanket super fast. Very satisfied.",
+      "date": "2026-01-15",
+      "location": "Galjevica"
+    },
+    {
+      "author": "Eva",
+      "rating": 4,
+      "text_si": "Priročna lokacija in všeč mi je da je 24/7 odprto.",
+      "text_en": "Convenient location and I like that it's open 24/7.",
+      "date": "2025-12-22",
+      "location": "Galjevica"
+    },
+    {
+      "author": "Janez",
+      "rating": 5,
+      "text_si": "Odlično za velike stvari kot so zavese in posteljnina. Stroji so zmogljivi.",
+      "text_en": "Excellent for large items like curtains and bedding. Machines are powerful.",
+      "date": "2025-12-08",
+      "location": "Galjevica"
+    },
+    {
+      "author": "Tina",
+      "rating": 5,
+      "text_si": "Čista pralnica, vse deluje brezhibno. Prihranim veliko časa.",
+      "text_en": "Clean laundry, everything works flawlessly. Save a lot of time.",
+      "date": "2025-11-19",
+      "location": "Galjevica"
+    },
+    {
+      "author": "Aleš",
+      "rating": 4,
+      "text_si": "Dobre cene in kvalitetno pranje. Manjka mi samo brezstično plačilo.",
+      "text_en": "Good prices and quality washing. I just miss contactless payment.",
+      "date": "2025-10-30",
+      "location": "Galjevica"
+    },
+    {
+      "author": "Marko",
+      "rating": 5,
+      "text_si": "Super, lahko na enkrat posušiš in opereš 20 kg",
+      "text_en": "Great, you can wash and dry 20 kg at once",
+      "date": "2024-07-23",
+      "location": "Galjevica"
+    },
+    {
+      "author": "Ana",
+      "rating": 5,
+      "text_si": "Ponavadi perem in sušim 2x2m sedežne prevleke. Brez zapletov. Priporočam.",
+      "text_en": "I usually wash and dry 2x2m seat covers. No complications. Highly recommend.",
+      "date": "2024-07-06",
+      "location": "Galjevica"
+    },
+    {
+      "author": "David",
+      "rating": 5,
+      "text_si": "Imel sem težavo z žetoni in lastnik je takoj prišel in uredil mojo težavo.",
+      "text_en": "I had an issue with the coins and the owner came and sorted out my issue.",
+      "date": "2024-05-29",
+      "location": "Galjevica"
+    },
+    {
+      "author": "Michael",
+      "rating": 5,
+      "text_si": "Res najboljše mesto za pranje in sušenje v Ljubljani. Preizkusil sem vse, ta je 4.8/5 po mojem mnenju.",
+      "text_en": "Really the best wash & dry place in Ljubljana. Have tried them all, this one is 4.8/5 in my opinion.",
+      "date": "2024-04-30",
+      "location": "Galjevica"
+    },
+    {
+      "author": "Nina",
+      "rating": 5,
+      "text_si": "Je čisto. Jaz hodim v pralnico samo za sušenje perila.",
+      "text_en": "It's clean. I only go to the laundry for drying clothes.",
+      "date": "2023-10-30",
+      "location": "Galjevica"
+    },
+    {
+      "author": "Peter",
+      "rating": 5,
+      "text_si": "Super stroji, super pranje.",
+      "text_en": "Great machines, great washing.",
+      "date": "2023-09-16",
+      "location": "Galjevica"
+    },
+    {
+      "author": "Sarah",
+      "rating": 5,
+      "text_si": "Čist prostor, z lepim vonjem mehčalca. Učinkovite naprave.",
+      "text_en": "Clean space, with nice fabric softener smell. Efficient devices.",
+      "date": "2023-04-14",
+      "location": "Galjevica"
+    }
+  ]
+}

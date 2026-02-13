@@ -1,0 +1,75 @@
+name: Deploy FTP Alternative Ports
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
+
+jobs:
+  # Try port 2222 first
+  deploy-port-2222:
+    name: Try FTP port 2222
+    runs-on: ubuntu-latest
+    continue-on-error: true
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy via FTP port 2222
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 2222
+          protocol: ftps
+          server-dir: /public_html/
+          security: loose
+          timeout: 300000
+          log-level: verbose
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.github/**
+            .env
+            .env.*
+            deploy.bat
+            DEPLOY_GUIDE.md
+            .cpanel.yml
+
+  # Fallback to port 990 (FTPS implicit)
+  deploy-port-990:
+    name: Try FTPS port 990
+    runs-on: ubuntu-latest
+    needs: deploy-port-2222
+    if: failure()
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy via FTPS port 990
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.4
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 990
+          protocol: ftps
+          server-dir: /public_html/
+          security: loose
+          timeout: 300000
+          log-level: verbose
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.github/**
+            .env
+            .env.*
+            deploy.bat
+            DEPLOY_GUIDE.md
+            .cpanel.yml

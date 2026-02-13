@@ -1,0 +1,24 @@
+name: Trigger cPanel Git Deploy
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
+
+jobs:
+  trigger-cpanel:
+    name: Trigger cPanel Git Pull
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Trigger cPanel Git Deployment
+        run: |
+          curl -X POST "${{ secrets.CPANEL_GIT_WEBHOOK_URL }}" \
+            -H "Content-Type: application/json" \
+            -d '{
+              "repository": {
+                "clone_url": "https://github.com/DmitryMaznich/Claude.git"
+              },
+              "ref": "refs/heads/main"
+            }'

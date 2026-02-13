@@ -1,0 +1,708 @@
+<!-- Hero Section -->
+    <section class="hero">
+
+<!-- Menu Button -->
+<button class="menu-button" aria-label="Open menu">
+  <span></span>
+  <span></span>
+  <span></span>
+</button>
+
+        <div class="container">
+            <div class="logo-container">
+                <img src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIiB4bWxuczppbmtzY2FwZT0iaHR0cDovL3d3dy5pbmtzY2FwZS5vcmcvbmFtZXNwYWNlcy9pbmtzY2FwZSIgdmVyc2lvbj0iMS4xIiB3aWR0aD0iMTU5LjA5MDAiIGhlaWdodD0iMTU5LjA5MDAiIHZpZXdCb3g9IjIxOC4wOTI4IDM0MS4zOTk5IDE1OS4wOTAwIDE1OS4wOTAwIj4KPGRlZnM+CjxjbGlwUGF0aCBpZD0iY2xpcF8xIj4KPHBhdGggdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMCw4NDEuODg5OCkiIGQ9Ik0yOTcuNjM3OCA0MjAuOTQ0OUgyMjAuMzI0NUMyMjAuMzI0NSAzNzguMjQ2IDI1NC45MzkyIDM0My42MzE2IDI5Ny42Mzc4IDM0My42MzE2IDM0MC4zMzY2IDM0My42MzE2IDM3NC45NTExIDM3OC4yNDYgMzc0Ljk1MTEgNDIwLjk0NDlaIiBjbGlwLXJ1bGU9ImV2ZW5vZGQiLz4KPC9jbGlwUGF0aD4KPC9kZWZzPgo8ZyBpbmtzY2FwZTpncm91cG1vZGU9ImxheWVyIiBpbmtzY2FwZTpsYWJlbD0iTGF5ZXIgMSI+CjxwYXRoIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDAsODQxLjg4OTgpIiBkPSJNMjk3LjYzNzggNTAwLjQ4OTlDMzQxLjU2OTEgNTAwLjQ4OTkgMzc3LjE4MjggNDY0Ljg3NjIgMzc3LjE4MjggNDIwLjk0NDkgMzc3LjE4MjggMzc3LjAxMzUgMzQxLjU2OTEgMzQxLjM5OTkgMjk3LjYzNzggMzQxLjM5OTkgMjUzLjcwNjUgMzQxLjM5OTkgMjE4LjA5MjggMzc3LjAxMzUgMjE4LjA5MjggNDIwLjk0NDkgMjE4LjA5MjggNDY0Ljg3NjIgMjUzLjcwNjUgNTAwLjQ4OTkgMjk3LjYzNzggNTAwLjQ4OTkiIGZpbGw9IiMyODU2YTQiLz4KPHBhdGggdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMCw4NDEuODg5OCkiIGQ9Ik0yOTcuNjM3OCA0OTguMjU4MUMzNDAuMzM2NiA0OTguMjU4MSAzNzQuOTUxMSA0NjMuNjQzNCAzNzQuOTUxMSA0MjAuOTQ0OSAzNzQuOTUxMSAzNzguMjQ2IDM0MC4zMzY2IDM0My42MzE2IDI5Ny42Mzc4IDM0My42MzE2IDI1NC45MzkyIDM0My42MzE2IDIyMC4zMjQ1IDM3OC4yNDYgMjIwLjMyNDUgNDIwLjk0NDkgMjIwLjMyNDUgNDYzLjY0MzQgMjU0LjkzOTIgNDk4LjI1ODEgMjk3LjYzNzggNDk4LjI1ODEiIGZpbGw9IiMwMDk4ZDkiIGZpbGwtcnVsZT0iZXZlbm9kZCIvPgo8ZyBjbGlwLXBhdGg9InVybCgjY2xpcF8xKSI+CjxpbWFnZSB4PSIyMjAiIHk9IjQyMCIgd2lkdGg9IjE1NSIgaGVpZ2h0PSI3OSIgeGxpbms6aHJlZj0iZGF0YTppbWFnZS9wbmc7YmFzZTY0LAppVkJPUncwS0dnb0FBQUFOU1VoRVVnQUFBSnNBQUFCUENBWUFBQUQ4enJlMUFBQUFDWEJJV1hNQUFBN0VBQUFPCnhBR1ZLdzRiQUFBRCswbEVRVlI0bk8zVVpaZFdaUlNBNGYzdmJEQkFBY1ZFTVFrRE83RUlPMmpzQUpPaHUydGcKWUdnWWFxaWhZYkQ5TkQ3UDJmdFp2T2U4ZkhBdDJjYzM3Zy8zUDdqV0xZZTcvKzZKSFNyVTJmMVgxc0h6K1E1WQorOC9sMjVjNnErMjFPZ3J0T2ZObjF1NUN1MDVyT3d2dFNKM1N0bHZiVWlmL3lOcHFiVW1kME5xdHpZVTJIZGZhCkNtM3MwalowL1o2cjlWaSs5ZGE2MUZGdHJiVW1kVVJiZmVTM3JGV3B3OXBLYTBXaDVZZTBaWVdXZG1wTE9uL04KdGZpZ3RxalFRbXZCZ1h6enJYbjdVNzlremJYbTdNczMyNXFWMnF2TnRGcFNIZG9NNitlT0M5cWVDejBDcnYrTwpDMWpWc0dJL1dUOWFBaXl1NVlVcjljTnVUY0FGTGk5YzN4Y1NjSUhMQzlkM3U3VHBsZ0FMV0I2d1V0TjJkbWQ5Ckd4SndnY3NMVjJYZlJHemdhaHhjdFFRcjl2V09mQUl1UDF6TmRLMUw0ZnJLK25LN0pvME9xeEdPVlkrd1VsOVkKbjI4TDJMeHhOZUt4d1BYdmNHbm5zejRMU1QxZkMxeTFqU3YycWZYSjFvQU5XTUR5Z0ZYWlZFdkFCUzR2WEZPMgo1Qk53Z2NzTDEyUnJVcnNtNENvWFY3UEFtdGgrTHRlRWtBQ0xhM25oaW8zZmZERUJGN2k4Y01YR1dSOXZDdGpLCndBV3M1b01WKzZpUWNDMXdlZUg2c0UzN29PMXNsb0FMWEY2NFV1OWIwdkM0Z1BXL3dIcHZvL1p1UmRKUXNNQlYKVTdoaTcyelEzZzdKNWNRRkxHQWxXSlc5MWFvSjF3S1hGNjZ4cldkeUNiakE1WVZyakRWNnZTYjFqZ3RZdFFscgpWS0UzMXdWczlRUUxYUFdGSy9hRzlYckVCaTV3ZWVIS1duczY2N1dRQUF0WUhyQmlyMW9qTFFFWHVMeHdqVnlqCnZXSUp1TURsaGV2bDFHcE5nQVVzRDFndldTOWFMNnc2MVNQZ0FwY1hyc3FlajlpYUFSZXd5b2NWZTI2bDlxd2wKalFZTFhMV0RLL1dNSmVBQ2x4ZXVwMWRvVDFrQ0xHQjV3RW85dWZ4azFvaVFnQXRjWHJoaVQxaVBMd3ZZd0FVdQpMMXlWUFJheEFRdFlIckJpajFyRGwyb0NMbkI1NFJwbURiVUVYT0R5d2pWMHlZbXNJWllBQzFnZXNCNnhIbDZzClBSUVNjSUhMQzFmc3dZb0VYT0R5d2hWN1lKRjJmMGlBQlN3UFdMSEIxbjBMajJjSnVNRGxoU3QxcnlYQUFwWUgKckVFTHRIdXN1ME1DTG5CNTRZcmROZjlpQWk1d2VlR0szV25kRWJFQkMxZ2VzR0szeit2S0dtZ0p1TURsaGVzMgo2OWE1bW9BTFhGNjRCbGo5TFFFV3NEeGc5WnVUNzVhUWdBdGNYcmhpTjF0OVp4L3JFWENCeXd0WHJJOTFVOFFHCkxHQjV3SXJkT0V1N3dSSndnY3NMMS9WVzc1bWFBS3U1WVhuaTZtVmRad200bWd0WFdiQ3ViZEd1YVRtYWRYVkkKd0FVdUwxeXhxNndyWndSc3dBS1dCNnpZRllVRVhPRHl3bFdGRFZqQXFvUjFPWEZWWVFOWGMrUHlnblZKYk9BQwpseGV1S216Z0FwY1hyaXBzd0FKV1dRbTR3RlVhTm5DQnF6UnN3QUpXYWRqQUJhN1NzQUVMV0tWaEF4ZTRTc01HCkxuQ1ZoZzFZd0NvTkc3akFWUm8yY0lHcnJQNEI1aVord2lSRjRLd0FBQUFBU1VWT1JLNUNZSUk9Ii8+CjwvZz4KPHBhdGggdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMCw4NDEuODg5OCkiIGQ9Ik0yOTcuNjM3OCA0ODQuOTkyQzMzMy4wMDk5IDQ4NC45OTIgMzYxLjY4NDkgNDU2LjMxNjcgMzYxLjY4NDkgNDIwLjk0NDkgMzYxLjY4NDkgMzg1LjU3MjggMzMzLjAwOTkgMzU2Ljg5NzggMjk3LjYzNzggMzU2Ljg5NzggMjYyLjI2NiAzNTYuODk3OCAyMzMuNTkwNyAzODUuNTcyOCAyMzMuNTkwNyA0MjAuOTQ0OSAyMzMuNTkwNyA0NTYuMzE2NyAyNjIuMjY2IDQ4NC45OTIgMjk3LjYzNzggNDg0Ljk5MiIgZmlsbD0iIzkyZDdmNiIgZmlsbC1ydWxlPSJldmVub2RkIi8+CjxwYXRoIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDAsODQxLjg4OTgpIiBkPSJNMjYyLjEzOTIgNDQzLjY5NjNDMjYyLjEzOTIgNDQyLjc4NjcgMjYxLjk2OTcgNDQxLjk3NDggMjYxLjYzNTggNDQxLjI2MDUgMjYxLjI5NjUgNDQwLjU1MTMgMjYwLjgyOTEgNDM5Ljk0NDkgMjYwLjIzMjkgNDM5LjQ0NjMgMjU5LjYzNjggNDM4Ljk1MzEgMjU4LjkzMjcgNDM4LjU3ODEgMjU4LjEyNiA0MzguMzI2MSAyNTcuMzE0MSA0MzguMDc0NCAyNTYuNDQ1NiA0MzcuOTUxMSAyNTUuNTEwMSA0MzcuOTUxMSAyNTQuODU3NiA0MzcuOTUxMSAyNTQuMjUxMyA0MzguMDA3NSAyNTMuNjk2MyA0MzguMTE1NSAyNTMuMTM2MSA0MzguMjI4NiAyNTIuNjM3NSA0MzguMzY3MiAyNTIuMjAwNyA0MzguNTI2NSAyNTEuNzY0MiA0MzguNjg1OCAyNTEuMzk5MSA0MzguODU1NiAyNTEuMTAxMSA0MzkuMDI1MSAyNTAuODA4MyA0MzkuMTk5NyAyNTAuNTk3NCA0MzkuMzQzNyAyNTAuNDg0NiA0MzkuNDY3IDI1MC4zNjY0IDQzOS41ODUyIDI1MC4yODM5IDQzOS43Mzk0IDI1MC4yMjc1IDQzOS45MjQzIDI1MC4xNzExIDQ0MC4xMDk0IDI1MC4xNDUzIDQ0MC4zNTYgMjUwLjE0NTMgNDQwLjY2NDQgMjUwLjE0NTMgNDQwLjg4NTUgMjUwLjE1NTUgNDQxLjA3MDMgMjUwLjE3NjIgNDQxLjIxNDMgMjUwLjE5NjYgNDQxLjM1OCAyNTAuMjI3NSA0NDEuNDc2MiAyNTAuMjYzNSA0NDEuNTYzOCAyNTAuMzA0NiA0NDEuNjU2MiAyNTAuMzU1OSA0NDEuNzE3NyAyNTAuNDE3NyA0NDEuNzUzNyAyNTAuNDc5MiA0NDEuNzg5NyAyNTAuNTQ2MSA0NDEuODA1MyAyNTAuNjI4MyA0NDEuODA1MyAyNTAuNzY3MiA0NDEuODA1MyAyNTAuOTY3NiA0NDEuNzE3NyAyNTEuMjI0NCA0NDEuNTQ4MiAyNTEuNDc2MiA0NDEuMzc4NyAyNTEuODA1MyA0NDEuMTkzNiAyNTIuMjExMiA0NDAuOTkzMiAyNTIuNjEyIDQ0MC43OTc5IDI1My4wOTUgNDQwLjYwOCAyNTMuNjY1NCA0NDAuNDMzMSAyNTQuMjMwNiA0NDAuMjU4NSAyNTQuODg4NSA0NDAuMTcxMSAyNTUuNjI4MyA0NDAuMTcxMSAyNTYuMTkzNiA0NDAuMTcxMSAyNTYuNzA3NSA0NDAuMjQ4MyAyNTcuMTc1MiA0NDAuMzk3MSAyNTcuNjQyOSA0NDAuNTQ2MiAyNTguMDQzNyA0NDAuNzU2OCAyNTguMzc3NyA0NDEuMDM0MyAyNTguNzE3IDQ0MS4zMDY3IDI1OC45NzM4IDQ0MS42NDYgMjU5LjE1MzggNDQyLjA0NjggMjU5LjMzMzUgNDQyLjQ0NzcgMjU5LjQyNTkgNDQyLjkwNDkgMjU5LjQyNTkgNDQzLjQxMzcgMjU5LjQyNTkgNDQzLjk2MzYgMjU5LjMwMjYgNDQ0LjQzNjIgMjU5LjA1MDkgNDQ0LjgyNjggMjU4Ljc5OTIgNDQ1LjIxNzQgMjU4LjQ3MDEgNDQ1LjU2MTggMjU4LjA1OTEgNDQ1Ljg1OTcgMjU3LjY0MjkgNDQ2LjE1MjUgMjU3LjE3NTIgNDQ2LjQyNDkgMjU2LjY1MTEgNDQ2LjY3MTYgMjU2LjEyMTkgNDQ2LjkxODUgMjU1LjU4MjEgNDQ3LjE2NTEgMjU1LjAzMjIgNDQ3LjQyMTkgMjU0LjQ4MjYgNDQ3LjY3OSAyNTMuOTQyOSA0NDcuOTYxNiAyNTMuNDIzOCA0NDguMjc1MSAyNTIuODk5NyA0NDguNTgzMiAyNTIuNDMyIDQ0OC45NDgxIDI1Mi4wMjEgNDQ5LjM2OTYgMjUxLjYxIDQ0OS43OTA4IDI1MS4yNzU3IDQ1MC4yODQzIDI1MS4wMjQgNDUwLjg1NDYgMjUwLjc2NzIgNDUxLjQxOTkgMjUwLjYzODUgNDUyLjA5ODIgMjUwLjYzODUgNDUyLjg4OTYgMjUwLjYzODUgNDUzLjcwNjkgMjUwLjc4NzYgNDU0LjQzMTQgMjUxLjA4MDQgNDU1LjA2ODYgMjUxLjM3ODYgNDU1LjcwMDUgMjUxLjc4OTcgNDU2LjIzNTEgMjUyLjMxMzggNDU2LjY2NjggMjUyLjg0MzMgNDU3LjA5ODIgMjUzLjQ3IDQ1Ny40MjczIDI1NC4xOTQ2IDQ1Ny42NTMzIDI1NC45MjQ1IDQ1Ny44Nzk1IDI1NS43MDU0IDQ1Ny45OTI2IDI1Ni41NDgyIDQ1Ny45OTI2IDI1Ni45Nzk5IDQ1Ny45OTI2IDI1Ny40MTE2IDQ1Ny45NTY2IDI1Ny44NDg0IDQ1Ny44Nzk1IDI1OC4yODUzIDQ1Ny44MDI0IDI1OC42OTYzIDQ1Ny43MDQ5IDI1OS4wODE4IDQ1Ny41NzYyIDI1OS40NjcgNDU3LjQ1MjkgMjU5LjgxMTQgNDU3LjMwOTEgMjYwLjExNDcgNDU3LjE1NDkgMjYwLjQxMjcgNDU3LjAwMDcgMjYwLjYxMzEgNDU2Ljg3MjMgMjYwLjcwNTUgNDU2Ljc3OTYgMjYwLjgwMzMgNDU2LjY4MjEgMjYwLjg2NDggNDU2LjYxMDEgMjYwLjg5NTcgNDU2LjU1MzcgMjYwLjkyNjYgNDU2LjQ5NyAyNjAuOTQ3IDQ1Ni40MjUzIDI2MC45Njc3IDQ1Ni4zNDMxIDI2MC45ODg0IDQ1Ni4yNTU1IDI2MS4wMDM3IDQ1Ni4xNTI5IDI2MS4wMTM5IDQ1Ni4wMjk2IDI2MS4wMjQxIDQ1NS45MTE0IDI2MS4wMjk1IDQ1NS43NTcyIDI2MS4wMjk1IDQ1NS41NjE5IDI2MS4wMjk1IDQ1NS4zODE5IDI2MS4wMjQxIDQ1NS4yMjI2IDI2MS4wMDg4IDQ1NS4wNzg4IDI2MC45OTM1IDQ1NC45Mzk5IDI2MC45Njc3IDQ1NC44MjE3IDI2MC45MzY4IDQ1NC43MjQyIDI2MC45MTEzIDQ1NC42MzE4IDI2MC44NjQ4IDQ1NC41NTk4IDI2MC44MTM1IDQ1NC41MTM2IDI2MC43NTcxIDQ1NC40Njc0IDI2MC42OTUzIDQ1NC40NDY3IDI2MC42MjMzIDQ1NC40NDY3IDI2MC41MTA1IDQ1NC40NDY3IDI2MC4zNDA3IDQ1NC41MTg3IDI2MC4xMDQzIDQ1NC42NTczIDI1OS44Njc4IDQ1NC44MDEzIDI1OS41ODAxIDQ1NC45NTU1IDI1OS4yMzYgNDU1LjEzNTIgMjU4Ljg5NjcgNDU1LjMxMDEgMjU4LjQ5MDggNDU1LjQ2OTQgMjU4LjAyMzEgNDU1LjYxMzIgMjU3LjU2MDcgNDU1Ljc2MjMgMjU3LjAzNjYgNDU1LjgzNDMgMjU2LjQ1MDcgNDU1LjgzNDMgMjU1LjkxMSA0NTUuODM0MyAyNTUuNDM4NCA0NTUuNzYyMyAyNTUuMDM3NiA0NTUuNjE4MyAyNTQuNjM2NSA0NTUuNDY5NCAyNTQuMzAyNiA0NTUuMjc5MiAyNTQuMDQwNyA0NTUuMDM3NyAyNTMuNzgzNiA0NTQuNzk2MiAyNTMuNTg4MyA0NTQuNTEzNiAyNTMuNDU0NyA0NTQuMTg0OCAyNTMuMzI2MyA0NTMuODUwNiAyNTMuMjU5NCA0NTMuNTAxMSAyNTMuMjU5NCA0NTMuMTMxMSAyNTMuMjU5NCA0NTIuNTkxNyAyNTMuMzgyNyA0NTIuMTI0IDI1My42MzQ1IDQ1MS43MzM0IDI1My44ODY1IDQ1MS4zNDI4IDI1NC4yMjA0IDQ1MC45OTg2IDI1NC42MzY1IDQ1MC42OTUzIDI1NS4wNTggNDUwLjM5MjMgMjU1LjUzMDggNDUwLjExOTkgMjU2LjA2NTIgNDQ5Ljg2NzkgMjU2LjU5NDQgNDQ5LjYxNjIgMjU3LjEzOTIgNDQ5LjM2NDUgMjU3LjY5NDIgNDQ5LjEwNzQgMjU4LjI0NDIgNDQ4Ljg1MDYgMjU4Ljc4ODcgNDQ4LjU3MyAyNTkuMzE4MiA0NDguMjY0NiAyNTkuODUyNSA0NDcuOTYxNiAyNjAuMzI1NCA0NDcuNTk2OCAyNjAuNzQ2NiA0NDcuMTgwNCAyNjEuMTYzIDQ0Ni43NjQzIDI2MS40OTY5IDQ0Ni4yNzU4IDI2MS43NTQgNDQ1LjcwNTUgMjYyLjAxMDggNDQ1LjE0MDMgMjYyLjEzOTIgNDQ0LjQ3MjIgMjYyLjEzOTIgNDQzLjY5NjNaTTI4OC4yMDg2IDQzOC42MTkyQzI4OC4yMDg2IDQzOC41MzcgMjg4LjE4ODIgNDM4LjQ2NSAyODguMTQ3MSA0MzguNDA4NiAyODguMTA2IDQzOC4zNDY4IDI4OC4wMzQgNDM4LjMwMDYgMjg3LjkzMTEgNDM4LjI2NDYgMjg3LjgyODUgNDM4LjIyODYgMjg3LjY5NDcgNDM4LjE5NzcgMjg3LjUzNTQgNDM4LjE3MjIgMjg3LjM3NjEgNDM4LjE0NjQgMjg3LjE2NTUgNDM4LjEzNjIgMjg2LjkwODcgNDM4LjEzNjIgMjg2LjY2NzEgNDM4LjEzNjIgMjg2LjQ2MTQgNDM4LjE0NjQgMjg2LjI5MTggNDM4LjE3MjIgMjg2LjEyMjMgNDM4LjE5NzcgMjg1Ljk4ODggNDM4LjIyODYgMjg1Ljg5MSA0MzguMjY0NiAyODUuNzkzNSA0MzguMzAwNiAyODUuNzIxNSA0MzguMzQ2OCAyODUuNjgwNCA0MzguNDA4NiAyODUuNjM5MyA0MzguNDY1IDI4NS42MTg2IDQzOC41MzcgMjg1LjYxODYgNDM4LjYxOTJWNDU1LjU5MjhIMjg1LjU4OEwyNzguNzI3NiA0MzguNTQyMUMyNzguNzAxOCA0MzguNDcwMSAyNzguNjU1NiA0MzguNDEzNyAyNzguNjA0MyA0MzguMzYyMSAyNzguNTQ3NiA0MzguMzEwOCAyNzguNDY1NCA0MzguMjY5NyAyNzguMzYyOCA0MzguMjMzNyAyNzguMjU0OCA0MzguMTk3NyAyNzguMTMxNSA0MzguMTcyMiAyNzcuOTgyNCA0MzguMTU2NiAyNzcuODM4NiA0MzguMTQxMyAyNzcuNjYzNyA0MzguMTM2MiAyNzcuNDYzMyA0MzguMTM2MiAyNzcuMjUyNyA0MzguMTM2MiAyNzcuMDcyNyA0MzguMTQ2NCAyNzYuOTIzOSA0MzguMTY2OCAyNzYuNzc0OCA0MzguMTg3NSAyNzYuNjQ2NCA0MzguMjEzMyAyNzYuNTQ4NiA0MzguMjQ5MyAyNzYuNDQ2IDQzOC4yODUgMjc2LjM2ODkgNDM4LjMyNjEgMjc2LjMxMjIgNDM4LjM3NzcgMjc2LjI2MDkgNDM4LjQyOSAyNzYuMjE5OCA0MzguNDgwMyAyNzYuMTk5NCA0MzguNTQyMUwyNjkuNjMxOCA0NTUuNTkyOEgyNjkuNjE2NVY0MzguNjE5MkMyNjkuNjE2NSA0MzguNTM3IDI2OS41OTU4IDQzOC40NjUgMjY5LjU1NDcgNDM4LjQwODYgMjY5LjUxMzYgNDM4LjM0NjggMjY5LjQ0MTYgNDM4LjMwMDYgMjY5LjMzOSA0MzguMjY0NiAyNjkuMjM2MSA0MzguMjI4NiAyNjkuMDk3NCA0MzguMTk3NyAyNjguOTMzIDQzOC4xNzIyIDI2OC43NjgzIDQzOC4xNDY0IDI2OC41NTc3IDQzOC4xMzYyIDI2OC4zMDA5IDQzOC4xMzYyIDI2OC4wNDg5IDQzOC4xMzYyIDI2Ny44NDM0IDQzOC4xNDY0IDI2Ny42NzkgNDM4LjE3MjIgMjY3LjUxNDYgNDM4LjE5NzcgMjY3LjM4MTEgNDM4LjIyODYgMjY3LjI4MzMgNDM4LjI2NDYgMjY3LjE4NTggNDM4LjMwMDYgMjY3LjExODkgNDM4LjM0NjggMjY3LjA4MjkgNDM4LjQwODYgMjY3LjA0NjkgNDM4LjQ2NSAyNjcuMDI2NSA0MzguNTM3IDI2Ny4wMjY1IDQzOC42MTkyVjQ1Ni41MzgxQzI2Ny4wMjY1IDQ1Ni45NjQ3IDI2Ny4xMzk2IDQ1Ny4yNjI5IDI2Ny4zNjA0IDQ1Ny40NDI2IDI2Ny41ODY2IDQ1Ny42MjI2IDI2Ny44MzgzIDQ1Ny43MTUxIDI2OC4xMTA3IDQ1Ny43MTUxSDI2OS43MDM4QzI3MC4wMjc1IDQ1Ny43MTUxIDI3MC4zMTUyIDQ1Ny42ODQyIDI3MC41NTY3IDQ1Ny42MjI2IDI3MC44MDMzIDQ1Ny41NjYgMjcxLjAxNDIgNDU3LjQ2ODQgMjcxLjE5OTEgNDU3LjM0IDI3MS4zODQyIDQ1Ny4yMDYyIDI3MS41Mzg0IDQ1Ny4wNDE4IDI3MS42NTY2IDQ1Ni44NDE0IDI3MS43Nzk5IDQ1Ni42NDEgMjcxLjg4NzkgNDU2LjQwNDYgMjcxLjk4MDMgNDU2LjEzMjJMMjc3LjU1NTcgNDQyLjAyMUgyNzcuNjMyOUwyODMuNDE5MiA0NTYuMDkxMUMyODMuNTMyMyA0NTYuMzg5MyAyODMuNjU1NiA0NTYuNjQ2MSAyODMuNzg5NCA0NTYuODU2NyAyODMuOTIyOSA0NTcuMDY3NiAyODQuMDY2OSA0NTcuMjM3MSAyODQuMjI2IDQ1Ny4zNjA0IDI4NC4zODAyIDQ1Ny40ODg5IDI4NC41NjAyIDQ1Ny41NzYyIDI4NC43NTA0IDQ1Ny42MzI5IDI4NC45NDU3IDQ1Ny42ODkzIDI4NS4xNzE2IDQ1Ny43MTUxIDI4NS40MjMzIDQ1Ny43MTUxSDI4Ny4wOTM1QzI4Ny4yNDI2IDQ1Ny43MTUxIDI4Ny4zOTE3IDQ1Ny42OTQ0IDI4Ny41MzAzIDQ1Ny42NDgyIDI4Ny42NjQxIDQ1Ny42MDIgMjg3Ljc4MjMgNDU3LjUzIDI4Ny44Nzk4IDQ1Ny40Mzc1IDI4Ny45NzczIDQ1Ny4zNCAyODguMDU0NCA0NTcuMjIxOCAyODguMTE2MiA0NTcuMDcyNyAyODguMTc3NyA0NTYuOTI4NyAyODguMjA4NiA0NTYuNzQ5IDI4OC4yMDg2IDQ1Ni41MzgxWk0zMDkuMTgwMiA0MzkuMTQzM0MzMDkuMjU3MyA0MzguOTIyMiAzMDkuMzAzNSA0MzguNzQ3NiAzMDkuMzA4NiA0MzguNjA5IDMwOS4zMTM3IDQzOC40NzUyIDMwOS4yNzI2IDQzOC4zNzI2IDMwOS4xOTU4IDQzOC4zMDA2IDMwOS4xMTMzIDQzOC4yMzM3IDMwOC45Nzk4IDQzOC4xODc1IDMwOC43OTQ3IDQzOC4xNjY4IDMwOC42MDk5IDQzOC4xNDY0IDMwOC4zNjMyIDQzOC4xMzYyIDMwOC4wNDk3IDQzOC4xMzYyIDMwNy43NDEzIDQzOC4xMzYyIDMwNy40ODk2IDQzOC4xNDEzIDMwNy4zMDQ1IDQzOC4xNTY2IDMwNy4xMTk3IDQzOC4xNzIyIDMwNi45ODA4IDQzOC4xOTc3IDMwNi44ODMzIDQzOC4yMzM3IDMwNi43ODU1IDQzOC4yNjk3IDMwNi43MTg2IDQzOC4zMTU5IDMwNi42NzI0IDQzOC4zNzc3IDMwNi42MjYyIDQzOC40MzkyIDMwNi41ODUxIDQzOC41MTEyIDMwNi41NDQgNDM4LjYwMzZMMzA0Ljg3MzggNDQzLjM0NjhIMjk2Ljc3NTJMMjk1LjE3NyA0MzguNjY1NEMyOTUuMTQ2MSA0MzguNTczIDI5NS4xMTAxIDQzOC40OTU5IDI5NS4wNTg4IDQzOC40MjkgMjk1LjAwNzIgNDM4LjM2MjEgMjk0LjkzNTIgNDM4LjMxMDggMjk0LjgzNzcgNDM4LjI2NDYgMjk0Ljc0NTMgNDM4LjIxODQgMjk0LjYwNjQgNDM4LjE4NzUgMjk0LjQzMTggNDM4LjE2NjggMjk0LjI1NjkgNDM4LjE0NjQgMjk0LjAzMSA0MzguMTM2MiAyOTMuNzQ4NCA0MzguMTM2MiAyOTMuNDU1MyA0MzguMTM2MiAyOTMuMjE4OSA0MzguMTQ2NCAyOTMuMDM0IDQzOC4xNzIyIDI5Mi44NDg5IDQzOC4xOTc3IDI5Mi43MTU0IDQzOC4yNDM5IDI5Mi42NDM0IDQzOC4zMTU5IDI5Mi41NjYzIDQzOC4zODc5IDI5Mi41MzAzIDQzOC40OTA4IDI5Mi41MzU0IDQzOC42MjQzIDI5Mi41NDA4IDQzOC43NjI5IDI5Mi41ODE5IDQzOC45Mzc4IDI5Mi42NjQxIDQzOS4xNTg2TDI5OS4xOTU0IDQ1Ny4yNjI5QzI5OS4yMzY1IDQ1Ny4zNzU3IDI5OS4yOTMyIDQ1Ny40Njg0IDI5OS4zNTQ3IDQ1Ny41MzUxIDI5OS40MjE2IDQ1Ny42MDcxIDI5OS41MTQgNDU3LjY2MzcgMjk5LjY0MjUgNDU3LjY5OTcgMjk5Ljc2NTggNDU3Ljc0MDkgMjk5LjkyNTEgNDU3Ljc3MTUgMzAwLjEyNTUgNDU3Ljc4NzEgMzAwLjMyMDggNDU3LjgwMjQgMzAwLjU2NzQgNDU3LjgwNzUgMzAwLjg3MDcgNDU3LjgwNzUgMzAxLjE4OTMgNDU3LjgwNzUgMzAxLjQ1NjYgNDU3LjgwMjQgMzAxLjY2NzIgNDU3Ljc4NzEgMzAxLjg3NzkgNDU3Ljc3MTUgMzAyLjA0NzcgNDU3Ljc0MDkgMzAyLjE3NjEgNDU3LjY5OTcgMzAyLjMwOTYgNDU3LjY2MzcgMzAyLjQwNzQgNDU3LjYwMiAzMDIuNDc5MSA0NTcuNTMgMzAyLjU1MTEgNDU3LjQ1MjkgMzAyLjYwNzggNDU3LjM2MDQgMzAyLjY0MzUgNDU3LjI1MjRaTTMwMC43OTM2IDQ1NS4xMjVIMzAwLjc3ODNMMjk3LjQyMjYgNDQ1LjQxMjdIMzA0LjE5NTVaTTMyNi42MzE3IDQzOC42MTkyQzMyNi42MzE3IDQzOC41MzcgMzI2LjYxNjQgNDM4LjQ3MDEgMzI2LjU4NTUgNDM4LjQwODYgMzI2LjU1NDYgNDM4LjM0NjggMzI2LjQ5MzEgNDM4LjI5NTUgMzI2LjM5MDIgNDM4LjI1NDQgMzI2LjI5MjcgNDM4LjIxODQgMzI2LjE0ODcgNDM4LjE4NzUgMzI1Ljk2ODkgNDM4LjE2NjggMzI1Ljc4ODkgNDM4LjE0NjQgMzI1LjU0NzQgNDM4LjEzNjIgMzI1LjI0OTUgNDM4LjEzNjIgMzI0Ljk4NzMgNDM4LjEzNjIgMzI0Ljc3MTYgNDM4LjE0NjQgMzI0LjYwNzIgNDM4LjE2NjggMzI0LjQ0MjUgNDM4LjE4NzUgMzI0LjMwOSA0MzguMjE4NCAzMjQuMjA2NCA0MzguMjY0NiAzMjQuMTA4NiA0MzguMzEwOCAzMjQuMDMxNSA0MzguMzcyNiAzMjMuOTc1MSA0MzguNDU0OCAzMjMuOTE4NCA0MzguNTMxOSAzMjMuODcyMiA0MzguNjM0NSAzMjMuODMxMSA0MzguNzUyN0wzMjIuMDQyNyA0NDMuMzUxOUMzMjEuODMyMSA0NDMuODc2IDMyMS42MTEyIDQ0NC4zNTQgMzIxLjM4NSA0NDQuNzkwOCAzMjEuMTU4OCA0NDUuMjI3NiAzMjAuODkxOCA0NDUuNjAyOSAzMjAuNTc4MyA0NDUuOTIxNSAzMjAuMjY5OSA0NDYuMjQwMSAzMTkuOSA0NDYuNDgxNiAzMTkuNDc4NSA0NDYuNjYxNCAzMTkuMDU3MiA0NDYuODM2MyAzMTguNTQ4NCA0NDYuOTIzNiAzMTcuOTU3NCA0NDYuOTIzNkgzMTYuMjI1N1Y0MzguNjE5MkMzMTYuMjI1NyA0MzguNTM3IDMxNi4yMDUgNDM4LjQ3MDEgMzE2LjE1ODggNDM4LjQwODYgMzE2LjExMjYgNDM4LjM0NjggMzE2LjA0MDYgNDM4LjMwMDYgMzE1Ljk0ODIgNDM4LjI2NDYgMzE1Ljg1MDQgNDM4LjIyODYgMzE1LjcyMiA0MzguMTk3NyAzMTUuNTU3NiA0MzguMTcyMiAzMTUuMzg4MSA0MzguMTQ2NCAzMTUuMTgyNiA0MzguMTM2MiAzMTQuOTMwNiA0MzguMTM2MiAzMTQuNjc4OCA0MzguMTM2MiAzMTQuNDczMyA0MzguMTQ2NCAzMTQuMzAzOCA0MzguMTcyMiAzMTQuMTM5MSA0MzguMTk3NyAzMTQuMDA1NiA0MzguMjI4NiAzMTMuOTA4MSA0MzguMjY0NiAzMTMuODA1MiA0MzguMzAwNiAzMTMuNzM4MyA0MzguMzQ2OCAzMTMuNjk3MiA0MzguNDA4NiAzMTMuNjU2MSA0MzguNDY1IDMxMy42MzU3IDQzOC41MzcgMzEzLjYzNTcgNDM4LjYxOTJWNDU2LjY2MTdDMzEzLjYzNTcgNDU3LjA1MiAzMTMuNzM4MyA0NTcuMzI0NCAzMTMuOTQ0MSA0NTcuNDgzNyAzMTQuMTQ5NiA0NTcuNjM4IDMxNC4zNzA0IDQ1Ny43MTUxIDMxNC42MDE3IDQ1Ny43MTUxSDMxOC43NDM3QzMxOS4yMzY5IDQ1Ny43MTUxIDMxOS42NDI5IDQ1Ny43MDQ5IDMxOS45NzE3IDQ1Ny42NzkxIDMyMC4yOTU3IDQ1Ny42NTMzIDMyMC41ODg1IDQ1Ny42MjI2IDMyMC44NTA0IDQ1Ny41OTY5IDMyMS42MDU5IDQ1Ny40NjMzIDMyMi4yNjg5IDQ1Ny4yNTc1IDMyMi44NDk3IDQ1Ni45ODAzIDMyMy40MjUxIDQ1Ni42OTc0IDMyMy45MDgyIDQ1Ni4zNDMxIDMyNC4yOTg4IDQ1NS45MTE0IDMyNC42OTQ1IDQ1NS40Nzk3IDMyNC45ODczIDQ1NC45ODY0IDMyNS4xODI2IDQ1NC40MjYzIDMyNS4zNzc5IDQ1My44NzEzIDMyNS40NzU0IDQ1My4yNTQ1IDMyNS40NzU0IDQ1Mi41ODEyIDMyNS40NzU0IDQ1MS45MzM4IDMyNS4zODgxIDQ1MS4zNDc5IDMyNS4yMTM1IDQ1MC44Mjg5IDMyNS4wMzM1IDQ1MC4zMTUyIDMyNC43ODE4IDQ0OS44NTc3IDMyNC40NTMgNDQ5LjQ2MiAzMjQuMTE4OCA0NDkuMDY2MyAzMjMuNzIzMSA0NDguNzIyMSAzMjMuMjYwNyA0NDguNDI5IDMyMi43OTgxIDQ0OC4xNDEzIDMyMi4yODQyIDQ0Ny44OTQ3IDMyMS43MDg4IDQ0Ny42OTQzIDMyMi4wMzI1IDQ0Ny41NTAzIDMyMi4zMjAyIDQ0Ny4zNzU3IDMyMi41ODI0IDQ0Ny4xNiAzMjIuODQ0MyA0NDYuOTQ0IDMyMy4wODU4IDQ0Ni42ODIgMzIzLjMxMiA0NDYuMzgzOCAzMjMuNTM4MiA0NDYuMDgwOCAzMjMuNzU0IDQ0NS43MzEzIDMyMy45NTQ0IDQ0NS4zNDA3IDMyNC4xNTQ4IDQ0NC45NTAxIDMyNC4zNTUyIDQ0NC41MDgyIDMyNC41NTU2IDQ0NC4wMTQ5TDMyNi4zMDI5IDQzOS43MTg3QzMyNi40NDE1IDQzOS4zNTkgMzI2LjUzNDIgNDM5LjEwMjIgMzI2LjU3MDIgNDM4Ljk1ODIgMzI2LjYxMTMgNDM4LjgxNDUgMzI2LjYzMTcgNDM4LjcwMTQgMzI2LjYzMTcgNDM4LjYxOTJaTTMyMi43MzE1IDQ1Mi4zMTkzQzMyMi43MzE1IDQ1My4wNzk4IDMyMi41NjE3IDQ1My43MjczIDMyMi4yMTc2IDQ1NC4yNTY1IDMyMS44NzgzIDQ1NC43ODA2IDMyMS4zMDc5IDQ1NS4xNjEgMzIwLjUwMTIgNDU1LjM5MjMgMzIwLjI0OTIgNDU1LjQ2NDMgMzE5Ljk2NjYgNDU1LjUxMDYgMzE5LjY1MzQgNDU1LjU0MTIgMzE5LjMzNDcgNDU1LjU3MjEgMzE4LjkyMzQgNDU1LjU4NzcgMzE4LjQwOTUgNDU1LjU4NzdIMzE2LjIyNTdWNDQ5LjAyMDFIMzE4Ljc1MzlDMzE5LjQzNzQgNDQ5LjAyMDEgMzIwLjAyODQgNDQ5LjEwMjMgMzIwLjUyNjcgNDQ5LjI2NjcgMzIxLjAyMDIgNDQ5LjQzNjUgMzIxLjQzNjMgNDQ5LjY2NzUgMzIxLjc2NTIgNDQ5Ljk2MDYgMzIyLjA5OTQgNDUwLjI1ODUgMzIyLjM0MDkgNDUwLjYwOCAzMjIuNTAwMiA0NTEuMDA4OSAzMjIuNjU0NCA0NTEuNDA5NyAzMjIuNzMxNSA0NTEuODQ2NSAzMjIuNzMxNSA0NTIuMzE5M1pNMzQzLjQ5MjQgNDU2LjYwNUMzNDMuNDkyNCA0NTYuNDE0OCAzNDMuNDgyIDQ1Ni4yNTA0IDM0My40NjE1IDQ1Ni4xMTE4IDM0My40NDA5IDQ1NS45NzI5IDM0My40MSA0NTUuODU5OCAzNDMuMzYzNyA0NTUuNzcyNSAzNDMuMzE3NSA0NTUuNjkwMyAzNDMuMjY2MiA0NTUuNjIzNyAzNDMuMTk5MyA0NTUuNTg3NyAzNDMuMTMyNyA0NTUuNTQ2NiAzNDMuMDYwNyA0NTUuNTI1OSAzNDIuOTgzNiA0NTUuNTI1OUgzMzcuNTEwOFY0MzguNjE5MkMzMzcuNTEwOCA0MzguNTM3IDMzNy40OTAxIDQzOC40NzAxIDMzNy40NDkgNDM4LjQwODYgMzM3LjQwNzkgNDM4LjM0NjggMzM3LjM0MTMgNDM4LjMwMDYgMzM3LjIzODQgNDM4LjI2NDYgMzM3LjE0MDkgNDM4LjIyODYgMzM3LjAwNzEgNDM4LjE5NzcgMzM2Ljg0MjYgNDM4LjE3MjIgMzM2LjY3MzEgNDM4LjE0NjQgMzM2LjQ2NzYgNDM4LjEzNjIgMzM2LjIxNTYgNDM4LjEzNjIgMzM1Ljk3NDEgNDM4LjEzNjIgMzM1Ljc2ODYgNDM4LjE0NjQgMzM1LjU5OTEgNDM4LjE3MjIgMzM1LjQyOTYgNDM4LjE5NzcgMzM1LjI5MDcgNDM4LjIyODYgMzM1LjE5MzIgNDM4LjI2NDYgMzM1LjA5MDMgNDM4LjMwMDYgMzM1LjAyMzcgNDM4LjM0NjggMzM0Ljk4MjMgNDM4LjQwODYgMzM0Ljk0MTIgNDM4LjQ3MDEgMzM0LjkyMDggNDM4LjUzNyAzMzQuOTIwOCA0MzguNjE5MlY0NTUuNTI1OUgzMjkuNDQ3OUMzMjkuMzcwOCA0NTUuNTI1OSAzMjkuMjk4OCA0NTUuNTQ2NiAzMjkuMjMyMiA0NTUuNTg3NyAzMjkuMTY1MyA0NTUuNjIzNyAzMjkuMTE0IDQ1NS42OTAzIDMyOS4wNzI5IDQ1NS43NzI1IDMyOS4wMzY5IDQ1NS44NTk4IDMyOS4wMDA5IDQ1NS45NzI5IDMyOC45NzUxIDQ1Ni4xMTE4IDMyOC45NDkzIDQ1Ni4yNTA0IDMyOC45MzkxIDQ1Ni40MTQ4IDMyOC45MzkxIDQ1Ni42MDUgMzI4LjkzOTEgNDU2Ljc5NTIgMzI4Ljk0OTMgNDU2Ljk2NDcgMzI4Ljk3NTEgNDU3LjEwODcgMzI5LjAwMDkgNDU3LjI1MjQgMzI5LjAzNjkgNDU3LjM3MDYgMzI5LjA3MjkgNDU3LjQ1OCAzMjkuMTE0IDQ1Ny41NTA2IDMyOS4xNjUzIDQ1Ny42MTczIDMyOS4yMzIyIDQ1Ny42NTMzIDMyOS4yOTg4IDQ1Ny42OTQ0IDMyOS4zNzA4IDQ1Ny43MTUxIDMyOS40NDc5IDQ1Ny43MTUxSDM0Mi45ODM2QzM0My4wNjA3IDQ1Ny43MTUxIDM0My4xMzI3IDQ1Ny42OTQ0IDM0My4xOTkzIDQ1Ny42NTMzIDM0My4yNjYyIDQ1Ny42MTczIDM0My4zMTc1IDQ1Ny41NTA2IDM0My4zNjM3IDQ1Ny40NTggMzQzLjQxIDQ1Ny4zNzA2IDM0My40NDA5IDQ1Ny4yNTI0IDM0My40NjE1IDQ1Ny4xMDg3IDM0My40ODIgNDU2Ljk2NDcgMzQzLjQ5MjQgNDU2Ljc5NTIgMzQzLjQ5MjQgNDU2LjYwNSIgZmlsbD0iI2ZmZmZmZiIvPgo8cGF0aCB0cmFuc2Zvcm09Im1hdHJpeCgxLDAsMCwtMSwwLDg0MS44ODk4KSIgZD0iTTI1OC45MzY5IDQwNS42NzQxIDI1Ni42MDYgMzk2LjY4MjNDMjU2LjQ0NzMgMzk2LjExMTQgMjU2LjI2NSAzOTUuNzYyNSAyNTYuMDU5MiAzOTUuNjM1NSAyNTUuODUyNiAzOTUuNTA4OCAyNTUuNDY0NSAzOTUuNDQ1MyAyNTQuODkzMyAzOTUuNDQ1M0gyNDkuNjYwM0MyNDkuMTIwOSAzOTUuNDQ1MyAyNDguNzE2OSAzOTUuNTcyMyAyNDguNDQ3MSAzOTUuODI1NyAyNDguMTc3OCAzOTYuMDc5OSAyNDcuOTk0OSAzOTYuMzY1NCAyNDcuOSAzOTYuNjgyM0wyNDAuOTU0IDQyNy4wODI1QzI0MC44OTA1IDQyNy4zOTk0IDI0MC44NTkgNDI3LjY2OTIgMjQwLjg1OSA0MjcuODkwOSAyNDAuODU5IDQyOC40NjIxIDI0MS4xOTE4IDQyOC43NDc1IDI0MS44NTgyIDQyOC43NDc1SDI0Ni44NTMxQzI0Ny4yNjU2IDQyOC43NDc1IDI0Ny41ODI1IDQyOC42MDQ3IDI0Ny44MDQ3IDQyOC4zMTk1IDI0OC4wMjcgNDI4LjAzNCAyNDguMTY5MyA0MjcuNzQ4MyAyNDguMjMyOCA0MjcuNDYyOUwyNTIuNjU3NCA0MDcuMDA1OEMyNTIuNjg5MSA0MDYuODc5MSAyNTIuNzIwNiA0MDYuNzUyMSAyNTIuNzUyNiA0MDYuNjI1NCAyNTIuNzg0MSA0MDYuNDk4NyAyNTIuODQ3NiA0MDYuMzU1NSAyNTIuOTQyOCA0MDYuMTk3NCAyNTMuMDA2MyA0MDYuMTk3NCAyNTMuMDY5NSA0MDYuMjkyMyAyNTMuMTMzIDQwNi40ODI4IDI1My4xOTY1IDQwNi42NzMgMjUzLjI0NDEgNDA2LjgzMTUgMjUzLjI3NTkgNDA2Ljk1ODVMMjU1LjY1NDcgNDE3LjM3NzVDMjU1LjcxNzkgNDE3LjU5OTEgMjU1Ljc0OTQgNDE3LjkwMDIgMjU1Ljc0OTQgNDE4LjI4MTIgMjU1Ljc0OTQgNDE4LjU5ODEgMjU1LjY3MDMgNDE5LjEyMTYgMjU1LjUxMTYgNDE5Ljg1MDdMMjUzLjg0NjUgNDI3LjA4MjVDMjUzLjc4MzMgNDI3LjMzNjIgMjUzLjc1MTggNDI3LjU1ODEgMjUzLjc1MTggNDI3Ljc0ODMgMjUzLjc1MTggNDI4LjQxNDUgMjU0LjA4NDMgNDI4Ljc0NzUgMjU0Ljc1MDcgNDI4Ljc0NzVIMjU5Ljc0NkMyNjAuMjg1MSA0MjguNzQ3NSAyNjAuNjQ5NiA0MjguNjIwOCAyNjAuODQwNCA0MjguMzY2OCAyNjAuOTM1NCA0MjguMjM5OCAyNjEuMDMwNiA0MjcuOTIyOSAyNjEuMTI1NiA0MjcuNDE1MkwyNjQuODg0IDQwOS4yODk3QzI2NC45MTU1IDQwOS4xNjI3IDI2NC45NDc1IDQwOS4wNjc0IDI2NC45NzkgNDA5LjAwMzkgMjY1LjAxMDcgNDA4Ljk0MDcgMjY1LjA1ODYgNDA4Ljg5MjggMjY1LjEyMTkgNDA4Ljg2MTQgMjY1LjI4MDYgNDA5LjAxOTggMjY1LjM1OTcgNDA5LjE2MjcgMjY1LjM1OTcgNDA5LjI4OTdMMjY1LjkzMDkgNDEyLjE5MTUgMjY5LjU5MzggNDI3LjQ2MjlDMjY5LjcyMDggNDI4LjAzNCAyNjkuODcxMyA0MjguMzkwNiAyNzAuMDQ1OSA0MjguNTMzMiAyNzAuMjIwMyA0MjguNjc2NCAyNzAuNTEzNiA0MjguNzQ3NSAyNzAuOTI2MSA0MjguNzQ3NUgyNzUuODc0QzI3Ni41Mzk4IDQyOC43NDc1IDI3Ni44NzI2IDQyOC40NDYyIDI3Ni44NzI2IDQyNy44NDM4IDI3Ni44NzI2IDQyNy43NDgzIDI3Ni44NDExIDQyNy41MTA1IDI3Ni43Nzc2IDQyNy4xMjk4TDI2OS40NTEyIDM5Ny4wMTU3QzI2OS4yOTI1IDM5Ni4zODEgMjY5LjA5NDMgMzk1Ljk2MDkgMjY4Ljg1NjUgMzk1Ljc1NDUgMjY4LjYxODcgMzk1LjU0ODQgMjY4LjI5MzMgMzk1LjQ0NTMgMjY3Ljg4MDggMzk1LjQ0NTNIMjYyLjYwMDRDMjYyLjE4OCAzOTUuNDQ1MyAyNjEuODU1MiAzOTUuNjA0IDI2MS42MDEyIDM5NS45MjEyIDI2MS40NzQ1IDM5Ni4wNzk5IDI2MS4zNjM0IDM5Ni4zMzM0IDI2MS4yNjg0IDM5Ni42ODIzWk0yODYuNDM1MyA0MjguNzQ3NUgyOTIuNDI5NEMyOTIuODQxOSA0MjguNzQ3NSAyOTMuMTY2NyA0MjguNjY3OSAyOTMuNDA0NSA0MjguNTA5NyAyOTMuNjQyNCA0MjguMzUxIDI5My44NDA4IDQyNy45ODY0IDI5My45OTkyIDQyNy40MTUyTDMwMS43MDY2IDM5Ni44NzI1QzMwMS43Njk5IDM5Ni42ODIzIDMwMS44MDEzIDM5Ni40NzU5IDMwMS44MDEzIDM5Ni4yNTQzIDMwMS44MDEzIDM5NS43MTUxIDMwMS40NTI0IDM5NS40NDUzIDMwMC43NTUxIDM5NS40NDUzSDI5Ni4wOTI2QzI5NS42MTcgMzk1LjQ0NTMgMjk1LjI3NiAzOTUuNTcyMyAyOTUuMDY5OSAzOTUuODI1NyAyOTQuODYzNSAzOTYuMDc5OSAyOTQuNzEyNyAzOTYuMzk2OSAyOTQuNjE3OCAzOTYuNzc3OEwyOTMuNjY2NSA0MDAuMzkzNEMyOTMuNTM5NSA0MDAuODY5MSAyOTMuMjIyMyA0MDEuMTA2OSAyOTIuNzE0OSA0MDEuMTA2OUgyODYuMTk3NEMyODUuNjU3NyA0MDEuMTA2OSAyODUuMzQwOCA0MDAuODY5MSAyODUuMjQ1MyA0MDAuMzkzNEwyODQuMzQxNiAzOTYuNjM0N0MyODQuMjc4MSAzOTYuMzE3OCAyODQuMTQzNSAzOTYuMDQgMjgzLjkzNzEgMzk1LjgwMjEgMjgzLjczMTMgMzk1LjU2NDMgMjgzLjQwNTkgMzk1LjQ0NTMgMjgyLjk2MiAzOTUuNDQ1M0gyNzguMzQ3NUMyNzcuNzQ0OCAzOTUuNDQ1MyAyNzcuNDQzNSAzOTUuNzQ2NiAyNzcuNDQzNSAzOTYuMzQ5MiAyNzcuNDQzNSAzOTYuNDQ0NSAyNzcuNDQzNSAzOTYuNTM5NCAyNzcuNDQzNSAzOTYuNjM0NyAyNzcuNTA3IDM5Ni43NjE0IDI3Ny41Mzg1IDM5Ni44NDEgMjc3LjUzODUgMzk2Ljg3MjVMMjg0Ljg2NDkgNDI3LjQxNTJDMjg0Ljk5MTkgNDI3Ljk4NjQgMjg1LjE3NDEgNDI4LjM1MSAyODUuNDEyIDQyOC41MDk3IDI4NS42NDk4IDQyOC42Njc5IDI4NS45OTA4IDQyOC43NDc1IDI4Ni40MzUzIDQyOC43NDc1Wk0zMDQuNTEzMiAzOTcuMzAwNVY0MDEuNTgyNkMzMDQuNTEzMiA0MDEuOTYzIDMwNC42MjQzIDQwMi4yMjQ5IDMwNC44NDYzIDQwMi4zNjc1IDMwNS4wNzY1IDQwMi41MSAzMDUuMjk4MSA0MDIuNTgxOCAzMDUuNTIwMSA0MDIuNTgxOCAzMDUuNzc0NCA0MDIuNTgxOCAzMDYuMDc1NCA0MDIuNTM0MSAzMDYuNDA4MiA0MDIuNDM4NiAzMDYuNzQxNSA0MDIuMzQzOSAzMDYuOTg3IDQwMi4yODA0IDMwNy4xNTM3IDQwMi4yNDg0IDMwNy42OTI5IDQwMi4wODk3IDMwOC41MDk4IDQwMS45MzE1IDMwOS41OTU3IDQwMS43NzI4IDMxMC42ODIgNDAxLjYxNCAzMTEuNTQ2MyA0MDEuNTM0OSAzMTIuMTg4NiA0MDEuNTM0OSAzMTMuNTkyMyA0MDEuNTM0OSAzMTQuNzAyMSA0MDEuODI4MyAzMTUuNTE4NyA0MDIuNDE1MSAzMTYuMzM1NCA0MDMuMDAxOSAzMTYuNzM5OSA0MDMuODAyNiAzMTYuNzM5OSA0MDQuODE3NCAzMTYuNzM5OSA0MDYuMzA4NSAzMTUuODIwMSA0MDcuNzAzNyAzMTMuOTgwNCA0MDkuMDAzOSAzMTIuNjQ4NyA0MDkuODYwNiAzMTEuNjY1MyA0MTAuNDk0NyAzMTEuMDMwOSA0MTAuOTA2OCAzMDguNjg0MSA0MTIuNDYxNCAzMDcuMDgyNiA0MTMuNzc3NSAzMDYuMjI1OSA0MTQuODU1OCAzMDUuMDg0MSA0MTYuMjgzIDMwNC41MTMyIDQxOC4wNTg5IDMwNC41MTMyIDQyMC4xODQxIDMwNC41MTMyIDQyMy4xMDE4IDMwNS40OTY2IDQyNS4zMjIxIDMwNy40NjMgNDI2Ljg0NDYgMzA5LjQyOTEgNDI4LjM2NjggMzEyLjA5MzQgNDI5LjEyNzkgMzE1LjQ1NTIgNDI5LjEyNzkgMzE2LjkxNDUgNDI5LjEyNzkgMzE4LjM1NzQgNDI5LjAwMTIgMzE5Ljc4NDYgNDI4Ljc0NzUgMzIxLjk0MTUgNDI4LjM2NjggMzIzLjAxOTggNDI3LjgxMTggMzIzLjAxOTggNDI3LjA4MjVWNDIyLjgwMDRDMzIzLjAxOTggNDIyLjY3MzcgMzIzLjAxOTggNDIyLjU2MjYgMzIzLjAxOTggNDIyLjQ2NzcgMzIyLjkyNDUgNDIyLjA4NyAzMjIuNjU1IDQyMS44OTY4IDMyMi4yMTA4IDQyMS44OTY4TDMxOS45Mjc1IDQyMi4zMjQ4QzMxOC42MjcyIDQyMi41Nzg4IDMxNy44MTAzIDQyMi43MjkzIDMxNy40NzcyIDQyMi43NzY5IDMxNy4xNDQ0IDQyMi44MjQ1IDMxNi42NDQ3IDQyMi44NDgxIDMxNS45Nzg4IDQyMi44NDgxIDMxNC42NzgzIDQyMi44NDgxIDMxMy43MzQ5IDQyMi42NDIzIDMxMy4xNDgxIDQyMi4yMjk4IDMxMi41NjExIDQyMS44MTc3IDMxMi4yNjc3IDQyMS4zMSAzMTIuMjY3NyA0MjAuNzA3MyAzMTIuMjY3NyA0MTkuNjI5IDMxNC4wNiA0MTcuOTMyMiAzMTcuNjQzOSA0MTUuNjE2OSAzMTkuNzM3IDQxNC4yMjE0IDMyMS4yNTk1IDQxMi45MDUzIDMyMi4yMTA4IDQxMS42NjgyIDMyMy43MzMzIDQwOS43MDE4IDMyNC40OTQ2IDQwNy4zODY4IDMyNC40OTQ2IDQwNC43MjI1IDMyNC40OTQ2IDQwMS43NDEgMzIzLjQ0NzggMzk5LjM4NjMgMzIxLjM2MjYgMzk3LjY1NzQgMzE5LjI3NzUgMzk1LjkyODkgMzE2LjQxNDggMzk1LjA2NDkgMzEyLjc4MzMgMzk1LjA2NDkgMzExLjYwMTggMzk1LjA2NDkgMzEwLjI2MTYgMzk1LjE1MTkgMzA4Ljc3MTEgMzk1LjMyNjUgMzA3LjI3MjggMzk1LjUwMDggMzA2LjE3MDQgMzk1LjczMSAzMDUuNDcyNSAzOTYuMDE2NCAzMDUuMDUyNCAzOTYuMTc0NiAzMDQuNzkwNyAzOTYuMzY1NCAzMDQuNjc5OSAzOTYuNTg3MSAzMDQuNTY4OCAzOTYuODA5MyAzMDQuNTEzMiAzOTcuMDQ3MSAzMDQuNTEzMiAzOTcuMzAwNVpNMzMwLjQ0MTIgNDI4Ljc0NzVIMzM0LjE1MkMzMzQuODgxNCA0MjguNzQ3NSAzMzUuMzQxNCA0MjguNjEyOSAzMzUuNTMxNiA0MjguMzQzIDMzNS43MjI0IDQyOC4wNzMyIDMzNS44MTcxIDQyNy42NTMxIDMzNS44MTcxIDQyNy4wODI1VjQxNy45MDAyQzMzNS44MTcxIDQxNy42MTUzIDMzNS44NTcgNDE3LjM5MzEgMzM1LjkzNjEgNDE3LjIzNDMgMzM2LjAxNTggNDE3LjA3NjIgMzM2LjIxMzYgNDE2Ljk5NjUgMzM2LjUzMDggNDE2Ljk5NjVIMzQxLjcxNjVDMzQxLjg3NTMgNDE2Ljk5NjUgMzQxLjk4NTggNDE3LjAxMjEgMzQyLjA0OTMgNDE3LjA0NDEgMzQyLjMzNDggNDE3LjIwMjkgMzQyLjQ3NzYgNDE3LjUxOTggMzQyLjQ3NzYgNDE3Ljk5NTdWNDI3LjA4MjVDMzQyLjQ3NzYgNDI3LjY1MzEgMzQyLjU0MTEgNDI4LjAzNCAzNDIuNjY3OCA0MjguMjI0MyAzNDIuOTIxNSA0MjguNTczMiAzNDMuNDEzNCA0MjguNzQ3NSAzNDQuMTQyNyA0MjguNzQ3NUgzNDcuODUzOEMzNDguNTgzMiA0MjguNzQ3NSAzNDkuMDQzIDQyOC42MTI5IDM0OS4yMzMyIDQyOC4zNDMgMzQ5LjQyMzQgNDI4LjA3MzIgMzQ5LjUxODkgNDI3LjY1MzEgMzQ5LjUxODkgNDI3LjA4MjVWMzk3LjExMDNDMzQ5LjUxODkgMzk2LjUzOTQgMzQ5LjQ1NTQgMzk2LjE1OSAzNDkuMzI4MSAzOTUuOTY4OCAzNDkuMDc0NCAzOTUuNjE5OSAzNDguNTgzMiAzOTUuNDQ1MyAzNDcuODUzOCAzOTUuNDQ1M0gzNDQuMTQyN0MzNDMuNDEzNCAzOTUuNDQ1MyAzNDIuOTUzNiAzOTUuNTgwMiAzNDIuNzYzNCAzOTUuODQ5OCAzNDIuNTcyNiAzOTYuMTE5MSAzNDIuNDc3NiAzOTYuNTM5NCAzNDIuNDc3NiAzOTcuMTEwM1Y0MDkuNTc1MUMzNDIuNDc3NiA0MTAuMDgyMiAzNDIuMjIzNyA0MTAuMzM2MiAzNDEuNzE2NSA0MTAuMzM2MkgzMzYuNTMwOEMzMzYuMDU0OSA0MTAuMzM2MiAzMzUuODE3MSA0MTAuMDk4NCAzMzUuODE3MSA0MDkuNjIyN1YzOTcuMTEwM0MzMzUuODE3MSAzOTYuMzgxIDMzNS42ODI0IDM5NS45MjEyIDMzNS40MTI2IDM5NS43MzEgMzM1LjE0MzMgMzk1LjU0MDggMzM0LjcyMzIgMzk1LjQ0NTMgMzM0LjE1MiAzOTUuNDQ1M0gzMzAuNDQxMkMzMjkuODcwNiAzOTUuNDQ1MyAzMjkuNDg5NiAzOTUuNTA4OCAzMjkuMjk5NyAzOTUuNjM1NSAzMjguOTUwNyAzOTUuODg5NyAzMjguNzc2MSAzOTYuMzgxIDMyOC43NzYxIDM5Ny4xMTAzVjQyNy4wODI1QzMyOC43NzYxIDQyNy42NTMxIDMyOC44Mzk2IDQyOC4wMzQgMzI4Ljk2NjMgNDI4LjIyNDMgMzI5LjIyMDMgNDI4LjU3MzIgMzI5LjcxMTggNDI4Ljc0NzUgMzMwLjQ0MTIgNDI4Ljc0NzUiIGZpbGw9IiMyODU2YTQiLz4KPHBhdGggdHJhbnNmb3JtPSJtYXRyaXgoMSwwLDAsLTEsMCw4NDEuODg5OCkiIGQ9Ik0yODkuMzU1OCA0MTkuNDM4QzI5MS40NDQxIDQxNi4zOTEgMjk2LjMyODUgNDExLjM3OCAyOTIuNzM3NSA0MDcuNzg2NyAyOTAuODcwMSA0MDUuOTE5MyAyODcuODQxIDQwNS45MTkzIDI4NS45NzM1IDQwNy43ODY3IDI4Mi4zMzE4IDQxMS40Mjg0IDI4Ny4yNTg3IDQxNi40MDggMjg5LjM1NTggNDE5LjQzOCIgZmlsbD0iIzkyZDdmNiIgZmlsbC1ydWxlPSJldmVub2RkIi8+CjxwYXRoIHRyYW5zZm9ybT0ibWF0cml4KDEsMCwwLC0xLDAsODQxLjg4OTgpIiBkPSJNMjkxLjkxMzggNDEyLjAwNjRDMjkyLjE4ODggNDExLjk2NyAyOTIuMTcwMyA0MTEuOTY5OCAyOTIuNDQ1MyA0MTEuOTMwNCAyOTIuNTMxMiA0MTEuOTE4MiAyOTIuNTY2IDQxMS43ODk4IDI5Mi41ODc5IDQxMS42NTQ5IDI5My4xMDA5IDQwOC41Mzk5IDI5MS4yOTk4IDQwOS42NTY4IDI5MS40Mjg4IDQxMC4wNDkxIDI5MS42MDQ1IDQxMC41ODQgMjkxLjg1NjMgNDExLjEzOTMgMjkxLjc0NCA0MTEuNzc1MSAyOTEuNzIwNSA0MTEuOTA4NiAyOTEuODI3OSA0MTIuMDE4NiAyOTEuOTEzOCA0MTIuMDA2NCIgZmlsbD0iI2ZmZmZmZiIgZmlsbC1ydWxlPSJldmVub2RkIi8+CjwvZz4KPC9zdmc+Cg==" alt="Smart Wash Logo" class="logo">
+            </div>
+            
+            <h1>Smart Wash</h1>
+            <p class="tagline">Samopostrežna Pralnica Perila Ljubljana</p>
+            <p class="subtitle">Kakovostno pranje in sušenje perila • Hitro, enostavno in zanesljivo</p>
+            <p class="subtitle" style="font-size: 1rem; margin-top: 10px;">Dve lokaciji v Ljubljani • Odprto vsak dan 24/7</p>
+            
+            <div style="margin-top: 40px;">
+                <a href="#lokacije" class="cta-button">📍 Naše Lokacije</a>
+<a href="#lokacije" class="cta-button">StoreVibe</a>
+                <a href="#cenik" class="cta-button cta-secondary">💰 Cenik</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="section">
+        <div class="container">
+            <h2 class="section-title">Naše Storitve</h2>
+            <p class="section-subtitle">Profesionalno pranje in sušenje perila v kratkem času</p>
+            
+            <div class="services-grid">
+                <div class="service-card">
+                    <div class="service-icon">🧺</div>
+                    <h3>Pranje Perila</h3>
+                    <div class="service-price">od €5</div>
+                    <div class="service-details">
+                        <p>✓ Profesionalni pralni stroji</p>
+                        <p>✓ Zmogljivost 9kg, 14kg in 18kg</p>
+                        <p>✓ Operete vse vaše perilo naenkrat</p>
+                        <p>✓ Čas pranja: 40 minut</p>
+                        <p>✓ Kakovostna italijanska detergent in mehčalec vključena</p>
+                        <p>✓ Stroji se po vsakem pranju avtomatsko dezinficirajo</p>
+                        <p>✓ Centrifuga 1.100 obratov/minuto</p>
+                    </div>
+                </div>
+                
+                <div class="service-card">
+                    <div class="service-icon">🌀</div>
+                    <h3>Sušenje Perila</h3>
+                    <div class="service-price">od €2</div>
+                    <div class="service-details">
+                        <p>✓ Močni sušilni stroji</p>
+                        <p>✓ Zmogljivost 14kg</p>
+                        <p>✓ Čas sušenja: 15 do 30 minut</p>
+                        <p>✓ 4 temperaturne stopnje</p>
+                        <p>✓ Optimalno za vse vrste perila</p>
+                        <p>✓ Sušite od 10 minut naprej</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="cenik" class="section" style="background: #f9f9f9;">
+        <div class="container">
+            <h2 class="section-title">Cenik</h2>
+            <p class="section-subtitle">Vse cene vsebujejo DDV. Pralna sredstva vključena v ceno.</p>
+            
+            <div class="pricing-table">
+                <div class="price-card">
+                    <div class="price-capacity">9 kg</div>
+                    <div class="price-amount">€5</div>
+                    <div class="price-duration">40 minut</div>
+                    <div class="price-type">Pralni stroj</div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="price-capacity">14 kg</div>
+                    <div class="price-amount">€7</div>
+                    <div class="price-duration">40 minut</div>
+                    <div class="price-type">Pralni stroj</div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="price-capacity">18 kg</div>
+                    <div class="price-amount">€8</div>
+                    <div class="price-duration">40 minut</div>
+                    <div class="price-type">Pralni stroj</div>
+                </div>
+                
+                <div class="price-card">
+                    <div class="price-capacity">14 kg</div>
+                    <div class="price-amount">€2</div>
+                    <div class="price-duration">15 minut</div>
+                    <div class="price-type">Sušilni stroj</div>
+                </div>
+            </div>
+            
+            <!-- Payment Information -->
+            <div style="max-width: 800px; margin: 50px auto 0; padding: 30px; background: white; border-radius: 15px; border: 2px solid #1e88e5;">
+                <h3 style="color: #0d47a1; text-align: center; margin-bottom: 20px; font-size: 1.5rem;">💡 Pomembno o Plačilu</h3>
+                
+                <div style="margin-bottom: 25px;">
+                    <p style="font-size: 1.1rem; font-weight: 600; color: #333; margin-bottom: 15px;">
+                        Pralni in sušilni stroji sprejemajo <strong style="color: #ff6f00;">SAMO ŽETONE</strong>.
+                    </p>
+                    
+                    <p style="margin-bottom: 15px; color: #555;">
+                        Žetone kupite na avtomatu za zamenjavo (exchanger), ki se nahaja v pralnici.
+                    </p>
+                    
+                    <div style="background: #e3f2fd; padding: 20px; border-radius: 10px; margin: 20px 0;">
+                        <p style="margin-bottom: 10px; font-weight: 600; color: #0d47a1;">Avtomat sprejema:</p>
+                        <ul style="list-style: none; padding-left: 0; margin: 10px 0;">
+                            <li style="padding: 5px 0;">💰 <strong>Kovance:</strong> 0,50 €, 1,00 € in 2,00 €</li>
+                            <li style="padding: 5px 0;">💵 <strong>Bankovce:</strong> do 50 €</li>
+                        </ul>
+                    </div>
+                    
+                    <p style="font-size: 1.2rem; text-align: center; background: #fff3e0; padding: 15px; border-radius: 10px; margin: 20px 0; font-weight: 600; color: #ff6f00;">
+                        1 žeton = 1 EUR
+                    </p>
+                    
+                    <p style="background: #fff3e0; padding: 15px; border-radius: 10px; font-weight: 600; color: #f57c00; text-align: center;">
+                        ⚠️ Avtomat za žetone NE vrača denarja
+                    </p>
+                </div>
+                
+                <div style="border-top: 1px solid #e0e0e0; padding-top: 20px; margin-top: 20px;">
+                    <p style="color: #666; font-size: 0.95rem; margin-bottom: 8px;">
+                        ✓ Vse cene vsebujejo DDV
+                    </p>
+                    <p style="color: #666; font-size: 0.95rem;">
+                        ✓ Kakovostna italijanska detergent in mehčalec sta všteta v ceno pranja
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Advantages Section -->
+    <section class="section advantages">
+        <div class="container">
+            <h2 class="section-title">Zakaj Smart Wash?</h2>
+            <p class="section-subtitle">Prihranite čas in denar z našo sodobno samopostrežno pralnico</p>
+            
+            <div class="advantages-grid">
+                <div class="advantage-item">
+                    <div class="advantage-icon">⏱️</div>
+                    <h3>Prihranite Čas</h3>
+                    <p>Oprano in posušeno v dobri uri. Opravite nakupe medtem ko se pere perilo v TC Jarše.</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="advantage-icon">🛒</div>
+                    <h3>Operite Med Nakupi</h3>
+                    <p>Edinstvena lokacija v Mercator TC Jarše. Eno potovanje - dve opravili!</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="advantage-icon">💰</div>
+                    <h3>Cenovno Ugodno</h3>
+                    <p>Prihranite na stroških domače pralke in kemične čistilnice. Kakovostna italijanska detergent in mehčalec vključena.</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="advantage-icon">🏠</div>
+                    <h3>Več Prostora Doma</h3>
+                    <p>Postavite kad ali razširite kopalnico - pralnega stroja vam ni treba imeti doma.</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="advantage-icon">🛏️</div>
+                    <h3>Velika Perila</h3>
+                    <p>Operite in posušite prešite odeje, vzglavnike, puhovke - vse kar se doma ne da.</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="advantage-icon">✨</div>
+                    <h3>Profesionalna Oprema</h3>
+                    <p>Močni profesionalni stroji. Stroji se po vsakem pranju avtomatsko dezinficirajo. Operete vse vaše perilo naenkrat!</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="advantage-icon">📱</div>
+                    <h3>Moderne Rešitve</h3>
+                    <p>Enostavna uporaba. Različni načini plačila. Brezžični internet na voljo.</p>
+                </div>
+                
+                <div class="advantage-item">
+                    <div class="advantage-icon">🔒</div>
+                    <h3>Varno in Čisto</h3>
+                    <p>Video nadzor. Čista okolica. Redno vzdrževani stroji. Vaše perilo je v varnih rokah.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Locations Section -->
+    <section id="lokacije" class="section">
+        <div class="container">
+            <h2 class="section-title">Naše Lokacije</h2>
+            <p class="section-subtitle">Dve priročni lokaciji v Ljubljani za vašo udobnost</p>
+            
+            <div class="locations-grid">
+                <!-- TC Jarše Location -->
+                <div class="location-card">
+                    <div class="location-header special">
+                        <div class="location-badge">⭐ EDINSTVENA LOKACIJA ⭐</div>
+                        <div class="location-name">Smart Wash TC Jarše</div>
+                        <div class="location-tagline">Operite med nakupi v Mercatorju!</div>
+                    </div>
+                    
+                    <div class="location-body">
+                        <div class="location-info">
+                            <div class="location-info-icon">📍</div>
+                            <div class="location-info-text">
+                                <strong>Naslov</strong>
+                                <p>Beblerjev trg 2<br>1000 Ljubljana<br>(v Mercator TC Jarše)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="location-info">
+                            <div class="location-info-icon">📞</div>
+                            <div class="location-info-text">
+                                <strong>Telefon</strong>
+                                <p>05 120 15 25</p>
+                            </div>
+                        </div>
+                        
+                        <div class="location-info">
+                            <div class="location-info-icon">⏰</div>
+                            <div class="location-info-text">
+                                <strong>Delovni Čas</strong>
+                                <p>Ponedeljek - Sobota: 8:00 - 20:00<br>
+                                Nedelja: 8:00 - 14:00</p>
+                            </div>
+                        </div>
+                        
+                        <div class="location-features">
+                            <h4>🌟 Posebnosti Lokacije:</h4>
+                            <ul class="feature-list">
+                                <li>V trgovskem centru Mercator</li>
+                                <li>Brezplačno parkiranje TC</li>
+                                <li>Operite med nakupi!</li>
+                                <li>Zaščita pred vremenom</li>
+                                <li>Idealno za družine</li>
+                                <li>Wi-Fi na voljo</li>
+                            </ul>
+                        </div>
+                        
+                        <a href="https://maps.app.goo.gl/Di1pM6rZoZDZRS857" target="_blank" class="map-button">
+                            🗺️ Odpri v Google Maps
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- Galjevica Location -->
+                <div class="location-card">
+                    <div class="location-header">
+                        <div class="location-badge">⏰ DOLG DELOVNI ČAS</div>
+                        <div class="location-name">Smart Wash Galjevica</div>
+                        <div class="location-tagline">Operite tudi zvečer - odprto do 23h!</div>
+                    </div>
+                    
+                    <div class="location-body">
+                        <div class="location-info">
+                            <div class="location-info-icon">📍</div>
+                            <div class="location-info-text">
+                                <strong>Naslov</strong>
+                                <p>Galjevica 7<br>1000 Ljubljana<br>(Četrt Galjevica)</p>
+                            </div>
+                        </div>
+                        
+                        <div class="location-info">
+                            <div class="location-info-icon">📞</div>
+                            <div class="location-info-text">
+                                <strong>Telefon</strong>
+                                <p>05 120 15 25</p>
+                            </div>
+                        </div>
+                        
+                        <div class="location-info">
+                            <div class="location-info-icon">⏰</div>
+                            <div class="location-info-text">
+                                <strong>Delovni Čas</strong>
+                                <p>Vsak Dan: 6:00 - 23:00<br>
+                                Tudi med vikendi in prazniki<br>
+                                <strong style="color: #ff6f00;">365 dni v letu ⭐</strong></p>
+                            </div>
+                        </div>
+                        
+                        <div class="location-features">
+                            <h4>🌟 Posebnosti Lokacije:</h4>
+                            <ul class="feature-list">
+                                <li>Odprto že od 6:00 zjutraj</li>
+                                <li>Delamo do 23:00 zvečer</li>
+                                <li>Idealno za zaposlene</li>
+                                <li>Stanovanjsko območje</li>
+                                <li>Enak urnik vsak dan</li>
+                                <li>Wi-Fi na voljo</li>
+                            </ul>
+                        </div>
+                        
+                        <a href="https://maps.app.goo.gl/TLvEv1DMmnd6HwVK9" target="_blank" class="map-button">
+                            🗺️ Odpri v Google Maps
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Use Section -->
+    <section class="section how-to-use">
+        <div class="container">
+            <h2 class="section-title">Kako Uporabljati?</h2>
+            <p class="section-subtitle">Preprosto in hitro - profesionalno pranje v 7 korakih</p>
+            
+            <div style="max-width: 900px; margin: 0 auto;">
+                <!-- Pralni Stroj -->
+                <div style="background: white; padding: 40px; border-radius: 15px; margin-bottom: 40px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                    <h3 style="color: #0d47a1; text-align: center; margin-bottom: 30px; font-size: 1.8rem;">🧺 Kako Uporabljati Pralni Stroj?</h3>
+                    
+                    <div class="steps-grid">
+                        <div class="step-card">
+                            <div class="step-number">1</div>
+                            <h3>Izberite Stroj</h3>
+                            <p>Glede na količino perila izberite pralni stroj z zmogljivostjo 9kg, 14kg ali 18kg.</p>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">2</div>
+                            <h3>Vstavite Perilo</h3>
+                            <p>Ne prepolnite stroja - perilo potrebuje prostor za pranje. Optimalno je napolniti stroj do 80%.</p>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">3</div>
+                            <h3>Kupite Žetone</h3>
+                            <p>Pojdite do avtomata (exchanger). Vstavite bankovce (do 50€) ali kovance. 1 žeton = 1 EUR.</p>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">4</div>
+                            <h3>Izberite Program</h3>
+                            <p>Za normalno pranje izberite želeno temperaturo. Pri normalnem pranju je centrifuga 1.100 obratov/minuto.</p>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">5</div>
+                            <h3>Vstavite Žetone</h3>
+                            <p>Vstavite potrebno število žetonov v reže. Pritisnite zeleni gumb START. Prikaže se čas pranja.</p>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">6</div>
+                            <h3>Počakajte 40 Minut</h3>
+                            <p>Medtem lahko opravite nakupe (TC Jarše), uporabite internet ali sedite v čakalnici.</p>
+                        </div>
+                        
+                        <div class="step-card">
+                            <div class="step-number">7</div>
+                            <h3>Vzamite Perilo</h3>
+                            <p>Ko stroj konča, vzamite perilo iz bobna. Takoj lahko začutite, kako čisto in dišeče je!</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Sušilni Stroj -->
+                <div style="background: #e3f2fd; padding: 40px; border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1);">
+                    <h3 style="color: #0d47a1; text-align: center; margin-bottom: 30px; font-size: 1.8rem;">🌀 Kako Uporabljati Sušilni Stroj?</h3>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 25px;">
+                        <div style="background: white; padding: 25px; border-radius: 10px;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #1e88e5; margin-bottom: 15px;">1</div>
+                            <h4 style="color: #0d47a1; margin-bottom: 10px;">Vstavite Perilo</h4>
+                            <p style="color: #666;">Optimalno je napolniti stroj do polovice bobna. Tako se perilo bolje in hitreje posuši.</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 25px; border-radius: 10px;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #1e88e5; margin-bottom: 15px;">2</div>
+                            <h4 style="color: #0d47a1; margin-bottom: 10px;">Izberite Temperaturo</h4>
+                            <p style="color: #666;">Izbirate lahko med 4 stopnjami: +++ (najvišja), ++ (srednja), + (nizka). Priporočamo začetek s +++.</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 25px; border-radius: 10px;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #1e88e5; margin-bottom: 15px;">3</div>
+                            <h4 style="color: #0d47a1; margin-bottom: 10px;">Vstavite Žetone</h4>
+                            <p style="color: #666;">Za zagon potrebujete vsaj 3 žetone (18 minut). Za optimalno sušenje priporočamo 4 žetone.</p>
+                        </div>
+                        
+                        <div style="background: white; padding: 25px; border-radius: 10px;">
+                            <div style="font-size: 2rem; font-weight: bold; color: #1e88e5; margin-bottom: 15px;">4</div>
+                            <h4 style="color: #0d47a1; margin-bottom: 10px;">Pritisnite START</h4>
+                            <p style="color: #666;">Pritisnite zeleni gumb START. Med sušenjem lahko odprete vrata za preverjanje vlažnosti.</p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: white; padding: 20px; border-radius: 10px; margin-top: 25px; border-left: 4px solid #ff6f00;">
+                        <p style="margin: 0; color: #666; font-size: 0.95rem;">
+                            💡 <strong>Nasvet:</strong> Po 3-4 minutah lahko odprete vrata ter preverite perilo, nato nadaljujete s stopnjo ++ ali +, odvisno od stanja perila.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section class="section faq">
+        <div class="container">
+            <h2 class="section-title">Pogosto Zastavljena Vprašanja</h2>
+            <p class="section-subtitle">Odgovori na najpogostejša vprašanja</p>
+            
+            <div class="faq-container">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Kako deluje plačilo?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Pralni in sušilni stroji sprejemajo SAMO ŽETONE.</strong></p>
+                        <p>Žetone kupite na avtomatu za zamenjavo (exchanger), ki se nahaja v pralnici.</p>
+                        <p><strong>Avtomat sprejema:</strong><br>
+                        • Kovance: 0,50 €, 1,00 € in 2,00 €<br>
+                        • Bankovce: do 50 €</p>
+                        <p><strong>1 žeton = 1 EUR</strong></p>
+                        <p>⚠️ <strong>POMEMBNO:</strong> Avtomat za žetone NE vrača denarja. Uporabite točno število žetonov, ki ga potrebujete.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Ali so pralna sredstva vključena v ceno?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>DA!</strong> Pralna sredstva so VKLJUČENA v ceno pranja.</p>
+                        <p><strong>Uporabljamo:</strong><br>
+                        • Kakovostna italijanska detergent<br>
+                        • Mehčalec za perilo</p>
+                        <p>Pralna sredstva se dozirajo AVTOMATSKO pri vsakem pranju. Vam ni treba prinašati svojih pralnih sredstev.</p>
+                        <p>Stroji se po vsakem pranju tudi avtomatsko dezinficirajo, zato je vaše perilo oprano v čistem in svežem stroju.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Koliko časa traja pranje in sušenje?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Pranje traja 40 minut, sušenje od 15 do 30 minut (odvisno od programa). Skupaj lahko oprano in posušeno perilo dobite v dobri uri.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Ali lahko perem velike kose perila (odeje, vzglavniki)?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        DA! Naši profesionalni stroji z zmogljivostjo 14kg in 18kg so idealni za velike kose perila kot so prešite odeje, vzglavniki, puhovke in podobno, ki se doma težko pere in suši.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Ali se stroji avtomatsko razkužujejo?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>DA!</strong> Stroji se po VSAKEM pranju avtomatsko dezinficirajo.</p>
+                        <p><strong>To pomeni:</strong><br>
+                        • Stroj je vedno čist za naslednjega uporabnika<br>
+                        • Vaše perilo se pere v razkuženem stroju<br>
+                        • Ni križnega onesnaženja med uporabniki<br>
+                        • Higiena je zagotovljena</p>
+                        <p>Dezinfekcija se izvede avtomatsko po končanem pranju.</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Kaj če nimam kovancev ali gotovine?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Naš avtomat za žetone sprejema bankovce do 50 EUR. Prav tako lahko na nekaterih lokacijah plačate s kartico. Priporočamo, da prinesete gotovino za lažje plačilo.
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Ali imate brezžični internet (Wi-Fi)?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>DA!</strong> V obeh naših lokacijah je na voljo brezplačen brezžični internet.</p>
+                        <p>Medtem ko čakate lahko:<br>
+                        • Brskate po spletu<br>
+                        • Berete novice ali knjige<br>
+                        • Delate<br>
+                        • Opravite nakupe (TC Jarše)</p>
+                        <p>Vaš čas postane produktiven!</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Kaj je posebnega pri lokaciji TC Jarše?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        Smart Wash TC Jarše je v lokalnem nakupovalnem centru Jarše pri Mercatorju! Medtem ko se pere vaše perilo, lahko opravite vsakodnevne nakupe. Prihranite čas z enim potovanjem. Brezplačno parkiranje. Idealno za družine!
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Kje lahko parkiram?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>Obe naši lokaciji imata BREZPLAČNO PARKIRANJE:</strong></p>
+                        <p><strong>📍 TC Jarše (Beblerjev trg 2):</strong><br>
+                        Veliko parkirišče Mercatorja - tik ob vhodu v pralnico. Brezplačno parkiranje za vse obiskovalce TC. Parkirate in ste v nekaj korakih pri pralnici.</p>
+                        <p><strong>📍 Galjevica (Galjevica 7):</strong><br>
+                        Parkiranje pred vhodom - dovolj prostora. Enostaven dostop z avtomobilom.</p>
+                        <p>Ne potrebujete nositi težkega perila daleč od avtomobila!</p>
+                    </div>
+                </div>
+                
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFaq(this)">
+                        Ali ste odprti med vikendi in prazniki?
+                        <span class="faq-icon">▼</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p><strong>DA!</strong> Odprto vsak dan - tudi med vikendi in prazniki.</p>
+                        <p><strong>📍 TC Jarše:</strong><br>
+                        Pon-Sob: 8:00 - 20:00<br>
+                        Nedelja: 8:00 - 14:00</p>
+                        <p><strong>📍 Galjevica:</strong><br>
+                        Vsak dan: 6:00 - 23:00<br>
+                        <strong style="color: #ff6f00;">365 dni v letu ⭐</strong></p>
+                        <p>Galjevica lokacija deluje praktično NON-STOP (17 ur na dan, vsak dan)!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="container">
+            <h2>Pridite Še Danes!</h2>
+            <p>Izkusite prednosti profesionalnega pranja in sušenja v Smart Wash</p>
+            <a href="#lokacije" class="cta-button" style="background: white; color: #ff6f00;">
+                📍 Izberite Lokacijo
+            </a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Smart Wash</h3>
+                <p>Samopostrežna pralnica perila</p>
+                <p>Ljubljana, Slovenija</p>
+                <p style="margin-top: 20px;">© 2026 Smart Wash</p>
+                <p>Vse pravice pridržane</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Lokaciji</h3>
+                <a href="https://maps.app.goo.gl/Di1pM6rZoZDZRS857" target="_blank">TC Jarše - Beblerjev trg 2</a>
+                <a href="https://maps.app.goo.gl/TLvEv1DMmnd6HwVK9" target="_blank">Galjevica - Galjevica 7</a>
+                <p style="margin-top: 20px;">Telefon: 05 120 15 25</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Uporabne Povezave</h3>
+                <a href="#cenik">Cenik</a>
+                <a href="#lokacije">Lokacije</a>
+                <a href="/privacy-policy.html">Politika Zasebnosti</a>
+                <a href="/cookie-policy.html">Piškotki</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Delovni Čas</h3>
+                <p><strong>TC Jarše:</strong><br>
+                Pon-Sob: 8:00-20:00<br>
+                Ned: 8:00-14:00</p>
+                <p style="margin-top: 15px;"><strong>Galjevica:</strong><br>
+                Vsak dan: 6:00-23:00</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>Smart Wash - Pametna Izbira za Moderno Pranje</p>
+            <p style="margin-top: 10px; font-size: 0.9rem;">
+                Ta spletna stran spoštuje GDPR in ePrivacy Directive
+            </p>
+        </div>
+    </footer>
+
+    <script>
+        // FAQ Toggle
+        function toggleFaq(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+            
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+        
+        // Smooth scroll for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+        
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('animate-on-scroll');
+                }
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.service-card, .advantage-item, .location-card, .step-card, .faq-item').forEach(el => {
+            observer.observe(el);
+        });
+    </script>
+
+<!-- Menu Panel -->
+
+<div class="menu-backdrop" aria-hidden="true"></div>
+<div class="menu-panel" aria-hidden="true">
+  <button class="menu-close" aria-label="Close menu">×</button>
+<nav class="menu-nav">
+    <a href="#" class="menu-item disabled">Видеоинструкции</a>
+  </nav>
+</div>
+
+
+<script>
+const menuBtn = document.querySelector('.menu-button');
+const menuPanel = document.querySelector('.menu-panel');
+const menuBackdrop = document.querySelector('.menu-backdrop');
+const menuClose = document.querySelector('.menu-close');
+
+function closeMenu(){
+  menuPanel.classList.remove('open');
+  menuBackdrop.classList.remove('open');
+  menuPanel.setAttribute('aria-hidden','true');
+  menuBackdrop.setAttribute('aria-hidden','true');
+}
+
+function toggleMenu(){
+  const willOpen = !menuPanel.classList.contains('open');
+  if (willOpen){
+    menuPanel.classList.add('open');
+    menuBackdrop.classList.add('open');
+    menuPanel.setAttribute('aria-hidden','false');
+    menuBackdrop.setAttribute('aria-hidden','false');
+  } else {
+    closeMenu();
+  }
+}
+
+menuBtn?.addEventListener('click', toggleMenu);
+menuClose?.addEventListener('click', closeMenu);
+menuBackdrop?.addEventListener('click', closeMenu);
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') closeMenu();
+});
+</script>
+

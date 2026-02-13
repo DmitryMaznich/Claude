@@ -1,0 +1,29 @@
+name: Deploy via SCP
+
+on:
+  workflow_dispatch:
+  # push:
+  #   branches:
+  #     - main
+
+jobs:
+  deploy:
+    name: Deploy to cPanel via SCP
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Deploy via SCP
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          port: 22
+          source: "index.html,*.js,*.css,*.svg,*.png,*.jpg,*.mp4,bot.js,package.json"
+          target: /home/${{ secrets.FTP_USERNAME }}/public_html/
+          strip_components: 0
+          overwrite: true
+          timeout: 300s

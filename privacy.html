@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Politika zasebnosti - Smart Wash</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; line-height: 1.6; color: #333; background: #f5f5f5; }
+        .container { max-width: 900px; margin: 40px auto; padding: 40px; background: white; border-radius: 12px; box-shadow: 0 2px 20px rgba(0,0,0,0.1); }
+        h1 { color: #1D51A2; margin-bottom: 20px; font-size: 32px; }
+        h2 { color: #1D51A2; margin-top: 30px; margin-bottom: 15px; font-size: 24px; }
+        p { margin-bottom: 15px; }
+        .back-link { display: inline-block; margin-bottom: 20px; color: #1D51A2; text-decoration: none; font-weight: 600; }
+        .back-link:hover { text-decoration: underline; }
+        ul { margin-left: 30px; margin-bottom: 15px; }
+        li { margin-bottom: 8px; }
+        .contact-info { background: #f0f7ff; padding: 20px; border-radius: 8px; margin-top: 30px; }
+        .lang-toggle { text-align: right; margin-bottom: 20px; }
+        .lang-btn { background: #1D51A2; color: white; border: none; padding: 8px 16px; margin-left: 8px; border-radius: 6px; cursor: pointer; font-size: 14px; }
+        .lang-btn.active { background: #0097DA; }
+        .lang-si, .lang-en { display: none; }
+        [data-lang="si"] .lang-si { display: block; }
+        [data-lang="en"] .lang-en { display: block; }
+    </style>
+</head>
+<body data-lang="si">
+    <div class="container">
+        <a href="smart_wash_with_logo.html" class="back-link">← Nazaj / Back</a>
+        <div class="lang-toggle">
+            <button class="lang-btn active" onclick="setLanguage('si')">SI</button>
+            <button class="lang-btn" onclick="setLanguage('en')">EN</button>
+        </div>
+        <div class="lang-si">
+            <h1>Politika zasebnosti</h1>
+            <p><strong>Zadnja posodobitev:</strong> Februar 2026</p>
+            <h2>1. Piškotki</h2>
+            <p>Naša spletna stran uporablja:</p>
+            <ul>
+                <li><strong>Google Maps</strong> - prikaz lokacij</li>
+                <li><strong>Google Analytics</strong> - analiza obiska (anonimno)</li>
+            </ul>
+            <h2>2. Google Analytics</h2>
+            <p>Zbira anonimizirane podatke: število obiskovalcev, čas na strani, geografsko lokacijo. IP naslovi so anonimizirani. Deluje šele po vašem soglasju.</p>
+            <h2>3. Vaše pravice (GDPR)</h2>
+            <p>Imate pravico do dostopa, popravka, izbrisa in prenosa podatkov.</p>
+
+            <h2>4. Omejitev odgovornosti</h2>
+            <p><strong>Uporaba storitev na lastno odgovornost:</strong></p>
+            <ul>
+                <li>Smart Wash ne odgovarja za izgubljene, ukradene ali poškodovane predmete.</li>
+                <li>Pred pranjem preverite žepe in odstranite vse predmete.</li>
+                <li>Preden zapustite prostor, preverite stroje in okolico.</li>
+                <li>Cene in urniki so informativne narave in se lahko spremenijo brez predhodnega obvestila.</li>
+                <li>V primeru okvare stroja nas takoj pokličite - ne poskušajte sami odpirati ali popravljati strojev.</li>
+            </ul>
+            <p><strong>Priporočamo:</strong> Ne puščajte dragocenosti v žepih, ne pralite občutljivih tkanin brez preverjanja napotkov, uporabljajte ustrezne programe za vaše perilo.</p>
+
+            <div class="contact-info">
+                <p><strong>Smart Wash</strong></p>
+                <p>Tel: <a href="tel:+38617778270">+386 1 777 82 70</a></p>
+            </div>
+        </div>
+        <div class="lang-en">
+            <h1>Privacy Policy & Terms</h1>
+            <p><strong>Last updated:</strong> February 2026</p>
+            <h2>1. Cookies</h2>
+            <p>Our website uses:</p>
+            <ul>
+                <li><strong>Google Maps</strong> - location display</li>
+                <li><strong>Google Analytics</strong> - anonymous traffic analysis</li>
+            </ul>
+            <h2>2. Google Analytics</h2>
+            <p>Collects anonymized data: visitor count, time on page, geographic location. IP addresses are anonymized. Only works after your consent.</p>
+            <h2>3. Your Rights (GDPR)</h2>
+            <p>You have the right to access, correct, delete and port your data.</p>
+
+            <h2>4. Disclaimer & Liability</h2>
+            <p><strong>Use of services at your own risk:</strong></p>
+            <ul>
+                <li>Smart Wash is not responsible for lost, stolen or damaged items.</li>
+                <li>Check pockets and remove all items before washing.</li>
+                <li>Check machines and surroundings before leaving the premises.</li>
+                <li>Prices and schedules are for information purposes and may change without prior notice.</li>
+                <li>In case of machine malfunction, call us immediately - do not attempt to open or repair machines yourself.</li>
+            </ul>
+            <p><strong>We recommend:</strong> Do not leave valuables in pockets, do not wash delicate fabrics without checking instructions, use appropriate programs for your laundry.</p>
+
+            <div class="contact-info">
+                <p><strong>Smart Wash</strong></p>
+                <p>Phone: <a href="tel:+38617778270">+386 1 777 82 70</a></p>
+            </div>
+        </div>
+    </div>
+    <script>
+        function setLanguage(lang) {
+            document.body.setAttribute('data-lang', lang);
+            document.querySelectorAll('.lang-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

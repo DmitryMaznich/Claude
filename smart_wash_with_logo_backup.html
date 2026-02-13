@@ -1,0 +1,4319 @@
+<!DOCTYPE html>
+<html lang="sl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Wash - Samopostrežna Pralnica Ljubljana</title>
+    <meta name="description" content="Smart Wash samopostrežna pralnica v Ljubljani. Galjevica in TC Jarše. Odprto vsak dan 0-24h. Kakovostna italijanska detergenta vključena.">
+    <link rel="icon" type="image/svg+xml" href="logo (1).svg">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Work+Sans:wght@300;400;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            /* Брендовые цвета из логотипа */
+            --primary-navy: #1D51A2;
+            --primary-blue: #0097DA;
+            --accent-light: #8FD8F8;
+            --accent-bright: #43B0E4;
+            --navy: #1D51A2;
+            --cream: #F0F7FB;
+            --text-dark: #1A2332;
+            --text-light: #64748B;
+            --text-secondary: #64748B;
+            --bg-light: #F8FAFB;
+
+            /* Алиасы для совместимости */
+            --coral: #0097DA;
+            --coral-dark: #1D51A2;
+            --orange: #FF9B71;
+            --mint: #8FD8F8;
+            --mint-dark: #43B0E4;
+            --accent: #0097DA;
+        }
+
+        body {
+            font-family: 'Work Sans', sans-serif;
+            line-height: 1.6;
+            color: var(--text-dark);
+            background: white;
+            overflow-x: hidden;
+        }
+
+        body[data-lang="en"] .lang-si { display: none; }
+        body[data-lang="en"] .lang-en { display: inline; }
+        body[data-lang="si"] .lang-en { display: none; }
+        body[data-lang="si"] .lang-si { display: inline; }
+        body:not([data-lang]) .lang-en { display: none; }
+
+        /* HEADER */
+        header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+
+        header.scrolled {
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+        }
+
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 24px 40px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+        }
+
+        .logo-image {
+            height: 100px;
+            width: auto;
+            filter: drop-shadow(0 2px 4px rgba(0, 151, 218, 0.15));
+            transition: all 0.3s ease;
+        }
+
+        .logo-image:hover {
+            filter: drop-shadow(0 4px 12px rgba(0, 151, 218, 0.3));
+            transform: translateY(-2px);
+        }
+
+        .logo-text-wrapper {
+            display: flex;
+            flex-direction: column;
+            gap: 2px;
+        }
+
+        .logo-text {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 26px;
+            font-weight: 700;
+            letter-spacing: -0.3px;
+            color: var(--navy);
+            line-height: 1.2;
+            text-align: left;
+        }
+
+        .logo-text-light {
+            font-weight: 400;
+        }
+
+        .logo-badge {
+            background: linear-gradient(135deg, var(--coral) 0%, var(--accent-bright) 100%);
+            color: white;
+            font-size: 10px;
+            font-weight: 700;
+            padding: 3px 10px;
+            border-radius: 12px;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            width: fit-content;
+        }
+
+        nav {
+            display: flex;
+            gap: 12px;
+        }
+
+        nav a {
+            font-size: 17px;
+            font-weight: 500;
+            color: var(--text-dark);
+            text-decoration: none;
+            padding: 12px 22px;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        nav a:hover {
+            background: var(--cream);
+            color: var(--coral);
+        }
+
+        .nav-right {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .lang-switcher {
+            display: flex;
+            gap: 4px;
+            background: var(--cream);
+            border-radius: 8px;
+            padding: 4px;
+        }
+
+        .lang-btn {
+            background: transparent;
+            border: none;
+            padding: 8px 16px;
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-light);
+            cursor: pointer;
+            border-radius: 6px;
+            transition: all 0.2s ease;
+        }
+
+        .lang-btn.active {
+            background: white;
+            color: var(--coral);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+        }
+
+        /* Mobile Menu */
+        .mobile-menu-btn {
+            display: none;
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            padding: 8px;
+            z-index: 1001;
+        }
+
+        .hamburger {
+            width: 28px;
+            height: 20px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .hamburger span {
+            width: 100%;
+            height: 3px;
+            background: var(--primary-navy);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+
+        .mobile-menu-btn.active .hamburger span:nth-child(1) {
+            transform: rotate(45deg) translateY(9px);
+        }
+
+        .mobile-menu-btn.active .hamburger span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .mobile-menu-btn.active .hamburger span:nth-child(3) {
+            transform: rotate(-45deg) translateY(-9px);
+        }
+
+        .mobile-menu {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            z-index: 999;
+            padding: 100px 40px 40px;
+            opacity: 0;
+            transform: translateY(-20px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
+        }
+
+        .mobile-menu.active {
+            display: flex;
+            flex-direction: column;
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .mobile-menu nav {
+            display: flex !important;
+            flex-direction: column;
+            gap: 0;
+            margin-bottom: 32px;
+        }
+
+        .mobile-menu nav a {
+            padding: 20px 0;
+            font-size: 24px;
+            font-weight: 700;
+            border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+        }
+
+        .mobile-lang-switcher {
+            display: flex;
+            gap: 12px;
+            padding: 20px 0;
+        }
+
+        .mobile-lang-switcher .lang-btn {
+            flex: 1;
+            padding: 16px;
+            font-size: 16px;
+            border: 2px solid rgba(0, 151, 218, 0.2);
+            border-radius: 12px;
+        }
+
+        .mobile-lang-switcher .lang-btn.active {
+            background: var(--primary-blue);
+            color: white;
+            border-color: var(--primary-blue);
+        }
+
+        /* HERO SECTION */
+        .hero {
+            min-height: auto;
+            padding-top: 140px;
+            padding-bottom: 60px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--cream) 0%, #FFFFFF 100%);
+        }
+
+        .hero-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 60px 40px 40px;
+            display: grid;
+            grid-template-columns: 1.2fr 1fr;
+            gap: 80px;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-content {
+            animation: fadeInUp 1s ease-out;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero-eyebrow {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: white;
+            padding: 8px 20px;
+            border-radius: 24px;
+            margin-bottom: 24px;
+            border: 1px solid rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+
+        .hero-eyebrow-dot {
+            width: 8px;
+            height: 8px;
+            background: #22C55E;
+            border-radius: 50%;
+            animation: pulse 2s ease-in-out infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .hero-eyebrow-text {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--text-dark);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-title {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 72px;
+            font-weight: 900;
+            line-height: 1.1;
+            color: var(--navy);
+            letter-spacing: -2px;
+            margin-bottom: 24px;
+            animation: fadeInUp 1s ease-out 0.3s both;
+        }
+
+        .hero-title-highlight {
+            color: var(--coral);
+            position: relative;
+            display: inline-block;
+        }
+
+        .hero-title-highlight::after {
+            content: '';
+            position: absolute;
+            bottom: 8px;
+            left: 0;
+            right: 0;
+            height: 12px;
+            background: var(--mint);
+            opacity: 0.4;
+            z-index: -1;
+            border-radius: 4px;
+        }
+
+        .hero-subtitle {
+            font-size: 22px;
+            line-height: 1.6;
+            color: var(--text-light);
+            margin-bottom: 40px;
+            font-weight: 300;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+
+        .hero-cta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+            margin-top: 20px;
+            animation: fadeInUp 1s ease-out 0.5s both;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 18px 36px;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            border: none;
+        }
+
+        .btn-primary {
+            background: var(--coral);
+            color: white;
+            box-shadow: 0 4px 16px rgba(255, 107, 90, 0.3);
+        }
+
+        .btn-primary:hover {
+            background: var(--coral-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(255, 107, 90, 0.4);
+        }
+
+        .btn-secondary {
+            background: white;
+            color: var(--navy);
+            border: 2px solid var(--navy);
+        }
+
+        .btn-secondary:hover {
+            background: var(--navy);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .hero-stats {
+            display: flex;
+            gap: 48px;
+            margin-top: 64px;
+            padding-top: 32px;
+            border-top: 1px solid rgba(0, 0, 0, 0.08);
+            animation: fadeInUp 1s ease-out 0.6s both;
+        }
+
+        .stat {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .stat-value {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 42px;
+            font-weight: 800;
+            color: var(--coral);
+            line-height: 1;
+        }
+
+        .stat-label {
+            font-size: 14px;
+            color: var(--text-light);
+            font-weight: 500;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .hero-footnote {
+            margin-top: 8px;
+            font-size: 12px;
+            color: var(--text-light);
+            line-height: 1.5;
+            opacity: 0.8;
+        }
+
+        .hero-footnote sup {
+            font-size: 10px;
+            margin-right: 2px;
+        }
+
+        /* HERO VISUAL */
+        .hero-visual {
+            position: relative;
+            animation: fadeIn 1.2s ease-out 0.4s both;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        .hero-card {
+            background: linear-gradient(135deg, rgba(0, 151, 218, 0.85) 0%, rgba(29, 81, 162, 0.75) 100%),
+                        url('galjevica.png') center/cover no-repeat;
+            border-radius: 24px;
+            padding: 80px 48px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.12);
+            position: relative;
+            transform: rotate(2deg);
+            transition: transform 0.4s ease;
+            color: white;
+        }
+
+        .hero-card:hover {
+            transform: rotate(0deg) scale(1.02);
+        }
+
+        .hero-card-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, var(--coral) 0%, var(--coral-dark) 100%);
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            margin-bottom: 24px;
+            box-shadow: 0 8px 24px rgba(255, 107, 90, 0.3);
+        }
+
+        .hero-card-title {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        .hero-card-features {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-size: 16px;
+            color: white;
+        }
+
+        .feature-check {
+            width: 24px;
+            height: 24px;
+            background: rgba(255, 255, 255, 0.3);
+            border: 2px solid white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 12px;
+            font-weight: 700;
+            color: white;
+        }
+
+        .price-tag {
+            position: absolute;
+            top: -20px;
+            right: -20px;
+            background: var(--navy);
+            color: white;
+            padding: 16px 24px;
+            border-radius: 16px;
+            transform: rotate(8deg);
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .price-tag-line {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 15px;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+
+        .price-tag-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            opacity: 0.7;
+            margin-bottom: 4px;
+        }
+
+        .price-tag-value {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 900;
+        }
+
+        /* BACKGROUND DECORATIONS */
+        .hero-bg-shape {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.08;
+            z-index: 0;
+        }
+
+        .shape-1 {
+            width: 400px;
+            height: 400px;
+            background: var(--coral);
+            top: 10%;
+            right: -100px;
+            animation: float 8s ease-in-out infinite;
+        }
+
+        .shape-2 {
+            width: 300px;
+            height: 300px;
+            background: var(--mint);
+            bottom: 10%;
+            left: -50px;
+            animation: float 6s ease-in-out infinite reverse;
+        }
+
+        .shape-3 {
+            width: 200px;
+            height: 200px;
+            background: var(--sage);
+            top: 40%;
+            left: 20%;
+            animation: float 10s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-30px); }
+        }
+
+        /* SECTION GENERAL */
+        section {
+            padding: 60px 0;
+            position: relative;
+        }
+
+        .section-header {
+            max-width: 1400px;
+            margin: 0 auto 80px;
+            padding: 0 40px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        #services .section-header {
+            margin-bottom: 20px;
+        }
+
+        .section-eyebrow {
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            color: var(--coral);
+            font-weight: 700;
+            margin-bottom: 16px;
+        }
+
+        .section-title {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 56px;
+            font-weight: 900;
+            color: var(--navy);
+            letter-spacing: -1px;
+            margin-bottom: 24px;
+        }
+
+        .section-subtitle {
+            font-size: 20px;
+            color: var(--text-light);
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        /* SERVICES / PRICING */
+        #services {
+            background: var(--bg-light);
+            padding-top: 40px;
+        }
+
+        .token-info-grid {
+            max-width: 1400px;
+            margin: 12px auto 60px;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 32px;
+        }
+
+        .token-info-column {
+            padding: 0;
+        }
+
+        .token-column-title {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy);
+            margin-bottom: 16px;
+        }
+
+        .token-column-content {
+            font-size: 15px;
+            color: var(--text-dark);
+            line-height: 1.6;
+        }
+
+        .token-price-large {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--coral);
+            margin: 12px 0;
+        }
+
+        .token-bonus-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 16px;
+            padding: 12px 16px;
+            background: rgba(0, 151, 218, 0.08);
+            border-radius: 12px;
+        }
+
+        .payment-icons {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .payment-icon {
+            width: 48px;
+            height: 48px;
+            background: var(--bg-light);
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .token-info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            position: relative;
+        }
+
+        .token-info-item:not(:last-child)::after {
+            content: '|';
+            position: absolute;
+            right: -24px;
+            font-size: 24px;
+            color: rgba(0, 151, 218, 0.25);
+            font-weight: 300;
+        }
+
+        .token-info-icon {
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .token-info-text {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--navy);
+            white-space: nowrap;
+        }
+
+        .token-info-text strong {
+            font-weight: 700;
+        }
+
+        .token-bonus-badge {
+            background: var(--coral);
+            color: white;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: 700;
+            margin-left: 4px;
+        }
+
+        .payment-methods-note {
+            text-align: center;
+            font-size: 17px;
+            color: var(--text-secondary);
+            margin-top: 20px;
+            padding: 14px 24px;
+            background: rgba(0, 151, 218, 0.04);
+            border-radius: 12px;
+            max-width: 1000px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        @media (max-width: 768px) {
+            .token-info-description {
+                font-size: 15px;
+                text-align: left;
+            }
+
+            .token-info-box {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 20px;
+            }
+
+            .token-info-item {
+                width: 100%;
+            }
+
+            .token-info-item:not(:last-child)::after {
+                display: none;
+            }
+
+            .token-info-text {
+                font-size: 16px;
+            }
+
+            .payment-methods-note {
+                font-size: 13px;
+                text-align: left;
+                padding: 12px 16px;
+            }
+        }
+
+        .services-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(380px, 1fr));
+            gap: 32px;
+        }
+
+        .service-card {
+            background: white;
+            border-radius: 24px;
+            padding: 40px;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .service-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: var(--coral);
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.4s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+        }
+
+        .service-card:hover::before {
+            transform: scaleX(1);
+        }
+
+        .service-card.wash::before { background: var(--coral); }
+        .service-card.dry::before { background: var(--orange); }
+        .service-card.extra::before { background: #10B981; }
+
+        .service-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            margin-bottom: 16px;
+        }
+
+        .service-icon {
+            width: 64px;
+            height: 64px;
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .service-card.wash .service-icon { background: rgba(0, 151, 218, 0.15); }
+        .service-card.dry .service-icon { background: rgba(255, 155, 113, 0.1); }
+        .service-card.extra .service-icon { background: rgba(16, 185, 129, 0.1); }
+
+        .service-title {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 28px;
+            font-weight: 800;
+            color: var(--navy);
+        }
+
+        .service-description {
+            font-size: 16px;
+            color: var(--text-light);
+            margin-bottom: 20px;
+            line-height: 1.6;
+        }
+
+        .service-features {
+            margin-bottom: 20px;
+        }
+
+        .service-features-title {
+            font-size: 14px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-dark);
+            margin-bottom: 12px;
+        }
+
+        .service-features-list {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+        }
+
+        .service-feature-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: var(--text-dark);
+        }
+
+        .service-feature-item::before {
+            content: '✓';
+            color: var(--mint-dark);
+            font-weight: 700;
+            font-size: 16px;
+        }
+
+        .temp-badges {
+            display: flex;
+            gap: 8px;
+            flex-wrap: nowrap;
+        }
+
+        .temp-badge {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 1;
+            padding: 8px 6px;
+            background: white;
+            border: 2px solid rgba(0, 151, 218, 0.3);
+            border-radius: 12px;
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--navy);
+            transition: all 0.3s ease;
+        }
+
+        .temp-badge:hover {
+            background: rgba(0, 151, 218, 0.1);
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .service-pricing {
+            background: linear-gradient(135deg, rgba(0, 151, 218, 0.06) 0%, rgba(29, 81, 162, 0.04) 100%);
+            border-radius: 16px;
+            padding: 20px 24px;
+            border: 2px solid rgba(0, 151, 218, 0.15);
+            box-shadow: 0 2px 8px rgba(0, 151, 218, 0.08);
+        }
+
+        .price-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-bottom: 12px;
+            margin-bottom: 12px;
+            border-bottom: 2px solid rgba(0, 151, 218, 0.2);
+        }
+
+        .price-header-label {
+            font-size: 13px;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--accent);
+        }
+
+        .price-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px 0;
+        }
+
+        .price-row:not(:last-child) {
+            border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+        }
+
+        .price-capacity {
+            font-size: 15px;
+            font-weight: 600;
+            color: var(--text-dark);
+        }
+
+        .price-value {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 800;
+            color: var(--coral);
+            text-align: left;
+        }
+
+        .price-value small {
+            font-size: 12px;
+            color: var(--text-light);
+            font-weight: 500;
+            margin-left: 4px;
+        }
+
+        .price-note {
+            margin-top: 12px;
+            padding-top: 12px;
+            border-top: 1px solid rgba(0, 0, 0, 0.06);
+            font-size: 12px;
+            color: var(--text-light);
+            font-style: italic;
+        }
+
+        /* LOCATIONS */
+        #locations {
+            background: white;
+        }
+
+        .locations-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(500px, 1fr));
+            gap: 48px;
+        }
+
+        .location-card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 4px 24px rgba(0, 0, 0, 0.08);
+            transition: all 0.4s ease;
+        }
+
+        .location-card:hover {
+            box-shadow: 0 12px 48px rgba(0, 0, 0, 0.12);
+            transform: translateY(-4px);
+        }
+
+        .location-map {
+            width: 100%;
+            height: 300px;
+            border: none;
+            display: block;
+        }
+
+        .location-content {
+            padding: 40px;
+        }
+
+        .location-name {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 32px;
+            font-weight: 800;
+            color: var(--navy);
+            margin-bottom: 24px;
+        }
+
+        .location-info {
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+            margin-bottom: 32px;
+        }
+
+        .location-info-item {
+            display: flex;
+            gap: 12px;
+        }
+
+        .location-info-icon {
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            flex-shrink: 0;
+        }
+
+        .location-info-content {
+            flex: 1;
+        }
+
+        .location-info-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: var(--text-light);
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .location-info-value {
+            font-size: 16px;
+            color: var(--text-dark);
+            font-weight: 500;
+        }
+
+        .location-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: var(--coral);
+            color: white;
+            padding: 16px 32px;
+            border-radius: 12px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 16px;
+            transition: all 0.3s ease;
+        }
+
+        .location-btn:hover {
+            background: var(--coral-dark);
+            transform: translateX(4px);
+        }
+
+        /* LOCATION AMENITIES */
+        .location-amenities {
+            display: grid;
+            grid-template-columns: repeat(6, 1fr);
+            gap: 8px;
+        }
+
+        .amenity-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 12px 8px;
+            background: rgba(0, 151, 218, 0.05);
+            border-radius: 8px;
+            border: 1px solid rgba(0, 151, 218, 0.15);
+            transition: all 0.3s ease;
+        }
+
+        .amenity-item:hover {
+            background: rgba(0, 151, 218, 0.1);
+            border-color: rgba(0, 151, 218, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .amenity-icon {
+            width: 100%;
+            height: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .amenity-icon img {
+            width: 100%;
+            height: auto;
+            max-height: 55px;
+            object-fit: contain;
+        }
+
+        .amenity-icon svg {
+            width: 100%;
+            height: auto;
+            max-height: 50px;
+        }
+
+        .amenity-label {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--text-dark);
+            text-align: center;
+            line-height: 1.2;
+        }
+
+        /* SCHEDULE VISUALIZATION */
+        .schedule-visual {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .days-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 4px;
+            flex: 1;
+        }
+
+        .day-box {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: 8px 3px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            min-width: 0;
+        }
+
+        .day-name {
+            font-size: 9px;
+            font-weight: 700;
+            color: var(--text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+
+        .day-check {
+            font-size: 20px;
+            line-height: 1;
+        }
+
+        .day-box.open .day-check {
+            color: #10B981;
+        }
+
+        .day-box.partial .day-check {
+            color: #F59E0B;
+        }
+
+        .day-box.closed .day-check {
+            color: #EF4444;
+        }
+
+        .schedule-hours {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-shrink: 0;
+        }
+
+        .digital-time {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            background: linear-gradient(135deg, rgba(16, 185, 129, 0.15), rgba(0, 151, 218, 0.15));
+            padding: 8px 12px;
+            border-radius: 8px;
+            border: 2px solid rgba(0, 151, 218, 0.4);
+            box-shadow: 0 3px 12px rgba(0, 0, 0, 0.2), inset 0 1px 0 rgba(255, 255, 255, 0.1);
+            white-space: nowrap;
+        }
+
+        .time-display {
+            font-family: 'Courier New', monospace;
+            font-size: 16px;
+            font-weight: 700;
+            color: #0097DA;
+            letter-spacing: 1px;
+            text-shadow: 0 0 8px rgba(0, 151, 218, 0.3);
+        }
+
+        .time-separator {
+            font-size: 14px;
+            color: var(--text-light);
+            font-weight: 700;
+        }
+
+        /* INSTRUCTIONS */
+        #instructions {
+            background: var(--navy);
+            color: white;
+        }
+
+        #instructions .section-header {
+            margin-bottom: 32px;
+        }
+
+        #instructions .section-eyebrow {
+            color: var(--mint);
+            margin-bottom: 12px;
+        }
+
+        #instructions .section-title {
+            color: white;
+            margin-bottom: 16px;
+        }
+
+        #instructions .section-subtitle {
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .instructions-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 40px;
+        }
+
+        .instructions-steps {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+        }
+
+        .instruction-step {
+            display: flex;
+            align-items: flex-start;
+            gap: 20px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 16px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+        }
+
+        .instruction-step:hover {
+            background: rgba(255, 255, 255, 0.08);
+            transform: translateX(4px);
+        }
+
+        .instruction-number {
+            width: 48px;
+            height: 48px;
+            background: var(--accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            font-weight: 800;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .instruction-number.done {
+            background: var(--mint);
+            color: var(--navy);
+        }
+
+        .instruction-content {
+            flex: 1;
+        }
+
+        .instruction-title {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 20px;
+            font-weight: 700;
+            margin-bottom: 8px;
+            color: var(--primary-navy);
+        }
+
+        .instruction-description {
+            font-size: 15px;
+            line-height: 1.6;
+            color: var(--text-dark);
+        }
+
+        .video-placeholder {
+            background: rgba(255, 255, 255, 0.05);
+            border: 2px dashed rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            aspect-ratio: 16 / 9;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 16px;
+            padding: 40px;
+            text-align: center;
+        }
+
+        .video-placeholder-icon {
+            font-size: 64px;
+            opacity: 0.5;
+        }
+
+        .video-placeholder-text {
+            font-size: 18px;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .video-placeholder-subtext {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.5);
+        }
+
+        .video-container {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 16 / 9;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+            background: #000;
+        }
+
+        .video-container iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* TABS */
+        .instruction-tabs {
+            display: flex;
+            gap: 8px;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 12px;
+            border-radius: 12px 12px 0 0;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .tab-button {
+            background: rgba(255, 255, 255, 0.6);
+            border: 2px solid rgba(0, 151, 218, 0.2);
+            color: rgba(29, 81, 162, 0.7);
+            padding: 12px 24px;
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            border-radius: 8px;
+        }
+
+        .tab-button:hover {
+            color: rgba(29, 81, 162, 1);
+            background: rgba(0, 151, 218, 0.15);
+            border-color: rgba(0, 151, 218, 0.4);
+        }
+
+        .tab-button.active {
+            color: var(--primary-navy);
+            background: rgba(0, 151, 218, 0.2);
+            border-color: var(--accent);
+            border-width: 2px;
+            font-weight: 700;
+        }
+
+        .tab-content {
+            display: none;
+        }
+
+        .tab-content.active {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            align-items: start;
+            background: rgba(255, 255, 255, 0.92);
+            padding: 40px;
+            border-radius: 0 0 12px 12px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        /* CONTACT */
+        #contact {
+            background: linear-gradient(135deg, #F8FAFB 0%, #FFFFFF 100%);
+            position: relative;
+            overflow: hidden;
+            padding: 60px 0 80px;
+        }
+
+        #contact::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 20% 50%, rgba(0, 151, 218, 0.03) 0%, transparent 50%),
+                        radial-gradient(circle at 80% 80%, rgba(29, 81, 162, 0.03) 0%, transparent 50%);
+            pointer-events: none;
+        }
+
+        #contact .section-header {
+            margin-bottom: 32px;
+        }
+
+        .contact-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 40px;
+            text-align: center;
+            position: relative;
+            z-index: 1;
+        }
+
+        .contact-methods {
+            display: inline-flex;
+            flex-direction: row;
+            gap: 20px;
+            margin-top: 0;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .contact-method {
+            background: white;
+            padding: 16px 24px;
+            border-radius: 14px;
+            box-shadow: 0 2px 12px rgba(0, 0, 0, 0.06);
+            transition: all 0.3s ease;
+            display: inline-flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .contact-method:hover {
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            transform: translateX(8px);
+        }
+
+        .contact-icon {
+            width: 44px;
+            height: 44px;
+            min-width: 44px;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-bright));
+            border-radius: 11px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            box-shadow: 0 4px 16px rgba(0, 151, 218, 0.25);
+            transition: all 0.3s ease;
+        }
+
+        .contact-method:hover .contact-icon {
+            transform: scale(1.05);
+        }
+
+        .contact-info {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+            flex: 1;
+            text-align: left;
+        }
+
+        .contact-label {
+            font-size: 11px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: var(--text-light);
+            font-weight: 600;
+        }
+
+        .contact-value {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--navy);
+        }
+
+        .contact-value a {
+            color: var(--navy);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-value a:hover {
+            color: var(--primary-blue);
+        }
+
+        /* FOOTER */
+        footer {
+            background: linear-gradient(135deg, var(--primary-navy) 0%, #0F3166 100%);
+            color: white;
+            padding: 32px 40px;
+            text-align: center;
+            border-top: 3px solid var(--primary-blue);
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .footer-main {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 24px;
+        }
+
+        .footer-brand {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            text-align: left;
+        }
+
+        .footer-logo {
+            font-family: 'Cabinet Grotesk', sans-serif;
+            font-size: 24px;
+            font-weight: 900;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, white, var(--accent-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .footer-tagline {
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.6);
+        }
+
+        .footer-locations {
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.8);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .footer-locations::before {
+            content: '📍';
+            font-size: 16px;
+        }
+
+        .footer-copyright {
+            font-size: 12px;
+            color: rgba(255, 255, 255, 0.5);
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-top: 8px;
+            font-size: 12px;
+        }
+
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.6);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent-light);
+        }
+
+        /* Cookie Notice */
+        .cookie-notice {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(135deg, rgba(29, 81, 162, 0.98), rgba(15, 49, 102, 0.98));
+            backdrop-filter: blur(12px);
+            padding: 20px;
+            box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.2);
+            border-top: 3px solid var(--primary-blue);
+            z-index: 10000;
+            transform: translateY(100%);
+            transition: transform 0.4s ease;
+        }
+
+        .cookie-notice.show {
+            transform: translateY(0);
+        }
+
+        .cookie-notice-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .cookie-notice-text {
+            flex: 1;
+            color: white;
+            font-size: 14px;
+            line-height: 1.6;
+            min-width: 280px;
+        }
+
+        .cookie-notice-text a {
+            color: var(--accent-light);
+            text-decoration: underline;
+            font-weight: 600;
+        }
+
+        .cookie-notice-text a:hover {
+            color: white;
+        }
+
+        .cookie-notice-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .cookie-notice-btn {
+            padding: 12px 24px;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 14px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .cookie-notice-btn.accept {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-bright));
+            color: white;
+            box-shadow: 0 4px 12px rgba(0, 151, 218, 0.3);
+        }
+
+        .cookie-notice-btn.accept:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(0, 151, 218, 0.4);
+        }
+
+        .cookie-notice-btn.decline {
+            background: rgba(255, 255, 255, 0.1);
+            color: white;
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .cookie-notice-btn.decline:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            .hero-container {
+                grid-template-columns: 1fr;
+                gap: 60px;
+                padding: 60px 32px;
+            }
+
+            .hero-title { font-size: 56px; }
+            .section-title { font-size: 42px; }
+
+            .services-grid,
+            .locations-grid,
+            .token-info-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .token-info-grid {
+                gap: 24px;
+                padding: 0 32px;
+            }
+        }
+
+        /* Chat Widget */
+        .chat-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-bright));
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0, 151, 218, 0.4);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 151, 218, 0.6);
+        }
+
+        .chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 380px;
+            height: 550px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .chat-widget.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: all;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-bright));
+            color: white;
+            padding: 20px;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header-info h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .chat-status {
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        .chat-status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            margin-right: 6px;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .close-chat:hover {
+            transform: rotate(90deg);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .chat-message {
+            margin-bottom: 16px;
+            display: flex;
+        }
+
+        .chat-message.user {
+            justify-content: flex-end;
+        }
+
+        .chat-message.bot {
+            justify-content: flex-start;
+        }
+
+        .message-bubble {
+            max-width: 75%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .chat-message.user .message-bubble {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-bright));
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-message.bot .message-bubble {
+            background: white;
+            color: #333;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-bubble p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .chat-input-container {
+            display: flex;
+            padding: 16px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            border-radius: 0 0 16px 16px;
+        }
+
+        .chat-input {
+            flex: 1;
+            border: 1px solid #e0e0e0;
+            border-radius: 24px;
+            padding: 12px 16px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary-blue);
+        }
+
+        .send-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--accent-bright));
+            border: none;
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            margin-left: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .send-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Typing indicator */
+        .typing-indicator .message-bubble {
+            padding: 16px 20px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: #999;
+            border-radius: 50%;
+            animation: typing 1.4s infinite;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes typing {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.7;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chat-widget {
+                width: calc(100vw - 20px);
+                height: calc(100vh - 100px);
+                right: 10px;
+                bottom: 10px;
+            }
+
+            .chat-button {
+                right: 20px;
+                bottom: 20px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 16px 24px;
+            }
+
+            .logo-image {
+                height: 60px;
+            }
+
+            .logo-text {
+                font-size: 13px;
+            }
+
+            nav { display: none; }
+
+            .lang-switcher { display: none; }
+
+            .mobile-menu-btn {
+                display: block;
+            }
+
+            .hero {
+                padding-top: 70px;
+            }
+
+            .hero-title {
+                font-size: 38px;
+            }
+
+            .hero-subtitle {
+                font-size: 18px;
+            }
+
+            .hero-card {
+                padding: 32px;
+            }
+
+            .hero-stats {
+                flex-direction: column;
+                gap: 24px;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+
+            .section-title {
+                font-size: 32px;
+            }
+
+            .token-info-grid {
+                padding: 0 24px;
+                gap: 20px;
+                margin: 12px auto 40px;
+            }
+
+            .token-column-title {
+                font-size: 16px;
+            }
+
+            .token-column-content {
+                font-size: 14px;
+            }
+
+            .token-price-large {
+                font-size: 24px;
+            }
+
+            .service-features-list {
+                grid-template-columns: 1fr;
+            }
+
+            .services-grid {
+                padding: 0 24px;
+            }
+
+            .temp-badges {
+                flex-wrap: wrap;
+                gap: 6px;
+            }
+
+            .temp-badge {
+                padding: 6px 4px;
+                min-width: 0;
+            }
+
+            .temp-badge svg {
+                width: 40px;
+                height: 40px;
+            }
+
+            .temp-badge span {
+                font-size: 14px !important;
+                margin-left: 4px !important;
+            }
+
+            .tab-content.active {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                padding: 24px;
+            }
+
+            #contact {
+                padding: 40px 0 60px;
+            }
+
+            #contact .section-header {
+                margin-bottom: 24px;
+            }
+
+            .contact-methods {
+                flex-direction: column;
+                gap: 12px;
+                margin-top: 0;
+            }
+
+            .contact-method {
+                padding: 14px 20px;
+            }
+
+            .contact-icon {
+                width: 40px;
+                height: 40px;
+                min-width: 40px;
+                font-size: 20px;
+            }
+
+            .contact-value {
+                font-size: 16px;
+            }
+
+            footer {
+                padding: 24px 24px;
+            }
+
+            .footer-main {
+                flex-direction: column;
+                align-items: center;
+                text-align: center;
+                gap: 16px;
+            }
+
+            .footer-brand {
+                align-items: center;
+                text-align: center;
+            }
+
+            .footer-logo {
+                font-size: 20px;
+            }
+
+            .footer-tagline {
+                font-size: 12px;
+            }
+
+            .footer-locations {
+                font-size: 13px;
+            }
+
+            .cookie-notice {
+                padding: 16px;
+            }
+
+            .cookie-notice-content {
+                flex-direction: column;
+                gap: 16px;
+            }
+
+            .cookie-notice-text {
+                font-size: 13px;
+                text-align: center;
+            }
+
+            .cookie-notice-actions {
+                width: 100%;
+                flex-direction: column;
+            }
+
+            .cookie-notice-btn {
+                width: 100%;
+                padding: 14px 24px;
+            }
+
+            .location-amenities {
+                grid-template-columns: repeat(3, 1fr);
+                gap: 6px;
+            }
+
+            .amenity-item {
+                padding: 10px 6px;
+                gap: 6px;
+            }
+
+            .amenity-icon img {
+                max-height: 40px;
+            }
+
+            .amenity-icon svg {
+                max-height: 38px;
+            }
+
+            .amenity-label {
+                font-size: 9px;
+            }
+
+            .day-box {
+                padding: 8px 2px;
+            }
+
+            .day-name {
+                font-size: 8px;
+            }
+
+            .day-check {
+                font-size: 18px;
+            }
+
+            .days-row {
+                gap: 3px;
+            }
+
+            .digital-time {
+                padding: 6px 10px;
+                gap: 4px;
+            }
+
+            .time-display {
+                font-size: 14px;
+                letter-spacing: 0.5px;
+            }
+
+            .time-separator {
+                font-size: 12px;
+            }
+
+            .schedule-visual {
+                gap: 8px;
+            }
+
+            /* Mobile: Tabs optimization */
+            .instruction-tabs {
+                padding: 8px;
+                gap: 6px;
+                overflow-x: auto;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .tab-button {
+                padding: 10px 16px;
+                font-size: 14px;
+                min-width: max-content;
+                white-space: nowrap;
+            }
+
+            .tab-button span[style*="font-size: 40px"] {
+                font-size: 32px !important;
+                margin-right: 8px !important;
+            }
+
+            .tab-button img {
+                width: 32px !important;
+                height: 32px !important;
+                margin-right: 8px !important;
+            }
+
+            /* Mobile: Section headers */
+            #instructions .section-header {
+                margin-bottom: 24px;
+                padding: 0 24px;
+            }
+
+            #instructions .section-eyebrow {
+                font-size: 12px;
+                margin-bottom: 8px;
+            }
+
+            #instructions .section-title {
+                font-size: 28px;
+                margin-bottom: 12px;
+            }
+
+            #instructions .section-subtitle {
+                font-size: 16px;
+            }
+
+            /* Mobile: Video container */
+            .video-container {
+                border-radius: 12px;
+            }
+
+            /* Mobile: Instructions container */
+            .instructions-container {
+                padding: 0 24px;
+            }
+
+            /* Mobile: Instruction steps */
+            .instruction-number {
+                font-size: 28px;
+                min-width: 48px;
+                min-height: 48px;
+            }
+
+            .instruction-title {
+                font-size: 18px;
+            }
+
+            .instruction-description {
+                font-size: 14px;
+            }
+        }
+
+        /* Extra small screens */
+        @media (max-width: 380px) {
+            .hero-title {
+                font-size: 32px;
+            }
+
+            .section-title {
+                font-size: 28px;
+            }
+
+            #instructions .section-title {
+                font-size: 24px;
+            }
+
+            .tab-button {
+                padding: 8px 12px;
+                font-size: 13px;
+            }
+
+            .tab-button span[style*="font-size: 40px"],
+            .tab-button span[style*="font-size: 32px"] {
+                font-size: 28px !important;
+                margin-right: 6px !important;
+            }
+
+            .tab-button img {
+                width: 28px !important;
+                height: 28px !important;
+            }
+
+            .location-amenities {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .btn {
+                padding: 14px 24px;
+                font-size: 15px;
+            }
+        }
+
+        /* Chat Widget */
+        .chat-button {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
+            border: none;
+            color: white;
+            font-size: 28px;
+            cursor: pointer;
+            box-shadow: 0 4px 16px rgba(0, 152, 217, 0.4);
+            z-index: 999;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .chat-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(0, 152, 217, 0.6);
+        }
+
+        .chat-widget {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 380px;
+            height: 550px;
+            background: white;
+            border-radius: 16px;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+            z-index: 1000;
+            display: flex;
+            flex-direction: column;
+            opacity: 0;
+            transform: scale(0.8);
+            pointer-events: none;
+            transition: opacity 0.3s, transform 0.3s;
+        }
+
+        .chat-widget.active {
+            opacity: 1;
+            transform: scale(1);
+            pointer-events: all;
+        }
+
+        .chat-header {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
+            color: white;
+            padding: 20px;
+            border-radius: 16px 16px 0 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .chat-header-info h3 {
+            margin: 0;
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .chat-status {
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            opacity: 0.9;
+            margin-top: 4px;
+        }
+
+        .chat-status::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #4ade80;
+            border-radius: 50%;
+            margin-right: 6px;
+            animation: chatPulse 2s infinite;
+        }
+
+        @keyframes chatPulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.5; }
+        }
+
+        .close-chat {
+            background: none;
+            border: none;
+            color: white;
+            font-size: 32px;
+            cursor: pointer;
+            line-height: 1;
+            padding: 0;
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .close-chat:hover {
+            transform: rotate(90deg);
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 20px;
+            background: #f8f9fa;
+        }
+
+        .chat-message {
+            margin-bottom: 16px;
+            display: flex;
+        }
+
+        .chat-message.user {
+            justify-content: flex-end;
+        }
+
+        .chat-message.bot {
+            justify-content: flex-start;
+        }
+
+        .message-bubble {
+            max-width: 75%;
+            padding: 12px 16px;
+            border-radius: 12px;
+            position: relative;
+        }
+
+        .chat-message.user .message-bubble {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
+            color: white;
+            border-bottom-right-radius: 4px;
+        }
+
+        .chat-message.bot .message-bubble {
+            background: white;
+            color: #333;
+            border-bottom-left-radius: 4px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .message-bubble p {
+            margin: 0;
+            font-size: 0.95rem;
+            line-height: 1.4;
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 4px;
+            display: block;
+        }
+
+        .chat-input-container {
+            display: flex;
+            padding: 16px;
+            background: white;
+            border-top: 1px solid #e0e0e0;
+            border-radius: 0 0 16px 16px;
+        }
+
+        .chat-input {
+            flex: 1;
+            border: 1px solid #e0e0e0;
+            border-radius: 24px;
+            padding: 12px 16px;
+            font-size: 0.95rem;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        .chat-input:focus {
+            border-color: var(--primary-navy);
+        }
+
+        .send-button {
+            background: linear-gradient(135deg, var(--primary-blue), var(--primary-navy));
+            border: none;
+            color: white;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            margin-left: 8px;
+            cursor: pointer;
+            font-size: 18px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: transform 0.2s;
+        }
+
+        .send-button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Typing indicator */
+        .typing-indicator .message-bubble {
+            padding: 16px 20px;
+        }
+
+        .typing-dots {
+            display: flex;
+            gap: 4px;
+        }
+
+        .typing-dots span {
+            width: 8px;
+            height: 8px;
+            background: #999;
+            border-radius: 50%;
+            animation: chatTyping 1.4s infinite;
+        }
+
+        .typing-dots span:nth-child(2) {
+            animation-delay: 0.2s;
+        }
+
+        .typing-dots span:nth-child(3) {
+            animation-delay: 0.4s;
+        }
+
+        @keyframes chatTyping {
+            0%, 60%, 100% {
+                transform: translateY(0);
+                opacity: 0.7;
+            }
+            30% {
+                transform: translateY(-10px);
+                opacity: 1;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .chat-widget {
+                width: calc(100vw - 20px);
+                height: calc(100vh - 100px);
+                right: 10px;
+                bottom: 10px;
+            }
+
+            .chat-button {
+                right: 20px;
+                bottom: 20px;
+            }
+        }
+    </style>
+</head>
+<body data-lang="si">
+    <!-- HEADER -->
+    <header id="header">
+        <div class="header-container">
+            <div class="logo-area">
+                <img src="data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiBlbmNvZGluZz0iVVRGLTgiPz4NCjwhRE9DVFlQRSBzdmcgUFVCTElDICItLy9XM0MvL0RURCBTVkcgMS4xLy9FTiIgImh0dHA6Ly93d3cudzMub3JnL0dyYXBoaWNzL1NWRy8xLjEvRFREL3N2ZzExLmR0ZCI+DQo8IS0tIENyZWF0b3I6IENvcmVsRFJBVyAoRXZhbHVhdGlvbiBWZXJzaW9uKSAtLT4NCjxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB4bWw6c3BhY2U9InByZXNlcnZlIiB3aWR0aD0iNTA1LjAxM21tIiBoZWlnaHQ9IjUwNS4wMTNtbSIgdmVyc2lvbj0iMS4xIiBzdHlsZT0ic2hhcGUtcmVuZGVyaW5nOmdlb21ldHJpY1ByZWNpc2lvbjsgdGV4dC1yZW5kZXJpbmc6Z2VvbWV0cmljUHJlY2lzaW9uOyBpbWFnZS1yZW5kZXJpbmc6b3B0aW1pemVRdWFsaXR5OyBmaWxsLXJ1bGU6ZXZlbm9kZDsgY2xpcC1ydWxlOmV2ZW5vZGQiDQp2aWV3Qm94PSIwIDAgNDM3OS42NCA0Mzc5LjY0Ig0KIHhtbG5zOnhsaW5rPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5L3hsaW5rIg0KIHhtbG5zOnhvZG09Imh0dHA6Ly93d3cuY29yZWwuY29tL2NvcmVsZHJhdy9vZG0vMjAwMyI+DQogPGRlZnM+DQogIDxzdHlsZSB0eXBlPSJ0ZXh0L2NzcyI+DQogICA8IVtDREFUQVsNCiAgICAuZmlsNSB7ZmlsbDp3aGl0ZX0NCiAgICAuZmlsMyB7ZmlsbDojOEZEOEY4fQ0KICAgIC5maWwxIHtmaWxsOiMwMDk3REF9DQogICAgLmZpbDQge2ZpbGw6d2hpdGU7ZmlsbC1ydWxlOm5vbnplcm99DQogICAgLmZpbDAge2ZpbGw6IzFENTFBMjtmaWxsLXJ1bGU6bm9uemVyb30NCiAgICAuZmlsMiB7ZmlsbDp1cmwoI2lkMCl9DQogICBdXT4NCiAgPC9zdHlsZT4NCiAgPGxpbmVhckdyYWRpZW50IGlkPSJpZDAiIGdyYWRpZW50VW5pdHM9InVzZXJTcGFjZU9uVXNlIiB4MT0iMjc2Ni43IiB5MT0iNDIxMy43OCIgeDI9IjIwNjYuNTgiIHkyPSIxMTYxLjY3Ij4NCiAgIDxzdG9wIG9mZnNldD0iMCIgc3R5bGU9InN0b3Atb3BhY2l0eToxOyBzdG9wLWNvbG9yOiM0M0IwRTQiLz4NCiAgIDxzdG9wIG9mZnNldD0iMSIgc3R5bGU9InN0b3Atb3BhY2l0eToxOyBzdG9wLWNvbG9yOndoaXRlIi8+DQogIDwvbGluZWFyR3JhZGllbnQ+DQogPC9kZWZzPg0KIDxnIGlkPSJMYXllcl94MDAyMF8xIj4NCiAgPG1ldGFkYXRhIGlkPSJDb3JlbENvcnBJRF8wQ29yZWwtTGF5ZXIiLz4NCiAgPGcgaWQ9Il8zOTA4OTE3MjgiPg0KICAgPHBhdGggY2xhc3M9ImZpbDAiIGQ9Ik0yMTg5LjgyIDBjMTIwOS40LDAgMjE4OS44Miw5ODAuNDIgMjE4OS44MiwyMTg5LjgyIDAsMTIwOS40IC05ODAuNDIsMjE4OS44MiAtMjE4OS44MiwyMTg5LjgyIC0xMjA5LjQsMCAtMjE4OS44MiwtOTgwLjQyIC0yMTg5LjgyLC0yMTg5LjgyIDAsLTEyMDkuNCA5ODAuNDIsLTIxODkuODIgMjE4OS44MiwtMjE4OS44MnoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwxIiBkPSJNMjE4OS44MiA2MS40NGMxMTc1LjQ3LDAgMjEyOC4zOCw5NTIuOTIgMjEyOC4zOCwyMTI4LjM4IDAsMTE3NS40NyAtOTUyLjkxLDIxMjguMzggLTIxMjguMzgsMjEyOC4zOCAtMTE3NS40NiwwIC0yMTI4LjM4LC05NTIuOTEgLTIxMjguMzgsLTIxMjguMzggMCwtMTE3NS40NiA5NTIuOTIsLTIxMjguMzggMjEyOC4zOCwtMjEyOC4zOHoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwyIiBkPSJNMjE4OS44MiAyMTg5LjgybC0yMTI4LjM4IDBjMCwxMTc1LjQ3IDk1Mi45MiwyMTI4LjM4IDIxMjguMzgsMjEyOC4zOCAxMTc1LjQ3LDAgMjEyOC4zOCwtOTUyLjkxIDIxMjguMzgsLTIxMjguMzhsLTIxMjguMzggMHoiLz4NCiAgIDxwYXRoIGNsYXNzPSJmaWwzIiBkPSJNMjE4OS44MiA0MjYuNjVjOTczLjc3LDAgMTc2My4xNyw3ODkuNDEgMTc2My4xNywxNzYzLjE3IDAsOTczLjc3IC03ODkuNCwxNzYzLjE3IC0xNzYzLjE3LDE3NjMuMTcgLTk3My43NiwwIC0xNzYzLjE3LC03ODkuNCAtMTc2My4xNywtMTc2My4xNyAwLC05NzMuNzYgNzg5LjQxLC0xNzYzLjE3IDE3NjMuMTcsLTE3NjMuMTd6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsNCIgZD0iTTEyMTIuNTcgMTU2My40OWMwLDI1LjA0IC00LjY3LDQ3LjM5IC0xMy44Niw2Ny4wNiAtOS4zNCwxOS41MiAtMjIuMjEsMzYuMjIgLTM4LjYyLDQ5Ljk0IC0xNi40MSwxMy41OCAtMzUuOCwyMy45IC01OCwzMC44NCAtMjIuMzUsNi45MyAtNDYuMjYsMTAuMzIgLTcyLjAxLDEwLjMyIC0xNy45NiwwIC0zNC42NiwtMS41NSAtNDkuOTQsLTQuNTMgLTE1LjQyLC0zLjExIC0yOS4xNSwtNi45MyAtNDEuMTcsLTExLjMxIC0xMi4wMiwtNC4zOSAtMjIuMDcsLTkuMDYgLTMwLjI3LC0xMy43MyAtOC4wNiwtNC44MSAtMTMuODcsLTguNzcgLTE2Ljk3LC0xMi4xNyAtMy4yNSwtMy4yNSAtNS41MywtNy41IC03LjA4LC0xMi41OSAtMS41NSwtNS4xIC0yLjI2LC0xMS44OCAtMi4yNiwtMjAuMzcgMCwtNi4wOSAwLjI4LC0xMS4xOCAwLjg1LC0xNS4xNCAwLjU2LC0zLjk2IDEuNDEsLTcuMjEgMi40LC05LjYyIDEuMTMsLTIuNTQgMi41NCwtNC4yNCA0LjI1LC01LjIzIDEuNjksLTAuOTkgMy41MywtMS40MiA1LjgsLTEuNDIgMy44MiwwIDkuMzQsMi40MSAxNi40MSw3LjA4IDYuOTMsNC42NyAxNS45OSw5Ljc2IDI3LjE2LDE1LjI4IDExLjAzLDUuMzggMjQuMzMsMTAuNiA0MC4wMywxNS40MiAxNS41Niw0LjgxIDMzLjY3LDcuMjEgNTQuMDQsNy4yMSAxNS41NiwwIDI5LjcxLC0yLjEyIDQyLjU4LC02LjIyIDEyLjg4LC00LjEgMjMuOTEsLTkuOSAzMy4xLC0xNy41NCA5LjM0LC03LjUgMTYuNDEsLTE2Ljg0IDIxLjM3LC0yNy44NyA0Ljk1LC0xMS4wMyA3LjQ5LC0yMy42MiA3LjQ5LC0zNy42MyAwLC0xNS4xNCAtMy40LC0yOC4xNSAtMTAuMzIsLTM4LjkgLTYuOTMsLTEwLjc1IC0xNS45OSwtMjAuMjMgLTI3LjMsLTI4LjQ0IC0xMS40NiwtOC4wNiAtMjQuMzMsLTE1LjU2IC0zOC43NiwtMjIuMzUgLTE0LjU3LC02LjggLTI5LjQzLC0xMy41OSAtNDQuNTcsLTIwLjY2IC0xNS4xMywtNy4wOCAtMjkuOTksLTE0Ljg2IC00NC4yOCwtMjMuNDkgLTE0LjQzLC04LjQ4IC0yNy4zLC0xOC41MyAtMzguNjIsLTMwLjEzIC0xMS4zMSwtMTEuNiAtMjAuNTIsLTI1LjE4IC0yNy40NSwtNDAuODggLTcuMDcsLTE1LjU2IC0xMC42MSwtMzQuMjMgLTEwLjYxLC01Ni4wMiAwLC0yMi41IDQuMSwtNDIuNDQgMTIuMTcsLTU5Ljk5IDguMjEsLTE3LjM5IDE5LjUyLC0zMi4xMSAzMy45NSwtNDQgMTQuNTgsLTExLjg4IDMxLjgzLC0yMC45NCA1MS43OCwtMjcuMTYgMjAuMDksLTYuMjMgNDEuNTksLTkuMzQgNjQuNzksLTkuMzQgMTEuODksMCAyMy43NywwLjk5IDM1LjgsMy4xMSAxMi4wMywyLjEyIDIzLjM0LDQuODEgMzMuOTUsOC4zNSAxMC42LDMuMzkgMjAuMDksNy4zNSAyOC40NCwxMS42IDguMiw0LjI1IDEzLjcyLDcuNzggMTYuMjYsMTAuMzMgMi42OSwyLjY4IDQuMzksNC42NyA1LjI0LDYuMjIgMC44NSwxLjU2IDEuNDEsMy41MyAxLjk4LDUuOCAwLjU3LDIuNDEgMC45OSw1LjI0IDEuMjcsOC42MyAwLjI4LDMuMjUgMC40Myw3LjUgMC40MywxMi44OCAwLDQuOTUgLTAuMTUsOS4zNCAtMC41NywxMy4zIC0wLjQyLDMuODIgLTEuMTMsNy4wOCAtMS45OCw5Ljc2IC0wLjcsMi41NCAtMS45OCw0LjUzIC0zLjM5LDUuOCAtMS41NSwxLjI3IC0zLjI1LDEuODQgLTUuMjQsMS44NCAtMy4xMSwwIC03Ljc4LC0xLjk4IC0xNC4yOSwtNS44IC02LjUxLC0zLjk2IC0xNC40MywtOC4yMSAtMjMuOSwtMTMuMTYgLTkuMzQsLTQuODEgLTIwLjUyLC05LjIgLTMzLjM5LC0xMy4xNiAtMTIuNzMsLTQuMSAtMjcuMTYsLTYuMDkgLTQzLjI5LC02LjA5IC0xNC44NiwwIC0yNy44NywxLjk4IC0zOC45LDUuOTUgLTExLjA0LDQuMSAtMjAuMjQsOS4zMyAtMjcuNDUsMTUuOTggLTcuMDgsNi42NSAtMTIuNDUsMTQuNDMgLTE2LjEzLDIzLjQ4IC0zLjUzLDkuMiAtNS4zOCwxOC44MiAtNS4zOCwyOS4wMSAwLDE0Ljg1IDMuMzksMjcuNzMgMTAuMzIsMzguNDggNi45NCwxMC43NSAxNi4xMywyMC4yMyAyNy41OSwyOC41OCAxMS42LDguMzQgMjQuNjIsMTUuODQgMzkuMzMsMjIuNzggMTQuNTcsNi45MyAyOS41NywxMy44NiA0NC44NSwyMC45NCAxNS4xNCw3LjA3IDMwLjEzLDE0LjcxIDQ0LjcxLDIzLjIgMTQuNzEsOC4zNCAyNy43MywxOC4zOSAzOS4zMiwyOS44NSAxMS40NiwxMS40NiAyMC42NiwyNC45IDI3LjczLDQwLjYgNy4wNywxNS41NiAxMC42MSwzMy45NSAxMC42MSw1NS4zMXptNzE3LjY3IDEzOS43N2MwLDIuMjYgLTAuNTYsNC4yNSAtMS42OSw1LjggLTEuMTMsMS43IC0zLjExLDIuOTcgLTUuOTUsMy45NiAtMi44MiwwLjk5IC02LjUxLDEuODQgLTEwLjg5LDIuNTQgLTQuMzksMC43MSAtMTAuMTgsMC45OSAtMTcuMjUsMC45OSAtNi42NSwwIC0xMi4zMSwtMC4yOCAtMTYuOTgsLTAuOTkgLTQuNjcsLTAuNyAtOC4zNCwtMS41NSAtMTEuMDMsLTIuNTQgLTIuNjgsLTAuOTkgLTQuNjcsLTIuMjYgLTUuOCwtMy45NiAtMS4xMywtMS41NSAtMS43LC0zLjUzIC0xLjcsLTUuOGwwIC00NjcuMjcgLTAuODQgMCAtMTg4Ljg2IDQ2OS4zOWMtMC43MSwxLjk4IC0xLjk4LDMuNTMgLTMuMzksNC45NiAtMS41NiwxLjQxIC0zLjgyLDIuNTQgLTYuNjUsMy41MyAtMi45NywwLjk5IC02LjM3LDEuNjkgLTEwLjQ3LDIuMTIgLTMuOTYsMC40MiAtOC43NywwLjU2IC0xNC4yOSwwLjU2IC01LjgsMCAtMTAuNzUsLTAuMjggLTE0Ljg1LC0wLjg0IC00LjEsLTAuNTcgLTcuNjQsLTEuMjggLTEwLjMzLC0yLjI3IC0yLjgyLC0wLjk4IC00Ljk1LC0yLjEyIC02LjUxLC0zLjUzIC0xLjQxLC0xLjQxIC0yLjU0LC0yLjgzIC0zLjExLC00LjUzbC0xODAuOCAtNDY5LjM5IC0wLjQyIDAgMCA0NjcuMjdjMCwyLjI2IC0wLjU3LDQuMjUgLTEuNyw1LjggLTEuMTMsMS43IC0zLjExLDIuOTcgLTUuOTQsMy45NiAtMi44MywwLjk5IC02LjY1LDEuODQgLTExLjE4LDIuNTQgLTQuNTMsMC43MSAtMTAuMzMsMC45OSAtMTcuNCwwLjk5IC02Ljk0LDAgLTEyLjU5LC0wLjI4IC0xNy4xMiwtMC45OSAtNC41MywtMC43IC04LjIsLTEuNTUgLTEwLjg5LC0yLjU0IC0yLjY4LC0wLjk5IC00LjUzLC0yLjI2IC01LjUyLC0zLjk2IC0wLjk5LC0xLjU1IC0xLjU1LC0zLjUzIC0xLjU1LC01LjhsMCAtNDkzLjNjMCwtMTEuNzQgMy4xMSwtMTkuOTUgOS4xOSwtMjQuOSA2LjIzLC00Ljk2IDEzLjE2LC03LjUgMjAuNjYsLTcuNWw0My44NiAwYzguOTEsMCAxNi44MywwLjg1IDIzLjQ4LDIuNTQgNi43OSwxLjU2IDEyLjU5LDQuMjUgMTcuNjgsNy43OCA1LjEsMy42OCA5LjM0LDguMjEgMTIuNTksMTMuNzMgMy40LDUuNTIgNi4zNywxMi4wMyA4LjkxLDE5LjUybDE1My40OSAzODguNDcgMi4xMiAwIDE1OS4yOSAtMzg3LjM0YzMuMTEsLTguMjEgNi41MSwtMTUuMjggMTAuMTksLTIxLjA4IDMuNjgsLTUuODEgNy42NCwtMTAuNDcgMTIuMDIsLTEzLjg3IDQuMjUsLTMuNTQgOS4yLC01Ljk0IDE0LjQ0LC03LjUgNS4zOCwtMS41NSAxMS42LC0yLjI2IDE4LjUzLC0yLjI2bDQ1Ljk4IDBjNC4xLDAgOC4yMSwwLjU3IDEyLjAzLDEuODQgMy42OCwxLjI3IDYuOTQsMy4yNSA5LjYyLDUuOCAyLjY4LDIuNjggNC44MSw1Ljk0IDYuNTEsMTAuMDQgMS42OSwzLjk2IDIuNTQsOC45MSAyLjU0LDE0LjcybDAgNDkzLjN6bTU3Ny4zMyAtMTQuNDNjMi4xMiw2LjA5IDMuNCwxMC44OSAzLjU0LDE0LjcxIDAuMTQsMy42OCAtMC45OSw2LjUxIC0zLjExLDguNDkgLTIuMjcsMS44NCAtNS45NSwzLjExIC0xMS4wNCwzLjY4IC01LjA5LDAuNTYgLTExLjg4LDAuODQgLTIwLjUxLDAuODQgLTguNDksMCAtMTUuNDIsLTAuMTQgLTIwLjUyLC0wLjU2IC01LjA5LC0wLjQzIC04LjkxLC0xLjEzIC0xMS42LC0yLjEyIC0yLjY5LC0wLjk5IC00LjUzLC0yLjI2IC01LjgxLC0zLjk2IC0xLjI3LC0xLjY5IC0yLjQsLTMuNjggLTMuNTMsLTYuMjJsLTQ1Ljk4IC0xMzAuNTggLTIyMi45NSAwIC00NCAxMjguODhjLTAuODUsMi41NCAtMS44NCw0LjY3IC0zLjI1LDYuNTEgLTEuNDIsMS44NCAtMy40LDMuMjUgLTYuMDksNC41MyAtMi41NCwxLjI3IC02LjM3LDIuMTIgLTExLjE4LDIuNjkgLTQuODEsMC41NiAtMTEuMDMsMC44NCAtMTguODEsMC44NCAtOC4wNywwIC0xNC41OCwtMC4yOCAtMTkuNjYsLTAuOTkgLTUuMSwtMC43IC04Ljc3LC0xLjk3IC0xMC43NSwtMy45NiAtMi4xMiwtMS45OCAtMy4xMSwtNC44MSAtMi45NywtOC40OSAwLjE1LC0zLjgyIDEuMjgsLTguNjMgMy41NCwtMTQuNzFsMTc5LjggLTQ5OC40YzEuMTMsLTMuMTEgMi42OSwtNS42NiA0LjM5LC03LjQ5IDEuODQsLTEuOTggNC4zOSwtMy41NCA3LjkyLC00LjUzIDMuMzksLTEuMTMgNy43OCwtMS45NyAxMy4zLC0yLjQgNS4zOCwtMC40MiAxMi4xNywtMC41NiAyMC41MiwtMC41NiA4Ljc3LDAgMTYuMTMsMC4xNCAyMS45MywwLjU2IDUuOCwwLjQzIDEwLjQ3LDEuMjcgMTQuMDEsMi40IDMuNjgsMC45OSA2LjM3LDIuNjkgOC4zNCw0LjY3IDEuOTgsMi4xMiAzLjU0LDQuNjcgNC41Myw3LjY0bDE3OS45NSA0OTguNTN6bS0yMzAuODggLTQzOS45N2wtMC40MiAwIC05Mi4zOCAyNjcuMzcgMTg2LjQ1IDAgLTkzLjY1IC0yNjcuMzd6bTcxMS4zMSA0NTQuMzljMCwyLjI2IC0wLjQyLDQuMSAtMS4yNyw1LjggLTAuODUsMS43IC0yLjU0LDMuMTEgLTUuMzgsNC4yNSAtMi42OCwwLjk5IC02LjY1LDEuODQgLTExLjYsMi40MSAtNC45NiwwLjU2IC0xMS42LDAuODQgLTE5LjgxLDAuODQgLTcuMjIsMCAtMTMuMTYsLTAuMjggLTE3LjY4LC0wLjg0IC00LjUzLC0wLjU3IC04LjIxLC0xLjQyIC0xMS4wMywtMi42OSAtMi42OSwtMS4yNyAtNC44MSwtMi45NyAtNi4zNywtNS4yNCAtMS41NiwtMi4xMiAtMi44MywtNC45NSAtMy45NiwtOC4ybC00OS4yMyAtMTI2LjYxYy01LjgsLTE0LjQzIC0xMS44OCwtMjcuNTggLTE4LjEsLTM5LjYxIC02LjIzLC0xMi4wMyAtMTMuNTgsLTIyLjM2IC0yMi4yMSwtMzEuMTMgLTguNDksLTguNzcgLTE4LjY3LC0xNS40MiAtMzAuMjgsLTIwLjM3IC0xMS42LC00LjgxIC0yNS42LC03LjIyIC00MS44NywtNy4yMmwtNDcuNjcgMCAwIDIyOC42MWMwLDIuMjYgLTAuNTcsNC4xIC0xLjg0LDUuOCAtMS4yNywxLjcgLTMuMjUsMi45NyAtNS44LDMuOTYgLTIuNjksMC45OSAtNi4yMywxLjg0IC0xMC43NSwyLjU0IC00LjY3LDAuNzEgLTEwLjMyLDAuOTkgLTE3LjI2LDAuOTkgLTYuOTMsMCAtMTIuNTksLTAuMjggLTE3LjI1LC0wLjk5IC00LjUzLC0wLjcgLTguMjEsLTEuNTUgLTEwLjg5LC0yLjU0IC0yLjgzLC0wLjk5IC00LjY3LC0yLjI2IC01LjgxLC0zLjk2IC0xLjEzLC0xLjU1IC0xLjY5LC0zLjUzIC0xLjY5LC01LjhsMCAtNDk2LjdjMCwtMTAuNzUgMi44MiwtMTguMjQgOC40OSwtMjIuNjMgNS42NiwtNC4yNSAxMS43NCwtNi4zNyAxOC4xLC02LjM3bDExNC4wMyAwYzEzLjU4LDAgMjQuNzUsMC4yOCAzMy44MSwwLjk5IDguOTIsMC43MSAxNi45OCwxLjU1IDI0LjE5LDIuMjYgMjAuOCwzLjY4IDM5LjA1LDkuMzQgNTUuMDQsMTYuOTcgMTUuODQsNy43OSAyOS4xNCwxNy41NCAzOS44OSwyOS40MyAxMC44OSwxMS44OCAxOC45NiwyNS40NiAyNC4zMyw0MC44OCA1LjM4LDE1LjI4IDguMDYsMzIuMjYgOC4wNiw1MC43OSAwLDE3LjgyIC0yLjQsMzMuOTUgLTcuMjEsNDguMjQgLTQuOTYsMTQuMTQgLTExLjg5LDI2Ljc0IC0yMC45NCwzNy42MyAtOS4yLDEwLjg5IC0yMC4wOSwyMC4zNyAtMzIuODIsMjguNDQgLTEyLjc0LDcuOTIgLTI2Ljg4LDE0LjcxIC00Mi43MywyMC4yMyA4LjkxLDMuOTYgMTYuODMsOC43NyAyNC4wNSwxNC43MSA3LjIxLDUuOTUgMTMuODYsMTMuMTYgMjAuMDksMjEuMzcgNi4yMyw4LjM0IDEyLjE3LDE3Ljk2IDE3LjY4LDI4LjcyIDUuNTIsMTAuNzUgMTEuMDMsMjIuOTIgMTYuNTUsMzYuNWw0OC4xIDExOC4yN2MzLjgyLDkuOSA2LjM3LDE2Ljk3IDcuMzYsMjAuOTQgMS4xMywzLjk2IDEuNjksNy4wNyAxLjY5LDkuMzN6bS0xMDcuMzcgLTM3Ny4xNWMwLC0yMC45NCAtNC42NywtMzguNzYgLTE0LjE1LC01My4zMyAtOS4zNCwtMTQuNDMgLTI1LjA0LC0yNC45IC00Ny4yNSwtMzEuMjcgLTYuOTQsLTEuOTggLTE0LjcyLC0zLjI1IC0yMy4zNCwtNC4xIC04Ljc3LC0wLjg1IC0yMC4wOSwtMS4yOCAtMzQuMjQsLTEuMjhsLTYwLjEyIDAgMCAxODAuOCA2OS42IDBjMTguODEsMCAzNS4wOSwtMi4yNiA0OC44LC02Ljc5IDEzLjU5LC00LjY3IDI1LjA0LC0xMS4wMyAzNC4wOSwtMTkuMSA5LjIsLTguMiAxNS44NSwtMTcuODIgMjAuMjMsLTI4Ljg2IDQuMjUsLTExLjAzIDYuMzcsLTIzLjA2IDYuMzcsLTM2LjA4em01NzEuNTMgLTExNy45OGMwLDUuMjQgLTAuMjksOS43NiAtMC44NSwxMy41OCAtMC41NywzLjgyIC0xLjQyLDYuOTQgLTIuNjksOS4zNCAtMS4yNywyLjI2IC0yLjY4LDQuMSAtNC41Myw1LjA5IC0xLjgzLDEuMTMgLTMuODIsMS43IC01Ljk0LDEuN2wtMTUwLjY2IDAgMCA0NjUuNDNjMCwyLjI2IC0wLjU3LDQuMSAtMS43LDUuOCAtMS4xMywxLjcgLTIuOTcsMi45NyAtNS44LDMuOTYgLTIuNjgsMC45OSAtNi4zNywxLjg0IC0xMC44OSwyLjU0IC00LjY3LDAuNzEgLTEwLjMyLDAuOTkgLTE3LjI2LDAuOTkgLTYuNjUsMCAtMTIuMzEsLTAuMjggLTE2Ljk3LC0wLjk5IC00LjY3LC0wLjcgLTguNDksLTEuNTUgLTExLjE4LC0yLjU0IC0yLjgzLC0wLjk5IC00LjY3LC0yLjI2IC01LjgxLC0zLjk2IC0xLjEzLC0xLjY5IC0xLjY5LC0zLjUzIC0xLjY5LC01LjhsMCAtNDY1LjQzIC0xNTAuNjYgMGMtMi4xMiwwIC00LjEsLTAuNTcgLTUuOTQsLTEuNyAtMS44NCwtMC45OSAtMy4yNSwtMi44MyAtNC4zOSwtNS4wOSAtMC45OSwtMi40IC0xLjk4LC01LjUyIC0yLjY5LC05LjM0IC0wLjcxLC0zLjgyIC0wLjk5LC04LjM0IC0wLjk5LC0xMy41OCAwLC01LjI0IDAuMjgsLTkuOSAwLjk5LC0xMy44NyAwLjcxLC0zLjk2IDEuNywtNy4yMSAyLjY5LC05LjYxIDEuMTMsLTIuNTUgMi41NCwtNC4zOSA0LjM5LC01LjM4IDEuODMsLTEuMTMgMy44MiwtMS43IDUuOTQsLTEuN2wzNzIuNjMgMGMyLjEyLDAgNC4xLDAuNTcgNS45NCwxLjcgMS44NCwwLjk5IDMuMjUsMi44MyA0LjUzLDUuMzggMS4yNywyLjQgMi4xMiw1LjY2IDIuNjksOS42MSAwLjU2LDMuOTYgMC44NSw4LjYzIDAuODUsMTMuODd6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsMCIgZD0iTTExMjQuNDEgMjYxMC4yMmwtNjQuMTcgMjQ3LjUzYy00LjM3LDE1LjcyIC05LjM5LDI1LjMzIC0xNS4wNiwyOC44MiAtNS42OCwzLjQ5IC0xNi4zNyw1LjI0IC0zMi4wOSw1LjI0bC0xNDQuMDYgMGMtMTQuODUsMCAtMjUuOTgsLTMuNDkgLTMzLjQsLTEwLjQ3IC03LjQxLC02Ljk5IC0xMi40NSwtMTQuODUgLTE1LjA2LC0yMy41OGwtMTkxLjIyIC04MzYuOWMtMS43NSwtOC43MyAtMi42MSwtMTYuMTUgLTIuNjEsLTIyLjI2IDAsLTE1LjcyIDkuMTYsLTIzLjU4IDI3LjUxLC0yMy41OGwxMzcuNTEgMGMxMS4zNSwwIDIwLjA4LDMuOTQgMjYuMTksMTEuNzggNi4xMSw3Ljg2IDEwLjA0LDE1LjcyIDExLjc4LDIzLjU4bDEyMS44IDU2My4xN2MwLjg4LDMuNDkgMS43NCw2Ljk4IDIuNjIsMTAuNDcgMC44NywzLjQ5IDIuNjEsNy40MyA1LjI0LDExLjc4IDEuNzQsMCAzLjQ5LC0yLjYxIDUuMjQsLTcuODYgMS43NSwtNS4yNCAzLjA2LC05LjU5IDMuOTQsLTEzLjFsNjUuNDggLTI4Ni44MmMxLjc1LC02LjEgMi42MSwtMTQuNCAyLjYxLC0yNC44OCAwLC04LjczIC0yLjE4LC0yMy4xNCAtNi41NSwtNDMuMjFsLTQ1Ljg0IC0xOTkuMDhjLTEuNzQsLTYuOTggLTIuNjEsLTEzLjEgLTIuNjEsLTE4LjMzIDAsLTE4LjMzIDkuMTYsLTI3LjUgMjcuNTEsLTI3LjVsMTM3LjUxIDBjMTQuODQsMCAyNC44OCwzLjQ5IDMwLjEzLDEwLjQ4IDIuNjEsMy40OSA1LjI0LDEyLjIyIDcuODUsMjYuMTlsMTAzLjQ3IDQ5OC45OWMwLjg3LDMuNDkgMS43NSw2LjEyIDIuNjEsNy44NiAwLjg4LDEuNzUgMi4xOSwzLjA2IDMuOTQsMy45MiA0LjM3LC00LjM2IDYuNTUsLTguMjkgNi41NSwtMTEuNzhsMTUuNzIgLTc5Ljg5IDEwMC44NCAtNDIwLjQxYzMuNSwtMTUuNzIgNy42NCwtMjUuNTQgMTIuNDUsLTI5LjQ3IDQuOCwtMy45NCAxMi44OCwtNS45IDI0LjIzLC01LjlsMTM2LjIxIDBjMTguMzMsMCAyNy40OSw4LjI5IDI3LjQ5LDI0Ljg4IDAsMi42MiAtMC44Nyw5LjE3IC0yLjYxLDE5LjY2bC0yMDEuNyA4MjkuMDJjLTQuMzcsMTcuNDcgLTkuODIsMjkuMDMgLTE2LjM3LDM0LjcyIC02LjU1LDUuNjcgLTE1LjUsOC41MSAtMjYuODUsOC41MWwtMTQ1LjM3IDBjLTExLjM1LDAgLTIwLjUxLC00LjM3IC0yNy41MSwtMTMuMSAtMy40OSwtNC4zNyAtNi41NSwtMTEuMzUgLTkuMTYsLTIwLjk2bC02NC4xOCAtMjQ3LjUzem03NTcgLTYzNS4ybDE2NS4wMiAwYzExLjM1LDAgMjAuMjksMi4xOSAyNi44NCw2LjU1IDYuNTUsNC4zNyAxMi4wMSwxNC40MSAxNi4zNywzMC4xM2wyMTIuMTggODQwLjgyYzEuNzUsNS4yNCAyLjYxLDEwLjkyIDIuNjEsMTcuMDIgMCwxNC44NCAtOS42MSwyMi4yNyAtMjguODEsMjIuMjdsLTEyOC4zNSAwYy0xMy4xLDAgLTIyLjQ5LC0zLjQ5IC0yOC4xNSwtMTAuNDcgLTUuNjgsLTYuOTkgLTkuODMsLTE1LjcyIC0xMi40NSwtMjYuMjFsLTI2LjE5IC05OS41NGMtMy40OSwtMTMuMSAtMTIuMjMsLTE5LjY0IC0yNi4xOSwtMTkuNjRsLTE3OS40MyAwYy0xNC44NSwwIC0yMy41OCw2LjU1IC0yNi4yMSwxOS42NGwtMjQuODggMTAzLjQ3Yy0xLjc0LDguNzMgLTUuNDUsMTYuMzcgLTExLjEzLDIyLjkyIC01LjY3LDYuNTUgLTE0LjYzLDkuODIgLTI2Ljg0LDkuODJsLTEyNy4wNCAwYy0xNi41OSwwIC0yNC44OCwtOC4yOSAtMjQuODgsLTI0Ljg4IDAsLTIuNjIgMCwtNS4yNCAwLC03Ljg2IDEuNzQsLTMuNDkgMi42MSwtNS42OCAyLjYxLC02LjU1bDIwMS43IC04NDAuODJjMy40OSwtMTUuNzIgOC41MSwtMjUuNzYgMTUuMDYsLTMwLjEzIDYuNTUsLTQuMzYgMTUuOTQsLTYuNTUgMjguMTcsLTYuNTV6bTQ5Ny42OCA4NjUuNzFsMCAtMTE3Ljg4YzAsLTEwLjQ3IDMuMDYsLTE3LjY4IDkuMTcsLTIxLjYxIDYuMzMsLTMuOTIgMTIuNDMsLTUuOSAxOC41NSwtNS45IDYuOTksMCAxNS4yOSwxLjMxIDI0LjQ1LDMuOTQgOS4xNywyLjYxIDE1Ljk0LDQuMzYgMjAuNTIsNS4yNCAxNC44NCw0LjM3IDM3LjMzLDguNzMgNjcuMjMsMTMuMSAyOS45LDQuMzcgNTMuNyw2LjU1IDcxLjM4LDYuNTUgMzguNjQsMCA2OS4xOSwtOC4wOCA5MS42OCwtMjQuMjMgMjIuNDgsLTE2LjE1IDMzLjYyLC0zOC4xOSAzMy42MiwtNjYuMTMgMCwtNDEuMDUgLTI1LjMzLC03OS40NiAtNzUuOTcsLTExNS4yNiAtMzYuNjYsLTIzLjU4IC02My43NCwtNDEuMDMgLTgxLjIsLTUyLjM5IC02NC42LC00Mi43OSAtMTA4LjcsLTc5LjAyIC0xMzIuMjgsLTEwOC43MSAtMzEuNDMsLTM5LjI5IC00Ny4xNSwtODguMTggLTQ3LjE1LC0xNDYuNjggMCwtODAuMzIgMjcuMDcsLTE0MS40NSA4MS4yLC0xODMuMzYgNTQuMTMsLTQxLjkgMTI3LjQ3LC02Mi44NiAyMjAuMDMsLTYyLjg2IDQwLjE3LDAgNzkuODksMy40OSAxMTkuMTgsMTAuNDcgNTkuMzgsMTAuNDggODkuMDYsMjUuNzYgODkuMDYsNDUuODRsMCAxMTcuODhjMCwzLjQ5IDAsNi41NSAwLDkuMTYgLTIuNjIsMTAuNDggLTEwLjA0LDE1LjcyIC0yMi4yNywxNS43MmwtNjIuODYgLTExLjc4Yy0zNS44LC02Ljk5IC01OC4yOCwtMTEuMTMgLTY3LjQ2LC0xMi40NSAtOS4xNiwtMS4zMSAtMjIuOTIsLTEuOTYgLTQxLjI1LC0xLjk2IC0zNS44LDAgLTYxLjc3LDUuNjcgLTc3LjkzLDE3LjAyIC0xNi4xNSwxMS4zNSAtMjQuMjMsMjUuMzMgLTI0LjIzLDQxLjkxIDAsMjkuNjggNDkuMzQsNzYuNCAxNDgsMTQwLjE0IDU3LjYyLDM4LjQyIDk5LjU0LDc0LjY1IDEyNS43MywxMDguNzEgNDEuOTEsNTQuMTMgNjIuODcsMTE3Ljg3IDYyLjg3LDE5MS4yMSAwLDgyLjA4IC0yOC44MiwxNDYuOSAtODYuMjIsMTk0LjUgLTU3LjQsNDcuNTggLTEzNi4yMSw3MS4zNyAtMjM2LjE4LDcxLjM3IC0zMi41MiwwIC02OS40MiwtMi40IC0xMTAuNDUsLTcuMiAtNDEuMjUsLTQuOCAtNzEuNiwtMTEuMTMgLTkwLjgxLC0xOSAtMTEuNTcsLTQuMzYgLTE4Ljc3LC05LjYxIC0yMS44MiwtMTUuNzEgLTMuMDYsLTYuMTEgLTQuNTksLTEyLjY2IC00LjU5LC0xOS42NHptNzEzLjc4IC04NjUuNzFsMTAyLjE2IDBjMjAuMDgsMCAzMi43NCwzLjcxIDM3Ljk4LDExLjEzIDUuMjUsNy40MyA3Ljg2LDE5IDcuODYsMzQuN2wwIDI1Mi43OGMwLDcuODUgMS4xLDEzLjk2IDMuMjcsMTguMzMgMi4xOSw0LjM2IDcuNjQsNi41NSAxNi4zNyw2LjU1bDE0Mi43NiAwYzQuMzcsMCA3LjQxLC0wLjQzIDkuMTYsLTEuMzEgNy44NiwtNC4zNyAxMS44LC0xMy4xIDExLjgsLTI2LjE5bDAgLTI1MC4xNmMwLC0xNS43MSAxLjc1LC0yNi4xOSA1LjI0LC0zMS40MyA2Ljk4LC05LjYxIDIwLjUyLC0xNC40MSA0MC42LC0xNC40MWwxMDIuMTYgMGMyMC4wOCwwIDMyLjc0LDMuNzEgMzcuOTgsMTEuMTMgNS4yNCw3LjQzIDcuODYsMTkgNy44NiwzNC43bDAgODI1LjExYzAsMTUuNzIgLTEuNzUsMjYuMTkgLTUuMjUsMzEuNDMgLTYuOTgsOS42MSAtMjAuNTEsMTQuNDEgLTQwLjU5LDE0LjQxbC0xMDIuMTYgMGMtMjAuMDgsMCAtMzIuNzQsLTMuNzEgLTM3Ljk4LC0xMS4xNCAtNS4yNSwtNy40MSAtNy44NiwtMTguOTggLTcuODYsLTM0LjdsMCAtMzQzLjE0YzAsLTEzLjk2IC02Ljk5LC0yMC45NiAtMjAuOTYsLTIwLjk2bC0xNDIuNzYgMGMtMTMuMSwwIC0xOS42NCw2LjU1IC0xOS42NCwxOS42NGwwIDM0NC40NmMwLDIwLjA4IC0zLjcxLDMyLjc0IC0xMS4xMywzNy45OCAtNy40MSw1LjI0IC0xOC45OCw3Ljg2IC0zNC43LDcuODZsLTEwMi4xNiAwYy0xNS43MSwwIC0yNi4xOSwtMS43NSAtMzEuNDMsLTUuMjQgLTkuNjEsLTYuOTkgLTE0LjQxLC0yMC41MiAtMTQuNDEsLTQwLjZsMCAtODI1LjExYzAsLTE1LjcxIDEuNzQsLTI2LjE5IDUuMjQsLTMxLjQzIDYuOTksLTkuNjEgMjAuNTIsLTE0LjQxIDQwLjYsLTE0LjQxeiIvPg0KICAgPHBhdGggY2xhc3M9ImZpbDMiIGQ9Ik0xOTYxLjgyIDIyMzEuM2M1Ny40OSw4My44OSAxOTEuOTYsMjIxLjg5IDkzLjEsMzIwLjc1IC01MS40MSw1MS40MSAtMTM0LjgsNTEuNDEgLTE4Ni4yMSwwIC0xMDAuMjUsLTEwMC4yNSAzNS4zOCwtMjM3LjMzIDkzLjExLC0zMjAuNzV6Ii8+DQogICA8cGF0aCBjbGFzcz0iZmlsNSIgZD0iTTIwMzIuMjQgMjQzNS44OWM3LjU3LDEuMDggNy4wNiwxLjAxIDE0LjYzLDIuMDkgMi4zNiwwLjM0IDMuMzIsMy44OCAzLjkyLDcuNTkgMTQuMTMsODUuNzUgLTM1LjQ2LDU1LjAxIC0zMS45MSw0NC4yIDQuODQsLTE0LjczIDExLjc3LC0zMC4wMSA4LjY4LC00Ny41MiAtMC42NSwtMy42OCAyLjMxLC02LjcgNC42OCwtNi4zN3oiLz4NCiAgPC9nPg0KIDwvZz4NCjwvc3ZnPg0K" alt="Smart Wash Logo" class="logo-image">
+                <div class="logo-text-wrapper">
+                    <div class="logo-text">
+                        <span class="lang-si">Samopostrežne pralnice<br><span class="logo-text-light">v Ljubljani</span></span>
+                        <span class="lang-en">Self-service laundromats<br><span class="logo-text-light">in Ljubljana</span></span>
+                    </div>
+                </div>
+            </div>
+            
+            <nav>
+                <a href="#services"><span class="lang-si">Storitve in Cenik</span><span class="lang-en">Services & Pricing</span></a>
+                <a href="#locations"><span class="lang-si">Lokacije</span><span class="lang-en">Locations</span></a>
+                <a href="#instructions"><span class="lang-si">Navodila</span><span class="lang-en">Instructions</span></a>
+                <a href="#contact"><span class="lang-si">Kontakt</span><span class="lang-en">Contact</span></a>
+            </nav>
+
+            <div class="nav-right">
+                <div class="lang-switcher">
+                    <button class="lang-btn active" data-lang="si">SL</button>
+                    <button class="lang-btn" data-lang="en">EN</button>
+                </div>
+            </div>
+
+            <!-- Mobile Menu Button -->
+            <button class="mobile-menu-btn" onclick="toggleMobileMenu()">
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </button>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="mobile-menu" id="mobileMenu">
+            <nav>
+                <a href="#services" onclick="toggleMobileMenu()"><span class="lang-si">Storitve in Cenik</span><span class="lang-en">Services & Pricing</span></a>
+                <a href="#locations" onclick="toggleMobileMenu()"><span class="lang-si">Lokacije</span><span class="lang-en">Locations</span></a>
+                <a href="#instructions" onclick="toggleMobileMenu()"><span class="lang-si">Navodila</span><span class="lang-en">Instructions</span></a>
+                <a href="#contact" onclick="toggleMobileMenu()"><span class="lang-si">Kontakt</span><span class="lang-en">Contact</span></a>
+            </nav>
+            <div class="mobile-lang-switcher">
+                <button class="lang-btn active" data-lang="si" onclick="switchLanguage('si')">Slovenščina</button>
+                <button class="lang-btn" data-lang="en" onclick="switchLanguage('en')">English</button>
+            </div>
+        </div>
+    </header>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+        <div class="hero-bg-shape shape-1"></div>
+        <div class="hero-bg-shape shape-2"></div>
+        <div class="hero-bg-shape shape-3"></div>
+
+        <div class="hero-container">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="lang-si">Operi in posuši<br>v <span class="hero-title-highlight">dobri uri</span><sup>*</sup></span>
+                    <span class="lang-en">Wash and dry<br>in <span class="hero-title-highlight">just an hour</span><sup>*</sup></span>
+                </h1>
+
+                <p class="hero-subtitle">
+                    <span class="lang-si">Samopostrežna pralnica s profesionalnimi stroji. Detergent vključen, parking brezplačen, rezultat odličen.</span>
+                    <span class="lang-en">Self-service laundromat with professional machines. Detergent included, free parking, excellent results.</span>
+                </p>
+
+                <div class="hero-footnote">
+                    <span class="lang-si"><sup>*</sup>Za manjše količine do 3-4 kg običajnega perila (srajce, majice, hlače). Dejansko trajanje je odvisno od količine in vrste perila.</span>
+                    <span class="lang-en"><sup>*</sup>For small loads up to 3-4 kg of regular laundry (shirts, t-shirts, pants). Actual duration depends on load size and fabric type.</span>
+                </div>
+
+                <div class="hero-cta">
+                    <a href="#locations" class="btn btn-primary">
+                        📍 <span class="lang-si">Najdi pralnico</span><span class="lang-en">Find location</span>
+                    </a>
+                    <a href="#services" class="btn btn-secondary">
+                        <span class="lang-si">Poglej cene</span><span class="lang-en">View pricing</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="hero-visual">
+                <div class="hero-card">
+                    <div class="price-tag">
+                        <div class="price-tag-line">
+                            <span class="lang-si">Pranje - od 5€</span>
+                            <span class="lang-en">Wash - from 5€</span>
+                        </div>
+                        <div class="price-tag-line">
+                            <span class="lang-si">Sušenje - od 2€</span>
+                            <span class="lang-en">Dry - from 2€</span>
+                        </div>
+                    </div>
+
+                    <h3 class="hero-card-title">
+                        <span class="lang-si">Kako deluje?</span>
+                        <span class="lang-en">How it works?</span>
+                    </h3>
+                    
+                    <div class="hero-card-features">
+                        <div class="feature-item">
+                            <div class="feature-check">1</div>
+                            <span class="lang-si">Kupi žetone v menjalniku</span>
+                            <span class="lang-en">Buy tokens at the exchanger</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">2</div>
+                            <span class="lang-si">Izberi stroj in program</span>
+                            <span class="lang-en">Choose machine and program</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">3</div>
+                            <span class="lang-si">Vstavi potrebno število žetonov</span>
+                            <span class="lang-en">Insert required number of tokens</span>
+                        </div>
+                        <div class="feature-item">
+                            <div class="feature-check">✓</div>
+                            <span class="lang-si">Oprano in posušeno v 1 uri</span>
+                            <span class="lang-en">Washed and dried in 1 hour</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- SERVICES / PRICING -->
+    <section id="services">
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="lang-si">Storitve in Cenik</span>
+                <span class="lang-en">Services & Pricing</span>
+            </h2>
+        </div>
+
+        <div class="token-info-grid">
+            <!-- Column 1: Token System Explanation -->
+            <div class="token-info-column">
+                <div class="token-column-title">
+                    <span class="lang-si">Sistem žetonov</span>
+                    <span class="lang-en">Token System</span>
+                </div>
+                <div class="token-column-content">
+                    <span class="lang-si">Vse naprave delujejo z žetoni, ki jih kupite v menjalnem avtomatu v pralnici. </span>
+                    <span class="lang-en">All machines operate with tokens that you buy at the exchanger on-site</span>
+                </div>
+            </div>
+
+            <!-- Column 2: Pricing -->
+            <div class="token-info-column">
+                <div class="token-column-title">
+                    <span class="lang-si">Cenik</span>
+                    <span class="lang-en">Pricing</span>
+                </div>
+                <div class="token-column-content">
+                    <div class="token-price-large">1 <span class="lang-si">žeton</span><span class="lang-en">token</span> = 1€</div>
+                    <div style="margin-top: 12px; font-size: 15px; color: var(--text-secondary);">
+                        <span class="lang-si">Nakup 20+ žetonov naenkrat</span>
+                        <span class="lang-en">Buy 20+ tokens at once</span>
+                        <span style="display: inline-block; margin-left: 8px; background: #FF3B3B; color: white; padding: 4px 12px; border-radius: 20px; font-weight: 700; font-size: 16px; box-shadow: 0 2px 8px rgba(255, 59, 59, 0.3);">+10%</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Column 3: Payment Methods -->
+            <div class="token-info-column">
+                <div class="token-column-title">
+                    <span class="lang-si">Načini plačila</span>
+                    <span class="lang-en">Payment Methods</span>
+                </div>
+                <div class="token-column-content">
+                    <div style="display: flex; gap: 32px; align-items: center; justify-content: flex-start;">
+                        <!-- Cash Icon -->
+                        <div style="text-align: center;">
+                            <svg width="80" height="60" viewBox="0 0 80 60" style="display: block; margin: 0 auto 12px;">
+                                <!-- Banknote -->
+                                <rect x="5" y="15" width="70" height="30" rx="4" fill="none" stroke="#0097DA" stroke-width="2.5"/>
+                                <circle cx="40" cy="30" r="10" fill="none" stroke="#0097DA" stroke-width="2.5"/>
+                                <text x="40" y="35" text-anchor="middle" font-family="Arial" font-size="14" font-weight="bold" fill="#0097DA">€</text>
+                                <circle cx="15" cy="30" r="3" fill="#0097DA" opacity="0.4"/>
+                                <circle cx="65" cy="30" r="3" fill="#0097DA" opacity="0.4"/>
+                            </svg>
+                            <div style="font-size: 14px; font-weight: 600; color: var(--text-dark);">
+                                <span class="lang-si">Gotovina</span>
+                                <span class="lang-en">Cash</span>
+                            </div>
+                        </div>
+
+                        <!-- Card Icon -->
+                        <div style="text-align: center;">
+                            <svg width="80" height="60" viewBox="0 0 80 60" style="display: block; margin: 0 auto 12px;">
+                                <!-- Card -->
+                                <rect x="5" y="15" width="70" height="30" rx="4" fill="none" stroke="#0097DA" stroke-width="2.5"/>
+                                <!-- Magnetic stripe -->
+                                <rect x="5" y="22" width="70" height="6" fill="#0097DA" opacity="0.3"/>
+                                <!-- Chip -->
+                                <rect x="12" y="32" width="12" height="10" rx="2" fill="none" stroke="#0097DA" stroke-width="2"/>
+                                <line x1="14" y1="32" x2="14" y2="42" stroke="#0097DA" stroke-width="0.5"/>
+                                <line x1="17" y1="32" x2="17" y2="42" stroke="#0097DA" stroke-width="0.5"/>
+                                <line x1="20" y1="32" x2="20" y2="42" stroke="#0097DA" stroke-width="0.5"/>
+                            </svg>
+                            <div style="font-size: 14px; font-weight: 600; color: var(--text-dark);">
+                                <span class="lang-si">Kartice</span>
+                                <span class="lang-en">Cards</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="services-grid">
+            <!-- WASHING -->
+            <div class="service-card wash">
+                <div class="service-header">
+                    <div class="service-icon"><img src="washing.png" alt="Washing" style="width: 48px; height: 48px; object-fit: contain;"></div>
+                    <h3 class="service-title">
+                        <span class="lang-si">Pranje</span>
+                        <span class="lang-en">Washing</span>
+                    </h3>
+                </div>
+                <p class="service-description">
+                    <span class="lang-si">Profesionalne pralne storitve z modernimi stroji Renzacci za popolno čistočo vašega perila. Velika izbira programov in temperatur za različne vrste tkanin in stopnje umazanije. <strong>Detergenti (za pranje in mehčanje) so vključeni v ceno in se dodajajo samodejno.</strong></span>
+                    <span class="lang-en">Professional washing services with modern Renzacci machines for perfect cleanliness of your laundry. Wide selection of programs and temperatures for different fabric types and soiling levels. <strong>Detergents (for washing and softening) are included in the price and dispensed automatically.</strong></span>
+                </p>
+                <div class="service-features">
+                    <div class="service-features-title">
+                        <span class="lang-si">Programi pranja (~40 min)</span>
+                        <span class="lang-en">Washing programs (~40 min)</span>
+                    </div>
+                    <div class="temp-badges">
+                        <div class="temp-badge">30°C</div>
+                        <div class="temp-badge">40°C</div>
+                        <div class="temp-badge">60°C</div>
+                        <div class="temp-badge">90°C</div>
+                    </div>
+                </div>
+                <div class="service-pricing">
+                    <div class="price-header">
+                        <span class="price-header-label">
+                            <span class="lang-si">Kapaciteta</span>
+                            <span class="lang-en">Capacity</span>
+                        </span>
+                        <span class="price-header-label">
+                            <span class="lang-si">Cena</span>
+                            <span class="lang-en">Price</span>
+                        </span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price-capacity">10 kg</span>
+                        <span class="price-value">6 <small><span class="lang-si">žetonov</span><span class="lang-en">tokens</span></small></span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price-capacity">18 kg</span>
+                        <span class="price-value">8 <small><span class="lang-si">žetonov</span><span class="lang-en">tokens</span></small></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DRYING -->
+            <div class="service-card dry">
+                <div class="service-header">
+                    <div class="service-icon"><img src="drying.png" alt="Drying" style="width: 48px; height: 48px; object-fit: contain;"></div>
+                    <h3 class="service-title">
+                        <span class="lang-si">Sušenje</span>
+                        <span class="lang-en">Drying</span>
+                    </h3>
+                </div>
+                <p class="service-description">
+                    <span class="lang-si">Hitro in učinkovito sušenje perila z regulacijo temperature in časa. Profesionalni sušilni stroji zagotavljajo nežno sušenje brez krčenja in ohranjajo mehkobo tkanin.</span>
+                    <span class="lang-en">Fast and efficient laundry drying with temperature and time control. Professional dryers ensure gentle drying without shrinking while maintaining fabric softness.</span>
+                </p>
+                <div class="service-features">
+                    <div class="service-features-title">
+                        <span class="lang-si">Programi sušenja</span>
+                        <span class="lang-en">Drying programs</span>
+                    </div>
+                    <div class="temp-badges">
+                        <div class="temp-badge">
+                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Thermometer outline -->
+                                <rect x="14" y="8" width="6" height="24" rx="3" fill="white" stroke="#FF9B71" stroke-width="1.5"/>
+                                <!-- Filled mercury (partial) -->
+                                <rect x="15.5" y="20" width="3" height="12" fill="#FF9B71"/>
+                                <!-- Bulb -->
+                                <circle cx="17" cy="34" r="5" fill="#FF9B71" stroke="#FF9B71" stroke-width="1"/>
+                                <!-- Scale marks -->
+                                <line x1="20.5" y1="12" x2="22.5" y2="12" stroke="#FF9B71" stroke-width="1"/>
+                                <line x1="20.5" y1="16" x2="22.5" y2="16" stroke="#FF9B71" stroke-width="1"/>
+                                <line x1="20.5" y1="20" x2="22.5" y2="20" stroke="#FF9B71" stroke-width="1"/>
+                                <line x1="20.5" y1="24" x2="22.5" y2="24" stroke="#FF9B71" stroke-width="1"/>
+                                <line x1="20.5" y1="28" x2="22.5" y2="28" stroke="#FF9B71" stroke-width="1"/>
+                                <!-- Plus sign (2x larger) -->
+                                <line x1="32" y1="18" x2="32" y2="26" stroke="#FF9B71" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="28" y1="22" x2="36" y2="22" stroke="#FF9B71" stroke-width="2.5" stroke-linecap="round"/>
+                            </svg>
+                            <span style="font-size: 16px; font-weight: 700; color: #1D51A2; margin-left: 6px;">~40°</span>
+                        </div>
+                        <div class="temp-badge">
+                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Thermometer outline -->
+                                <rect x="12" y="8" width="6" height="24" rx="3" fill="white" stroke="#FF9B71" stroke-width="1.5"/>
+                                <!-- Filled mercury (more filled) -->
+                                <rect x="13.5" y="16" width="3" height="16" fill="#FF9B71"/>
+                                <!-- Bulb -->
+                                <circle cx="15" cy="34" r="5" fill="#FF9B71" stroke="#FF9B71" stroke-width="1"/>
+                                <!-- Scale marks -->
+                                <line x1="18.5" y1="12" x2="20.5" y2="12" stroke="#FF9B71" stroke-width="1"/>
+                                <line x1="18.5" y1="16" x2="20.5" y2="16" stroke="#FF9B71" stroke-width="1"/>
+                                <line x1="18.5" y1="20" x2="20.5" y2="20" stroke="#FF9B71" stroke-width="1"/>
+                                <line x1="18.5" y1="24" x2="20.5" y2="24" stroke="#FF9B71" stroke-width="1"/>
+                                <line x1="18.5" y1="28" x2="20.5" y2="28" stroke="#FF9B71" stroke-width="1"/>
+                                <!-- Two plus signs (2x larger) -->
+                                <line x1="28" y1="14" x2="28" y2="22" stroke="#FF9B71" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="24" y1="18" x2="32" y2="18" stroke="#FF9B71" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="28" y1="26" x2="28" y2="34" stroke="#FF9B71" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="24" y1="30" x2="32" y2="30" stroke="#FF9B71" stroke-width="2.5" stroke-linecap="round"/>
+                            </svg>
+                            <span style="font-size: 16px; font-weight: 700; color: #1D51A2; margin-left: 6px;">~60°</span>
+                        </div>
+                        <div class="temp-badge">
+                            <svg width="50" height="50" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Thermometer outline -->
+                                <rect x="10" y="8" width="6" height="24" rx="3" fill="white" stroke="#FF9B71" stroke-width="1.5"/>
+                                <!-- Filled mercury (almost full) -->
+                                <rect x="11.5" y="12" width="3" height="20" fill="#FF9B71"/>
+                                <!-- Bulb -->
+                                <circle cx="13" cy="34" r="5" fill="#FF9B71" stroke="#FF9B71" stroke-width="1"/>
+                                <!-- Scale marks -->
+                                <line x1="16.5" y1="12" x2="18.5" y2="12" stroke="#FF9B71" stroke-width="1"/>
+                                <line x1="16.5" y1="16" x2="18.5" y2="16" stroke="#FF9B71" stroke-width="1"/>
+                                <line x1="16.5" y1="20" x2="18.5" y2="20" stroke="#FF9B71" stroke-width="1"/>
+                                <line x1="16.5" y1="24" x2="18.5" y2="24" stroke="#FF9B71" stroke-width="1"/>
+                                <line x1="16.5" y1="28" x2="18.5" y2="28" stroke="#FF9B71" stroke-width="1"/>
+                                <!-- Three plus signs (2x larger) -->
+                                <line x1="26" y1="10" x2="26" y2="18" stroke="#FF9B71" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="22" y1="14" x2="30" y2="14" stroke="#FF9B71" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="26" y1="20" x2="26" y2="28" stroke="#FF9B71" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="22" y1="24" x2="30" y2="24" stroke="#FF9B71" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="26" y1="30" x2="26" y2="38" stroke="#FF9B71" stroke-width="2.5" stroke-linecap="round"/>
+                                <line x1="22" y1="34" x2="30" y2="34" stroke="#FF9B71" stroke-width="2.5" stroke-linecap="round"/>
+                            </svg>
+                            <span style="font-size: 16px; font-weight: 700; color: #1D51A2; margin-left: 6px;">~80°</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-pricing">
+                    <div class="price-header">
+                        <span class="price-header-label">
+                            <span class="lang-si">Čas</span>
+                            <span class="lang-en">Time</span>
+                        </span>
+                        <span class="price-header-label" style="line-height: 1.3;">
+                            <span class="lang-si">Cena<br><span style="font-size: 10px; color: #64748B; font-weight: 400; text-transform: none; letter-spacing: 0;">(v žetonih)</span></span>
+                            <span class="lang-en">Price<br><span style="font-size: 10px; color: #64748B; font-weight: 400; text-transform: none; letter-spacing: 0;">(in tokens)</span></span>
+                        </span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price-capacity">
+                            <span class="lang-si">Start <small style="color: #64748B; font-weight: 400;">(12 min)</small></span>
+                            <span class="lang-en">Start <small style="color: #64748B; font-weight: 400;">(12 min)</small></span>
+                        </span>
+                        <span class="price-value">2</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price-capacity">+6 min</span>
+                        <span class="price-value">+1</span>
+                    </div>
+                    <div class="price-note">
+                        <span class="lang-si">*Maksimalno: 60 minut (10 žetonov)</span>
+                        <span class="lang-en">*Maximum: 60 minutes (10 tokens)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- DISINFECTION -->
+            <div class="service-card extra">
+                <div class="service-header">
+                    <div class="service-icon"><img src="disinfection.png" alt="Disinfection" style="width: 48px; height: 48px; object-fit: contain;"></div>
+                    <h3 class="service-title">
+                        <span class="lang-si">Dezinfekcija z ozonom</span>
+                        <span class="lang-en">Ozone Disinfection</span>
+                    </h3>
+                </div>
+                <p class="service-description">
+                    <span class="lang-si">Profesionalna dezinfekcija in odstranjevanje neprijetnih vonjav z ozonsko tehnologijo Renzacci. Idealno za oblačila, obutev in predmete, ki jih ni mogoče prati.</span>
+                    <span class="lang-en">Professional disinfection and odor removal with Renzacci ozone technology. Ideal for clothing, footwear and items that cannot be washed.</span>
+                </p>
+                <div class="service-features">
+                    <div class="service-features-title">
+                        <span class="lang-si">Primerno za</span>
+                        <span class="lang-en">Suitable for</span>
+                    </div>
+                    <div class="service-features-list">
+                        <div class="service-feature-item">
+                            <span class="lang-si">Čelade, kape</span>
+                            <span class="lang-en">Helmets, hats</span>
+                        </div>
+                        <div class="service-feature-item">
+                            <span class="lang-si">Jakne, športna oprema</span>
+                            <span class="lang-en">Jackets, sports gear</span>
+                        </div>
+                        <div class="service-feature-item">
+                            <span class="lang-si">Čevlji, posteljnina</span>
+                            <span class="lang-en">Shoes, bedding</span>
+                        </div>
+                        <div class="service-feature-item">
+                            <span class="lang-si">Otroške mehke igrače</span>
+                            <span class="lang-en">Children's soft toys</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="service-pricing">
+                    <div class="price-header">
+                        <span class="price-header-label">
+                            <span class="lang-si">Čas</span>
+                            <span class="lang-en">Time</span>
+                        </span>
+                        <span class="price-header-label" style="line-height: 1.3;">
+                            <span class="lang-si">Cena<br><span style="font-size: 10px; color: #64748B; font-weight: 400; text-transform: none; letter-spacing: 0;">(v žetonih)</span></span>
+                            <span class="lang-en">Price<br><span style="font-size: 10px; color: #64748B; font-weight: 400; text-transform: none; letter-spacing: 0;">(in tokens)</span></span>
+                        </span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price-capacity">16 min</span>
+                        <span class="price-value">3</span>
+                    </div>
+                    <div class="price-row">
+                        <span class="price-capacity">22 min</span>
+                        <span class="price-value">4</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- LOCATIONS -->
+    <section id="locations">
+        <div class="section-header">
+            <div class="section-eyebrow">
+                <span class="lang-si">LOKACIJE</span>
+                <span class="lang-en">LOCATIONS</span>
+            </div>
+            <h2 class="section-title">
+                <span class="lang-si">Najdite nas</span>
+                <span class="lang-en">Find us</span>
+            </h2>
+            <p class="section-subtitle">
+                <span class="lang-si">Dve lokaciji v Ljubljani z brezplačnim parkingom.</span>
+                <span class="lang-en">Two locations in Ljubljana with free parking.</span>
+            </p>
+        </div>
+
+        <div class="locations-grid">
+            <!-- TC JARŠE -->
+            <div class="location-card">
+                <iframe
+                    class="location-map"
+                    src="https://www.google.com/maps?q=Smart+Wash,+Beblerjev+trg+2,+Ljubljana&output=embed"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <div class="location-content">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                        <h3 class="location-name" style="margin-bottom: 0;">
+                            <span class="lang-si">Pralnica TC Jarše</span>
+                            <span class="lang-en">Laundromat TC Jarše</span>
+                        </h3>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Smart+Wash,+Beblerjev+trg+2,+Ljubljana"
+                           target="_blank"
+                           class="location-btn">
+                            <span class="lang-si">Pokaži pot →</span>
+                            <span class="lang-en">Get directions →</span>
+                        </a>
+                    </div>
+                    <div class="location-info">
+                        <div class="location-info-item">
+                            <div class="location-info-icon">📍</div>
+                            <div class="location-info-content">
+                                <div class="location-info-label">
+                                    <span class="lang-si">Naslov</span>
+                                    <span class="lang-en">Address</span>
+                                </div>
+                                <div class="location-info-value">Beblerjev trg 2, 1000 Ljubljana</div>
+                            </div>
+                        </div>
+                        <div class="location-info-item">
+                            <div class="location-info-icon">🕐</div>
+                            <div class="location-info-content">
+                                <div class="location-info-label">
+                                    <span class="lang-si">Odpiralni čas</span>
+                                    <span class="lang-en">Opening hours</span>
+                                </div>
+                                <div class="schedule-visual">
+                                    <!-- Days with Checkmarks -->
+                                    <div class="days-row">
+                                        <div class="day-box open">
+                                            <span class="day-name">
+                                                <span class="lang-si">Pon</span>
+                                                <span class="lang-en">Mon</span>
+                                            </span>
+                                            <span class="day-check">✓</span>
+                                        </div>
+                                        <div class="day-box open">
+                                            <span class="day-name">
+                                                <span class="lang-si">Tor</span>
+                                                <span class="lang-en">Tue</span>
+                                            </span>
+                                            <span class="day-check">✓</span>
+                                        </div>
+                                        <div class="day-box open">
+                                            <span class="day-name">
+                                                <span class="lang-si">Sre</span>
+                                                <span class="lang-en">Wed</span>
+                                            </span>
+                                            <span class="day-check">✓</span>
+                                        </div>
+                                        <div class="day-box open">
+                                            <span class="day-name">
+                                                <span class="lang-si">Čet</span>
+                                                <span class="lang-en">Thu</span>
+                                            </span>
+                                            <span class="day-check">✓</span>
+                                        </div>
+                                        <div class="day-box open">
+                                            <span class="day-name">
+                                                <span class="lang-si">Pet</span>
+                                                <span class="lang-en">Fri</span>
+                                            </span>
+                                            <span class="day-check">✓</span>
+                                        </div>
+                                        <div class="day-box open">
+                                            <span class="day-name">
+                                                <span class="lang-si">Sob</span>
+                                                <span class="lang-en">Sat</span>
+                                            </span>
+                                            <span class="day-check">✓</span>
+                                        </div>
+                                        <div class="day-box closed">
+                                            <span class="day-name">
+                                                <span class="lang-si">Ned</span>
+                                                <span class="lang-en">Sun</span>
+                                            </span>
+                                            <span class="day-check">✗</span>
+                                        </div>
+                                    </div>
+                                    <!-- Hours Display -->
+                                    <div class="schedule-hours">
+                                        <div class="digital-time">
+                                            <span class="time-display">08:00</span>
+                                            <span class="time-separator">→</span>
+                                            <span class="time-display">21:00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="location-info-item">
+                            <div class="location-info-icon">⚙️</div>
+                            <div class="location-info-content">
+                                <div class="location-info-label">
+                                    <span class="lang-si">Storitve</span>
+                                    <span class="lang-en">Services</span>
+                                </div>
+                                <div class="location-amenities">
+                                    <!-- Washing 9kg -->
+                                    <div class="amenity-item">
+                                        <div class="amenity-icon">
+                                            <img src="washing.png" alt="Washing">
+                                        </div>
+                                        <div class="amenity-label">9kg</div>
+                                    </div>
+                                    <!-- Washing 18kg -->
+                                    <div class="amenity-item">
+                                        <div class="amenity-icon">
+                                            <img src="washing.png" alt="Washing">
+                                        </div>
+                                        <div class="amenity-label">18kg</div>
+                                    </div>
+                                    <!-- Drying 18kg -->
+                                    <div class="amenity-item">
+                                        <div class="amenity-icon">
+                                            <img src="drying.png" alt="Drying">
+                                        </div>
+                                        <div class="amenity-label">18kg</div>
+                                    </div>
+                                    <!-- Payment -->
+                                    <div class="amenity-item" style="justify-content: center;">
+                                        <div style="line-height: 1; text-align: center; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; height: 60px;">
+                                            <span style="font-size: 28px;">🪙</span>
+                                            <span style="font-size: 28px;">💳</span>
+                                        </div>
+                                    </div>
+                                    <!-- Parking -->
+                                    <div class="amenity-item">
+                                        <div class="amenity-icon">
+                                            <svg width="100%" height="auto" viewBox="0 0 100 100" style="max-height: 50px;">
+                                                <!-- Road sign background -->
+                                                <rect x="5" y="5" width="90" height="90" rx="8" fill="#0066CC" stroke="white" stroke-width="3"/>
+                                                <!-- P letter -->
+                                                <text x="50" y="73" text-anchor="middle" font-family="Arial, sans-serif" font-size="70" font-weight="bold" fill="white">P</text>
+                                            </svg>
+                                        </div>
+                                        <div class="amenity-label">
+                                            <span class="lang-si">Brezplačno</span>
+                                            <span class="lang-en">Free</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- GALJEVICA -->
+            <div class="location-card">
+                <iframe
+                    class="location-map"
+                    src="https://www.google.com/maps?q=Smart+Wash,+Galjevica+6a,+Ljubljana&output=embed"
+                    allowfullscreen=""
+                    loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+                <div class="location-content">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                        <h3 class="location-name" style="margin-bottom: 0;">
+                            <span class="lang-si">Pralnica Galjevica</span>
+                            <span class="lang-en">Laundromat Galjevica</span>
+                        </h3>
+                        <a href="https://www.google.com/maps/dir/?api=1&destination=Smart+Wash,+Galjevica+6a,+Ljubljana"
+                           target="_blank"
+                           class="location-btn">
+                            <span class="lang-si">Pokaži pot →</span>
+                            <span class="lang-en">Get directions →</span>
+                        </a>
+                    </div>
+                    <div class="location-info">
+                        <div class="location-info-item">
+                            <div class="location-info-icon">📍</div>
+                            <div class="location-info-content">
+                                <div class="location-info-label">
+                                    <span class="lang-si">Naslov</span>
+                                    <span class="lang-en">Address</span>
+                                </div>
+                                <div class="location-info-value">Galjevica 6a, 1000 Ljubljana</div>
+                            </div>
+                        </div>
+                        <div class="location-info-item">
+                            <div class="location-info-icon">🕐</div>
+                            <div class="location-info-content">
+                                <div class="location-info-label">
+                                    <span class="lang-si">Odpiralni čas</span>
+                                    <span class="lang-en">Opening hours</span>
+                                </div>
+                                <div class="schedule-visual">
+                                    <!-- Days with Checkmarks -->
+                                    <div class="days-row">
+                                        <div class="day-box open">
+                                            <span class="day-name">
+                                                <span class="lang-si">Pon</span>
+                                                <span class="lang-en">Mon</span>
+                                            </span>
+                                            <span class="day-check">✓</span>
+                                        </div>
+                                        <div class="day-box open">
+                                            <span class="day-name">
+                                                <span class="lang-si">Tor</span>
+                                                <span class="lang-en">Tue</span>
+                                            </span>
+                                            <span class="day-check">✓</span>
+                                        </div>
+                                        <div class="day-box open">
+                                            <span class="day-name">
+                                                <span class="lang-si">Sre</span>
+                                                <span class="lang-en">Wed</span>
+                                            </span>
+                                            <span class="day-check">✓</span>
+                                        </div>
+                                        <div class="day-box open">
+                                            <span class="day-name">
+                                                <span class="lang-si">Čet</span>
+                                                <span class="lang-en">Thu</span>
+                                            </span>
+                                            <span class="day-check">✓</span>
+                                        </div>
+                                        <div class="day-box open">
+                                            <span class="day-name">
+                                                <span class="lang-si">Pet</span>
+                                                <span class="lang-en">Fri</span>
+                                            </span>
+                                            <span class="day-check">✓</span>
+                                        </div>
+                                        <div class="day-box open">
+                                            <span class="day-name">
+                                                <span class="lang-si">Sob</span>
+                                                <span class="lang-en">Sat</span>
+                                            </span>
+                                            <span class="day-check">✓</span>
+                                        </div>
+                                        <div class="day-box open">
+                                            <span class="day-name">
+                                                <span class="lang-si">Ned</span>
+                                                <span class="lang-en">Sun</span>
+                                            </span>
+                                            <span class="day-check">✓</span>
+                                        </div>
+                                    </div>
+                                    <!-- Hours Display -->
+                                    <div class="schedule-hours">
+                                        <div class="digital-time">
+                                            <span class="time-display">06:00</span>
+                                            <span class="time-separator">→</span>
+                                            <span class="time-display">23:00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="location-info-item">
+                            <div class="location-info-icon">⚙️</div>
+                            <div class="location-info-content">
+                                <div class="location-info-label">
+                                    <span class="lang-si">Storitve</span>
+                                    <span class="lang-en">Services</span>
+                                </div>
+                                <div class="location-amenities">
+                                    <!-- Washing 9kg -->
+                                    <div class="amenity-item">
+                                        <div class="amenity-icon">
+                                            <img src="washing.png" alt="Washing">
+                                        </div>
+                                        <div class="amenity-label">9kg</div>
+                                    </div>
+                                    <!-- Washing 18kg -->
+                                    <div class="amenity-item">
+                                        <div class="amenity-icon">
+                                            <img src="washing.png" alt="Washing">
+                                        </div>
+                                        <div class="amenity-label">18kg</div>
+                                    </div>
+                                    <!-- Drying 18kg -->
+                                    <div class="amenity-item">
+                                        <div class="amenity-icon">
+                                            <img src="drying.png" alt="Drying">
+                                        </div>
+                                        <div class="amenity-label">18kg</div>
+                                    </div>
+                                    <!-- Disinfection -->
+                                    <div class="amenity-item">
+                                        <div class="amenity-icon">
+                                            <img src="disinfection.png" alt="Disinfection">
+                                        </div>
+                                        <div class="amenity-label">
+                                            <span class="lang-si">Ozon</span>
+                                            <span class="lang-en">Ozone</span>
+                                        </div>
+                                    </div>
+                                    <!-- Payment -->
+                                    <div class="amenity-item" style="justify-content: center;">
+                                        <div style="line-height: 1; text-align: center; width: 100%; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 4px; height: 60px;">
+                                            <span style="font-size: 28px;">🪙</span>
+                                            <span style="font-size: 28px;">💳</span>
+                                        </div>
+                                    </div>
+                                    <!-- Parking -->
+                                    <div class="amenity-item">
+                                        <div class="amenity-icon">
+                                            <svg width="100%" height="auto" viewBox="0 0 100 100" style="max-height: 50px;">
+                                                <!-- Road sign background -->
+                                                <rect x="5" y="5" width="90" height="90" rx="8" fill="#0066CC" stroke="white" stroke-width="3"/>
+                                                <!-- P letter -->
+                                                <text x="50" y="73" text-anchor="middle" font-family="Arial, sans-serif" font-size="70" font-weight="bold" fill="white">P</text>
+                                            </svg>
+                                        </div>
+                                        <div class="amenity-label">
+                                            <span class="lang-si">Brezplačno</span>
+                                            <span class="lang-en">Free</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- INSTRUCTIONS -->
+    <section id="instructions">
+        <div class="section-header">
+            <div class="section-eyebrow">
+                <span class="lang-si">NAVODILA</span>
+                <span class="lang-en">INSTRUCTIONS</span>
+            </div>
+            <h2 class="section-title">
+                <span class="lang-si">Kako uporabljati Smart Wash?</span>
+                <span class="lang-en">How to use Smart Wash?</span>
+            </h2>
+            <p class="section-subtitle">
+                <span class="lang-si">Enostavna navodila za uporabo samopostrežne pralnice Smart Wash.</span>
+                <span class="lang-en">Simple instructions for using Smart Wash self-service laundromat.</span>
+            </p>
+        </div>
+
+        <div class="instructions-container">
+            <!-- Tab Navigation -->
+                <div class="instruction-tabs">
+                    <button class="tab-button active" onclick="switchTab(event, 'rules')">
+                        <span style="font-size: 40px; margin-right: 12px; vertical-align: middle;">📋</span>
+                        <span class="lang-si">Splošna pravila</span>
+                        <span class="lang-en">General Rules</span>
+                    </button>
+                    <button class="tab-button" onclick="switchTab(event, 'tokens')">
+                        <span style="font-size: 40px; margin-right: 12px; vertical-align: middle;">🪙</span>
+                        <span class="lang-si">Nakup žetonov</span>
+                        <span class="lang-en">Buy tokens</span>
+                    </button>
+                    <button class="tab-button" onclick="switchTab(event, 'washing')">
+                        <img src="washing.png" alt="Washing" style="width: 40px; height: 40px; object-fit: contain; margin-right: 12px; vertical-align: middle;">
+                        <span class="lang-si">Pranje</span>
+                        <span class="lang-en">Washing</span>
+                    </button>
+                    <button class="tab-button" onclick="switchTab(event, 'drying')">
+                        <img src="drying.png" alt="Drying" style="width: 40px; height: 40px; object-fit: contain; margin-right: 12px; vertical-align: middle;">
+                        <span class="lang-si">Sušenje</span>
+                        <span class="lang-en">Drying</span>
+                    </button>
+                    <button class="tab-button" onclick="switchTab(event, 'disinfection')">
+                        <img src="disinfection.png" alt="Disinfection" style="width: 40px; height: 40px; object-fit: contain; margin-right: 12px; vertical-align: middle;">
+                        <span class="lang-si">Dezinfekcija</span>
+                        <span class="lang-en">Disinfection</span>
+                    </button>
+                    <button class="tab-button" onclick="switchTab(event, 'problems')">
+                        <span style="font-size: 40px; margin-right: 12px; vertical-align: middle;">❓</span>
+                        <span class="lang-si">Možne težave</span>
+                        <span class="lang-en">Troubleshooting</span>
+                    </button>
+                </div>
+
+            <!-- Tab 1: WASHING -->
+            <div class="tab-content" id="washing">
+                <div>
+                <div class="instruction-step">
+                    <div class="instruction-number">1</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Naložite perilo v stroj</span>
+                            <span class="lang-en">Load laundry into machine</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">Odprite vrata in naložite perilo. <strong>Najboljša kakovost pranja je pri približno polovični napolnitvi bobna.</strong> Ne prenapolnite - perilo mora imeti prostor za gibanje.</span>
+                            <span class="lang-en">Open the door and load laundry. <strong>Best washing quality at approximately half-full drum.</strong> Don't overload - laundry needs space to move.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">2</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Izberite program na zaslonu</span>
+                            <span class="lang-en">Select program on screen</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">Pritisnite gumbe na nadzorni plošči stroja. Izberite temperaturo (30°, 40°, 60° ali 90°). Cikel pranja traja približno 40 minut.</span>
+                            <span class="lang-en">Press buttons on machine control panel. Choose temperature (30°, 40°, 60° or 90°). Washing cycle takes approximately 40 minutes.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">3</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Vstavite žetone in pritisnite START</span>
+                            <span class="lang-en">Insert tokens and press START</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">10 kg stroj = 6 žetonov • 18 kg stroj = 8 žetonov. Vstavite žetone v režo. <strong>Pritisnite gumb START za zagon.</strong> Detergent in mehčalec se dodajata samodejno.</span>
+                            <span class="lang-en">10 kg machine = 6 tokens • 18 kg machine = 8 tokens. Insert tokens into slot. <strong>Press START button to begin.</strong> Detergent and softener are added automatically.</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="video-container" style="background: linear-gradient(135deg, rgba(0, 151, 218, 0.3), rgba(16, 185, 129, 0.3)); display: flex; align-items: center; justify-content: center; position: relative;">
+                    <div style="text-align: center; color: var(--primary-navy);">
+                        <div style="font-size: 80px; margin-bottom: 20px; opacity: 0.6;">▶️</div>
+                        <div style="font-size: 24px; font-weight: 700; margin-bottom: 12px;">
+                            <span class="lang-si">Video prikaz dela stroja</span>
+                            <span class="lang-en">Machine operation video</span>
+                        </div>
+                        <div style="font-size: 16px; opacity: 0.8; color: var(--text-dark);">
+                            <span class="lang-si">Format 16:9 • Celoten zaslon</span>
+                            <span class="lang-en">16:9 format • Full screen</span>
+                        </div>
+                    </div>
+                    <div style="position: absolute; bottom: 20px; right: 20px; background: rgba(0, 0, 0, 0.7); padding: 8px 16px; border-radius: 8px; font-size: 14px; color: white; font-weight: 600;">
+                        3:45
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 2: DRYING -->
+            <div class="tab-content" id="drying">
+                <div>
+                <div class="instruction-step">
+                    <div class="instruction-number">1</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Naložite vlažno perilo v sušilec</span>
+                            <span class="lang-en">Load damp laundry into dryer</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">Ne sušite kapajočega mokrega perila. Najprej ga ožemite v pralni stroj.</span>
+                            <span class="lang-en">Don't dry dripping wet laundry. Spin it first in the washing machine.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">2</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Vstavite žetone (minimalno 2)</span>
+                            <span class="lang-en">Insert tokens (minimum 2)</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">2 žetona = 12 minut sušenja. Želite dlje? Dodajte več žetonov (+1 žeton = +6 minut). Maksimalno 60 minut (10 žetonov).</span>
+                            <span class="lang-en">2 tokens = 12 minutes drying. Want longer? Add more tokens (+1 token = +6 minutes). Maximum 60 minutes (10 tokens).</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">3</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Izberite temperaturo in pritisnite START</span>
+                            <span class="lang-en">Choose temperature and press START</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">Nizka (~40°) za občutljive tkanine • Srednja (~60°) za običajno perilo • Visoka (~80°) za debele stvari in brisače</span>
+                            <span class="lang-en">Low (~40°) for delicate fabrics • Medium (~60°) for regular laundry • High (~80°) for thick items and towels</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="video-placeholder">
+                    <div class="video-placeholder-icon">🎥</div>
+                    <div class="video-placeholder-text">
+                        <span class="lang-si">Video: Kako sušiti perilo</span>
+                        <span class="lang-en">Video: How to dry laundry</span>
+                    </div>
+                    <div class="video-placeholder-subtext">
+                        <span class="lang-si">Kmalu na voljo</span>
+                        <span class="lang-en">Coming soon</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 3: DISINFECTION -->
+            <div class="tab-content" id="disinfection">
+                <div>
+                <div class="instruction-step">
+                    <div class="instruction-number">1</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Naložite predmete v ozonski kabinet</span>
+                            <span class="lang-en">Load items into ozone cabinet</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">Primerno za: čelade, kape, jakne, športno opremo, čevlje, posteljnino, otroške mehke igrače. Ne za mokre predmete.</span>
+                            <span class="lang-en">Suitable for: helmets, hats, jackets, sports gear, shoes, bedding, children's soft toys. Not for wet items.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">2</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Izberite cikel in vstavite žetone</span>
+                            <span class="lang-en">Select cycle and insert tokens</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">16 minut = 3 žetone • 22 minut = 4 žetone. Vstavite žetone in zaprite vrata.</span>
+                            <span class="lang-en">16 minutes = 3 tokens • 22 minutes = 4 tokens. Insert tokens and close door.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">3</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Počakajte do konca cikla</span>
+                            <span class="lang-en">Wait until cycle completes</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">Ozon bo dezinficiral predmete in odstranil neprijetne vonjave. Po končanem ciklu vzemite predmete iz kabineta.</span>
+                            <span class="lang-en">Ozone will disinfect items and remove odors. After cycle completes, remove items from cabinet.</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="video-placeholder">
+                    <div class="video-placeholder-icon">🎥</div>
+                    <div class="video-placeholder-text">
+                        <span class="lang-si">Video: Ozonska dezinfekcija</span>
+                        <span class="lang-en">Video: Ozone disinfection</span>
+                    </div>
+                    <div class="video-placeholder-subtext">
+                        <span class="lang-si">Kmalu na voljo</span>
+                        <span class="lang-en">Coming soon</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 4: BUY TOKENS -->
+            <div class="tab-content" id="tokens">
+                <div>
+                <div class="instruction-step">
+                    <div class="instruction-number">1</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Najdite menjalnik žetonov</span>
+                            <span class="lang-en">Find the token exchanger</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">Menjalnik se nahaja v vsaki pralnici. Velika modra naprava ob vhodu.</span>
+                            <span class="lang-en">The exchanger is located in each laundromat. Large blue device near the entrance.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">2</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Izberite način plačila</span>
+                            <span class="lang-en">Choose payment method</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">Gotovina: bankovci 5€, 10€, 20€, 50€ | kovanci 0.5€, 1€, 2€<br>Bančne kartice: vse glavne kartice</span>
+                            <span class="lang-en">Cash: bills 5€, 10€, 20€, 50€ | coins 0.5€, 1€, 2€<br>Bank cards: all major cards</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">3</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Vstavite denar ali kartico</span>
+                            <span class="lang-en">Insert money or card</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">1 žeton = 1€. <strong>Kupite 20+ žetonov naenkrat in prejmite +10% bonus!</strong> Žetoni bodo padli v spodnjo škatlico.</span>
+                            <span class="lang-en">1 token = 1€. <strong>Buy 20+ tokens at once and get +10% bonus!</strong> Tokens will drop into the bottom tray.</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="video-placeholder">
+                    <div class="video-placeholder-icon">🎥</div>
+                    <div class="video-placeholder-text">
+                        <span class="lang-si">Video: Kako kupiti žetone</span>
+                        <span class="lang-en">Video: How to buy tokens</span>
+                    </div>
+                    <div class="video-placeholder-subtext">
+                        <span class="lang-si">Kmalu na voljo</span>
+                        <span class="lang-en">Coming soon</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 5: TROUBLESHOOTING -->
+            <div class="tab-content" id="problems">
+                <div>
+                <div class="instruction-step">
+                    <div class="instruction-number">❌</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Stroj se ne zažene</span>
+                            <span class="lang-en">Machine won't start</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">• Preverite, ali ste vstavili pravilno število žetonov<br>• Preverite, ali so vrata dobro zaprta<br>• Poskusite pritisniti gumb START še enkrat<br>• Če problem ostaja, pokličite +386 40 558 337</span>
+                            <span class="lang-en">• Check if you inserted correct number of tokens<br>• Check if door is properly closed<br>• Try pressing START button again<br>• If problem persists, call +386 40 558 337</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">🚪</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Vrata se ne odprejo</span>
+                            <span class="lang-en">Door won't open</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">• Počakajte 2-3 minute - vrata se zaklenejo med ciklom in kratek čas po njem<br>• Preverite, ali se je cikel res končal (Display prikazuje "End" ali "0:00")<br>• Ne vlecite na silo - pokličite +386 40 558 337</span>
+                            <span class="lang-en">• Wait 2-3 minutes - door locks during cycle and briefly after<br>• Check if cycle really finished (Display shows "End" or "0:00")<br>• Don't force it - call +386 40 558 337</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">🪙</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Menjalnik ne sprejme denarja</span>
+                            <span class="lang-en">Exchanger doesn't accept money</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">• Poskusite z drugo bankovico ali kartico<br>• Preverite, ali je bankovnica čista in nepoškodovana<br>• Menjalnik sprejema: 5€, 10€, 20€, 50€ bankovce in 0.5€, 1€, 2€ kovance<br>• Za pomoč pokličite +386 40 558 337</span>
+                            <span class="lang-en">• Try another bill or card<br>• Check if bill is clean and undamaged<br>• Exchanger accepts: 5€, 10€, 20€ bills and 0.5€, 1€, 2€ coins<br>• For help call +386 40 558 337</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">💧</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Perilo ni dobro oprano</span>
+                            <span class="lang-en">Laundry not washed well</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">• Ne prenapolnite stroja - najboljša kvaliteta pri polovični polnosti<br>• Izberite višjo temperaturo za močno umazano perilo<br>• Ločite belo in barvno perilo<br>• Za zelo umazano perilo uporabite cikel z predpranjem</span>
+                            <span class="lang-en">• Don't overload machine - best quality at half full<br>• Select higher temperature for heavily soiled laundry<br>• Separate white and colored laundry<br>• For very dirty laundry use cycle with pre-wash</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">📞</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Druga težava?</span>
+                            <span class="lang-en">Other problem?</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">Če vaše težave ni na tem seznamu ali potrebujete dodatno pomoč, nas takoj pokličite:<br><strong>📱 +386 40 558 337</strong><br>Na voljo smo 24/7 za vašo podporo.</span>
+                            <span class="lang-en">If your problem isn't on this list or you need additional help, call us immediately:<br><strong>📱 +386 40 558 337</strong><br>We're available 24/7 for your support.</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="video-placeholder">
+                    <div class="video-placeholder-icon">🎥</div>
+                    <div class="video-placeholder-text">
+                        <span class="lang-si">Video: Reševanje težav</span>
+                        <span class="lang-en">Video: Troubleshooting</span>
+                    </div>
+                    <div class="video-placeholder-subtext">
+                        <span class="lang-si">Kmalu na voljo</span>
+                        <span class="lang-en">Coming soon</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tab 6: GENERAL RULES -->
+            <div class="tab-content active" id="rules">
+                <div>
+                <div class="instruction-step">
+                    <div class="instruction-number">🏷️</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Preverite etikete na oblačilih</span>
+                            <span class="lang-en">Check garment care labels</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">Pred pranjem vedno preverite navodila na etiketah oblačil. Upoštevajte priporočene temperature in način pranja. Nekatere tkanine zahtevajo posebno nego.</span>
+                            <span class="lang-en">Always check care labels before washing. Follow recommended temperatures and washing methods. Some fabrics require special care.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">👟</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Ne perite in sušite obutve</span>
+                            <span class="lang-en">Don't wash or dry shoes</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si"><strong>Strogo prepovedano:</strong> pranje in sušenje obutve v strojih lahko poškoduje stroje in vašo obutev. Za čiščenje obutve uporabite specializirane storitve.</span>
+                            <span class="lang-en"><strong>Strictly prohibited:</strong> washing and drying shoes in machines can damage both machines and your footwear. Use specialized services for shoe cleaning.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">🔍</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Izpraznite žepe</span>
+                            <span class="lang-en">Empty all pockets</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">Pred pranjem odstranite vse predmete iz žepov: ključe, kovance, papirnate robčke, telefone. Zaprite zadrge, gumbe in kavlje, da preprečite poškodbe.</span>
+                            <span class="lang-en">Remove all items from pockets before washing: keys, coins, tissues, phones. Close zippers, buttons and hooks to prevent damage.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">🎨</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Ločite belo in barvno perilo</span>
+                            <span class="lang-en">Separate whites and colors</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">Vedno ločite belo perilo od temnega in barvnega. Nove barvne obleke perite ločeno prvič, ker lahko spustijo barvo. To prepreči barvanje svetlega perila.</span>
+                            <span class="lang-en">Always separate white laundry from dark and colored items. Wash new colored garments separately first time as they may bleed. This prevents color transfer to light items.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">⏱️</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Ne puščajte perila v strojih</span>
+                            <span class="lang-en">Don't leave laundry unattended</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si">Po končanem ciklu takoj odstranite perilo iz stroja. Perilo, puščeno v strojih, lahko postane vlažno in zasmradi. Omogočite tudi drugim strankam uporabo strojev.</span>
+                            <span class="lang-en">Remove laundry immediately after cycle completes. Laundry left in machines can become damp and develop odors. Also allow other customers to use machines.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="instruction-step">
+                    <div class="instruction-number">🚫</div>
+                    <div class="instruction-content">
+                        <div class="instruction-title">
+                            <span class="lang-si">Prepovedano pranje</span>
+                            <span class="lang-en">Prohibited items</span>
+                        </div>
+                        <div class="instruction-description">
+                            <span class="lang-si"><strong>Ne perite:</strong> predmete z motornimi olji ali bencinom, zelo umazane delovne obleke s kemikalijami, velike preproge, živalske kože. Za take predmete uporabite specializirane čistilnice.</span>
+                            <span class="lang-en"><strong>Do not wash:</strong> items with motor oils or gasoline, heavily soiled work clothes with chemicals, large carpets, animal hides. Use specialized cleaners for such items.</span>
+                        </div>
+                    </div>
+                </div>
+                </div>
+                <div class="video-placeholder">
+                    <div class="video-placeholder-icon">🎥</div>
+                    <div class="video-placeholder-text">
+                        <span class="lang-si">Video: Pravila uporabe</span>
+                        <span class="lang-en">Video: Usage rules</span>
+                    </div>
+                    <div class="video-placeholder-subtext">
+                        <span class="lang-si">Kmalu na voljo</span>
+                        <span class="lang-en">Coming soon</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="contact">
+        <div class="section-header">
+            <div class="section-eyebrow">
+                <span class="lang-si">KONTAKT</span>
+                <span class="lang-en">CONTACT</span>
+            </div>
+            <h2 class="section-title">
+                <span class="lang-si">Stopite v stik</span>
+                <span class="lang-en">Get in touch</span>
+            </h2>
+            <p class="section-subtitle">
+                <span class="lang-si">Smo tu za vas. Pišite ali pokličite.</span>
+                <span class="lang-en">We're here for you. Write or call.</span>
+            </p>
+        </div>
+
+        <div class="contact-content">
+            <div class="contact-methods">
+                <div class="contact-method">
+                    <div class="contact-icon">📞</div>
+                    <div class="contact-info">
+                        <div class="contact-label">
+                            <span class="lang-si">Telefon</span>
+                            <span class="lang-en">Phone</span>
+                        </div>
+                        <div class="contact-value">
+                            <a href="tel:+38651369177">+386 51 369 177</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="contact-method">
+                    <div class="contact-icon">✉️</div>
+                    <div class="contact-info">
+                        <div class="contact-label">Email</div>
+                        <div class="contact-value">
+                            <a href="mailto:info@smart-wash.si">info@smart-wash.si</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-main">
+                <div class="footer-brand">
+                    <div class="footer-logo">Smart Wash</div>
+                    <div class="footer-tagline">
+                        <span class="lang-si">Samopostrežne pralnice Ljubljana</span>
+                        <span class="lang-en">Self-service laundromats Ljubljana</span>
+                    </div>
+                </div>
+                <div class="footer-locations">TC Jarše · Galjevica</div>
+            </div>
+            <div class="footer-copyright">
+                &copy; 2025 Smart Wash. <span class="lang-si">Vse pravice pridržane.</span><span class="lang-en">All rights reserved.</span>
+                <div class="footer-links">
+                    <a href="privacy.html">
+                        <span class="lang-si">Politika zasebnosti</span>
+                        <span class="lang-en">Privacy Policy</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Cookie Notice -->
+    <div class="cookie-notice" id="cookieNotice">
+        <div class="cookie-notice-content">
+            <div class="cookie-notice-text">
+                <span class="lang-si">
+                    🍪 Ta spletna stran uporablja Google Maps za prikaz lokacij. Google lahko namesti tehnične piškotke za delovanje kart.
+                    <a href="privacy.html">Več o zasebnosti</a>
+                </span>
+                <span class="lang-en">
+                    🍪 This website uses Google Maps to display locations. Google may install technical cookies for maps functionality.
+                    <a href="privacy.html">Learn more</a>
+                </span>
+            </div>
+            <div class="cookie-notice-actions">
+                <button class="cookie-notice-btn accept" onclick="acceptCookies()">
+                    <span class="lang-si">Razumem</span>
+                    <span class="lang-en">I understand</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Widget -->
+    <button id="chatButton" class="chat-button">
+        💬
+    </button>
+
+    <div id="chatWidget" class="chat-widget">
+        <div class="chat-header">
+            <div class="chat-header-info">
+                <h3>Smart Wash Chat</h3>
+                <span class="chat-status">Online</span>
+            </div>
+            <button id="closeChat" class="close-chat">×</button>
+        </div>
+
+        <div id="chatMessages" class="chat-messages">
+            <!-- Messages will be added here -->
+        </div>
+
+        <div class="chat-input-container">
+            <input
+                type="text"
+                id="chatInput"
+                class="chat-input"
+                placeholder="Napišite sporočilo..."
+                autocomplete="off"
+            />
+            <button id="sendMessage" class="send-button">
+                ➤
+            </button>
+        </div>
+    </div>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Header scroll effect
+        const header = document.getElementById('header');
+        window.addEventListener('scroll', () => {
+            if (window.pageYOffset > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Language switcher
+        const langBtns = document.querySelectorAll('.lang-btn');
+        const body = document.body;
+
+        langBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const lang = btn.dataset.lang;
+                body.setAttribute('data-lang', lang);
+                langBtns.forEach(b => b.classList.remove('active'));
+
+                // Update all language buttons (desktop and mobile)
+                document.querySelectorAll('.lang-btn').forEach(b => {
+                    if (b.dataset.lang === lang) {
+                        b.classList.add('active');
+                    } else {
+                        b.classList.remove('active');
+                    }
+                });
+            });
+        });
+
+        // Mobile menu toggle
+        function toggleMobileMenu() {
+            const mobileMenu = document.getElementById('mobileMenu');
+            const menuBtn = document.querySelector('.mobile-menu-btn');
+            mobileMenu.classList.toggle('active');
+            menuBtn.classList.toggle('active');
+            document.body.style.overflow = mobileMenu.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // Switch language (for mobile menu)
+        function switchLanguage(lang) {
+            body.setAttribute('data-lang', lang);
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                if (btn.dataset.lang === lang) {
+                    btn.classList.add('active');
+                } else {
+                    btn.classList.remove('active');
+                }
+            });
+        }
+
+        // Cookie Notice functionality
+        function acceptCookies() {
+            localStorage.setItem('cookieConsent', 'accepted');
+            document.getElementById('cookieNotice').classList.remove('show');
+        }
+
+        // Show cookie notice if not previously accepted
+        window.addEventListener('load', function() {
+            const cookieConsent = localStorage.getItem('cookieConsent');
+            if (!cookieConsent) {
+                setTimeout(function() {
+                    document.getElementById('cookieNotice').classList.add('show');
+                }, 1000);
+            }
+        });
+
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const headerHeight = header.offsetHeight;
+                    const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - headerHeight - 20;
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Chat Widget Toggle
+        const chatButton = document.getElementById('chatButton');
+        const chatWidget = document.getElementById('chatWidget');
+        const closeChatBtn = document.getElementById('closeChat');
+        const chatInput = document.getElementById('chatInput');
+        const sendMessageBtn = document.getElementById('sendMessage');
+        const chatMessages = document.getElementById('chatMessages');
+
+        chatButton.addEventListener('click', function() {
+            chatWidget.classList.add('active');
+            chatButton.style.display = 'none';
+            chatInput.focus();
+        });
+
+        closeChatBtn.addEventListener('click', function() {
+            chatWidget.classList.remove('active');
+            chatButton.style.display = 'flex';
+        });
+
+        // Chat configuration
+        const API_URL = 'http://localhost:3000'; // Change to your server URL in production
+        const SESSION_ID = generateSessionId();
+        let isOperatorMode = false;
+        let lastMessageTime = new Date().toISOString();
+        let pollingInterval = null;
+
+        // Generate unique session ID
+        function generateSessionId() {
+            return 'session-' + Math.random().toString(36).substring(2, 15) +
+                   Math.random().toString(36).substring(2, 15);
+        }
+
+        // Send message to server
+        async function sendMessage() {
+            const message = chatInput.value.trim();
+            if (!message) return;
+
+            // Add user message
+            addMessage(message, 'user');
+            chatInput.value = '';
+
+            // Show typing indicator
+            showTyping();
+
+            try {
+                const response = await fetch(`${API_URL}/api/chat`, {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({
+                        message: message,
+                        sessionId: SESSION_ID
+                    })
+                });
+
+                const data = await response.json();
+
+                hideTyping();
+
+                if (data.error) {
+                    addMessage('Prišlo je do napake. Prosimo, poskusite znova.\\nAn error occurred. Please try again.', 'bot');
+                    return;
+                }
+
+                addMessage(data.response, 'bot');
+
+                // Update operator mode status
+                if (data.operatorMode && !isOperatorMode) {
+                    isOperatorMode = true;
+                    updateChatStatus('Operator');
+                    startPolling(); // Start polling for operator messages
+                }
+
+            } catch (error) {
+                hideTyping();
+                console.error('Error sending message:', error);
+                addMessage('Povezava s strežnikom ni uspela. Prosimo, preverite ali je strežnik zagnan.\\nConnection to server failed. Please check if server is running.', 'bot');
+            }
+        }
+
+        function addMessage(text, sender) {
+            const messageDiv = document.createElement('div');
+            messageDiv.className = `chat-message ${sender}`;
+            messageDiv.innerHTML = `
+                <div class="message-bubble">
+                    <p>${escapeHtml(text)}</p>
+                    <span class="message-time">${new Date().toLocaleTimeString('sl-SI', {hour: '2-digit', minute: '2-digit'})}</span>
+                </div>
+            `;
+            chatMessages.appendChild(messageDiv);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+            lastMessageTime = new Date().toISOString();
+        }
+
+        function escapeHtml(text) {
+            const div = document.createElement('div');
+            div.textContent = text;
+            return div.innerHTML;
+        }
+
+        let typingIndicator = null;
+
+        function showTyping() {
+            if (typingIndicator) return;
+
+            typingIndicator = document.createElement('div');
+            typingIndicator.className = 'chat-message bot typing-indicator';
+            typingIndicator.innerHTML = `
+                <div class="message-bubble">
+                    <div class="typing-dots">
+                        <span></span><span></span><span></span>
+                    </div>
+                </div>
+            `;
+            chatMessages.appendChild(typingIndicator);
+            chatMessages.scrollTop = chatMessages.scrollHeight;
+        }
+
+        function hideTyping() {
+            if (typingIndicator) {
+                typingIndicator.remove();
+                typingIndicator = null;
+            }
+        }
+
+        function updateChatStatus(status) {
+            const statusElement = document.querySelector('.chat-status');
+            if (statusElement) {
+                statusElement.textContent = status;
+            }
+        }
+
+        // Poll for new messages from operator
+        function startPolling() {
+            if (pollingInterval) return;
+
+            pollingInterval = setInterval(async () => {
+                try {
+                    const response = await fetch(`${API_URL}/api/messages/${SESSION_ID}?lastMessageTime=${lastMessageTime}`);
+                    const data = await response.json();
+
+                    if (data.messages && data.messages.length > 0) {
+                        data.messages.forEach(msg => {
+                            addMessage(msg.content, 'bot');
+                        });
+                    }
+                } catch (error) {
+                    console.error('Polling error:', error);
+                }
+            }, 2000); // Poll every 2 seconds
+        }
+
+        function stopPolling() {
+            if (pollingInterval) {
+                clearInterval(pollingInterval);
+                pollingInterval = null;
+            }
+        }
+
+        sendMessageBtn.addEventListener('click', sendMessage);
+        chatInput.addEventListener('keypress', function(e) {
+            if (e.key === 'Enter' && !e.shiftKey) {
+                e.preventDefault();
+                sendMessage();
+            }
+        });
+
+        // Initial greeting message
+        setTimeout(() => {
+            addMessage('Pozdravljeni! Kako vam lahko pomagamo? 👋\\nHello! How can we help you? 👋', 'bot');
+        }, 500);
+
+        // Cleanup on page unload
+        window.addEventListener('beforeunload', () => {
+            stopPolling();
+        });
+
+        // Tab switching function
+        function switchTab(event, tabId) {
+            // Remove active class from all tabs and content
+            const tabButtons = document.querySelectorAll('.tab-button');
+            const tabContents = document.querySelectorAll('.tab-content');
+
+            tabButtons.forEach(btn => btn.classList.remove('active'));
+            tabContents.forEach(content => content.classList.remove('active'));
+
+            // Add active class to clicked tab and corresponding content
+            event.currentTarget.classList.add('active');
+            document.getElementById(tabId).classList.add('active');
+        }
+    </script>
+</body>
+</html>
