@@ -408,13 +408,14 @@ function getSession(sessionId) {
 
 // Translate text to Russian if needed
 async function translateToRussian(text, sourceLanguage) {
-    // Don't translate if already in Russian, Slovenian, or English
-    const noTranslateLanguages = ['Russian', 'Slovenian', 'English'];
-    if (noTranslateLanguages.includes(sourceLanguage)) {
+    // Only skip translation if already in Russian
+    if (sourceLanguage === 'Russian') {
         return text;
     }
 
     try {
+        console.log(`Translating from ${sourceLanguage} to Russian: "${text.substring(0, 50)}..."`);
+
         const response = await anthropic.messages.create({
             model: 'claude-3-haiku-20240307',
             max_tokens: 500,
@@ -425,10 +426,12 @@ async function translateToRussian(text, sourceLanguage) {
             }]
         });
 
-        return response.content[0].text.trim();
+        const translated = response.content[0].text.trim();
+        console.log(`Translation result: "${translated.substring(0, 50)}..."`);
+        return translated;
     } catch (error) {
         console.error('Translation error:', error);
-        return text; // Return original if translation fails
+        return `[${sourceLanguage}] ${text}`; // Return original with language tag if translation fails
     }
 }
 
@@ -705,20 +708,45 @@ app.post('/api/chat', async (req, res) => {
                 const detectedLanguage = languageDetectionResponse.content[0].text.trim();
                 console.log(`Detected language: ${detectedLanguage} from message: "${message}"`);
 
-                // Validate and set language
-                const validLanguages = ['Slovenian', 'English', 'Russian', 'Croatian', 'Serbian', 'Italian',
-                                       'German', 'Spanish', 'French', 'Ukrainian', 'Polish', 'Czech', 'Portuguese'];
-
-                if (validLanguages.includes(detectedLanguage)) {
+                // Check if language detection returned something valid
+                // (should be a single word, max 20 characters)
+                if (detectedLanguage && detectedLanguage.length > 0 && detectedLanguage.length < 20 && !detectedLanguage.includes(' ')) {
                     session.language = detectedLanguage;
                     console.log(`Language set to: ${detectedLanguage}`);
                 } else {
-                    console.log(`Unknown language "${detectedLanguage}", defaulting to Slovenian`);
-                    session.language = 'Slovenian';
+                    // Language detection failed or returned invalid value
+                    console.log(`Invalid language detected: "${detectedLanguage}", defaulting to English`);
+                    session.language = 'English';
+
+                    // Send error message in English
+                    const errorMessage = '⚠️ Sorry, we could not detect your language. Please continue in English.';
+                    session.messages.push({
+                        role: 'assistant',
+                        content: errorMessage,
+                        timestamp: new Date()
+                    });
+
+                    return res.json({
+                        response: errorMessage,
+                        operatorMode: false
+                    });
                 }
             } catch (error) {
                 console.error('Language detection error:', error);
-                session.language = 'Slovenian'; // Fallback to default
+                session.language = 'English'; // Fallback to English
+
+                // Send error message in English
+                const errorMessage = '⚠️ Sorry, we could not detect your language. Please continue in English.';
+                session.messages.push({
+                    role: 'assistant',
+                    content: errorMessage,
+                    timestamp: new Date()
+                });
+
+                return res.json({
+                    response: errorMessage,
+                    operatorMode: false
+                });
             }
         }
 
