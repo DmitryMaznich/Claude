@@ -79,7 +79,11 @@
       "Bash(timeout 3 tail:*)",
       "Bash(exit:*)",
       "Bash(netstat:*)",
-      "Bash(python -m json.tool:*)"
+      "Bash(python -m json.tool:*)",
+      "WebFetch(domain:medium.com)",
+      "WebFetch(domain:betterstack.com)",
+      "WebFetch(domain:www.codecademy.com)",
+      "WebFetch(domain:www.aifire.co)"
     ]
   }
 }
