@@ -1,0 +1,15 @@
+# robots.txt for Smart Wash - Samopostrežna Pralnica Ljubljana
+# https://smart-wash.si
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://smart-wash.si/sitemap.xml
+
+# Crawl-delay (optional, helps with server load)
+Crawl-delay: 1
+
+# Disallow admin or unnecessary paths (if you have any)
+# Disallow: /admin/
+# Disallow: /temp/
