@@ -7,7 +7,7 @@
     <!-- Primary Meta Tags -->
     <title>Smart Wash - Samopostrežna Pralnica Ljubljana | Odprto Vsak Dan</title>
     <meta name="title" content="Smart Wash - Samopostrežna Pralnica Ljubljana | Odprto Vsak Dan">
-    <meta name="description" content="Smart Wash samopostrežna pralnica v Ljubljani. Galjevica in TC Jarše. Odprto vsak dan z zgodnjimi in poznimi urami. Stroji do 20 kg, detergent vključen, parking brezplačen.">
+    <meta name="description" content="Smart Wash samopostrežna pralnica Ljubljana. 2 lokaciji: Galjevica 6a (06:00-23:00 vsak dan) in TC Jarše Beblerjev trg 2 (08:00-21:00 Pon-Sob). Stroji do 20 kg, detergent vključen, parking brezplačen.">
     <meta name="keywords" content="pralnica Ljubljana, samopostrežna pralnica, pranje perila, sušenje perila, Smart Wash, Galjevica, TC Jarše, laundromat Ljubljana">
     <meta name="author" content="Smart Wash">
     <meta name="robots" content="index, follow">
@@ -32,6 +32,11 @@
     <meta property="twitter:title" content="Smart Wash - Samopostrežna Pralnica Ljubljana">
     <meta property="twitter:description" content="Moderna samopostrežna pralnica v Ljubljani. Stroji do 20 kg, detergent vključen, parking brezplačen.">
     <meta property="twitter:image" content="https://smart-wash.si/og-image.jpg">
+
+    <!-- Hreflang for multilingual support -->
+    <link rel="alternate" hreflang="sl" href="https://smart-wash.si/" />
+    <link rel="alternate" hreflang="en" href="https://smart-wash.si/?lang=en" />
+    <link rel="alternate" hreflang="x-default" href="https://smart-wash.si/" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -1652,7 +1657,7 @@
             width: fit-content;
         }
 
-        .location-amenities-new::before {
+        /*.location-amenities-new::before {
             content: '';
             position: absolute;
             top: -20px;
@@ -1662,7 +1667,7 @@
             height: 1px;
             background: linear-gradient(90deg, transparent, #0097DA 20%, #0097DA 80%, transparent);
             opacity: 0.3;
-        }
+        }*/
 
         .location-amenities-new::after {
             content: '';
@@ -1681,10 +1686,10 @@
             flex-direction: column;
             align-items: center;
             justify-content: flex-end;
-            gap: 8px;
-            margin: 0 -5px 0 0;
+            gap: 0px;
+            margin: 0 0px 0 0;
             padding: 0;
-            min-height: 215px;
+            min-height: 240px;
         }
 
         .amenity-icon-animated {
@@ -1697,6 +1702,7 @@
         .amenity-icon-large {
             transform: scale(1.2);
             transform-origin: bottom center;
+            margin-bottom: -1px;
         }
 
         .amenity-label-new {
@@ -2458,6 +2464,124 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
+        /* DESKTOP ONLY - Locations Grid 2 columns */
+        @media (min-width: 1025px) {
+            .locations-grid {
+                max-width: 1400px !important;
+                grid-template-columns: 1fr 1fr !important;
+                gap: 60px !important;
+                display: grid !important;
+                padding: 0px;
+                align-items: start !important;
+                margin-top: -70px !important;
+            }
+
+            .location-card:nth-child(1) {
+                min-height: 800px !important;
+            }
+
+            .location-card:nth-child(2) {
+                min-height: 800px !important;
+                border-bottom: 1px solid #555 !important;
+            }
+
+            .location-content {
+                margin-bottom: 20px !important;
+            }
+
+            .location-info {
+                margin-bottom: 20px !important;
+            }
+
+            .location-amenities-new {
+                margin-top: -20px !important;
+                gap: 30px !important;
+            }
+
+            .location-amenities-new::after {
+                bottom: 28px !important;
+                width: 150%;
+            }
+
+            /* Увеличение иконок на 20% */
+            .amenity-icon-large {
+                transform: scale(1.44) !important;
+                padding-bottom: 0px;
+            }
+
+            .amenity-icon-small-wash {
+                transform: scale(1.32) !important;
+            }
+
+            .amenity-icon-dryer {
+                transform: scale(1.26) translateY(-43px) !important;
+                padding-bottom: 2px;
+            }
+
+            .amenity-group {
+                gap:12px !important;
+            }
+
+            .amenity-icon-animated {
+                height: 189px !important;
+                margin: 0 12px 0 0;
+            }
+
+            .day-check {
+                display: none !important;
+            }
+
+            .day-name {
+                display: none !important;
+            }
+
+            /* Выравнивание расписания по левому краю */
+            .schedule-visual {
+                justify-content: flex-start !important;
+                display: flex !important;
+                /*align-self: center !important;*/
+                margin-left: -300px !important;
+            }
+
+            .schedule-text {
+                text-align: left !important;
+            }
+
+            /* Часы как в мобильной версии */
+            .schedule-hours-large {
+                font-size: 32px !important;
+                font-weight: 700 !important;
+                color: #0097da !important;
+                letter-spacing: 1px !important;
+                text-align: left !important;
+            }
+
+            .schedule-days-small {
+                font-size: 13px !important;
+                font-weight: 500 !important;
+                color: #666 !important;
+                text-align: right !important;
+            }
+
+            /* Заголовок остается слева */
+            .location-info-label {
+                text-align: left !important;
+                justify-content: flex-start !important;
+                align-self: flex-start !important;
+                width: 100% !important;
+            }
+
+            .location-info-content {
+                display: flex !important;
+                align-items: center !important;
+                flex-direction: column !important;
+            }
+
+            .day-box {
+                display: none !important;
+            }
+        }
+
         /* RESPONSIVE */
         @media (max-width: 1024px) {
             .hero-container {
@@ -2608,14 +2732,14 @@
 
         .chat-header-info h3 {
             margin: 0;
-            font-size: 1.2rem;
+            font-size: 1.56rem;
             font-weight: 600;
         }
 
         .chat-status {
             display: flex;
             align-items: center;
-            font-size: 0.85rem;
+            font-size: 1.1rem;
             opacity: 0.9;
             margin-top: 4px;
         }
@@ -2723,6 +2847,11 @@
             opacity: 0.7;
             margin-top: 4px;
             display: block;
+        }
+
+        .message-status {
+            font-size: 0.85em;
+            transition: color 0.3s ease;
         }
 
         .operator-badge {
@@ -3253,12 +3382,13 @@
             /* Mobile: Location Cards */
             .locations-grid {
                 grid-template-columns: 1fr;
-                padding: 5px 5px 820px 5px;
+                padding: 5px 5px 20px 5px;
                 gap: 32px !important;
             }
 
             .location-card {
                 border-radius: 16px;
+                max-height: 1000px !important;
             }
 
             .location-card:nth-child(2) {
@@ -3557,14 +3687,14 @@
 
         .chat-header-info h3 {
             margin: 0;
-            font-size: 1.2rem;
+            font-size: 1.56rem;
             font-weight: 600;
         }
 
         .chat-status {
             display: flex;
             align-items: center;
-            font-size: 0.85rem;
+            font-size: 1.1rem;
             opacity: 0.9;
             margin-top: 4px;
         }
@@ -3577,6 +3707,41 @@
             border-radius: 50%;
             margin-right: 6px;
             animation: chatPulse 2s infinite;
+        }
+
+        .chat-hint {
+            display: block;
+            font-size: 0.8rem;
+            opacity: 0.75;
+            margin-top: 6px;
+            font-style: italic;
+        }
+
+        .chat-hint code {
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            padding: 2px 6px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85em;
+            font-style: normal;
+            font-weight: 600;
+        }
+
+        .chat-hint span {
+            display: none;
+        }
+
+        .chat-hint span[data-lang="sl"] {
+            display: inline;
+        }
+
+        [data-lang="en"] .chat-hint span[data-lang="sl"] {
+            display: none;
+        }
+
+        [data-lang="en"] .chat-hint span[data-lang="en"] {
+            display: inline;
         }
 
         @keyframes chatPulse {
@@ -3672,6 +3837,11 @@
             opacity: 0.7;
             margin-top: 4px;
             display: block;
+        }
+
+        .message-status {
+            font-size: 0.85em;
+            transition: color 0.3s ease;
         }
 
         .operator-badge {
@@ -3814,37 +3984,52 @@
         }
     </style>
 
-    <!-- Structured Data (Schema.org) -->
+    <!-- Structured Data (Schema.org) - Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "@id": "https://smart-wash.si/#organization",
+        "name": "Smart Wash",
+        "url": "https://smart-wash.si",
+        "logo": "https://smart-wash.si/logo_smart_wash.svg",
+        "telephone": "+386-1-777-82-70"
+    }
+    </script>
+
+    <!-- Structured Data - Galjevica Location -->
     <script type="application/ld+json">
     {
         "@context": "https://schema.org",
         "@type": "LocalBusiness",
-        "@id": "https://smart-wash.si",
-        "name": "Smart Wash",
-        "description": "Samopostrežna pralnica perila v Ljubljani z modernimi stroji do 20 kg",
+        "@id": "https://smart-wash.si/#galjevica",
+        "name": "Smart Wash Galjevica",
+        "description": "Samopostrežna pralnica perila v Ljubljani - Galjevica. Odprto vsak dan 06:00-23:00. Stroji do 20 kg, detergent vključen, parking brezplačen.",
         "url": "https://smart-wash.si",
         "image": "https://smart-wash.si/logo_smart_wash.svg",
         "telephone": "+386-1-777-82-70",
-        "priceRange": "€€",
+        "priceRange": "€-€€",
         "address": {
             "@type": "PostalAddress",
+            "streetAddress": "Galjevica 6a",
             "addressLocality": "Ljubljana",
+            "postalCode": "1000",
+            "addressRegion": "Ljubljana",
             "addressCountry": "SI"
         },
-        "openingHoursSpecification": {
-            "@type": "OpeningHoursSpecification",
-            "dayOfWeek": [
-                "Monday",
-                "Tuesday",
-                "Wednesday",
-                "Thursday",
-                "Friday",
-                "Saturday",
-                "Sunday"
-            ],
-            "opens": "06:00",
-            "closes": "23:00"
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "46.035539",
+            "longitude": "14.519709"
         },
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday"],
+                "opens": "06:00",
+                "closes": "23:00"
+            }
+        ],
         "amenityFeature": [
             {
                 "@type": "LocationFeatureSpecification",
@@ -3855,6 +4040,142 @@
                 "@type": "LocationFeatureSpecification",
                 "name": "Detergent Included",
                 "value": true
+            },
+            {
+                "@type": "LocationFeatureSpecification",
+                "name": "Self-Service",
+                "value": true
+            }
+        ],
+        "paymentAccepted": "Cash, Credit Card, Contactless Payment",
+        "currenciesAccepted": "EUR"
+    }
+    </script>
+
+    <!-- Structured Data - TC Jarše Location -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "LocalBusiness",
+        "@id": "https://smart-wash.si/#tc-jarse",
+        "name": "Smart Wash TC Jarše",
+        "description": "Samopostrežna pralnica perila v Ljubljani - TC Jarše. Odprto Pon-Sob 08:00-21:00. Stroji do 20 kg, detergent vključen, parking brezplačen.",
+        "url": "https://smart-wash.si",
+        "image": "https://smart-wash.si/logo_smart_wash.svg",
+        "telephone": "+386-1-777-82-70",
+        "priceRange": "€-€€",
+        "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "Beblerjev trg 2",
+            "addressLocality": "Ljubljana",
+            "postalCode": "1000",
+            "addressRegion": "Ljubljana",
+            "addressCountry": "SI"
+        },
+        "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": "46.070485",
+            "longitude": "14.543860"
+        },
+        "openingHoursSpecification": [
+            {
+                "@type": "OpeningHoursSpecification",
+                "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+                "opens": "08:00",
+                "closes": "21:00"
+            }
+        ],
+        "amenityFeature": [
+            {
+                "@type": "LocationFeatureSpecification",
+                "name": "Free Parking",
+                "value": true
+            },
+            {
+                "@type": "LocationFeatureSpecification",
+                "name": "Detergent Included",
+                "value": true
+            },
+            {
+                "@type": "LocationFeatureSpecification",
+                "name": "Self-Service",
+                "value": true
+            }
+        ],
+        "paymentAccepted": "Cash, Credit Card, Contactless Payment",
+        "currenciesAccepted": "EUR"
+    }
+    </script>
+
+    <!-- FAQ Schema -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+            {
+                "@type": "Question",
+                "name": "Kje se nahajajo pralnice Smart Wash v Ljubljani?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Smart Wash ima dve lokaciji v Ljubljani: Galjevica 6a (odprto vsak dan 06:00-23:00) in TC Jarše na Beblerjevem trgu 2 (odprto Pon-Sob 08:00-21:00). Obe lokaciji imajo brezplačen parking."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Koliko stane pranje v Smart Wash pralnici?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Cene se začnejo že pri 5€ za manjše količine perila. Ponujamo različne velikosti strojev od 10 kg do 20 kg. Detergent je vključen v ceno."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Ali je detergent vključen v ceno pranja?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Da, detergent je pri vseh naših strojih vključen v ceno pranja. Ne potrebujete svojega detergenta."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Koliko časa traja pranje in sušenje?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Za manjše količine do 3-4 kg običajnega perila lahko celoten cikel pranja in sušenja traja približno 1 uro. Dejansko trajanje je odvisno od količine in vrste perila."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Ali je na voljo parking pri pralnicah Smart Wash?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Da, pri obeh lokacijah (Galjevica in TC Jarše) je na voljo brezplačen parking za naše stranke."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Kakšne načine plačila sprejemate?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Sprejemamo gotovino, plačilne kartice in brezkontaktno plačevanje."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Ali so pralnice odprte ob vikendih?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Da. Pralnica Galjevica je odprta vsak dan vključno z nedeljami (06:00-23:00). Pralnica TC Jarše je odprta ob sobotah (08:00-21:00), ob nedeljah pa je zaprta."
+                }
+            },
+            {
+                "@type": "Question",
+                "name": "Ali lahko operem velike predmete kot so odeje in zavese?",
+                "acceptedAnswer": {
+                    "@type": "Answer",
+                    "text": "Da, imamo stroje s kapaciteto do 20 kg, ki so idealni za velike predmete kot so odeje, zavese, blazine in druga večja perila."
+                }
             }
         ]
     }
@@ -3945,8 +4266,8 @@
         <div class="hero-container">
             <div class="hero-content">
                 <h1 class="hero-title">
-                    <span class="lang-si">Operi in posuši<br>v <span class="hero-title-highlight">dobri uri</span><sup>*</sup></span>
-                    <span class="lang-en">Wash and dry<br>in <span class="hero-title-highlight">just an hour</span><sup>*</sup></span>
+                    <span class="lang-si">Smart Wash Ljubljana - Operi in posuši<br>v <span class="hero-title-highlight">dobri uri</span><sup>*</sup></span>
+                    <span class="lang-en">Smart Wash Ljubljana - Wash and dry<br>in <span class="hero-title-highlight">just an hour</span><sup>*</sup></span>
                 </h1>
 
                 <p class="hero-subtitle">
@@ -4674,7 +4995,7 @@
 
         <div class="locations-grid">
             <!-- TC JARŠE -->
-            <div class="location-card" style="overflow: visible; height: 800px;">
+            <div class="location-card">
                 <div class="location-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
                     <h3 class="location-name" style="margin-bottom: 0;">
                         <span class="lang-si">1. Pralnica TC Jarše</span>
@@ -5196,9 +5517,10 @@
                     </div>
                 </div>
             </div>
+            </div>
 
-            <!-- THIRD LOCATION -->
-            <div class="location-card" style="height: 800px; margin-top: 30px;">
+            <!-- SECOND LOCATION - Galjevica -->
+            <div class="location-card">
                 <div class="location-header" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                     <h3 class="location-name" style="margin-bottom: 0;">
                         <span class="lang-si">2. Pralnica Galjevica</span>
@@ -6500,7 +6822,11 @@
         <div class="chat-header">
             <div class="chat-header-info">
                 <h3>Smart Wash Chat</h3>
-                <span class="chat-status">AI online</span>
+                <span class="chat-status" id="chatStatus">AI online</span>
+                <span class="chat-hint" id="chatHint">
+                    <span data-lang="sl">Napiši <code>/live</code> za pogovor s sodelavcem</span>
+                    <span data-lang="en">Type <code>/live</code> to chat with a live agent</span>
+                </span>
             </div>
             <button id="closeChat" class="close-chat">×</button>
         </div>
@@ -6818,6 +7144,11 @@
         const chatMessages = document.getElementById('chatMessages');
         const photoButton = document.getElementById('photoButton');
         const photoInput = document.getElementById('photoInput');
+        const chatStatus = document.getElementById('chatStatus');
+        const chatHint = document.getElementById('chatHint');
+
+        // Chat mode state
+        let chatMode = 'ai'; // 'ai' or 'live'
 
         chatButton.addEventListener('click', function() {
             chatWidget.classList.add('active');
@@ -6914,10 +7245,84 @@
             }
         }
 
+        // Update message status (sent, delivered, read)
+        function updateMessageStatus(messageId, status) {
+            const messageElement = document.querySelector(`[data-message-id="${messageId}"]`);
+            if (!messageElement) return;
+
+            const statusSpan = messageElement.querySelector('.message-status');
+            if (!statusSpan) return;
+
+            // Update status icon and color
+            switch(status) {
+                case 'sent':
+                    statusSpan.textContent = ' ✓';
+                    statusSpan.style.color = '#999';
+                    statusSpan.style.marginLeft = '4px';
+                    break;
+                case 'delivered':
+                    statusSpan.textContent = ' ✓✓';
+                    statusSpan.style.color = '#999';
+                    statusSpan.style.marginLeft = '4px';
+                    break;
+                case 'read':
+                    statusSpan.textContent = ' ✓✓';
+                    statusSpan.style.color = '#34b7f1';
+                    statusSpan.style.marginLeft = '4px';
+                    break;
+            }
+        }
+
+        // Switch chat mode between AI and live agent
+        function switchChatMode(mode) {
+            chatMode = mode;
+            const currentLang = document.body.getAttribute('data-lang') || 'sl';
+
+            if (mode === 'live') {
+                chatStatus.textContent = currentLang === 'en' ? 'Live agent' : 'Sodelavec';
+                chatHint.innerHTML = currentLang === 'en'
+                    ? '<span data-lang="en">Type <code>/ai</code> to switch back to AI</span><span data-lang="sl">Napiši <code>/ai</code> za vrnitev na AI</span>'
+                    : '<span data-lang="sl">Napiši <code>/ai</code> za vrnitev na AI</span><span data-lang="en">Type <code>/ai</code> to switch back to AI</span>';
+
+                addMessage(
+                    currentLang === 'en'
+                        ? '👤 Connecting you to a live agent. Please wait...'
+                        : '👤 Povezujem vas s sodelavcem. Prosim počakajte...',
+                    'bot'
+                );
+            } else {
+                chatStatus.textContent = 'AI online';
+                chatHint.innerHTML = currentLang === 'en'
+                    ? '<span data-lang="en">Type <code>/live</code> to chat with a live agent</span><span data-lang="sl">Napiši <code>/live</code> za pogovor s sodelavcem</span>'
+                    : '<span data-lang="sl">Napiši <code>/live</code> za pogovor s sodelavcem</span><span data-lang="en">Type <code>/live</code> to chat with a live agent</span>';
+
+                addMessage(
+                    currentLang === 'en'
+                        ? '🤖 Switched back to AI assistant'
+                        : '🤖 Preklopljeno nazaj na AI asistenta',
+                    'bot'
+                );
+            }
+        }
+
         // Send message to server
         async function sendMessage() {
             const message = chatInput.value.trim();
             if (!message) return;
+
+            // Check for mode switch commands
+            // Note: /live is now handled by server, not frontend
+            // if (message.toLowerCase() === '/live') {
+            //     chatInput.value = '';
+            //     switchChatMode('live');
+            //     return;
+            // }
+
+            if (message.toLowerCase() === '/ai') {
+                chatInput.value = '';
+                switchChatMode('ai');
+                return;
+            }
 
             // Request notification permission on first message
             if (notificationPermission === 'default') {
@@ -6925,7 +7330,7 @@
             }
 
             // Add user message and keep reference
-            const userMessageElement = addMessage(message, 'user');
+            const userMessageElement = addMessage(message, 'user', true, null);
             chatInput.value = '';
 
             // Show typing indicator
@@ -6950,6 +7355,12 @@
                 if (data.error) {
                     addMessage('Prišlo je do napake. Prosimo, poskusite znova.\\nAn error occurred. Please try again.', 'bot');
                     return;
+                }
+
+                // Set messageId and initial status if provided by backend
+                if (data.messageId) {
+                    userMessageElement.dataset.messageId = data.messageId;
+                    updateMessageStatus(data.messageId, 'sent');
                 }
 
                 // Update operator mode status BEFORE adding message
@@ -6996,9 +7407,15 @@
             }
         }
 
-        function addMessage(text, sender, updateTimestamp = true) {
+        function addMessage(text, sender, updateTimestamp = true, messageId = null) {
             const messageDiv = document.createElement('div');
             messageDiv.className = `chat-message ${sender}`;
+
+            // Add messageId as data attribute for tracking
+            if (messageId) {
+                messageDiv.dataset.messageId = messageId;
+            }
+
             messageDiv.innerHTML = `
                 <div class="message-bubble">
                     <p>${linkifyUrls(text)}</p>
@@ -7148,6 +7565,15 @@
                         console.log(`⏰ UPDATING lastMessageTime: ${lastMessageTime} → ${newLastMessageTime}`);
                         lastMessageTime = newLastMessageTime;
                         console.log(`✅ lastMessageTime updated to: ${lastMessageTime}`);
+                    }
+
+                    // Process status updates for user messages
+                    if (data.statusUpdates && data.statusUpdates.length > 0) {
+                        console.log(`📊 POLLING: Processing ${data.statusUpdates.length} status updates`);
+                        data.statusUpdates.forEach(update => {
+                            console.log(`  - Message ${update.messageId}: ${update.status}`);
+                            updateMessageStatus(update.messageId, update.status);
+                        });
                     }
 
                     // Check if operator mode changed
