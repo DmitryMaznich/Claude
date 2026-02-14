@@ -7652,26 +7652,34 @@
     </section>
 
     <!-- FOOTER -->
+    <!-- FOOTER -->
     <footer>
-        <div class="footer-content">
-            <div class="footer-main">
-                <div class="footer-brand">
-                    <div class="footer-logo">Smart Wash</div>
-                    <div class="footer-tagline">
-                        <span class="lang-si">Samopostrežne pralnice perila Ljubljana</span>
-                        <span class="lang-en">Self-service laundromats Ljubljana</span>
-                    </div>
-                </div>
-                <div class="footer-locations">TC Jarše · Galjevica</div>
-            </div>
-            <div class="footer-copyright">
-                &copy; 2025 Smart Wash. <span class="lang-si">Vse pravice pridržane.</span><span class="lang-en">All
-                    rights reserved.</span>
-                <div class="footer-links">
+        <div class="footer-content" style="padding-top: 20px; padding-bottom: 20px;">
+            <div class="footer-copyright" style="border-top: none; padding-top: 0;">
+                &copy; 2025 Smart Washing d.o.o.
+                <span class="lang-si">Vse pravice pridržane.</span>
+                <span class="lang-en">All rights reserved.</span>
+
+                <div class="footer-links"
+                    style="margin-top: 12px; display: flex; gap: 24px; justify-content: center; align-items: center; flex-wrap: wrap;">
                     <a href="privacy.html">
                         <span class="lang-si">Politika zasebnosti</span>
                         <span class="lang-en">Privacy Policy</span>
                     </a>
+                    <a href="#" class="inactive-link" style="opacity: 0.6; cursor: default; text-decoration: none;">
+                        <span class="lang-si">Pogoji uporabe</span>
+                        <span class="lang-en">Terms of Use</span>
+                    </a>
+                    <button onclick="document.getElementById('cookieNotice').classList.add('show')"
+                        style="background: none; border: none; padding: 0; color: rgba(255,255,255,0.6); font-family: inherit; font-size: 14px; cursor: pointer; transition: color 0.2s;">
+                        <span class="lang-si">Piškotki</span>
+                        <span class="lang-en">Cookies</span>
+                    </button>
+                    <style>
+                        .footer-links button:hover {
+                            color: white !important;
+                        }
+                    </style>
                 </div>
             </div>
         </div>
