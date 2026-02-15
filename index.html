@@ -165,6 +165,169 @@
             transform: translateY(-2px);
         }
 
+        /* Logo washing animation */
+        .logo-area {
+            position: relative;
+        }
+
+        .logo-image {
+            animation: logoWashCycle 10s linear infinite;
+            transform-origin: center center;
+        }
+
+        /* Washing cycle animation */
+        @keyframes logoWashCycle {
+            0% {
+                transform: rotate(0deg) scale(1);
+                filter: drop-shadow(0 2px 4px rgba(0, 151, 218, 0.15)) blur(0px);
+            }
+            2% {
+                transform: rotate(0deg) scale(1.02);
+                filter: drop-shadow(0 3px 6px rgba(0, 151, 218, 0.2)) blur(0px);
+            }
+            5% {
+                transform: rotate(72deg) scale(1.05);
+                filter: drop-shadow(0 4px 8px rgba(0, 151, 218, 0.3)) blur(1.5px);
+            }
+            15% {
+                transform: rotate(360deg) scale(1.05);
+                filter: drop-shadow(0 4px 8px rgba(0, 151, 218, 0.3)) blur(2.5px);
+            }
+            25% {
+                transform: rotate(720deg) scale(1.05);
+                filter: drop-shadow(0 4px 8px rgba(0, 151, 218, 0.3)) blur(2.5px);
+            }
+            28% {
+                transform: rotate(720deg) scale(1.02);
+                filter: drop-shadow(0 3px 6px rgba(0, 151, 218, 0.25)) blur(1px);
+            }
+            30% {
+                transform: rotate(720deg) scale(1);
+                filter: drop-shadow(0 2px 4px rgba(0, 151, 218, 0.15)) blur(0px);
+            }
+            50%, 100% {
+                transform: rotate(720deg) scale(1);
+                filter: drop-shadow(0 2px 4px rgba(0, 151, 218, 0.15)) blur(0px);
+            }
+        }
+
+        /* Sparkle effects */
+        .logo-area::before,
+        .logo-area::after {
+            content: '';
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(255, 255, 255, 0) 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            opacity: 0;
+            z-index: 10;
+        }
+
+        .logo-area::before {
+            top: 20%;
+            left: 15%;
+            animation: sparkle1 10s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+                        0 0 40px rgba(0, 151, 218, 0.6);
+        }
+
+        .logo-area::after {
+            top: 60%;
+            right: 20%;
+            animation: sparkle2 10s ease-in-out infinite;
+            box-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
+                        0 0 40px rgba(0, 151, 218, 0.6);
+        }
+
+        @keyframes sparkle1 {
+            0%, 30%, 100% {
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            32% {
+                opacity: 1;
+                transform: scale(1) rotate(0deg);
+            }
+            34% {
+                opacity: 0;
+                transform: scale(0.5) rotate(90deg);
+            }
+        }
+
+        @keyframes sparkle2 {
+            0%, 34%, 100% {
+                opacity: 0;
+                transform: scale(0) rotate(0deg);
+            }
+            36% {
+                opacity: 1;
+                transform: scale(1.2) rotate(0deg);
+            }
+            38% {
+                opacity: 0;
+                transform: scale(0.5) rotate(-90deg);
+            }
+        }
+
+        /* Additional sparkles using pseudo-elements on logo-text-wrapper */
+        .logo-text-wrapper {
+            position: relative;
+        }
+
+        .logo-text-wrapper::before,
+        .logo-text-wrapper::after {
+            content: '✨';
+            position: absolute;
+            font-size: 24px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: 10;
+        }
+
+        .logo-text-wrapper::before {
+            top: -10px;
+            left: 20%;
+            animation: sparkleText1 10s ease-in-out infinite;
+        }
+
+        .logo-text-wrapper::after {
+            bottom: -10px;
+            right: 30%;
+            animation: sparkleText2 10s ease-in-out infinite;
+        }
+
+        @keyframes sparkleText1 {
+            0%, 38%, 100% {
+                opacity: 0;
+                transform: translateY(0) scale(0) rotate(0deg);
+            }
+            40% {
+                opacity: 1;
+                transform: translateY(-5px) scale(1) rotate(0deg);
+            }
+            42% {
+                opacity: 0;
+                transform: translateY(-10px) scale(0.5) rotate(180deg);
+            }
+        }
+
+        @keyframes sparkleText2 {
+            0%, 42%, 100% {
+                opacity: 0;
+                transform: translateY(0) scale(0) rotate(0deg);
+            }
+            44% {
+                opacity: 1;
+                transform: translateY(5px) scale(1.2) rotate(0deg);
+            }
+            46% {
+                opacity: 0;
+                transform: translateY(10px) scale(0.5) rotate(-180deg);
+            }
+        }
+
         .logo-text-wrapper {
             display: flex;
             flex-direction: column;
@@ -2584,6 +2747,7 @@
         }
 
         .tab-button img,
+        .tab-button svg,
         .tab-button span {
             display: inline-block;
             vertical-align: middle;
@@ -4052,14 +4216,15 @@
                 box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.1);
             }
 
-            .tab-button span[style*="font-size: 40px"] {
-                font-size: 32px !important;
+            .tab-button span[style*="font-size: 52px"] {
+                font-size: 42px !important;
                 margin-right: 8px !important;
             }
 
-            .tab-button img {
-                width: 32px !important;
-                height: 32px !important;
+            .tab-button img,
+            .tab-button svg {
+                width: 42px !important;
+                height: 42px !important;
                 margin-right: 8px !important;
             }
 
@@ -4133,15 +4298,16 @@
                 font-size: 13px;
             }
 
-            .tab-button span[style*="font-size: 40px"],
-            .tab-button span[style*="font-size: 32px"] {
-                font-size: 28px !important;
+            .tab-button span[style*="font-size: 52px"],
+            .tab-button span[style*="font-size: 42px"] {
+                font-size: 36px !important;
                 margin-right: 6px !important;
             }
 
-            .tab-button img {
-                width: 28px !important;
-                height: 28px !important;
+            .tab-button img,
+            .tab-button svg {
+                width: 36px !important;
+                height: 36px !important;
             }
 
             .location-amenities {
@@ -7191,35 +7357,307 @@
             <!-- Tab Navigation -->
             <div class="instruction-tabs">
                 <button class="tab-button active" onclick="switchTab(event, 'rules')">
-                    <span style="font-size: 40px; margin-right: 12px; vertical-align: middle;">📋</span>
+                    <span style="font-size: 52px; margin-right: 12px; vertical-align: middle;">📋</span>
                     <span class="lang-si">Splošna pravila</span>
                     <span class="lang-en">General Rules</span>
                 </button>
                 <button class="tab-button" onclick="switchTab(event, 'tokens')">
-                    <span style="font-size: 40px; margin-right: 12px; vertical-align: middle;">🪙</span>
+                    <span style="font-size: 52px; margin-right: 12px; vertical-align: middle;">🪙</span>
                     <span class="lang-si">Nakup žetonov</span>
                     <span class="lang-en">Buy tokens</span>
                 </button>
                 <button class="tab-button" onclick="switchTab(event, 'washing')">
-                    <img src="washing.png" alt="Washing"
-                        style="width: 40px; height: 40px; object-fit: contain; margin-right: 12px; vertical-align: middle;">
+                    <svg width="52" height="52" viewBox="0 0 58 73" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 12px; vertical-align: middle;">
+                        <!-- Main body -->
+                        <rect x="7" y="4" width="44" height="65" rx="1.5" fill="white" stroke="#0097DA"
+                            stroke-width="2.5" />
+
+                        <!-- Top control panel -->
+                        <rect x="7" y="4" width="44" height="9" rx="1.5" fill="#E8F4F8" stroke="#0097DA"
+                            stroke-width="2.5" />
+
+                        <!-- Display screen -->
+                        <rect x="12" y="6.5" width="19" height="4" rx="0.5" fill="white" stroke="#0097DA"
+                            stroke-width="1" />
+
+                        <!-- Control knob -->
+                        <circle cx="43" cy="8.5" r="3" fill="white" stroke="#0097DA" stroke-width="1.5" />
+                        <circle cx="43" cy="8.5" r="1.5" fill="#0097DA" />
+                        <line x1="43" y1="7" x2="43" y2="5.5" stroke="#0097DA" stroke-width="1"
+                            stroke-linecap="round" />
+
+                        <!-- Door outer frame -->
+                        <circle cx="29" cy="42" r="15" fill="#E8F4F8" stroke="#0097DA" stroke-width="2.5" />
+
+                        <!-- Door glass layers -->
+                        <circle cx="29" cy="42" r="13" fill="white" stroke="#0097DA" stroke-width="1.5"
+                            opacity="0.3" />
+                        <circle cx="29" cy="42" r="11" fill="#8FD8F8" opacity="0.2" stroke="#0097DA"
+                            stroke-width="1" opacity="0.3" />
+                        <circle cx="29" cy="42" r="9" fill="#8FD8F8" opacity="0.3" />
+
+                        <!-- Door handle -->
+                        <rect x="12" y="40" width="3" height="8" rx="1.5" fill="#0097DA" opacity="0.7" />
+
+                        <!-- Rotating drum pattern -->
+                        <g style="transform-origin: 29px 42px; animation: drumRotate 3s linear infinite;">
+                            <circle cx="29" cy="36" r="1" fill="#0097DA" opacity="0.4" />
+                            <circle cx="34" cy="39" r="1" fill="#0097DA" opacity="0.4" />
+                            <circle cx="34" cy="45" r="1" fill="#0097DA" opacity="0.4" />
+                            <circle cx="29" cy="48" r="1" fill="#0097DA" opacity="0.4" />
+                            <circle cx="24" cy="45" r="1" fill="#0097DA" opacity="0.4" />
+                            <circle cx="24" cy="39" r="1" fill="#0097DA" opacity="0.4" />
+                        </g>
+
+                        <!-- Water bubbles -->
+                        <g opacity="0.6">
+                            <circle cx="26" cy="44" r="1.5" fill="#43B0E4">
+                                <animate attributeName="cy" values="44;40;44" dur="2s" repeatCount="indefinite" />
+                            </circle>
+                            <circle cx="32" cy="40" r="1.2" fill="#43B0E4">
+                                <animate attributeName="cy" values="40;36;40" dur="2.5s" repeatCount="indefinite" />
+                            </circle>
+                        </g>
+
+                        <!-- Bottom plinth -->
+                        <rect x="7" y="62" width="44" height="7" fill="#E8F4F8" stroke="#0097DA"
+                            stroke-width="2.5" />
+                    </svg>
                     <span class="lang-si">Pranje</span>
                     <span class="lang-en">Washing</span>
                 </button>
                 <button class="tab-button" onclick="switchTab(event, 'drying')">
-                    <img src="drying.png" alt="Drying"
-                        style="width: 40px; height: 40px; object-fit: contain; margin-right: 12px; vertical-align: middle;">
+                    <svg width="52" height="52" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 12px; vertical-align: middle;">
+                        <!-- Dryer body -->
+                        <rect x="4" y="2" width="52" height="74" rx="2" fill="#9CA3AF" />
+                        <rect x="6" y="4" width="48" height="70" rx="1.5" fill="#D1D5DB" />
+
+                        <!-- Top control panel area -->
+                        <rect x="6" y="4" width="48" height="15" rx="1.5" fill="#D1D5DB" />
+
+                        <!-- Display screen -->
+                        <rect x="37" y="6.5" width="15" height="9" rx="1" fill="#1F2937" />
+                        <rect x="38" y="7.5" width="13" height="7" rx="0.5" fill="#3B82F6" opacity="0.2" />
+
+                        <!-- Display segments (digital) -->
+                        <rect x="40" y="9.5" width="2.5" height="3.5" rx="0.3" fill="#3B82F6" opacity="0.8" />
+                        <rect x="43.5" y="9.5" width="2.5" height="3.5" rx="0.3" fill="#3B82F6" opacity="0.8" />
+                        <rect x="47.5" y="9.5" width="2" height="3.5" rx="0.3" fill="#3B82F6" opacity="0.5" />
+
+                        <!-- Control buttons -->
+                        <circle cx="11" cy="10" r="2.2" fill="#6B7280" />
+                        <circle cx="17.5" cy="10" r="2.2" fill="#6B7280" />
+                        <circle cx="24" cy="10" r="2.2" fill="#6B7280" />
+                        <circle cx="30.5" cy="10" r="2.2" fill="#6B7280" />
+
+                        <!-- Button indicators -->
+                        <circle cx="11" cy="10" r="0.7" fill="#3B82F6" opacity="0.8" />
+                        <circle cx="17.5" cy="10" r="0.7" fill="#6B7280" opacity="0.3" />
+                        <circle cx="24" cy="10" r="0.7" fill="#6B7280" opacity="0.3" />
+
+                        <!-- Separator line -->
+                        <line x1="8" y1="19" x2="52" y2="19" stroke="#6B7280" stroke-width="1" opacity="0.3" />
+
+                        <!-- Door frame -->
+                        <circle cx="30" cy="48.5" r="23.5" fill="#1F2937" />
+                        <circle cx="30" cy="48.5" r="21.5" fill="#111827" />
+                        <circle cx="30" cy="48.5" r="20" fill="#E5E7EB" />
+
+                        <!-- Glass reflection -->
+                        <ellipse cx="23" cy="38" rx="6" ry="8" fill="#ffffff" opacity="0.15" />
+
+                        <!-- Door handle (more prominent) -->
+                        <rect x="28" y="48" width="4" height="1.5" rx="0.75" fill="#6B7280" />
+                        <circle cx="28.5" cy="48.75" r="1" fill="#1F2937" />
+                        <circle cx="31.5" cy="48.75" r="1" fill="#1F2937" />
+
+                        <!-- Drum mesh pattern -->
+                        <circle cx="18" cy="37" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="23" cy="37" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="28" cy="37" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="33" cy="37" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="38" cy="37" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="16" cy="43" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="21" cy="43" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="26" cy="43" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="31" cy="43" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="36" cy="43" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="41" cy="43" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="18" cy="48.5" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="23" cy="48.5" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="33" cy="48.5" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="38" cy="48.5" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="16" cy="54" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="21" cy="54" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="26" cy="54" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="31" cy="54" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="36" cy="54" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="41" cy="54" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="18" cy="60" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="23" cy="60" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="28" cy="60" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="33" cy="60" r="0.9" fill="#9CA3AF" opacity="0.4" />
+                        <circle cx="38" cy="60" r="0.9" fill="#9CA3AF" opacity="0.4" />
+
+                        <!-- Animated clothes tumbling -->
+                        <g style="transform-origin: 30px 48.5px; animation: tumbleTop 4s linear infinite;">
+                            <ellipse cx="30" cy="43" rx="4.5" ry="3.5" fill="#FF9B71" opacity="0.7" />
+                            <ellipse cx="35" cy="48.5" rx="3.5" ry="4.5" fill="#FF6B35" opacity="0.7" />
+                            <ellipse cx="25" cy="52" rx="4" ry="3" fill="#FF9B71" opacity="0.6" />
+                        </g>
+
+                        <!-- Bottom feet -->
+                        <rect x="10" y="73" width="7" height="3" rx="1" fill="#6B7280" />
+                        <rect x="43" y="73" width="7" height="3" rx="1" fill="#6B7280" />
+                    </svg>
                     <span class="lang-si">Sušenje</span>
                     <span class="lang-en">Drying</span>
                 </button>
                 <button class="tab-button" onclick="switchTab(event, 'disinfection')">
-                    <img src="disinfection.png" alt="Disinfection"
-                        style="width: 40px; height: 40px; object-fit: contain; margin-right: 12px; vertical-align: middle;">
+                    <svg width="52" height="52" viewBox="0 0 48 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 12px; vertical-align: middle;">
+                        <!-- Ozone chamber body -->
+                        <rect x="6" y="4" width="36" height="48" rx="3" fill="white" stroke="#10B981"
+                            stroke-width="2.5" />
+
+                        <!-- Top panel with ozone generator -->
+                        <rect x="6" y="4" width="36" height="8" rx="3" fill="#10B981" opacity="0.15" />
+
+                        <!-- Ozone generator indicators -->
+                        <circle cx="12" cy="8" r="1.5" fill="#10B981">
+                            <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite" />
+                        </circle>
+                        <circle cx="17" cy="8" r="1.5" fill="#10B981">
+                            <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"
+                                begin="0.5s" />
+                        </circle>
+                        <circle cx="22" cy="8" r="1.5" fill="#10B981">
+                            <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"
+                                begin="1s" />
+                        </circle>
+
+                        <!-- Display -->
+                        <rect x="28" y="6" width="10" height="4" rx="1" fill="#10B981" opacity="0.3" />
+
+                        <!-- Items hanging inside (visible through door) -->
+                        <g id="hangingItems">
+                            <!-- Hanger rod -->
+                            <line x1="12" y1="18" x2="36" y2="18" stroke="#10B981" stroke-width="1.5"
+                                opacity="0.4" />
+
+                            <!-- Jacket on hanger -->
+                            <path
+                                d="M 18 18 L 18 20 Q 18 22, 16 24 L 16 32 Q 16 33, 17 33 L 21 33 Q 22 33, 22 32 L 22 24 Q 22 22, 20 20 L 20 18"
+                                fill="#10B981" opacity="0.3" stroke="#10B981" stroke-width="0.8" />
+
+                            <!-- Shoes on bottom -->
+                            <ellipse cx="16" cy="46" rx="3" ry="2" fill="#10B981" opacity="0.3" />
+                            <ellipse cx="23" cy="46" rx="3" ry="2" fill="#10B981" opacity="0.3" />
+
+                            <!-- Cap/hat -->
+                            <ellipse cx="30" cy="22" rx="3.5" ry="2" fill="#10B981" opacity="0.3" />
+                            <rect x="27" y="22" width="6" height="4" rx="1" fill="#10B981" opacity="0.25" />
+                        </g>
+
+                        <!-- Ozone particles falling from top -->
+                        <g opacity="0.7">
+                            <!-- Particle 1 -->
+                            <circle cx="14" cy="15" r="1.5" fill="#10B981" opacity="0.6">
+                                <animate attributeName="cy" values="15;45;15" dur="4s" repeatCount="indefinite" />
+                                <animate attributeName="opacity" values="0.8;0.3;0.8" dur="4s"
+                                    repeatCount="indefinite" />
+                            </circle>
+                            <!-- Particle 2 -->
+                            <circle cx="24" cy="20" r="1.2" fill="#10B981" opacity="0.5">
+                                <animate attributeName="cy" values="20;48;20" dur="5s" repeatCount="indefinite" />
+                                <animate attributeName="opacity" values="0.7;0.2;0.7" dur="5s"
+                                    repeatCount="indefinite" />
+                            </circle>
+                            <!-- Particle 3 -->
+                            <circle cx="32" cy="18" r="1.3" fill="#10B981" opacity="0.6">
+                                <animate attributeName="cy" values="18;46;18" dur="4.5s" repeatCount="indefinite" />
+                                <animate attributeName="opacity" values="0.8;0.3;0.8" dur="4.5s"
+                                    repeatCount="indefinite" />
+                            </circle>
+                            <!-- Particle 4 -->
+                            <circle cx="20" cy="16" r="1" fill="#10B981" opacity="0.5">
+                                <animate attributeName="cy" values="16;44;16" dur="3.8s" repeatCount="indefinite" />
+                                <animate attributeName="opacity" values="0.7;0.2;0.7" dur="3.8s"
+                                    repeatCount="indefinite" />
+                            </circle>
+                            <!-- Particle 5 -->
+                            <circle cx="28" cy="14" r="1.4" fill="#10B981" opacity="0.6">
+                                <animate attributeName="cy" values="14;47;14" dur="4.2s" repeatCount="indefinite" />
+                                <animate attributeName="opacity" values="0.8;0.3;0.8" dur="4.2s"
+                                    repeatCount="indefinite" />
+                            </circle>
+                        </g>
+
+                        <!-- Ozone waves (mist effect) -->
+                        <g opacity="0.5">
+                            <path d="M 10 25 Q 15 23, 20 25 T 30 25 T 38 25" stroke="#10B981" stroke-width="1.5"
+                                fill="none" stroke-linecap="round">
+                                <animate attributeName="d"
+                                    values="M 10 25 Q 15 23, 20 25 T 30 25 T 38 25;M 10 25 Q 15 27, 20 25 T 30 25 T 38 25;M 10 25 Q 15 23, 20 25 T 30 25 T 38 25"
+                                    dur="3s" repeatCount="indefinite" />
+                                <animate attributeName="opacity" values="0.5;0.2;0.5" dur="3s"
+                                    repeatCount="indefinite" />
+                            </path>
+                            <path d="M 10 35 Q 15 33, 20 35 T 30 35 T 38 35" stroke="#10B981" stroke-width="1.5"
+                                fill="none" stroke-linecap="round">
+                                <animate attributeName="d"
+                                    values="M 10 35 Q 15 33, 20 35 T 30 35 T 38 35;M 10 35 Q 15 37, 20 35 T 30 35 T 38 35;M 10 35 Q 15 33, 20 35 T 30 35 T 38 35"
+                                    dur="3s" repeatCount="indefinite" begin="0.5s" />
+                                <animate attributeName="opacity" values="0.5;0.2;0.5" dur="3s"
+                                    repeatCount="indefinite" begin="0.5s" />
+                            </path>
+                        </g>
+
+                        <!-- Door (opens and closes by swinging) -->
+                        <!-- Hinges (always visible on frame) -->
+                        <rect x="6" y="16" width="2" height="3" rx="0.5" fill="#10B981" opacity="0.6" />
+                        <rect x="6" y="46" width="2" height="3" rx="0.5" fill="#10B981" opacity="0.6" />
+
+                        <!-- Door (perspective opening like refrigerator) -->
+                        <g id="ozoneDoor">
+                            <!-- Door panel - width decreases as it opens -->
+                            <rect x="6" y="12" width="36" height="40" rx="2" fill="white" stroke="#10B981"
+                                stroke-width="2.5">
+                                <animate attributeName="width" values="36;3;3;36" dur="8s"
+                                    repeatCount="indefinite" />
+                            </rect>
+
+                            <!-- Glass window - disappears when door opens -->
+                            <rect x="12" y="18" width="24" height="28" rx="2" fill="#10B981" opacity="0.15">
+                                <animate attributeName="width" values="24;0;0;24" dur="8s"
+                                    repeatCount="indefinite" />
+                                <animate attributeName="opacity" values="0.15;0;0;0.15" dur="8s"
+                                    repeatCount="indefinite" />
+                            </rect>
+
+                            <!-- Door handle - moves to hinge when open -->
+                            <circle cx="38" cy="32" r="1.5" fill="#10B981">
+                                <animate attributeName="cx" values="38;7;7;38" dur="8s" repeatCount="indefinite" />
+                                <animate attributeName="r" values="1.5;0.8;0.8;1.5" dur="8s"
+                                    repeatCount="indefinite" />
+                            </circle>
+                        </g>
+
+                        <!-- Bottom vent -->
+                        <g opacity="0.4">
+                            <rect x="10" y="50" width="2" height="1" rx="0.5" fill="#10B981" />
+                            <rect x="14" y="50" width="2" height="1" rx="0.5" fill="#10B981" />
+                            <rect x="18" y="50" width="2" height="1" rx="0.5" fill="#10B981" />
+                            <rect x="22" y="50" width="2" height="1" rx="0.5" fill="#10B981" />
+                            <rect x="26" y="50" width="2" height="1" rx="0.5" fill="#10B981" />
+                            <rect x="30" y="50" width="2" height="1" rx="0.5" fill="#10B981" />
+                            <rect x="34" y="50" width="2" height="1" rx="0.5" fill="#10B981" />
+                        </g>
+                    </svg>
                     <span class="lang-si">Dezinfekcija</span>
                     <span class="lang-en">Disinfection</span>
                 </button>
                 <button class="tab-button" onclick="switchTab(event, 'problems')">
-                    <span style="font-size: 40px; margin-right: 12px; vertical-align: middle;">❓</span>
+                    <span style="font-size: 52px; margin-right: 12px; vertical-align: middle;">❓</span>
                     <span class="lang-si">Možne težave</span>
                     <span class="lang-en">Troubleshooting</span>
                 </button>
