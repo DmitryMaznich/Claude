@@ -43,3 +43,36 @@ A: YES. The washing machine locks the door for the entire duration of the progra
 
 **Q: I can't open the dryer door! Is it locked?**
 A: NO. Dryers use strong magnets, not locks. They do not lock even during operation (so you can check dryness). If it feels stuck, simply pull harder.
+
+---
+
+## 💡 EXPERT LAUNDRY TIPS (General Guidelines)
+*Please note: Always check the care label on your item FIRST. These are general guidelines.*
+
+### 🌡️ Temperature Guide by Fabric
+| Fabric | Temp | Notes |
+|--------|------|-------|
+| **Cotton (White)** | 60°C - 95°C | Can withstand high heat. |
+| **Cotton (Color)** | 40°C | Lower temp prevents fading. |
+| **Synthetics** | 30°C - 40°C | Polyester, nylon, spandex. High heat damages fibers. |
+| **Jeans/Denim** | 30°C - 40°C | Wash inside out to preserve color. |
+| **Bedding** | 40°C - 60°C | 60°C is good for hygiene if fabric allows. |
+| **Towels** | 60°C | Ensures good hygiene. |
+| **Wool/Silk** | 30°C | **WARNING:** Only if machine has a specific delicate/wool cycle. NEVER use high heat. |
+| **Down Jackets** | 30°C - 40°C | Delicate cycle. **MUST** be dried in dryer on low/medium heat to restore fluffiness. |
+
+### 🏷️ Common Care Symbols
+- **Tub with water**: Washing allowed. Number inside = max temperature.
+- **Triangle**: Bleaching (Empty = ok, Crossed out = no).
+- **Square with circle**: Tumble drying allowed.
+    - 1 dot = low heat
+    - 2 dots = medium heat
+    - Crossed out = Do NOT tumble dry
+- **Iron**: Ironing allowed. (Dots indicate temp).
+- **Circle**: Dry cleaning only.
+
+### 🚫 Common Mistakes to Avoid
+1.  **Overloading the machine**: Clothes need space to move to get clean. If packed too tight, they won't wash well.
+2.  **Wrong Temperature**: Washing wool or silk in hot water will shrink them.
+3.  **Drying Wool in Dryer**: **NEVER** put wool in the dryer; it will shrink instantly.
+4.  **Washing Down Jackets incorrectly**: They MUST be dried in a dryer to fluff up the feathers, otherwise they will smell and clump.
