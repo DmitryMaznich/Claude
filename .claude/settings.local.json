@@ -91,5 +91,10 @@
       "Bash(gh run list:*)",
       "Bash(cmd.exe:*)"
     ]
-  }
+  },
+  "enabledMcpjsonServers": [
+    "atlassian",
+    "telegram-mcp"
+  ],
+  "enableAllProjectMcpServers": true
 }
