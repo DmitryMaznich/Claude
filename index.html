@@ -9,7 +9,7 @@
     <title>Smart Wash - Samopostrežna Pralnica Ljubljana | Odprto Vsak Dan</title>
     <meta name="title" content="Smart Wash - Samopostrežna Pralnica Ljubljana | Odprto Vsak Dan">
     <meta name="description"
-        content="Smart Wash samopostrežna pralnica Ljubljana. 2 lokaciji: Galjevica 6a (06:00-23:00 vsak dan) in TC Jarše Beblerjev trg 2 (08:00-21:00 Pon-Sob). Stroji do 20 kg, detergent vključen, parking brezplačen.">
+        content="Smart Wash samopostrežna pralnica Ljubljana. 2 lokaciji: Galjevica 6a (06:00-23:00 vsak dan) in TC Jarše Beblerjev trg 2 (07:00-21:00 Pon-Sob). Stroji do 20 kg, detergent vključen, parking brezplačen.">
     <meta name="keywords"
         content="pralnica Ljubljana, samopostrežna pralnica, pranje perila, sušenje perila, Smart Wash, Galjevica, TC Jarše, laundromat Ljubljana">
     <meta name="author" content="Smart Wash">
@@ -2030,6 +2030,19 @@
 
         .temp-badge-item.high {
             background: linear-gradient(180deg, rgba(247, 37, 133, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+        }
+
+        /* Упрощенные цвета для карточек */
+        .temp-badge-item.wash-temp {
+            border-color: var(--primary-blue);
+            color: var(--primary-blue);
+            background: linear-gradient(180deg, rgba(0, 151, 218, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
+        }
+
+        .temp-badge-item.dry-temp {
+            border-color: var(--orange);
+            color: var(--orange);
+            background: linear-gradient(180deg, rgba(255, 155, 113, 0.05) 0%, rgba(255, 255, 255, 0) 100%);
         }
 
         .temp-icon {
@@ -4727,7 +4740,7 @@
         "@type": "LocalBusiness",
         "@id": "https://smart-wash.si/#tc-jarse",
         "name": "Smart Wash TC Jarše",
-        "description": "Samopostrežna pralnica perila v Ljubljani - TC Jarše. Odprto Pon-Sob 08:00-21:00. Stroji do 20 kg, detergent vključen, parking brezplačen.",
+        "description": "Samopostrežna pralnica perila v Ljubljani - TC Jarše. Odprto Pon-Sob 07:00-21:00. Stroji do 20 kg, detergent vključen, parking brezplačen.",
         "url": "https://smart-wash.si",
         "image": "https://smart-wash.si/logo_smart_wash.svg",
         "telephone": "+386-1-777-82-70",
@@ -4749,7 +4762,7 @@
             {
                 "@type": "OpeningHoursSpecification",
                 "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-                "opens": "08:00",
+                "opens": "07:00",
                 "closes": "21:00"
             }
         ],
@@ -4786,7 +4799,7 @@
                 "name": "Kje se nahajajo pralnice Smart Wash v Ljubljani?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Smart Wash ima dve lokaciji v Ljubljani: Galjevica 6a (odprto vsak dan 06:00-23:00) in TC Jarše na Beblerjevem trgu 2 (odprto Pon-Sob 08:00-21:00). Obe lokaciji imajo brezplačen parking."
+                    "text": "Smart Wash ima dve lokaciji v Ljubljani: Galjevica 6a (odprto vsak dan 06:00-23:00) in TC Jarše na Beblerjevem trgu 2 (odprto Pon-Sob 07:00-21:00). Obe lokaciji imajo brezplačen parking."
                 }
             },
             {
@@ -4834,7 +4847,7 @@
                 "name": "Ali so pralnice odprte ob vikendih?",
                 "acceptedAnswer": {
                     "@type": "Answer",
-                    "text": "Da. Pralnica Galjevica je odprta vsak dan vključno z nedeljami (06:00-23:00). Pralnica TC Jarše je odprta ob sobotah (08:00-21:00), ob nedeljah pa je zaprta."
+                    "text": "Da. Pralnica Galjevica je odprta vsak dan vključno z nedeljami (06:00-23:00). Pralnica TC Jarše je odprta ob sobotah (07:00-21:00), ob nedeljah pa je zaprta."
                 }
             },
             {
@@ -5313,11 +5326,42 @@
                         <span class="lang-si">Programi pranja (≈40 min)</span>
                         <span class="lang-en">Washing programs (≈40 min)</span>
                     </div>
-                    <div class="temp-badges">
-                        <div class="temp-badge">30°C</div>
-                        <div class="temp-badge">40°C</div>
-                        <div class="temp-badge">60°C</div>
-                        <div class="temp-badge">90°C</div>
+                    <div class="temp-badges" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;">
+                        <!-- 30°C -->
+                        <div class="temp-badge-item wash-temp">
+                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                                <circle cx="11.5" cy="18" r="2" fill="currentColor" stroke="none" />
+                            </svg>
+                            <div class="temp-value">30°C</div>
+                        </div>
+                        <!-- 40°C -->
+                        <div class="temp-badge-item wash-temp">
+                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                                <circle cx="11.5" cy="18" r="2" fill="currentColor" stroke="none" />
+                                <line x1="11.5" y1="14" x2="11.5" y2="16" stroke-width="2" />
+                            </svg>
+                            <div class="temp-value">40°C</div>
+                        </div>
+                        <!-- 60°C -->
+                        <div class="temp-badge-item wash-temp">
+                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                                <circle cx="11.5" cy="18" r="2" fill="currentColor" stroke="none" />
+                                <line x1="11.5" y1="10" x2="11.5" y2="16" stroke-width="2" />
+                            </svg>
+                            <div class="temp-value">60°C</div>
+                        </div>
+                        <!-- 90°C -->
+                        <div class="temp-badge-item wash-temp">
+                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                                <circle cx="11.5" cy="18" r="2" fill="currentColor" stroke="none" />
+                                <line x1="11.5" y1="5" x2="11.5" y2="16" stroke-width="2" />
+                            </svg>
+                            <div class="temp-value">90°C</div>
+                        </div>
                     </div>
                 </div>
                 <div class="service-pricing">
@@ -5460,10 +5504,60 @@
                         <span class="lang-si">Programi sušenja</span>
                         <span class="lang-en">Drying programs</span>
                     </div>
-                    <div class="temp-badges">
-                        <div class="temp-badge">≈40°</div>
-                        <div class="temp-badge">≈60°</div>
-                        <div class="temp-badge">≈80°</div>
+                    <div class="temp-badges" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
+                        <!-- ≈40° - 1 плюсик -->
+                        <div class="temp-badge-item dry-temp">
+                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                                <circle cx="11.5" cy="18" r="2" fill="currentColor" stroke="none" />
+                                <!-- 1 плюсик -->
+                                <g transform="translate(19, 11)">
+                                    <line x1="0" y1="-3" x2="0" y2="3" stroke-width="1.5" />
+                                    <line x1="-3" y1="0" x2="3" y2="0" stroke-width="1.5" />
+                                </g>
+                            </svg>
+                            <div class="temp-value">≈40°</div>
+                        </div>
+                        <!-- ≈60° - 2 плюсика -->
+                        <div class="temp-badge-item dry-temp">
+                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                                <circle cx="11.5" cy="18" r="2" fill="currentColor" stroke="none" />
+                                <line x1="11.5" y1="10" x2="11.5" y2="16" stroke-width="2" />
+                                <!-- 2 плюсика вертикально -->
+                                <g transform="translate(19, 8)">
+                                    <line x1="0" y1="-3" x2="0" y2="3" stroke-width="1.5" />
+                                    <line x1="-3" y1="0" x2="3" y2="0" stroke-width="1.5" />
+                                </g>
+                                <g transform="translate(19, 14)">
+                                    <line x1="0" y1="-3" x2="0" y2="3" stroke-width="1.5" />
+                                    <line x1="-3" y1="0" x2="3" y2="0" stroke-width="1.5" />
+                                </g>
+                            </svg>
+                            <div class="temp-value">≈60°</div>
+                        </div>
+                        <!-- ≈80° - 3 плюсика -->
+                        <div class="temp-badge-item dry-temp">
+                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
+                                <circle cx="11.5" cy="18" r="2" fill="currentColor" stroke="none" />
+                                <line x1="11.5" y1="5" x2="11.5" y2="16" stroke-width="2" />
+                                <!-- 3 плюсика вертикально -->
+                                <g transform="translate(19, 6)">
+                                    <line x1="0" y1="-3" x2="0" y2="3" stroke-width="1.5" />
+                                    <line x1="-3" y1="0" x2="3" y2="0" stroke-width="1.5" />
+                                </g>
+                                <g transform="translate(19, 11)">
+                                    <line x1="0" y1="-3" x2="0" y2="3" stroke-width="1.5" />
+                                    <line x1="-3" y1="0" x2="3" y2="0" stroke-width="1.5" />
+                                </g>
+                                <g transform="translate(19, 16)">
+                                    <line x1="0" y1="-3" x2="0" y2="3" stroke-width="1.5" />
+                                    <line x1="-3" y1="0" x2="3" y2="0" stroke-width="1.5" />
+                                </g>
+                            </svg>
+                            <div class="temp-value">≈80°</div>
+                        </div>
                     </div>
                 </div>
                 <div class="service-pricing">
@@ -5840,7 +5934,7 @@
                                     <!-- Hours Display -->
                                     <div class="schedule-hours">
                                         <div class="schedule-text">
-                                            <div class="schedule-hours-large">08:00 - 21:00</div>
+                                            <div class="schedule-hours-large">07:00 - 21:00</div>
                                             <div class="schedule-days-small">
                                                 <span class="lang-si">Pon • Tor • Sre • Čet • Pet • Sob • <span
                                                         style="color: #dc3545; text-decoration: line-through;">Ned</span>
