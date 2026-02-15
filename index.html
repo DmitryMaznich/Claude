@@ -427,6 +427,26 @@
             border-bottom: 1px solid rgba(0, 0, 0, 0.06);
         }
 
+        /* TOKEN PURCHASE GRID */
+        .token-purchase-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 24px;
+            align-items: start;
+        }
+
+        @media (min-width: 768px) {
+            .token-purchase-grid {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .token-purchase-grid {
+                grid-template-columns: 1fr 1fr 1fr;
+            }
+        }
+
         /* HERO SECTION */
         .hero {
             min-height: auto;
@@ -9215,11 +9235,11 @@
 
                 // Move menu content (starts at -100%)
                 // We add deltaY px to the negative percentage
-                mobileMenuContent.style.transform = 	ranslateY(calc(-100% + px));
+                mobileMenuContent.style.transform = ranslateY(calc(-100 % + px));
 
                 // Move tab (starts at translateY(100%) relative to header)
                 // We add deltaY to its initial position
-                menuTab.style.transform = 	ranslateY(calc(100% + px));
+                menuTab.style.transform = ranslateY(calc(100 % + px));
 
             }, { passive: false });
 
@@ -9240,7 +9260,7 @@
 
                 const deltaY = currentY - startY;
                 const dragDuration = Date.now() - dragStartTime;
-                
+
                 // Determine if it was a valid 'open' gesture
                 // Either moved a significant distance OR a quick flick
                 const isSignificantDrag = deltaY > threshold;
@@ -9254,9 +9274,9 @@
                 if (shouldOpen) {
                     // Animate to Open (0%)
                     mobileMenuContent.style.transform = 'translateY(0)';
-                    
+
                     // Animate tab back to top (original position) smoothly
-                    menuTab.style.transform = 'translateY(100%)'; 
+                    menuTab.style.transform = 'translateY(100%)';
 
                     // After animation, set active class and cleanup
                     setTimeout(() => {
@@ -9271,13 +9291,13 @@
                             if (mobileMenuBtn) mobileMenuBtn.classList.add('active');
                             document.body.style.overflow = 'hidden';
                         }
-                        
+
                         // Clear inline styles
                         mobileMenuContent.style.transition = '';
                         mobileMenuContent.style.transform = '';
                         menuTab.style.transition = '';
                         menuTab.style.transform = '';
-                        
+
                         // Reset visibility/pointer-events handled by toggleMobileMenu/CSS
                         mobileMenu.style.visibility = '';
                         mobileMenu.style.height = '';
@@ -9293,14 +9313,14 @@
                         mobileMenu.style.visibility = '';
                         mobileMenu.style.height = '';
                         mobileMenu.style.pointerEvents = '';
-                        
+
                         mobileMenuContent.style.transition = '';
                         mobileMenuContent.style.transform = '';
                         menuTab.style.transition = '';
                         menuTab.style.transform = '';
-                    }, 400); 
+                    }, 400);
                 }
-                
+
                 // Reset dragging flag after a short delay to block click
                 setTimeout(() => {
                     isDragging = false;
@@ -9309,4 +9329,5 @@
         });
     </script>
 </body>
+
 </html>
