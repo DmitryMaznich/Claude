@@ -431,13 +431,16 @@
         .token-purchase-grid {
             display: grid;
             grid-template-columns: 1fr;
-            gap: 12px;
+            gap: 8px;
             align-items: start;
+            width: 100%;
+            max-width: 100%;
         }
 
         @media (min-width: 768px) {
             .token-purchase-grid {
                 grid-template-columns: 1fr 1fr;
+                gap: 12px;
             }
         }
 
@@ -445,6 +448,14 @@
             .token-purchase-grid {
                 grid-template-columns: 1fr 1fr 1fr;
             }
+        }
+
+        /* Ensure payment cards don't overflow on mobile */
+        .payment-method {
+            box-sizing: border-box;
+            width: 100%;
+            max-width: 100%;
+            overflow: hidden;
         }
 
         /* HERO SECTION */
