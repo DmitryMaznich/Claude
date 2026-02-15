@@ -115,11 +115,11 @@ async function updateWebsiteContent() {
         // Use Claude to extract structured information from clean text
         const extractionResponse = await anthropic.messages.create({
             model: 'claude-3-haiku-20240307',
-            max_tokens: 2000,
-            system: 'You are a content extractor. Extract key information and format it clearly.',
+            max_tokens: 4000,
+            system: 'You are a content extractor. Extract ALL information from the website text and format it clearly. Do NOT skip any details, rules, or instructions. Be thorough and complete.',
             messages: [{
                 role: 'user',
-                content: `Extract the following information from this text (in English):
+                content: `Extract ALL of the following information from this text (in English). Be VERY thorough — do NOT skip anything:
 
 1. ALL SERVICES offered (washing, drying, disinfection/ozone treatment, etc.) with exact prices in tokens/euros
 2. ALL LOCATIONS with full addresses
@@ -127,12 +127,18 @@ async function updateWebsiteContent() {
 4. Contact information (phone, email)
 5. Payment methods and any special features
 6. Any promotions or bonuses
+7. ALL RULES AND RESTRICTIONS — what is ALLOWED and what is PROHIBITED/FORBIDDEN (e.g., shoes, pets, dyeing, bleach, overloading, etc.)
+8. STEP-BY-STEP USAGE INSTRUCTIONS for each service (washing instructions, drying instructions, disinfection instructions, token purchase instructions, etc.)
+9. ANY WARNINGS, TIPS, or IMPORTANT NOTES for customers
 
 IMPORTANT: Look carefully for:
 - Disinfection/ozone services
 - Different operating hours for different locations (TC Jarše vs Galjevica)
+- ANY prohibitions or restrictions (items that cannot be washed, things that are not allowed)
+- Step-by-step instructions for using machines
+- Rules about what can and cannot be washed
 
-Format clearly with sections and bullet points.
+Format clearly with sections and bullet points. Include a dedicated "RULES AND RESTRICTIONS" section.
 
 Text from website:
 ${cleanText}`
