@@ -83,7 +83,13 @@
       "WebFetch(domain:medium.com)",
       "WebFetch(domain:betterstack.com)",
       "WebFetch(domain:www.codecademy.com)",
-      "WebFetch(domain:www.aifire.co)"
+      "WebFetch(domain:www.aifire.co)",
+      "Bash(gh workflow list:*)",
+      "Bash(where:*)",
+      "Bash(git checkout:*)",
+      "WebFetch(domain:smart-wash.si)",
+      "Bash(gh run list:*)",
+      "Bash(cmd.exe:*)"
     ]
   }
 }

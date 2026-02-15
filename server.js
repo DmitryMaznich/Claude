@@ -206,9 +206,22 @@ Be friendly and brief.`;
 
 CRITICAL: You MUST respond ONLY in ${userLanguage}. Do not mix languages.
 
-Current Information about Smart Wash (updated ${websiteContent.lastUpdated ? websiteContent.lastUpdated.toLocaleDateString() : 'recently'}):
+## ⚠️ ABSOLUTE RULE: USE ONLY WEBSITE DATA — NEVER USE GENERAL KNOWLEDGE
+
+You have OFFICIAL information from the Smart Wash website below. This is your ONLY source of truth.
+
+**STRICT RULES:**
+1. ALWAYS answer questions using ONLY the website data provided below
+2. NEVER use your general knowledge or information from the internet about laundromats, prices, locations, or any other topic
+3. NEVER invent, assume, or guess information that is not explicitly stated in the website data below
+4. If the answer to a Smart Wash question is NOT found in the website data below, honestly say you don't have that information and suggest contacting the operator or visiting the website
+5. Do NOT add extra details, tips, or recommendations that are not on the website — stick strictly to what is provided
+
+**WEBSITE DATA (updated ${websiteContent.lastUpdated ? websiteContent.lastUpdated.toLocaleDateString() : 'recently'}) — THIS IS YOUR ONLY SOURCE:**
 
 ${websiteContent.info}
+
+**END OF WEBSITE DATA — do NOT use any other source of information.**
 
 IMPORTANT SCOPE:
 - You can ONLY help with Smart Wash laundry services
@@ -221,11 +234,11 @@ ONLY trigger operator (with "TRIGGER_OPERATOR:") when:
 3. User has a complaint or wants a refund
 4. User needs assistance at the location right now
 
-For all other questions about Smart Wash, answer directly. Be friendly, helpful, and concise. Remember: ONLY respond in ${userLanguage}.
+For all other questions about Smart Wash, answer directly using ONLY the website data above. Be friendly, helpful, and concise. Remember: ONLY respond in ${userLanguage}.
 
 ## PRICING - ALWAYS CONVERT TOKENS TO EUROS
 
-CRITICAL: When mentioning prices, ALWAYS include BOTH tokens AND euro amount.
+CRITICAL: When mentioning prices, ALWAYS use the EXACT prices from the website data above. ALWAYS include BOTH tokens AND euro amount.
 
 **Token value:** 1 token = €1
 
@@ -234,12 +247,6 @@ CRITICAL: When mentioning prices, ALWAYS include BOTH tokens AND euro amount.
 - English: "5 tokens (€5)" or "2 tokens (€2)"
 - Russian: "5 жетонов (€5)" or "2 жетона (€2)"
 - Other languages: follow same pattern
-
-**Examples:**
-- "Za pranje 10 kg potrebujete 5 žetonov (€5)"
-- "Washing 10 kg costs 5 tokens (€5)"
-- "Для стирки 10 кг нужно 5 жетонов (€5)"
-- "Sušenje 12 minut stane 2 žetona (€2)"
 
 ALWAYS add euro amount in parentheses after tokens!
 
@@ -884,82 +891,82 @@ app.post('/api/upload', (req, res) => {
 
         try {
 
-        const { sessionId } = req.body;
-        if (!sessionId) {
-            return res.status(400).json({ error: 'Session ID is required' });
-        }
-
-        const session = getSession(sessionId);
-        const photoUrl = `/uploads/${req.file.filename}`;
-        const photoPath = req.file.path;
-
-        // Update last user message time for inactivity tracking
-        session.lastUserMessageTime = new Date();
-
-        // Add photo message to session
-        session.messages.push({
-            role: 'user',
-            content: '[Фото]',
-            photo: photoUrl,
-            timestamp: new Date()
-        });
-
-        // Automatically switch to operator mode when photo is sent
-        if (!session.operatorMode) {
-            // Check if operator is available
-            if (!isOperatorAvailable()) {
-                console.log('Photo sent but operator unavailable (outside working hours)');
-                return res.json({
-                    response: getOperatorUnavailableMessage(session.language),
-                    operatorMode: false
-                });
+            const { sessionId } = req.body;
+            if (!sessionId) {
+                return res.status(400).json({ error: 'Session ID is required' });
             }
 
-            session.operatorMode = true;
-        }
+            const session = getSession(sessionId);
+            const photoUrl = `/uploads/${req.file.filename}`;
+            const photoPath = req.file.path;
 
-        // Send photo to operator via Telegram
-        if (bot && OPERATOR_CHAT_ID) {
-            const clientInfo = session.userName || `Customer${session.customerNumber}`;
-            const notification = `📸 *ФОТО ОТ КЛИЕНТА*\n` +
-                `━━━━━━━━━━━━━━━━━\n` +
-                `👤 ${clientInfo} (${session.language || 'Slovenian'})\n` +
-                `Session: \`${sessionId}\``;
+            // Update last user message time for inactivity tracking
+            session.lastUserMessageTime = new Date();
 
-            try {
-                const photoOptions = {
-                    caption: notification,
-                    parse_mode: 'Markdown',
-                    reply_markup: {
-                        inline_keyboard: [[
-                            { text: '🔄 V AI / To AI', callback_data: `close_${sessionId}` },
-                            { text: '🗑️ Izbriši / Delete', callback_data: `delete_${sessionId}` }
-                        ]]
+            // Add photo message to session
+            session.messages.push({
+                role: 'user',
+                content: '[Фото]',
+                photo: photoUrl,
+                timestamp: new Date()
+            });
+
+            // Automatically switch to operator mode when photo is sent
+            if (!session.operatorMode) {
+                // Check if operator is available
+                if (!isOperatorAvailable()) {
+                    console.log('Photo sent but operator unavailable (outside working hours)');
+                    return res.json({
+                        response: getOperatorUnavailableMessage(session.language),
+                        operatorMode: false
+                    });
+                }
+
+                session.operatorMode = true;
+            }
+
+            // Send photo to operator via Telegram
+            if (bot && OPERATOR_CHAT_ID) {
+                const clientInfo = session.userName || `Customer${session.customerNumber}`;
+                const notification = `📸 *ФОТО ОТ КЛИЕНТА*\n` +
+                    `━━━━━━━━━━━━━━━━━\n` +
+                    `👤 ${clientInfo} (${session.language || 'Slovenian'})\n` +
+                    `Session: \`${sessionId}\``;
+
+                try {
+                    const photoOptions = {
+                        caption: notification,
+                        parse_mode: 'Markdown',
+                        reply_markup: {
+                            inline_keyboard: [[
+                                { text: '🔄 V AI / To AI', callback_data: `close_${sessionId}` },
+                                { text: '🗑️ Izbriši / Delete', callback_data: `delete_${sessionId}` }
+                            ]]
+                        }
+                    };
+
+                    // If this session already has a thread, reply to it
+                    if (session.telegramThreadId) {
+                        photoOptions.reply_to_message_id = session.telegramThreadId;
                     }
-                };
 
-                // If this session already has a thread, reply to it
-                if (session.telegramThreadId) {
-                    photoOptions.reply_to_message_id = session.telegramThreadId;
+                    const sentMessage = await bot.sendPhoto(OPERATOR_CHAT_ID, photoPath, photoOptions);
+
+                    // Store message ID for thread tracking (use first message as thread root)
+                    if (!session.telegramThreadId) {
+                        session.telegramThreadId = sentMessage.message_id;
+                    }
+                    telegramMessageToSession.set(sentMessage.message_id, sessionId);
+                } catch (telegramError) {
+                    console.error('Telegram photo send failed:', telegramError.message);
                 }
-
-                const sentMessage = await bot.sendPhoto(OPERATOR_CHAT_ID, photoPath, photoOptions);
-
-                // Store message ID for thread tracking (use first message as thread root)
-                if (!session.telegramThreadId) {
-                    session.telegramThreadId = sentMessage.message_id;
-                }
-                telegramMessageToSession.set(sentMessage.message_id, sessionId);
-            } catch (telegramError) {
-                console.error('Telegram photo send failed:', telegramError.message);
             }
-        }
 
-        res.json({
-            success: true,
-            photoUrl: photoUrl,
-            operatorMode: true
-        });
+            res.json({
+                success: true,
+                photoUrl: photoUrl,
+                operatorMode: true
+            });
         } catch (error) {
             console.error('Photo upload error:', error);
             res.status(500).json({ error: 'Failed to upload photo' });
@@ -1384,7 +1391,7 @@ app.post(`/telegram/webhook`, async (req, res) => {
                                     resolve();
                                 });
                             }).on('error', (err) => {
-                                fs.unlink(photoPath, () => {});
+                                fs.unlink(photoPath, () => { });
                                 reject(err);
                             });
                         });
