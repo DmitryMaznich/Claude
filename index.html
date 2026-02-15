@@ -1873,6 +1873,28 @@
             font-style: italic;
         }
 
+        .service-instruction-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+            padding: 12px;
+            background: rgba(0, 151, 218, 0.05);
+            border-radius: 12px;
+            color: var(--navy);
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            width: 100%;
+        }
+
+        .service-instruction-link:hover {
+            background: rgba(0, 151, 218, 0.1);
+            color: var(--primary-blue);
+            transform: translateY(-2px);
+        }
+
         /* LOCATIONS */
         #locations {
             background: white;
@@ -3855,6 +3877,12 @@
                 height: 250px;
             }
 
+            /* Mobile: Token Purchase Instructions */
+            .tokens-methods-grid {
+                grid-template-columns: 1fr !important;
+                gap: 24px !important;
+            }
+
             /* Mobile: Reviews */
             .reviews-grid {
                 grid-template-columns: 1fr;
@@ -4792,9 +4820,23 @@
                     <span class="lang-en">Token System</span>
                 </div>
                 <div class="token-column-content">
-                    <span class="lang-si">Vse naprave delujejo z žetoni, ki jih kupite v menjalnem avtomatu v pralnici.
-                    </span>
-                    <span class="lang-en">All machines operate with tokens that you buy at the exchanger on-site</span>
+                    <p style="margin: 0 0 12px 0;">
+                        <span class="lang-si">Vse naprave delujejo z žetoni, ki jih kupite v menjalnem avtomatu v
+                            pralnici.</span>
+                        <span class="lang-en">All machines operate with tokens that you buy at the exchanger
+                            on-site</span>
+                    </p>
+                    <a href="#tokens" class="service-instruction-link" onclick="navigateToInstruction('tokens')"
+                        style="margin-top: 0;">
+                        <span>
+                            <span class="lang-si">Navodila za nakup žetonov</span>
+                            <span class="lang-en">How to buy tokens</span>
+                        </span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+                        </svg>
+                    </a>
                 </div>
             </div>
 
@@ -4912,7 +4954,7 @@
 
         <div class="services-grid">
             <!-- WASHING -->
-            <div class="service-card wash">
+            <div class="service-card wash" id="card-washing">
                 <div class="service-header">
                     <div class="service-icon">
                         <svg width="65" height="65" viewBox="0 0 58 73" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -5021,10 +5063,20 @@
                                     class="lang-en">tokens</span></small></span>
                     </div>
                 </div>
+                <a href="#washing" class="service-instruction-link" onclick="navigateToInstruction('washing')">
+                    <span>
+                        <span class="lang-si">Navodila za uporabo</span>
+                        <span class="lang-en">How to use</span>
+                    </span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+                    </svg>
+                </a>
             </div>
 
             <!-- DRYING -->
-            <div class="service-card dry">
+            <div class="service-card dry" id="card-drying">
                 <div class="service-header">
                     <div class="service-icon">
                         <svg width="59" height="78" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -5153,7 +5205,7 @@
                             <span class="lang-en">Start <small style="color: #64748B; font-weight: 400;">(12
                                     min)</small></span>
                         </span>
-                        <span class="price-value">2 <small><span class="lang-si">žetona</span><span
+                        <span class="price-value">2 <small><span class="lang-si">žetonov</span><span
                                     class="lang-en">tokens</span></small></span>
                     </div>
                     <div class="price-row">
@@ -5162,10 +5214,20 @@
                                     class="lang-en">token</span></small></span>
                     </div>
                 </div>
+                <a href="#drying" class="service-instruction-link" onclick="navigateToInstruction('drying')">
+                    <span>
+                        <span class="lang-si">Navodila za uporabo</span>
+                        <span class="lang-en">How to use</span>
+                    </span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+                    </svg>
+                </a>
             </div>
 
             <!-- DISINFECTION -->
-            <div class="service-card extra">
+            <div class="service-card extra" id="card-disinfection">
                 <div class="service-header">
                     <div class="service-icon">
                         <svg width="64" height="75" viewBox="0 0 48 56" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -5365,6 +5427,17 @@
                                     class="lang-en">tokens</span></small></span>
                     </div>
                 </div>
+                <a href="#disinfection" class="service-instruction-link"
+                    onclick="navigateToInstruction('disinfection')">
+                    <span>
+                        <span class="lang-si">Navodila za uporabo</span>
+                        <span class="lang-en">How to use</span>
+                    </span>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                        stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M7 13l5 5 5-5M7 6l5 5 5-5" />
+                    </svg>
+                </a>
             </div>
         </div>
     </section>
@@ -5388,8 +5461,10 @@
                 <span class="lang-en">Find us</span>
             </h2>
             <p class="section-subtitle">
-                <span class="lang-si">Dve lokaciji v Ljubljani z brezplačnim parkingom.</span>
-                <span class="lang-en">Two locations in Ljubljana with free parking.</span>
+                <span class="lang-si">Dve lokaciji v Ljubljani z brezplačnim parkingom. Oglejte si fotografije in ocene
+                    s klikom na zemljevid.</span>
+                <span class="lang-en">Two locations in Ljubljana with free parking. See photos and reviews by clicking
+                    on the map.</span>
             </p>
         </div>
 
@@ -5397,7 +5472,7 @@
             <!-- TC JARŠE -->
             <div class="location-card">
                 <div class="location-header"
-                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px;">
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
                     <h3 class="location-name" style="margin-bottom: 0;">
                         <span class="lang-si">1. Pralnica TC Jarše</span>
                         <span class="lang-en">1. Laundromat TC Jarše</span>
@@ -6097,7 +6172,7 @@
             <!-- SECOND LOCATION - Galjevica -->
             <div class="location-card">
                 <div class="location-header"
-                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
                     <h3 class="location-name" style="margin-bottom: 0;">
                         <span class="lang-si">2. Pralnica Galjevica</span>
                         <span class="lang-en">2. Laundromat Galjevica</span>
@@ -7247,55 +7322,268 @@
 
             <!-- Tab 4: BUY TOKENS -->
             <div class="tab-content" id="tokens">
-                <div>
-                    <div class="instruction-step">
-                        <div class="instruction-number">1</div>
-                        <div class="instruction-content">
-                            <div class="instruction-title">
-                                <span class="lang-si">Najdite menjalnik žetonov</span>
-                                <span class="lang-en">Find the token exchanger</span>
+                <!-- Two-Column Payment Methods -->
+                <div class="tokens-methods-grid"
+                    style="display: grid; grid-template-columns: 1fr 1fr; gap: 32px; margin-bottom: 40px;">
+
+                    <!-- LEFT COLUMN: Card/Smartphone Payment -->
+                    <div class="payment-method"
+                        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 32px; color: white; box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);">
+                        <h4
+                            style="font-size: 24px; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 12px;">
+                            <span style="font-size: 32px;">💳</span>
+                            <span>
+                                <span class="lang-si">S kartico / smartfonom</span>
+                                <span class="lang-en">With card / smartphone</span>
+                            </span>
+                        </h4>
+
+                        <!-- Terminal Photo -->
+                        <div style="text-align: center; margin-bottom: 24px;">
+                            <img src="terminal_card.png" alt="Payment Terminal"
+                                style="max-width: 100%; height: auto; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.3);">
+                        </div>
+
+                        <div class="payment-steps">
+                            <!-- Step 1 -->
+                            <div
+                                style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 16px; margin-bottom: 16px; backdrop-filter: blur(10px);">
+                                <div style="display: flex; align-items: start; gap: 16px;">
+                                    <div
+                                        style="background: white; color: #667eea; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; flex-shrink: 0;">
+                                        1</div>
+                                    <div>
+                                        <div style="font-weight: 600; margin-bottom: 4px;">
+                                            <span class="lang-si">Pritisnite gumb "SEL"</span>
+                                            <span class="lang-en">Press the "SEL" button</span>
+                                        </div>
+                                        <div style="display: inline-flex; gap: 8px; margin-top: 8px;">
+                                            <div
+                                                style="background: #DC3545; color: white; padding: 8px 16px; border-radius: 8px; font-weight: 700; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                                                SEL</div>
+                                            <div
+                                                style="background: #6C757D; color: white; padding: 8px 16px; border-radius: 8px; font-weight: 700; opacity: 0.5;">
+                                                OK</div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="instruction-description">
-                                <span class="lang-si">Menjalnik se nahaja v vsaki pralnici. Velika modra naprava ob
-                                    vhodu.</span>
-                                <span class="lang-en">The exchanger is located in each laundromat. Large blue device
-                                    near the entrance.</span>
+
+                            <!-- Step 2 -->
+                            <div
+                                style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 16px; margin-bottom: 16px; backdrop-filter: blur(10px);">
+                                <div style="display: flex; align-items: start; gap: 16px;">
+                                    <div
+                                        style="background: white; color: #667eea; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; flex-shrink: 0;">
+                                        2</div>
+                                    <div>
+                                        <div style="font-weight: 600;">
+                                            <span class="lang-si">Pristavite kartico k terminalu</span>
+                                            <span class="lang-en">Put your card to the terminal</span>
+                                        </div>
+                                        <div style="margin-top: 8px; font-size: 32px;">💳📱</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 3 -->
+                            <div
+                                style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 16px; margin-bottom: 16px; backdrop-filter: blur(10px);">
+                                <div style="display: flex; align-items: start; gap: 16px;">
+                                    <div
+                                        style="background: white; color: #667eea; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; flex-shrink: 0;">
+                                        3</div>
+                                    <div>
+                                        <div style="font-weight: 600; margin-bottom: 4px;">
+                                            <span class="lang-si">Z gumbom "SEL" izberite število žetonov</span>
+                                            <span class="lang-en">Press "SEL" to select number of tokens</span>
+                                        </div>
+                                        <div style="font-size: 14px; opacity: 0.9; margin-top: 4px;">
+                                            <span class="lang-si">(1€ = 1 žeton)</span>
+                                            <span class="lang-en">(1€ = 1 token)</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 4 -->
+                            <div
+                                style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 16px; margin-bottom: 16px; backdrop-filter: blur(10px);">
+                                <div style="display: flex; align-items: start; gap: 16px;">
+                                    <div
+                                        style="background: white; color: #667eea; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; flex-shrink: 0;">
+                                        4</div>
+                                    <div>
+                                        <div style="font-weight: 600; margin-bottom: 4px;">
+                                            <span class="lang-si">Potrdite z gumbom "OK"</span>
+                                            <span class="lang-en">Press "OK" to confirm</span>
+                                        </div>
+                                        <div style="display: inline-flex; gap: 8px; margin-top: 8px;">
+                                            <div
+                                                style="background: #6C757D; color: white; padding: 8px 16px; border-radius: 8px; font-weight: 700; opacity: 0.5;">
+                                                SEL</div>
+                                            <div
+                                                style="background: #28A745; color: white; padding: 8px 16px; border-radius: 8px; font-weight: 700; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
+                                                OK</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Step 5 -->
+                            <div
+                                style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 16px; backdrop-filter: blur(10px);">
+                                <div style="display: flex; align-items: start; gap: 16px;">
+                                    <div
+                                        style="background: white; color: #667eea; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; flex-shrink: 0;">
+                                        5</div>
+                                    <div>
+                                        <div style="font-weight: 600;">
+                                            <span class="lang-si">Pristavite kartico k terminalu ponovno</span>
+                                            <span class="lang-en">Put your card to the terminal again</span>
+                                        </div>
+                                        <div style="margin-top: 8px; font-size: 32px;">💳📱</div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
 
-                    <div class="instruction-step">
-                        <div class="instruction-number">2</div>
-                        <div class="instruction-content">
-                            <div class="instruction-title">
-                                <span class="lang-si">Izberite način plačila</span>
-                                <span class="lang-en">Choose payment method</span>
+                    <!-- RIGHT COLUMN: Cash Payment -->
+                    <div class="payment-method"
+                        style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); border-radius: 20px; padding: 32px; color: white; box-shadow: 0 8px 24px rgba(17, 153, 142, 0.3);">
+                        <h4
+                            style="font-size: 24px; font-weight: 700; margin-bottom: 24px; display: flex; align-items: center; gap: 12px;">
+                            <span style="font-size: 32px;">💵</span>
+                            <span>
+                                <span class="lang-si">Z gotovino</span>
+                                <span class="lang-en">With cash</span>
+                            </span>
+                        </h4>
+
+                        <!-- Accepted Money -->
+                        <div
+                            style="background: rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 20px; margin-bottom: 20px; backdrop-filter: blur(10px);">
+                            <div style="font-weight: 600; margin-bottom: 12px; font-size: 16px;">
+                                <span class="lang-si">Aparat sprejema:</span>
+                                <span class="lang-en">The changer accepts:</span>
                             </div>
-                            <div class="instruction-description">
-                                <span class="lang-si">Gotovina: bankovci 5€, 10€, 20€, 50€ | kovanci 0.5€, 1€,
-                                    2€<br>Bančne kartice: vse glavne kartice</span>
-                                <span class="lang-en">Cash: bills 5€, 10€, 20€, 50€ | coins 0.5€, 1€, 2€<br>Bank cards:
-                                    all major cards</span>
+
+                            <!-- Bills -->
+                            <div style="margin-bottom: 16px;">
+                                <div style="font-size: 14px; opacity: 0.9; margin-bottom: 8px;">
+                                    <span class="lang-si">💶 Bankovci:</span>
+                                    <span class="lang-en">💶 Bills:</span>
+                                </div>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <div
+                                        style="background: #FFA726; color: white; padding: 8px 12px; border-radius: 6px; font-weight: 700; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+                                        50€</div>
+                                    <div
+                                        style="background: #EF5350; color: white; padding: 8px 12px; border-radius: 6px; font-weight: 700; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+                                        20€</div>
+                                    <div
+                                        style="background: #42A5F5; color: white; padding: 8px 12px; border-radius: 6px; font-weight: 700; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+                                        10€</div>
+                                    <div
+                                        style="background: #9E9E9E; color: white; padding: 8px 12px; border-radius: 6px; font-weight: 700; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+                                        5€</div>
+                                </div>
+                            </div>
+
+                            <!-- Coins -->
+                            <div>
+                                <div style="font-size: 14px; opacity: 0.9; margin-bottom: 8px;">
+                                    <span class="lang-si">🪙 Kovanci:</span>
+                                    <span class="lang-en">🪙 Coins:</span>
+                                </div>
+                                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                                    <div
+                                        style="background: #FFD700; color: #333; padding: 8px 12px; border-radius: 50%; font-weight: 700; box-shadow: 0 2px 6px rgba(0,0,0,0.2); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+                                        2€</div>
+                                    <div
+                                        style="background: #FFD700; color: #333; padding: 8px 12px; border-radius: 50%; font-weight: 700; box-shadow: 0 2px 6px rgba(0,0,0,0.2); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center;">
+                                        1€</div>
+                                    <div
+                                        style="background: #FFD700; color: #333; padding: 8px 12px; border-radius: 50%; font-weight: 700; box-shadow: 0 2px 6px rgba(0,0,0,0.2); width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; font-size: 13px;">
+                                        0.5€</div>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
-                    <div class="instruction-step">
-                        <div class="instruction-number">3</div>
-                        <div class="instruction-content">
-                            <div class="instruction-title">
-                                <span class="lang-si">Vstavite denar ali kartico</span>
-                                <span class="lang-en">Insert money or card</span>
+                        <!-- Cash Steps -->
+                        <div class="payment-steps">
+                            <!-- Step 1 -->
+                            <div
+                                style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 16px; margin-bottom: 16px; backdrop-filter: blur(10px);">
+                                <div style="display: flex; align-items: start; gap: 16px;">
+                                    <div
+                                        style="background: white; color: #11998e; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; flex-shrink: 0;">
+                                        ①</div>
+                                    <div>
+                                        <div style="font-weight: 600;">
+                                            <span class="lang-si">Vstavite bankovec v režo 1</span>
+                                            <span class="lang-en">Insert bill in slot 1</span>
+                                        </div>
+                                        <div style="margin-top: 8px; font-size: 28px;">💵➡️📥</div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="instruction-description">
-                                <span class="lang-si">1 žeton = 1€. <strong>Kupite 20+ žetonov naenkrat in prejmite +10%
-                                        bonus!</strong> Žetoni bodo padli v spodnjo škatlico.</span>
-                                <span class="lang-en">1 token = 1€. <strong>Buy 20+ tokens at once and get +10%
-                                        bonus!</strong> Tokens will drop into the bottom tray.</span>
+
+                            <!-- OR divider -->
+                            <div
+                                style="text-align: center; margin: 16px 0; font-size: 18px; font-weight: 700; opacity: 0.9;">
+                                <span class="lang-si">ALI</span>
+                                <span class="lang-en">OR</span>
+                            </div>
+
+                            <!-- Step 2 -->
+                            <div
+                                style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 16px; margin-bottom: 20px; backdrop-filter: blur(10px);">
+                                <div style="display: flex; align-items: start; gap: 16px;">
+                                    <div
+                                        style="background: white; color: #11998e; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 18px; flex-shrink: 0;">
+                                        ②</div>
+                                    <div>
+                                        <div style="font-weight: 600;">
+                                            <span class="lang-si">Vstavite kovanec v režo 2</span>
+                                            <span class="lang-en">Insert coin in slot 2</span>
+                                        </div>
+                                        <div style="margin-top: 8px; font-size: 28px;">🪙➡️📥</div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Important Warning -->
+                            <div
+                                style="background: rgba(255, 193, 7, 0.3); border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 12px; padding: 16px; backdrop-filter: blur(10px);">
+                                <div style="display: flex; align-items: start; gap: 12px;">
+                                    <div style="font-size: 24px; flex-shrink: 0;">⚠️</div>
+                                    <div>
+                                        <div style="font-weight: 700; margin-bottom: 4px;">
+                                            <span class="lang-si">Če menjalec ne sprejema vašega denarja</span>
+                                            <span class="lang-en">If the changer doesn't accept your money</span>
+                                        </div>
+                                        <div style="font-size: 14px; opacity: 0.95;">
+                                            <span class="lang-si">Poskusite ponovno (obrnite bankovec ali močneje
+                                                potisnite kovanec)</span>
+                                            <span class="lang-en">Try again (flip the bill or push the coin
+                                                harder)</span>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
+
+                <!-- Token Machine Photo -->
+                <div style="text-align: center; margin-bottom: 32px;">
+                    <img src="menjalec.jpg" alt="Token Machine"
+                        style="max-width: 100%; height: auto; border-radius: 16px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);">
+                </div>
+
+                <!-- Video Placeholder -->
                 <div class="video-placeholder">
                     <div class="video-placeholder-icon">🎥</div>
                     <div class="video-placeholder-text">
@@ -8500,6 +8788,14 @@
             // Add active class to clicked tab and corresponding content
             if (event && event.currentTarget) {
                 event.currentTarget.classList.add('active');
+                // Update URL hash without scrolling (if possible) or just set it
+                // Using history.pushState to avoid default jump if we want smooth scroll, 
+                // but user wants "relative addresses", so setting hash is good.
+                // However, setting hash triggers hashchange, which calls handleQRCodeNavigation.
+                // handleQRCodeNavigation calls switchTab. We need to avoid infinite loop.
+                if (window.location.hash !== '#' + tabId) {
+                    history.pushState(null, null, '#' + tabId);
+                }
             } else {
                 // If called programmatically, find the button for this tab
                 const targetButton = Array.from(tabButtons).find(btn =>
@@ -8522,6 +8818,7 @@
 
                 // Wait for DOM to be ready, then activate tab
                 setTimeout(() => {
+                    // Call switchTab programmatically (null first arg)
                     switchTab(null, hash);
 
                     // Verify tab was activated
@@ -8557,6 +8854,34 @@
             console.log('Hash changed');
             handleQRCodeNavigation();
         });
+        // Helper for service card links
+        function navigateToInstruction(tabId) {
+            console.log('Navigating to instruction:', tabId);
+            // 1. Switch tab
+            switchTab(null, tabId);
+
+            // 2. Scroll active tab button into view (Horizontal centering)
+            setTimeout(() => {
+                const activeBtn = document.querySelector('.tab-button.active');
+                if (activeBtn) {
+                    activeBtn.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+                }
+            }, 100);
+
+            // 3. Scroll to instructions section (Vertical centering)
+            setTimeout(() => {
+                const instructionsContainer = document.querySelector('.instructions-container');
+                if (instructionsContainer) {
+                    // Scroll to center of viewport
+                    instructionsContainer.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                }
+            }, 100);
+
+            // 4. Update hash if needed
+            if (window.location.hash !== '#' + tabId) {
+                // history.pushState(null, null, '#' + tabId);
+            }
+        }
     </script>
 
     <script>
