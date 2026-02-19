@@ -181,31 +181,39 @@
                 transform: rotate(0deg) scale(1);
                 filter: drop-shadow(0 2px 4px rgba(0, 151, 218, 0.15)) blur(0px);
             }
+
             2% {
                 transform: rotate(0deg) scale(1.02);
                 filter: drop-shadow(0 3px 6px rgba(0, 151, 218, 0.2)) blur(0px);
             }
+
             5% {
                 transform: rotate(72deg) scale(1.05);
                 filter: drop-shadow(0 4px 8px rgba(0, 151, 218, 0.3)) blur(1.5px);
             }
+
             15% {
                 transform: rotate(360deg) scale(1.05);
                 filter: drop-shadow(0 4px 8px rgba(0, 151, 218, 0.3)) blur(2.5px);
             }
+
             25% {
                 transform: rotate(720deg) scale(1.05);
                 filter: drop-shadow(0 4px 8px rgba(0, 151, 218, 0.3)) blur(2.5px);
             }
+
             28% {
                 transform: rotate(720deg) scale(1.02);
                 filter: drop-shadow(0 3px 6px rgba(0, 151, 218, 0.25)) blur(1px);
             }
+
             30% {
                 transform: rotate(720deg) scale(1);
                 filter: drop-shadow(0 2px 4px rgba(0, 151, 218, 0.15)) blur(0px);
             }
-            50%, 100% {
+
+            50%,
+            100% {
                 transform: rotate(720deg) scale(1);
                 filter: drop-shadow(0 2px 4px rgba(0, 151, 218, 0.15)) blur(0px);
             }
@@ -230,7 +238,7 @@
             left: 15%;
             animation: sparkle1 10s ease-in-out infinite;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
-                        0 0 40px rgba(0, 151, 218, 0.6);
+                0 0 40px rgba(0, 151, 218, 0.6);
         }
 
         .logo-area::after {
@@ -238,18 +246,23 @@
             right: 20%;
             animation: sparkle2 10s ease-in-out infinite;
             box-shadow: 0 0 20px rgba(255, 255, 255, 0.8),
-                        0 0 40px rgba(0, 151, 218, 0.6);
+                0 0 40px rgba(0, 151, 218, 0.6);
         }
 
         @keyframes sparkle1 {
-            0%, 30%, 100% {
+
+            0%,
+            30%,
+            100% {
                 opacity: 0;
                 transform: scale(0) rotate(0deg);
             }
+
             32% {
                 opacity: 1;
                 transform: scale(1) rotate(0deg);
             }
+
             34% {
                 opacity: 0;
                 transform: scale(0.5) rotate(90deg);
@@ -257,14 +270,19 @@
         }
 
         @keyframes sparkle2 {
-            0%, 34%, 100% {
+
+            0%,
+            34%,
+            100% {
                 opacity: 0;
                 transform: scale(0) rotate(0deg);
             }
+
             36% {
                 opacity: 1;
                 transform: scale(1.2) rotate(0deg);
             }
+
             38% {
                 opacity: 0;
                 transform: scale(0.5) rotate(-90deg);
@@ -299,14 +317,19 @@
         }
 
         @keyframes sparkleText1 {
-            0%, 38%, 100% {
+
+            0%,
+            38%,
+            100% {
                 opacity: 0;
                 transform: translateY(0) scale(0) rotate(0deg);
             }
+
             40% {
                 opacity: 1;
                 transform: translateY(-5px) scale(1) rotate(0deg);
             }
+
             42% {
                 opacity: 0;
                 transform: translateY(-10px) scale(0.5) rotate(180deg);
@@ -314,14 +337,19 @@
         }
 
         @keyframes sparkleText2 {
-            0%, 42%, 100% {
+
+            0%,
+            42%,
+            100% {
                 opacity: 0;
                 transform: translateY(0) scale(0) rotate(0deg);
             }
+
             44% {
                 opacity: 1;
                 transform: translateY(5px) scale(1.2) rotate(0deg);
             }
+
             46% {
                 opacity: 0;
                 transform: translateY(10px) scale(0.5) rotate(-180deg);
@@ -706,8 +734,8 @@
 
         .chat-status {
             position: absolute;
-            bottom: 15px;
-            right: 50px;
+            bottom: 3px;
+            right: 10px;
             display: flex;
             align-items: center;
             font-size: 0.85rem;
@@ -717,10 +745,10 @@
         .chat-help-text {
             display: block;
             font-size: 0.72rem;
-            opacity: 0.8;
+            opacity: 1;
             line-height: 1.3;
             font-weight: 400;
-            margin-top: 6px;
+            margin-top: 1px;
         }
 
         .chat-help-text strong {
@@ -3447,8 +3475,8 @@
 
         .chat-status {
             position: absolute;
-            bottom: 15px;
-            right: 50px;
+            bottom: 3px;
+            right: 10px;
             display: flex;
             align-items: center;
             font-size: 0.85rem;
@@ -3461,7 +3489,7 @@
             opacity: 0.8;
             line-height: 1.3;
             font-weight: 400;
-            margin-top: 6px;
+            margin-top: 0px;
         }
 
         .chat-help-text strong {
@@ -5362,10 +5390,12 @@
                         <span class="lang-si">Programi pranja (≈40 min)</span>
                         <span class="lang-en">Washing programs (≈40 min)</span>
                     </div>
-                    <div class="temp-badges" style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;">
+                    <div class="temp-badges"
+                        style="display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px;">
                         <!-- 30°C -->
                         <div class="temp-badge-item wash-temp">
-                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
                                 <circle cx="11.5" cy="18" r="2" fill="currentColor" stroke="none" />
                             </svg>
@@ -5373,7 +5403,8 @@
                         </div>
                         <!-- 40°C -->
                         <div class="temp-badge-item wash-temp">
-                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
                                 <circle cx="11.5" cy="18" r="2" fill="currentColor" stroke="none" />
                                 <line x1="11.5" y1="14" x2="11.5" y2="16" stroke-width="2" />
@@ -5382,7 +5413,8 @@
                         </div>
                         <!-- 60°C -->
                         <div class="temp-badge-item wash-temp">
-                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
                                 <circle cx="11.5" cy="18" r="2" fill="currentColor" stroke="none" />
                                 <line x1="11.5" y1="10" x2="11.5" y2="16" stroke-width="2" />
@@ -5391,7 +5423,8 @@
                         </div>
                         <!-- 90°C -->
                         <div class="temp-badge-item wash-temp">
-                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
                                 <circle cx="11.5" cy="18" r="2" fill="currentColor" stroke="none" />
                                 <line x1="11.5" y1="5" x2="11.5" y2="16" stroke-width="2" />
@@ -5540,10 +5573,12 @@
                         <span class="lang-si">Programi sušenja</span>
                         <span class="lang-en">Drying programs</span>
                     </div>
-                    <div class="temp-badges" style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
+                    <div class="temp-badges"
+                        style="display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 12px;">
                         <!-- ≈40° - 1 плюсик -->
                         <div class="temp-badge-item dry-temp">
-                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
                                 <circle cx="11.5" cy="18" r="2" fill="currentColor" stroke="none" />
                                 <!-- 1 плюсик -->
@@ -5556,7 +5591,8 @@
                         </div>
                         <!-- ≈60° - 2 плюсика -->
                         <div class="temp-badge-item dry-temp">
-                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
                                 <circle cx="11.5" cy="18" r="2" fill="currentColor" stroke="none" />
                                 <line x1="11.5" y1="10" x2="11.5" y2="16" stroke-width="2" />
@@ -5574,7 +5610,8 @@
                         </div>
                         <!-- ≈80° - 3 плюсика -->
                         <div class="temp-badge-item dry-temp">
-                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round">
+                            <svg class="temp-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-linecap="round" stroke-linejoin="round">
                                 <path d="M14 14.76V3.5a2.5 2.5 0 0 0-5 0v11.26a4.5 4.5 0 1 0 5 0z" />
                                 <circle cx="11.5" cy="18" r="2" fill="currentColor" stroke="none" />
                                 <line x1="11.5" y1="5" x2="11.5" y2="16" stroke-width="2" />
@@ -7497,7 +7534,8 @@
                     <span class="lang-en">Buy tokens</span>
                 </button>
                 <button class="tab-button" onclick="switchTab(event, 'washing')">
-                    <svg width="52" height="52" viewBox="0 0 58 73" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 12px; vertical-align: middle;">
+                    <svg width="52" height="52" viewBox="0 0 58 73" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="margin-right: 12px; vertical-align: middle;">
                         <!-- Main body -->
                         <rect x="7" y="4" width="44" height="65" rx="1.5" fill="white" stroke="#0097DA"
                             stroke-width="2.5" />
@@ -7520,10 +7558,9 @@
                         <circle cx="29" cy="42" r="15" fill="#E8F4F8" stroke="#0097DA" stroke-width="2.5" />
 
                         <!-- Door glass layers -->
-                        <circle cx="29" cy="42" r="13" fill="white" stroke="#0097DA" stroke-width="1.5"
+                        <circle cx="29" cy="42" r="13" fill="white" stroke="#0097DA" stroke-width="1.5" opacity="0.3" />
+                        <circle cx="29" cy="42" r="11" fill="#8FD8F8" opacity="0.2" stroke="#0097DA" stroke-width="1"
                             opacity="0.3" />
-                        <circle cx="29" cy="42" r="11" fill="#8FD8F8" opacity="0.2" stroke="#0097DA"
-                            stroke-width="1" opacity="0.3" />
                         <circle cx="29" cy="42" r="9" fill="#8FD8F8" opacity="0.3" />
 
                         <!-- Door handle -->
@@ -7550,14 +7587,14 @@
                         </g>
 
                         <!-- Bottom plinth -->
-                        <rect x="7" y="62" width="44" height="7" fill="#E8F4F8" stroke="#0097DA"
-                            stroke-width="2.5" />
+                        <rect x="7" y="62" width="44" height="7" fill="#E8F4F8" stroke="#0097DA" stroke-width="2.5" />
                     </svg>
                     <span class="lang-si">Pranje</span>
                     <span class="lang-en">Washing</span>
                 </button>
                 <button class="tab-button" onclick="switchTab(event, 'drying')">
-                    <svg width="52" height="52" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 12px; vertical-align: middle;">
+                    <svg width="52" height="52" viewBox="0 0 60 80" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="margin-right: 12px; vertical-align: middle;">
                         <!-- Dryer body -->
                         <rect x="4" y="2" width="52" height="74" rx="2" fill="#9CA3AF" />
                         <rect x="6" y="4" width="48" height="70" rx="1.5" fill="#D1D5DB" />
@@ -7644,7 +7681,8 @@
                     <span class="lang-en">Drying</span>
                 </button>
                 <button class="tab-button" onclick="switchTab(event, 'disinfection')">
-                    <svg width="52" height="52" viewBox="0 0 48 56" fill="none" xmlns="http://www.w3.org/2000/svg" style="margin-right: 12px; vertical-align: middle;">
+                    <svg width="52" height="52" viewBox="0 0 48 56" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        style="margin-right: 12px; vertical-align: middle;">
                         <!-- Ozone chamber body -->
                         <rect x="6" y="4" width="36" height="48" rx="3" fill="white" stroke="#10B981"
                             stroke-width="2.5" />
@@ -7671,8 +7709,7 @@
                         <!-- Items hanging inside (visible through door) -->
                         <g id="hangingItems">
                             <!-- Hanger rod -->
-                            <line x1="12" y1="18" x2="36" y2="18" stroke="#10B981" stroke-width="1.5"
-                                opacity="0.4" />
+                            <line x1="12" y1="18" x2="36" y2="18" stroke="#10B981" stroke-width="1.5" opacity="0.4" />
 
                             <!-- Jacket on hanger -->
                             <path
@@ -7737,8 +7774,8 @@
                                 <animate attributeName="d"
                                     values="M 10 35 Q 15 33, 20 35 T 30 35 T 38 35;M 10 35 Q 15 37, 20 35 T 30 35 T 38 35;M 10 35 Q 15 33, 20 35 T 30 35 T 38 35"
                                     dur="3s" repeatCount="indefinite" begin="0.5s" />
-                                <animate attributeName="opacity" values="0.5;0.2;0.5" dur="3s"
-                                    repeatCount="indefinite" begin="0.5s" />
+                                <animate attributeName="opacity" values="0.5;0.2;0.5" dur="3s" repeatCount="indefinite"
+                                    begin="0.5s" />
                             </path>
                         </g>
 
@@ -7752,14 +7789,12 @@
                             <!-- Door panel - width decreases as it opens -->
                             <rect x="6" y="12" width="36" height="40" rx="2" fill="white" stroke="#10B981"
                                 stroke-width="2.5">
-                                <animate attributeName="width" values="36;3;3;36" dur="8s"
-                                    repeatCount="indefinite" />
+                                <animate attributeName="width" values="36;3;3;36" dur="8s" repeatCount="indefinite" />
                             </rect>
 
                             <!-- Glass window - disappears when door opens -->
                             <rect x="12" y="18" width="24" height="28" rx="2" fill="#10B981" opacity="0.15">
-                                <animate attributeName="width" values="24;0;0;24" dur="8s"
-                                    repeatCount="indefinite" />
+                                <animate attributeName="width" values="24;0;0;24" dur="8s" repeatCount="indefinite" />
                                 <animate attributeName="opacity" values="0.15;0;0;0.15" dur="8s"
                                     repeatCount="indefinite" />
                             </rect>
@@ -7767,8 +7802,7 @@
                             <!-- Door handle - moves to hinge when open -->
                             <circle cx="38" cy="32" r="1.5" fill="#10B981">
                                 <animate attributeName="cx" values="38;7;7;38" dur="8s" repeatCount="indefinite" />
-                                <animate attributeName="r" values="1.5;0.8;0.8;1.5" dur="8s"
-                                    repeatCount="indefinite" />
+                                <animate attributeName="r" values="1.5;0.8;0.8;1.5" dur="8s" repeatCount="indefinite" />
                             </circle>
                         </g>
 
