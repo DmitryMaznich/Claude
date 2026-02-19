@@ -1432,6 +1432,9 @@ app.post(`/telegram/webhook`, async (req, res) => {
                             return res.sendStatus(200);
                         }
 
+                        // Get operator's first name from Telegram
+                        const operatorName = msg.from && msg.from.first_name ? msg.from.first_name : 'Оператор';
+
                         // Translate operator's message to user's language
                         const userLanguage = session.language || 'English';
                         const translatedText = await translateToLanguage(text, userLanguage);
@@ -1449,7 +1452,7 @@ app.post(`/telegram/webhook`, async (req, res) => {
 
                         // Log operator message to Planfix (async)
                         if (session.planfixTaskId) {
-                            logMessageToPlanfix(session, operatorMsg, 'Оператор')
+                            logMessageToPlanfix(session, operatorMsg, operatorName)
                                 .catch(err => console.error('Failed to log operator message to Planfix:', err));
                         }
 
@@ -1530,14 +1533,24 @@ app.post(`/telegram/webhook`, async (req, res) => {
                             });
                         });
 
+                        // Get operator's first name from Telegram
+                        const operatorName = msg.from && msg.from.first_name ? msg.from.first_name : 'Оператор';
+
                         // Add photo to session
-                        session.messages.push({
+                        const photoMsg = {
                             role: 'assistant',
-                            content: '[Фото од оператора]',
+                            content: '[Фото от оператора]',
                             photo: `/uploads/${photoFilename}`,
                             timestamp: new Date(),
                             fromOperator: true
-                        });
+                        };
+                        session.messages.push(photoMsg);
+
+                        // Log photo message to Planfix (async)
+                        if (session.planfixTaskId) {
+                            logMessageToPlanfix(session, photoMsg, operatorName)
+                                .catch(err => console.error('Failed to log photo to Planfix:', err));
+                        }
 
                         console.log(`Photo sent to session ${sessionId} via operator`);
                         await bot.sendMessage(chatId, `✅ Fotografija poslana / Photo sent`);
@@ -1692,6 +1705,9 @@ app.post(`/telegram/webhook`, async (req, res) => {
                     return;
                 }
 
+                // Get operator's first name from Telegram
+                const operatorName = msg.from && msg.from.first_name ? msg.from.first_name : 'Оператор';
+
                 // Translate operator's message to user's language
                 const userLanguage = session.language || 'English';
                 const translatedMessage = await translateToLanguage(message, userLanguage);
@@ -1708,7 +1724,7 @@ app.post(`/telegram/webhook`, async (req, res) => {
 
                 // Log operator message to Planfix (async)
                 if (session.planfixTaskId) {
-                    logMessageToPlanfix(session, operatorMsg, 'Оператор')
+                    logMessageToPlanfix(session, operatorMsg, operatorName)
                         .catch(err => console.error('Failed to log operator message to Planfix:', err));
                 }
 
