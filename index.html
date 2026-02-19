@@ -704,13 +704,32 @@
             }
         }
 
+        .chat-status-container {
+            position: absolute;
+            bottom: 12px;
+            right: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+        }
+
+        .chat-status {
+            position: static !important;
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
         .chat-help-text {
             display: block;
-            font-size: 0.75rem;
-            opacity: 0.85;
-            margin-top: 8px;
-            line-height: 1.4;
+            font-size: 0.7rem;
+            opacity: 0.75;
+            line-height: 1.3;
             font-weight: 400;
+            text-align: right;
+            white-space: nowrap;
         }
 
         .chat-help-text strong {
@@ -3402,7 +3421,9 @@
             border-radius: 16px 16px 0 0;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+            position: relative;
+            min-height: 70px;
         }
 
         .chat-header-info h3 {
@@ -3411,18 +3432,10 @@
             font-weight: 600;
         }
 
-        .chat-status {
-            display: flex;
-            align-items: center;
-            font-size: 0.85rem;
-            opacity: 0.9;
-            margin-top: 4px;
-        }
-
         .chat-status::before {
             content: '';
-            width: 8px;
-            height: 8px;
+            width: 11px;
+            height: 11px;
             background: #4ade80;
             border-radius: 50%;
             margin-right: 6px;
@@ -3441,13 +3454,32 @@
             }
         }
 
+        .chat-status-container {
+            position: absolute;
+            bottom: 12px;
+            right: 50px;
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 4px;
+        }
+
+        .chat-status {
+            position: static !important;
+            display: flex;
+            align-items: center;
+            font-size: 0.85rem;
+            opacity: 0.9;
+        }
+
         .chat-help-text {
             display: block;
-            font-size: 0.75rem;
-            opacity: 0.85;
-            margin-top: 8px;
-            line-height: 1.4;
+            font-size: 0.7rem;
+            opacity: 0.75;
+            line-height: 1.3;
             font-weight: 400;
+            text-align: right;
+            white-space: nowrap;
         }
 
         .chat-help-text strong {
@@ -4418,7 +4450,9 @@
             border-radius: 16px 16px 0 0;
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+            position: relative;
+            min-height: 70px;
         }
 
         .chat-header-info h3 {
@@ -4427,18 +4461,10 @@
             font-weight: 600;
         }
 
-        .chat-status {
-            display: flex;
-            align-items: center;
-            font-size: 0.85rem;
-            opacity: 0.9;
-            margin-top: 4px;
-        }
-
         .chat-status::before {
             content: '';
-            width: 8px;
-            height: 8px;
+            width: 11px;
+            height: 11px;
             background: #4ade80;
             border-radius: 50%;
             margin-right: 6px;
@@ -8879,10 +8905,12 @@
         <div class="chat-header">
             <div class="chat-header-info">
                 <h3>Smart Wash Chat</h3>
+            </div>
+            <div class="chat-status-container">
                 <span class="chat-status">AI online</span>
                 <span class="chat-help-text">
-                    <span class="lang-si">💡 Napišite <strong>/operater</strong> za pogovor z našim operaterjem</span>
-                    <span class="lang-en">💡 Type <strong>/operator</strong> to chat with our live operator</span>
+                    <span class="lang-si">💡 Напишите <strong>/operater</strong></span>
+                    <span class="lang-en">💡 Type <strong>/operator</strong></span>
                 </span>
             </div>
             <button id="closeChat" class="close-chat">×</button>
