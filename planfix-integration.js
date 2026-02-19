@@ -78,12 +78,11 @@ class PlanfixIntegration {
 
         try {
             const commentData = {
-                task: taskId,
-                description: this._formatMessage(message, senderInfo),
-                notify: false // Не отправлять уведомления для каждого сообщения
+                description: this._formatMessage(message, senderInfo).replace(/\n/g, '<br>'),
+                recipients: undefined // Не отправлять уведомления для каждого сообщения
             };
 
-            const result = await this._makeRequest('POST', `/task/${taskId}/comment`, commentData);
+            const result = await this._makeRequest('POST', `task/${taskId}/comments/`, commentData);
 
             if (result && result.id) {
                 console.log(`✅ Comment added to Planfix task ${taskId}`);
