@@ -97,6 +97,35 @@ class PlanfixIntegration {
     }
 
     /**
+     * Обновить заголовок задачи
+     * @param {string} taskId - ID задачи
+     * @param {string} newName - Новый заголовок задачи
+     */
+    async updateTaskName(taskId, newName) {
+        if (!this.enabled || !taskId) {
+            return null;
+        }
+
+        try {
+            const updateData = {
+                name: newName
+            };
+
+            const result = await this._makeRequest('PATCH', `task/${taskId}`, updateData);
+
+            if (result) {
+                console.log(`✅ Planfix task ${taskId} name updated to: ${newName}`);
+                return result;
+            }
+
+            return null;
+        } catch (error) {
+            console.error(`❌ Failed to update Planfix task ${taskId} name:`, error.message);
+            return null;
+        }
+    }
+
+    /**
      * Обновить статус задачи
      * @param {string} taskId - ID задачи
      * @param {string} status - Новый статус (например, 'closed', 'completed')

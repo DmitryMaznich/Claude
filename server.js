@@ -473,6 +473,12 @@ app.post('/api/chat', async (req, res) => {
 
             console.log(`✅ User provided name: ${session.userName} for session ${sessionId}`);
 
+            // Update Planfix task name if task was already created
+            if (session.planfixTaskId) {
+                const newTaskName = `Чат: ${session.userName} (${session.language})`;
+                await planfix.updateTaskName(session.planfixTaskId, newTaskName);
+            }
+
             // Now actually connect to operator
             session.operatorMode = true;
 
@@ -689,6 +695,12 @@ app.post('/api/chat', async (req, res) => {
                 // User provided a name
                 session.userName = userName;
                 console.log(`User name set to: ${userName}`);
+
+                // Update Planfix task name if task was already created
+                if (session.planfixTaskId) {
+                    const newTaskName = `Чат: ${session.userName} (${session.language})`;
+                    await planfix.updateTaskName(session.planfixTaskId, newTaskName);
+                }
             } else {
                 // No valid name provided, use default
                 session.userName = `Customer${session.customerNumber}`;
