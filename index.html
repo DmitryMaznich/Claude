@@ -704,18 +704,10 @@
             }
         }
 
-        .chat-status-container {
+        .chat-status {
             position: absolute;
             bottom: 12px;
             right: 50px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 4px;
-        }
-
-        .chat-status {
-            position: static !important;
             display: flex;
             align-items: center;
             font-size: 0.85rem;
@@ -724,12 +716,11 @@
 
         .chat-help-text {
             display: block;
-            font-size: 0.7rem;
-            opacity: 0.75;
+            font-size: 0.72rem;
+            opacity: 0.8;
             line-height: 1.3;
             font-weight: 400;
-            text-align: right;
-            white-space: nowrap;
+            margin-top: 6px;
         }
 
         .chat-help-text strong {
@@ -3454,18 +3445,10 @@
             }
         }
 
-        .chat-status-container {
+        .chat-status {
             position: absolute;
             bottom: 12px;
             right: 50px;
-            display: flex;
-            flex-direction: column;
-            align-items: flex-end;
-            gap: 4px;
-        }
-
-        .chat-status {
-            position: static !important;
             display: flex;
             align-items: center;
             font-size: 0.85rem;
@@ -3474,12 +3457,11 @@
 
         .chat-help-text {
             display: block;
-            font-size: 0.7rem;
-            opacity: 0.75;
+            font-size: 0.72rem;
+            opacity: 0.8;
             line-height: 1.3;
             font-weight: 400;
-            text-align: right;
-            white-space: nowrap;
+            margin-top: 6px;
         }
 
         .chat-help-text strong {
@@ -8905,14 +8887,12 @@
         <div class="chat-header">
             <div class="chat-header-info">
                 <h3>Smart Wash Chat</h3>
-            </div>
-            <div class="chat-status-container">
-                <span class="chat-status">AI online</span>
                 <span class="chat-help-text">
-                    <span class="lang-si">💡 Напишите <strong>/operater</strong></span>
-                    <span class="lang-en">💡 Type <strong>/operator</strong></span>
+                    <span class="lang-si">💡 Napišite <strong>/operater</strong> za pogovor z našim operaterjem</span>
+                    <span class="lang-en">💡 Type <strong>/operator</strong> to chat with our live operator</span>
                 </span>
             </div>
+            <span class="chat-status">AI online</span>
             <button id="closeChat" class="close-chat">×</button>
         </div>
 
