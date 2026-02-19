@@ -89,12 +89,27 @@
       "Bash(git checkout:*)",
       "WebFetch(domain:smart-wash.si)",
       "Bash(gh run list:*)",
-      "Bash(cmd.exe:*)"
+      "Bash(cmd.exe:*)",
+      "Bash(npx:*)",
+      "Bash(find:*)",
+      "Bash(code:*)",
+      "Bash(grep:*)",
+      "Bash(claude mcp list:*)",
+      "Bash(npm show:*)",
+      "Bash(npm view:*)",
+      "Bash(GOOGLE_MAPS_API_KEY=\"AIzaSyDmf1WINWpXkgg-okt9VUUttNFWcthcMMY\" timeout 3 npx -y @modelcontextprotocol/server-google-maps)",
+      "WebFetch(domain:planfix.com)",
+      "WebFetch(domain:help.planfix.com)",
+      "Bash(test:*)",
+      "Bash(npm start)",
+      "Bash(taskkill:*)",
+      "Bash(railway:*)",
+      "Bash(env:*)"
     ]
   },
+  "enableAllProjectMcpServers": true,
   "enabledMcpjsonServers": [
     "atlassian",
     "telegram-mcp"
-  ],
-  "enableAllProjectMcpServers": true
+  ]
 }
