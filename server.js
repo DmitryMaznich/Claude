@@ -5,6 +5,7 @@ const TelegramBot = require('node-telegram-bot-api');
 const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
+const PlanfixIntegration = require('./planfix-integration');
 require('dotenv').config();
 
 const app = express();
@@ -12,6 +13,15 @@ const PORT = process.env.PORT || 3000;
 
 // Middleware
 app.use(cors());
+
+// Redirect www to non-www (SEO fix)
+app.use((req, res, next) => {
+    if (req.headers.host === 'www.smart-wash.si') {
+        return res.redirect(301, `https://smart-wash.si${req.url}`);
+    }
+    next();
+});
+
 app.use(express.json());
 app.use(express.static('.')); // Serve static files from current directory
 
@@ -69,6 +79,14 @@ const anthropic = new Anthropic({
 // Initialize Telegram Bot with webhook
 const bot = process.env.TELEGRAM_BOT_TOKEN ? new TelegramBot(process.env.TELEGRAM_BOT_TOKEN, { polling: false }) : null;
 const OPERATOR_CHAT_ID = process.env.OPERATOR_CHAT_ID;
+
+// Initialize Planfix Integration
+const planfix = new PlanfixIntegration({
+    enabled: process.env.PLANFIX_ENABLED === 'true',
+    account: process.env.PLANFIX_ACCOUNT,
+    apiToken: process.env.PLANFIX_API_TOKEN,
+    projectId: process.env.PLANFIX_PROJECT_ID
+});
 
 // Session storage (in production, use Redis or database)
 const sessions = new Map();
@@ -422,11 +440,11 @@ function shouldTriggerOperator(message) {
 // Counter for auto-generated customer names
 let customerCounter = 0;
 
-function getSession(sessionId) {
+async function getSession(sessionId) {
     if (!sessions.has(sessionId)) {
         console.log(`Creating new session: ${sessionId}`);
         customerCounter++;
-        sessions.set(sessionId, {
+        const newSession = {
             id: sessionId,
             messages: [],
             operatorMode: false,
@@ -435,10 +453,64 @@ function getSession(sessionId) {
             askedForName: false,
             customerNumber: customerCounter,
             createdAt: new Date(),
-            lastUserMessageTime: new Date()
+            lastUserMessageTime: new Date(),
+            planfixTaskId: null // ID задачи в Планфиксе
+        };
+        sessions.set(sessionId, newSession);
+
+        // Создаем задачу в Планфиксе (асинхронно, не блокируя)
+        createPlanfixTaskForSession(newSession).catch(err => {
+            console.error('Failed to create Planfix task:', err);
         });
     }
     return sessions.get(sessionId);
+}
+
+// Асинхронное создание задачи в Планфиксе
+async function createPlanfixTaskForSession(session) {
+    // Ждем немного, чтобы собрать базовую информацию о сессии
+    await new Promise(resolve => setTimeout(resolve, 2000));
+
+    const taskInfo = await planfix.createTaskForSession(session);
+    if (taskInfo) {
+        session.planfixTaskId = taskInfo.taskId;
+        console.log(`✅ Session ${session.id} linked to Planfix task ${taskInfo.taskId}`);
+        console.log(`📎 Task URL: ${taskInfo.taskUrl}`);
+    }
+}
+
+// Логирование сообщения в Планфикс
+async function logMessageToPlanfix(session, message, senderInfo) {
+    if (!session.planfixTaskId) {
+        return;
+    }
+
+    try {
+        await planfix.addMessageComment(session.planfixTaskId, message, senderInfo);
+    } catch (error) {
+        console.error('Failed to log message to Planfix:', error);
+    }
+}
+
+// Закрытие задачи в Планфиксе при завершении сессии
+async function closePlanfixTask(session) {
+    if (!session.planfixTaskId) {
+        return;
+    }
+
+    try {
+        // Добавляем итоговую сводку
+        await planfix.addSessionSummary(session.planfixTaskId, session);
+
+        // Обновляем статус на "Завершено"
+        await planfix.updateTaskStatus(session.planfixTaskId, 'completed', {
+            completedAt: new Date().toISOString()
+        });
+
+        console.log(`✅ Planfix task ${session.planfixTaskId} closed for session ${session.id}`);
+    } catch (error) {
+        console.error('Failed to close Planfix task:', error);
+    }
 }
 
 // Translate text to Russian if needed
@@ -511,17 +583,24 @@ app.post('/api/chat', async (req, res) => {
             return res.status(400).json({ error: 'Message and sessionId are required' });
         }
 
-        const session = getSession(sessionId);
+        const session = await getSession(sessionId);
 
         // Update last user message time for inactivity tracking
         session.lastUserMessageTime = new Date();
 
         // Add user message to session
-        session.messages.push({
+        const userMessage = {
             role: 'user',
             content: message,
             timestamp: new Date()
-        });
+        };
+        session.messages.push(userMessage);
+
+        // Log message to Planfix (async, don't block)
+        if (session.planfixTaskId) {
+            logMessageToPlanfix(session, userMessage, session.userName || `Customer${session.customerNumber}`)
+                .catch(err => console.error('Failed to log message to Planfix:', err));
+        }
 
         // Handle user commands
         const command = message.trim().toLowerCase();
@@ -530,6 +609,9 @@ app.post('/api/chat', async (req, res) => {
         if (command === '/ai' || command === '/bot') {
             if (session.operatorMode) {
                 session.operatorMode = false;
+
+                // Close Planfix task (async)
+                closePlanfixTask(session).catch(err => console.error('Failed to close Planfix task:', err));
 
                 const aiSwitchMessage = {
                     'English': '🤖 Switched back to AI assistant. How can I help you?',
@@ -542,11 +624,18 @@ app.post('/api/chat', async (req, res) => {
                     'German': '🤖 Zurück zum AI-Assistenten. Wie kann ich Ihnen helfen?'
                 };
 
-                session.messages.push({
+                const switchMsg = {
                     role: 'assistant',
                     content: aiSwitchMessage[session.language] || aiSwitchMessage['English'],
                     timestamp: new Date()
-                });
+                };
+                session.messages.push(switchMsg);
+
+                // Log switch to Planfix
+                if (session.planfixTaskId) {
+                    logMessageToPlanfix(session, switchMsg, 'СИСТЕМА')
+                        .catch(err => console.error('Failed to log to Planfix:', err));
+                }
 
                 return res.json({
                     response: aiSwitchMessage[session.language] || aiSwitchMessage['English'],
@@ -879,11 +968,18 @@ app.post('/api/chat', async (req, res) => {
         }
 
         // Add assistant response to session
-        session.messages.push({
+        const assistantMsg = {
             role: 'assistant',
             content: assistantMessage,
             timestamp: new Date()
-        });
+        };
+        session.messages.push(assistantMsg);
+
+        // Log assistant message to Planfix (async)
+        if (session.planfixTaskId) {
+            logMessageToPlanfix(session, assistantMsg, 'AI Assistant')
+                .catch(err => console.error('Failed to log AI response to Planfix:', err));
+        }
 
         res.json({
             response: assistantMessage,
@@ -1214,6 +1310,9 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 // Exit operator mode
                 session.operatorMode = false;
 
+                // Close Planfix task (async)
+                closePlanfixTask(session).catch(err => console.error('Failed to close Planfix task:', err));
+
                 console.log(`Session ${sessionId} closed via button by operator`);
                 try {
                     await bot.sendMessage(chatId,
@@ -1340,12 +1439,19 @@ app.post(`/telegram/webhook`, async (req, res) => {
 
                         // Add operator's message to session (in user's language)
                         const messageTimestamp = new Date();
-                        session.messages.push({
+                        const operatorMsg = {
                             role: 'assistant',
                             content: translatedText,
                             timestamp: messageTimestamp,
                             fromOperator: true
-                        });
+                        };
+                        session.messages.push(operatorMsg);
+
+                        // Log operator message to Planfix (async)
+                        if (session.planfixTaskId) {
+                            logMessageToPlanfix(session, operatorMsg, 'Оператор')
+                                .catch(err => console.error('Failed to log operator message to Planfix:', err));
+                        }
 
                         console.log(`✅ OPERATOR MESSAGE ADDED TO SESSION ${sessionId}`);
                         console.log(`   - Content: ${translatedText.substring(0, 50)}...`);
@@ -1592,12 +1698,19 @@ app.post(`/telegram/webhook`, async (req, res) => {
                 console.log(`Translating operator response from Russian to ${userLanguage}`);
 
                 // Add operator message to session (in user's language)
-                session.messages.push({
+                const operatorMsg = {
                     role: 'assistant',
                     content: translatedMessage,
                     timestamp: new Date(),
                     fromOperator: true
-                });
+                };
+                session.messages.push(operatorMsg);
+
+                // Log operator message to Planfix (async)
+                if (session.planfixTaskId) {
+                    logMessageToPlanfix(session, operatorMsg, 'Оператор')
+                        .catch(err => console.error('Failed to log operator message to Planfix:', err));
+                }
 
                 console.log(`Message added to session ${sessionId}`);
                 try {
@@ -1650,6 +1763,9 @@ app.post(`/telegram/webhook`, async (req, res) => {
 
                 // Exit operator mode
                 session.operatorMode = false;
+
+                // Close Planfix task (async)
+                closePlanfixTask(session).catch(err => console.error('Failed to close Planfix task:', err));
 
                 console.log(`Session ${sessionId} closed by operator`);
                 try {
@@ -1837,6 +1953,10 @@ async function checkInactiveSessions() {
 
             // Exit operator mode
             session.operatorMode = false;
+
+            // Close Planfix task (async)
+            closePlanfixTask(session).catch(err => console.error('Failed to close Planfix task:', err));
+
             console.log(`✅ Session ${sessionId} closed due to inactivity`);
         }
     }

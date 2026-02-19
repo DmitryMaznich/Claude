@@ -1,3 +1,6 @@
 
+RewriteEngine On
+RewriteCond %{HTTP_HOST} ^www\.smart-wash\.si [NC]
+RewriteRule ^(.*)$ https://smart-wash.si/$1 [L,R=301]
 
 RewriteOptions inherit
