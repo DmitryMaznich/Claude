@@ -605,6 +605,67 @@ app.post('/api/chat', async (req, res) => {
         // Handle user commands
         const command = message.trim().toLowerCase();
 
+        // Check if awaiting name for operator connection
+        if (session.awaitingNameForOperator) {
+            session.userName = message.trim();
+            session.awaitingNameForOperator = false;
+
+            console.log(`✅ User provided name: ${session.userName} for session ${sessionId}`);
+
+            // Now actually connect to operator
+            session.operatorMode = true;
+
+            // Translate user's original request to Russian for operator
+            const originalRequest = session.pendingOperatorRequest || 'Запрос оператора';
+            const translatedMessage = session.language === 'Russian'
+                ? originalRequest
+                : await translateToRussian(originalRequest, session.language);
+
+            // Notify operator via Telegram
+            const notification = `🔔 *ЗАПРОС ОПЕРАТОРА*\n` +
+                `━━━━━━━━━━━━━━━━━\n` +
+                `👤 ${session.userName} (${session.language || 'Slovenian'}):\n\n` +
+                `"${translatedMessage}"\n\n` +
+                `━━━━━━━━━━━━━━━━━\n` +
+                `Session: \`${sessionId}\``;
+
+            if (bot && OPERATOR_CHAT_ID) {
+                try {
+                    const messageOptions = {
+                        parse_mode: 'Markdown',
+                        reply_markup: {
+                            inline_keyboard: [[
+                                { text: '🔄 V AI / To AI', callback_data: `close_${sessionId}` },
+                                { text: '🗑️ Izbriši / Delete', callback_data: `delete_${sessionId}` }
+                            ]]
+                        }
+                    };
+
+                    const sentMessage = await bot.sendMessage(OPERATOR_CHAT_ID, notification, messageOptions);
+                    session.telegramThreadId = sentMessage.message_id;
+                    telegramMessageToSession.set(sentMessage.message_id, sessionId);
+                } catch (telegramError) {
+                    console.error('Telegram notification failed:', telegramError.message);
+                }
+            }
+
+            const thankYouMessages = {
+                'English': `Thank you, ${session.userName}! Connecting you with our operator...`,
+                'Slovenian': `Hvala, ${session.userName}! Povezujem vas z našim operaterjem...`,
+                'Russian': `Спасибо, ${session.userName}! Соединяю вас с оператором...`,
+                'Ukrainian': `Дякую, ${session.userName}! З'єдную вас з оператором...`,
+                'Croatian': `Hvala, ${session.userName}! Povezujem vas s našim operaterom...`,
+                'Serbian': `Hvala, ${session.userName}! Povezujem vas s našim operatorom...`,
+                'Italian': `Grazie, ${session.userName}! Ti sto collegando con il nostro operatore...`,
+                'German': `Danke, ${session.userName}! Ich verbinde Sie mit unserem Operator...`
+            };
+
+            return res.json({
+                response: thankYouMessages[session.language] || thankYouMessages['English'],
+                operatorMode: true
+            });
+        }
+
         // Command: /ai or /bot - switch back to AI
         if (command === '/ai' || command === '/bot') {
             if (session.operatorMode) {
@@ -745,6 +806,29 @@ app.post('/api/chat', async (req, res) => {
                 });
             }
 
+            // If user doesn't have a name yet, ask for it first
+            if (!session.userName) {
+                session.awaitingNameForOperator = true;
+                session.pendingOperatorRequest = message; // Save original message
+
+                const askNameMessages = {
+                    'English': '👋 Before connecting you with our operator, how should I address you? Please share your name.',
+                    'Slovenian': '👋 Preden vas povežem z našim operaterjem, kako naj vas naslovim? Prosim, delite svoje ime.',
+                    'Russian': '👋 Прежде чем соединить вас с оператором, как мне к вам обращаться? Пожалуйста, назовите ваше имя.',
+                    'Ukrainian': '👋 Перш ніж з\'єднати вас з оператором, як мені до вас звертатися? Будь ласка, назвіть ваше ім\'я.',
+                    'Croatian': '👋 Prije nego vas povežem s našim operaterom, kako da vas oslovljavam? Molim podijelite svoje ime.',
+                    'Serbian': '👋 Pre nego što vas povežem s našim operatorom, kako da vas oslovljavam? Molim podelite svoje ime.',
+                    'Italian': '👋 Prima di collegarti con il nostro operatore, come dovrei rivolgermi a te? Per favore, condividi il tuo nome.',
+                    'German': '👋 Bevor ich Sie mit unserem Operator verbinde, wie soll ich Sie ansprechen? Bitte teilen Sie mir Ihren Namen mit.'
+                };
+
+                return res.json({
+                    response: askNameMessages[session.language] || askNameMessages['English'],
+                    operatorMode: false
+                });
+            }
+
+            // If already has name, proceed with operator connection
             session.operatorMode = true;
 
             // Always translate to Russian for operator (except if already Russian)
