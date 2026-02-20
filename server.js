@@ -472,11 +472,15 @@ app.post('/api/chat', async (req, res) => {
             session.awaitingNameForOperator = false;
 
             console.log(`✅ User provided name: ${session.userName} for session ${sessionId}`);
+            console.log(`📋 Session planfixTaskId: ${session.planfixTaskId || 'NOT SET'}`);
 
             // Update Planfix task name if task was already created
             if (session.planfixTaskId) {
                 const newTaskName = `Чат: ${session.userName} (${session.language})`;
+                console.log(`🔄 Calling updateTaskName for task ${session.planfixTaskId}: "${newTaskName}"`);
                 await planfix.updateTaskName(session.planfixTaskId, newTaskName);
+            } else {
+                console.log(`⚠️ Cannot update task name - planfixTaskId not set yet`);
             }
 
             // Now actually connect to operator

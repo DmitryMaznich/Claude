@@ -103,15 +103,22 @@ class PlanfixIntegration {
      */
     async updateTaskName(taskId, newName) {
         if (!this.enabled || !taskId) {
+            console.log(`⚠️ updateTaskName skipped: enabled=${this.enabled}, taskId=${taskId}`);
             return null;
         }
 
+        console.log(`🔄 Attempting to update Planfix task ${taskId} name to: "${newName}"`);
+
         try {
+            // Use POST (not PATCH) - this is how Planfix API updates tasks
             const updateData = {
                 name: newName
             };
 
-            const result = await this._makeRequest('PATCH', `task/${taskId}`, updateData);
+            console.log(`📤 Sending POST request to task/${taskId} with data:`, JSON.stringify(updateData));
+            const result = await this._makeRequest('POST', `task/${taskId}`, updateData);
+
+            console.log(`📥 Response from Planfix:`, JSON.stringify(result));
 
             if (result) {
                 console.log(`✅ Planfix task ${taskId} name updated to: ${newName}`);
@@ -121,6 +128,7 @@ class PlanfixIntegration {
             return null;
         } catch (error) {
             console.error(`❌ Failed to update Planfix task ${taskId} name:`, error.message);
+            console.error(`❌ Full error:`, error);
             return null;
         }
     }
