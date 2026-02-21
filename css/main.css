@@ -2473,26 +2473,47 @@
             position: relative;
         }
 
-        /* SVG indicator dot on machine screen */
-        .machine-indicator-dot {
-            fill: transparent;
-            transition: fill 0.4s ease, filter 0.4s ease;
+        /* LED indicator — ::after on amenity-group (outside filtered container) */
+        .amenity-group[data-machine-id]::after {
+            content: '';
+            position: absolute;
+            width: 7px;
+            height: 7px;
+            border-radius: 50%;
+            background: transparent;
+            z-index: 10;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+            /* default position: small washers (scale 1.1, SVG 73px, screen at y=8.5) */
+            top: 145px;
+            left: 26px;
         }
 
-        .amenity-group[data-machine-id].machine-free .machine-indicator-dot {
-            fill: #22C55E;
-            filter: drop-shadow(0 0 2px #22C55E);
+        /* Large washer: CSS override svg to 52x83, scale 1.2 → screen shifts up */
+        .amenity-group[data-machine-id]:has(.amenity-icon-large)::after {
+            top: 128px;
+            left: 34px;
         }
 
-        .amenity-group[data-machine-id].machine-busy .machine-indicator-dot {
-            fill: #EF4444;
-            filter: drop-shadow(0 0 3px #EF4444);
+        /* Dryers: scale 1.05 + translateY(-54px) → panel at cy=55.5 visually ~90px */
+        .amenity-group[data-machine-id]:has(.amenity-icon-dryer)::after {
+            top: 90px;
+            left: 44px;
+        }
+
+        .amenity-group[data-machine-id].machine-free::after {
+            background: #22C55E;
+            box-shadow: 0 0 4px #22C55E, 0 0 1px #fff;
+        }
+
+        .amenity-group[data-machine-id].machine-busy::after {
+            background: #EF4444;
+            box-shadow: 0 0 5px #EF4444, 0 0 1px #fff;
             animation: indicatorPulse 1.5s ease-in-out infinite;
         }
 
         @keyframes indicatorPulse {
-            0%, 100% { filter: drop-shadow(0 0 2px #EF4444); }
-            50%       { filter: drop-shadow(0 0 5px #EF4444); }
+            0%, 100% { box-shadow: 0 0 3px #EF4444, 0 0 1px #fff; }
+            50%       { box-shadow: 0 0 9px #EF4444, 0 0 2px #fff; }
         }
 
         .amenity-group[data-machine-id] .amenity-icon-animated {
