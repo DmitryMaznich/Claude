@@ -2469,6 +2469,34 @@
         }
 
         /* Machine availability status on location card icons */
+        .amenity-group[data-machine-id] {
+            position: relative;
+        }
+
+        .amenity-group[data-machine-id]::after {
+            content: '';
+            position: absolute;
+            top: 8px;
+            right: 4px;
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background: #22C55E;
+            box-shadow: 0 0 5px #22C55E, 0 0 2px #fff;
+            transition: background 0.4s ease, box-shadow 0.4s ease;
+        }
+
+        .amenity-group[data-machine-id].machine-busy::after {
+            background: #EF4444;
+            box-shadow: 0 0 6px #EF4444, 0 0 2px #fff;
+            animation: indicatorPulse 1.5s ease-in-out infinite;
+        }
+
+        @keyframes indicatorPulse {
+            0%, 100% { box-shadow: 0 0 4px #EF4444, 0 0 2px #fff; }
+            50%       { box-shadow: 0 0 12px #EF4444, 0 0 4px #fff; }
+        }
+
         .amenity-group[data-machine-id] .amenity-icon-animated {
             transition: filter 0.5s ease;
         }
