@@ -104,7 +104,10 @@
       "Bash(npm start)",
       "Bash(taskkill:*)",
       "Bash(railway:*)",
-      "Bash(env:*)"
+      "Bash(env:*)",
+      "Bash(pkill:*)",
+      "Bash(tasklist:*)",
+      "Bash(awk:*)"
     ]
   },
   "enableAllProjectMcpServers": true,
