@@ -1002,74 +1002,34 @@ document.addEventListener('DOMContentLoaded', function () {
 
 // Laundry Machine Status Logic
 document.addEventListener('DOMContentLoaded', () => {
-    const machineList = document.getElementById('machine-list');
-    if (!machineList) return;
+    function updateMachineIcons(machines) {
+        Object.values(machines).forEach(machine => {
+            const iconEls = document.querySelectorAll(`[data-machine-id="${machine.id}"]`);
+            iconEls.forEach(el => {
+                const svg = el.querySelector('svg');
+                if (machine.isRunning) {
+                    el.classList.remove('machine-free');
+                    el.classList.add('machine-busy');
+                    if (svg) svg.unpauseAnimations();
+                } else {
+                    el.classList.remove('machine-busy');
+                    el.classList.add('machine-free');
+                    if (svg) svg.pauseAnimations();
+                }
+            });
+        });
+    }
 
     async function fetchMachineStatus() {
         try {
             const response = await fetch(`${API_URL}/api/laundry-status`);
             if (!response.ok) throw new Error('Network response was not ok');
             const machines = await response.json();
-
-            if (Object.keys(machines).length === 0) {
-                machineList.innerHTML = `
-                            <div style="text-align: center; grid-column: 1 / -1; padding: 2rem; color: #6B7280;">
-                                <span class="lang-si">Trenutno ni podatkov o strojih.</span>
-                                <span class="lang-en">No machine data available right now.</span>
-                            </div>
-                        `;
-                return;
-            }
-
-            machineList.innerHTML = Object.values(machines).map(machine => {
-                let durationStr = '';
-                if (machine.isRunning && machine.startedAt) {
-                    const diff = new Date() - new Date(machine.startedAt);
-                    const minutes = Math.floor(diff / 60000);
-                    durationStr = minutes > 0 ? `${minutes} min` : '< 1 min';
-                }
-
-                return `
-                            <div style="background: white; border-radius: 12px; padding: 1.5rem; box-shadow: 0 4px 6px rgba(0,0,0,0.05); border-left: 4px solid ${machine.isRunning ? '#EF4444' : '#10B981'}; display: flex; align-items: center; justify-content: space-between; transition: transform 0.2s;">
-                                <div>
-                                    <div style="font-weight: bold; font-size: 1.1rem; margin-bottom: 0.5rem; color: #1F2937;">${machine.name}</div>
-                                    <div style="font-size: 0.95rem; font-weight: 500;">
-                                        ${machine.isRunning ?
-                        `<span style="color: #EF4444;">
-                                                <span class="lang-si" style="display: var(--display-si, inline);">Zasedeno (${durationStr})</span>
-                                                <span class="lang-en" style="display: var(--display-en, none);">Busy (${durationStr})</span>
-                                             </span>` :
-                        `<span style="color: #10B981;">
-                                                <span class="lang-si" style="display: var(--display-si, inline);">Prosto</span>
-                                                <span class="lang-en" style="display: var(--display-en, none);">Free</span>
-                                             </span>`
-                    }
-                                    </div>
-                                </div>
-                                <div style="font-size: 2rem; opacity: 0.8;">
-                                    ${machine.isRunning ? '⏳' : '✅'}
-                                </div>
-                            </div>
-                        `;
-            }).join('');
-
-            // Trigger language update sync inside dynamically injected HTML if needed. 
-            // Usually CSS 'body[data-lang="en"] .lang-si { display: none }' handles this, but inline styles might override it.
-            // Wait, using inline styles with CSS variables is unnecessary if `.lang-si` is already handled globally in CSS.
-            // I'll leave `.lang-si` class. Note: I removed the arbitrary style vars to trust the global CSS.
+            updateMachineIcons(machines);
         } catch (error) {
             console.error('Error fetching machine status:', error);
-            machineList.innerHTML = `
-                        <div style="text-align: center; grid-column: 1 / -1; padding: 2rem; color: #EF4444;">
-                            <span class="lang-si">Napaka pri nalaganju statusa. Prosimo osvežite stran.</span>
-                            <span class="lang-en">Error loading status. Please refresh the page.</span>
-                        </div>
-                    `;
         }
     }
-
-    // Clean up the inline style vars string added by accident and use standard classes
-    machineList.innerHTML = `<div style="text-align: center; grid-column: 1 / -1; padding: 2rem;"><span class="lang-si">Nalaganje statusa...</span><span class="lang-en">Loading status...</span></div>`;
 
     // Initial fetch
     fetchMachineStatus();

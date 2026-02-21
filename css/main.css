@@ -2468,6 +2468,19 @@
             }
         }
 
+        /* Machine availability status on location card icons */
+        .amenity-group[data-machine-id] .amenity-icon-animated {
+            transition: filter 0.5s ease;
+        }
+
+        .amenity-group[data-machine-id].machine-free .amenity-icon-animated {
+            filter: grayscale(80%) brightness(0.7) opacity(0.6);
+        }
+
+        .amenity-group[data-machine-id].machine-free .amenity-icon-animated g {
+            animation-play-state: paused !important;
+        }
+
         @keyframes tumbleBottom {
             from {
                 transform: rotate(0deg);
