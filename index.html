@@ -3542,61 +3542,32 @@
                                                 style="background: #DC3545; color: white; padding: 3px 6px; border-radius: 6px; font-weight: 700; font-size: 13px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
                                                 SEL</div>
                                         </div>
-                                        <!-- Single row sequence with loop arrow -->
-                                        <div
-                                            style="margin-top: 5px; position: relative; padding-bottom: 6px; display: inline-block;">
-                                            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 4px;">
-                                                <div
-                                                    style="background: rgba(255,255,255,0.3); padding: 2px 3px; border-radius: 6px; font-weight: 700; font-size: 12px;">
-                                                    1</div>
-                                                <span style="font-size: 10px; opacity: 0.6;">→</span>
-                                                <div
-                                                    style="background: rgba(255,255,255,0.3); padding: 4px 7px; border-radius: 6px; font-weight: 700; font-size: 12px;">
-                                                    2</div>
-                                                <span style="font-size: 10px; opacity: 0.6;">→</span>
-                                                <div
-                                                    style="background: rgba(255,255,255,0.3); padding: 4px 7px; border-radius: 6px; font-weight: 700; font-size: 12px;">
-                                                    3</div>
-                                                <span style="font-size: 10px; opacity: 0.6;">→</span>
-                                                <div
-                                                    style="background: rgba(255,255,255,0.3); padding: 4px 7px; border-radius: 6px; font-weight: 700; font-size: 12px;">
-                                                    4</div>
-                                                <span style="font-size: 10px; opacity: 0.6;">→</span>
-                                                <div
-                                                    style="background: rgba(255,255,255,0.3); padding: 4px 7px; border-radius: 6px; font-weight: 700; font-size: 12px;">
-                                                    5</div>
-                                                <span style="font-size: 10px; opacity: 0.6;">→</span>
-                                                <div
-                                                    style="background: rgba(255,255,255,0.3); padding: 4px 7px; border-radius: 6px; font-weight: 700; font-size: 12px;">
-                                                    8</div>
-                                                <span style="font-size: 10px; opacity: 0.6;">→</span>
-                                                <div
-                                                    style="background: rgba(255,255,255,0.3); padding: 4px 7px; border-radius: 6px; font-weight: 700; font-size: 12px;">
-                                                    10</div>
-                                                <span style="font-size: 10px; opacity: 0.6;">→</span>
-                                                <div
-                                                    style="background: rgba(255,255,255,0.3); padding: 4px 7px; border-radius: 6px; font-weight: 700; font-size: 12px;">
-                                                    20</div>
-                                                <span style="font-size: 10px; opacity: 0.6;">→</span>
-                                                <div
-                                                    style="background: rgba(255,255,255,0.3); padding: 4px 7px; border-radius: 6px; font-weight: 700; font-size: 12px;">
-                                                    50</div>
+                                        <!-- Token quantity cycle display -->
+                                        <div style="margin-top: 8px; background: rgba(0,0,0,0.15); border-radius: 10px; padding: 8px 10px;">
+                                            <div style="font-size: 10px; opacity: 0.7; margin-bottom: 5px; letter-spacing: 0.5px; text-transform: uppercase;">
+                                                <span class="lang-si">Vsak pritisk SEL:</span>
+                                                <span class="lang-en">Each SEL press:</span>
                                             </div>
-
-                                            <!-- Arrow looping back under -->
-                                            <svg width="100%" height="20" viewBox="0 0 100 20"
-                                                preserveAspectRatio="none"
-                                                style="position: absolute; bottom: 0; left: 0; overflow: visible; pointer-events: none;">
-                                                <defs>
-                                                    <marker id="arrowhead-loop" markerWidth="6" markerHeight="6"
-                                                        refX="5" refY="3" orient="auto" fill="rgba(255,255,255,0.6)">
-                                                        <path d="M 0 0 L 6 3 L 0 6 z" />
-                                                    </marker>
-                                                </defs>
-                                                <path d="M 98 5 Q 98 18 92 18 L 8 18 Q 2 18 2 8"
-                                                    stroke="rgba(255,255,255,0.6)" stroke-width="1.5" fill="none"
-                                                    marker-end="url(#arrowhead-loop)" />
-                                            </svg>
+                                            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 3px;">
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">1</span>
+                                                <span style="opacity: 0.5; font-size: 9px;">›</span>
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">2</span>
+                                                <span style="opacity: 0.5; font-size: 9px;">›</span>
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">3</span>
+                                                <span style="opacity: 0.5; font-size: 9px;">›</span>
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">4</span>
+                                                <span style="opacity: 0.5; font-size: 9px;">›</span>
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">5</span>
+                                                <span style="opacity: 0.5; font-size: 9px;">›</span>
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">8</span>
+                                                <span style="opacity: 0.5; font-size: 9px;">›</span>
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">10</span>
+                                                <span style="opacity: 0.5; font-size: 9px;">›</span>
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">20</span>
+                                                <span style="opacity: 0.5; font-size: 9px;">›</span>
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">50</span>
+                                                <span style="background: rgba(255,255,255,0.12); border: 1.5px dashed rgba(255,255,255,0.5); padding: 2px 8px; border-radius: 20px; font-size: 13px; opacity: 0.85;" title="loops back to 1">↺</span>
+                                            </div>
                                         </div>
 
                                     </div>
