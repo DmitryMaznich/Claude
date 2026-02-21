@@ -3484,38 +3484,39 @@
                                             <span class="lang-si">Pristavite kartico k terminalu</span>
                                             <span class="lang-en">Put your card to the terminal</span>
                                         </div>
-                                        <div style="margin-top: 3px; display: flex; gap: 12px; align-items: center;">
-                                            <span style="font-size: 48px; line-height: 1;">💳</span>
-                                            <span style="font-size: 32px; opacity: 0.7;">➡️</span>
-                                            <!-- SVG POS Terminal Icon (Detailed) -->
-                                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                style="color: white; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">
-                                                <!-- Body -->
-                                                <rect x="5" y="2" width="14" height="20" rx="3" ry="3"
-                                                    stroke-width="1.5" />
-                                                <!-- Screen -->
-                                                <rect x="7" y="5" width="10" height="7" rx="1"
-                                                    fill="rgba(255,255,255,0.15)" stroke="none" />
-                                                <!-- Contactless Symbol -->
-                                                <path d="M10 9a2.5 2.5 0 0 1 4 0" stroke="rgba(255,255,255,0.9)"
-                                                    stroke-width="1.2" />
-                                                <path d="M9.2 8.2a3.8 3.8 0 0 1 5.6 0" stroke="rgba(255,255,255,0.6)"
-                                                    stroke-width="1.2" />
-                                                <path d="M8.4 7.4a5 5 0 0 1 7.2 0" stroke="rgba(255,255,255,0.4)"
-                                                    stroke-width="1.2" />
-                                                <!-- Keypad -->
-                                                <circle cx="8.5" cy="15" r="0.8" fill="white" stroke="none" />
-                                                <circle cx="12" cy="15" r="0.8" fill="white" stroke="none" />
-                                                <circle cx="15.5" cy="15" r="0.8" fill="white" stroke="none" />
-                                                <circle cx="8.5" cy="17.5" r="0.8" fill="white" stroke="none" />
-                                                <circle cx="12" cy="17.5" r="0.8" fill="white" stroke="none" />
-                                                <circle cx="15.5" cy="17.5" r="0.8" fill="white" stroke="none" />
-                                                <!-- Card Slot -->
-                                                <path d="M7 20h10" stroke-width="2" />
-                                            </svg>
-                                        </div>
+                                        <!-- Card tap to terminal illustration -->
+                                        <svg width="100%" height="72" viewBox="0 0 220 72" style="margin-top: 6px; max-width: 260px; display: block;">
+                                            <!-- CARD (tilted, approaching) -->
+                                            <g transform="rotate(-8, 55, 36)">
+                                                <rect x="8" y="12" width="88" height="56" rx="7" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.75)" stroke-width="1.5"/>
+                                                <rect x="8" y="22" width="88" height="10" fill="rgba(0,0,0,0.2)"/>
+                                                <rect x="18" y="37" width="18" height="14" rx="3" fill="rgba(255,255,255,0.55)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                                                <line x1="27" y1="37" x2="27" y2="51" stroke="rgba(100,100,100,0.35)" stroke-width="0.8"/>
+                                                <line x1="18" y1="44" x2="36" y2="44" stroke="rgba(100,100,100,0.35)" stroke-width="0.8"/>
+                                                <circle cx="44" cy="50" r="2.2" fill="rgba(255,255,255,0.6)"/>
+                                                <circle cx="51" cy="50" r="2.2" fill="rgba(255,255,255,0.6)"/>
+                                                <circle cx="58" cy="50" r="2.2" fill="rgba(255,255,255,0.6)"/>
+                                                <circle cx="65" cy="50" r="2.2" fill="rgba(255,255,255,0.6)"/>
+                                                <path d="M76 42 Q80 38 76 34" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                                <path d="M79 44 Q85 38 79 32" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                            </g>
+                                            <!-- CONTACTLESS WAVES -->
+                                            <path d="M 128 52 Q 135 36 128 20" stroke="rgba(255,255,255,0.9)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                                            <path d="M 134 54 Q 143 33 134 14" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                            <path d="M 140 56 Q 151 30 140 8" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                            <!-- TERMINAL body -->
+                                            <rect x="155" y="4" width="54" height="66" rx="7" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.65)" stroke-width="1.5"/>
+                                            <rect x="161" y="9" width="42" height="24" rx="3" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
+                                            <rect x="165" y="14" width="28" height="2.5" rx="1" fill="rgba(255,255,255,0.4)"/>
+                                            <rect x="165" y="20" width="20" height="2.5" rx="1" fill="rgba(255,255,255,0.25)"/>
+                                            <rect x="161" y="36" width="14" height="8" rx="2" fill="rgba(255,255,255,0.35)" stroke="rgba(255,255,255,0.5)" stroke-width="0.8"/>
+                                            <circle cx="167" cy="52" r="2.8" fill="rgba(255,255,255,0.45)"/>
+                                            <circle cx="176" cy="52" r="2.8" fill="rgba(255,255,255,0.45)"/>
+                                            <circle cx="185" cy="52" r="2.8" fill="rgba(255,255,255,0.45)"/>
+                                            <circle cx="167" cy="61" r="2.8" fill="rgba(255,255,255,0.45)"/>
+                                            <circle cx="176" cy="61" r="2.8" fill="rgba(255,255,255,0.6)"/>
+                                            <circle cx="185" cy="61" r="2.8" fill="rgba(255,255,255,0.45)"/>
+                                        </svg>
 
                                     </div>
                                 </div>
@@ -3610,38 +3611,36 @@
                                             <span class="lang-si">Pristavite kartico k terminalu ponovno</span>
                                             <span class="lang-en">Put your card to the terminal again</span>
                                         </div>
-                                        <div style="margin-top: 3px; display: flex; gap: 12px; align-items: center;">
-                                            <span style="font-size: 48px; line-height: 1;">💳</span>
-                                            <span style="font-size: 32px; opacity: 0.7;">➡️</span>
-                                            <!-- SVG POS Terminal Icon (Detailed) -->
-                                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none"
-                                                stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
-                                                stroke-linejoin="round"
-                                                style="color: white; filter: drop-shadow(0 2px 4px rgba(0,0,0,0.2));">
-                                                <!-- Body -->
-                                                <rect x="5" y="2" width="14" height="20" rx="3" ry="3"
-                                                    stroke-width="1.5" />
-                                                <!-- Screen -->
-                                                <rect x="7" y="5" width="10" height="7" rx="1"
-                                                    fill="rgba(255,255,255,0.15)" stroke="none" />
-                                                <!-- Contactless Symbol -->
-                                                <path d="M10 9a2.5 2.5 0 0 1 4 0" stroke="rgba(255,255,255,0.9)"
-                                                    stroke-width="1.2" />
-                                                <path d="M9.2 8.2a3.8 3.8 0 0 1 5.6 0" stroke="rgba(255,255,255,0.6)"
-                                                    stroke-width="1.2" />
-                                                <path d="M8.4 7.4a5 5 0 0 1 7.2 0" stroke="rgba(255,255,255,0.4)"
-                                                    stroke-width="1.2" />
-                                                <!-- Keypad -->
-                                                <circle cx="8.5" cy="15" r="0.8" fill="white" stroke="none" />
-                                                <circle cx="12" cy="15" r="0.8" fill="white" stroke="none" />
-                                                <circle cx="15.5" cy="15" r="0.8" fill="white" stroke="none" />
-                                                <circle cx="8.5" cy="17.5" r="0.8" fill="white" stroke="none" />
-                                                <circle cx="12" cy="17.5" r="0.8" fill="white" stroke="none" />
-                                                <circle cx="15.5" cy="17.5" r="0.8" fill="white" stroke="none" />
-                                                <!-- Card Slot -->
-                                                <path d="M7 20h10" stroke-width="2" />
-                                            </svg>
-                                        </div>
+                                        <!-- Card tap to terminal illustration -->
+                                        <svg width="100%" height="72" viewBox="0 0 220 72" style="margin-top: 6px; max-width: 260px; display: block;">
+                                            <g transform="rotate(-8, 55, 36)">
+                                                <rect x="8" y="12" width="88" height="56" rx="7" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.75)" stroke-width="1.5"/>
+                                                <rect x="8" y="22" width="88" height="10" fill="rgba(0,0,0,0.2)"/>
+                                                <rect x="18" y="37" width="18" height="14" rx="3" fill="rgba(255,255,255,0.55)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
+                                                <line x1="27" y1="37" x2="27" y2="51" stroke="rgba(100,100,100,0.35)" stroke-width="0.8"/>
+                                                <line x1="18" y1="44" x2="36" y2="44" stroke="rgba(100,100,100,0.35)" stroke-width="0.8"/>
+                                                <circle cx="44" cy="50" r="2.2" fill="rgba(255,255,255,0.6)"/>
+                                                <circle cx="51" cy="50" r="2.2" fill="rgba(255,255,255,0.6)"/>
+                                                <circle cx="58" cy="50" r="2.2" fill="rgba(255,255,255,0.6)"/>
+                                                <circle cx="65" cy="50" r="2.2" fill="rgba(255,255,255,0.6)"/>
+                                                <path d="M76 42 Q80 38 76 34" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                                <path d="M79 44 Q85 38 79 32" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                            </g>
+                                            <path d="M 128 52 Q 135 36 128 20" stroke="rgba(255,255,255,0.9)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
+                                            <path d="M 134 54 Q 143 33 134 14" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                            <path d="M 140 56 Q 151 30 140 8" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                            <rect x="155" y="4" width="54" height="66" rx="7" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.65)" stroke-width="1.5"/>
+                                            <rect x="161" y="9" width="42" height="24" rx="3" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
+                                            <rect x="165" y="14" width="28" height="2.5" rx="1" fill="rgba(255,255,255,0.4)"/>
+                                            <rect x="165" y="20" width="20" height="2.5" rx="1" fill="rgba(255,255,255,0.25)"/>
+                                            <rect x="161" y="36" width="14" height="8" rx="2" fill="rgba(255,255,255,0.35)" stroke="rgba(255,255,255,0.5)" stroke-width="0.8"/>
+                                            <circle cx="167" cy="52" r="2.8" fill="rgba(255,255,255,0.45)"/>
+                                            <circle cx="176" cy="52" r="2.8" fill="rgba(255,255,255,0.45)"/>
+                                            <circle cx="185" cy="52" r="2.8" fill="rgba(255,255,255,0.45)"/>
+                                            <circle cx="167" cy="61" r="2.8" fill="rgba(255,255,255,0.45)"/>
+                                            <circle cx="176" cy="61" r="2.8" fill="rgba(255,255,255,0.6)"/>
+                                            <circle cx="185" cy="61" r="2.8" fill="rgba(255,255,255,0.45)"/>
+                                        </svg>
 
                                     </div>
                                 </div>
