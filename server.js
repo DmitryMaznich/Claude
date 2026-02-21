@@ -1775,6 +1775,17 @@ app.get('/reset-webhook', async (req, res) => {
     }
 });
 
+// Debug endpoint to check MQTT connection and last received data
+app.get('/api/debug/mqtt', (req, res) => {
+    res.json({
+        mqttBrokerUrlSet: !!process.env.MQTT_BROKER_URL,
+        mqttUsernameSet: !!process.env.MQTT_USERNAME,
+        mqttPasswordSet: !!process.env.MQTT_PASSWORD,
+        ...mqttClient.getDebugStatus(),
+        machines: mqttClient.getMachines()
+    });
+});
+
 // Debug endpoint to check loaded website content
 app.get('/api/debug/content', (req, res) => {
     res.json({

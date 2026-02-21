@@ -18,6 +18,19 @@ class MqttClient extends EventEmitter {
 
         // Timers to avoid false positives on short power drops (e.g. during a wash cycle pause)
         this.stopTimers = {};
+
+        // Debug tracking
+        this.debug = {
+            isConnected: false,
+            connectedAt: null,
+            lastError: null,
+            lastErrorAt: null,
+            messagesReceived: 0,
+            lastMessageAt: null,
+            lastMessageTopic: null,
+            lastMessagePayload: null,
+            brokerUrl: null
+        };
     }
 
     connect(brokerUrl, options) {
@@ -26,6 +39,7 @@ class MqttClient extends EventEmitter {
             return;
         }
 
+        this.debug.brokerUrl = brokerUrl;
         console.log(`Connecting to MQTT broker at ${brokerUrl}...`);
 
         try {
@@ -33,6 +47,8 @@ class MqttClient extends EventEmitter {
 
             this.client.on('connect', () => {
                 console.log('✅ Successfully connected to cloud MQTT broker');
+                this.debug.isConnected = true;
+                this.debug.connectedAt = new Date();
                 // Subscribe to all topics to capture Refoss EM06P messages
                 this.client.subscribe('#', (err) => {
                     if (err) {
@@ -44,8 +60,13 @@ class MqttClient extends EventEmitter {
             });
 
             this.client.on('message', (topic, message) => {
+                const raw = message.toString();
+                this.debug.messagesReceived++;
+                this.debug.lastMessageAt = new Date();
+                this.debug.lastMessageTopic = topic;
+                this.debug.lastMessagePayload = raw.length > 500 ? raw.substring(0, 500) + '...' : raw;
                 try {
-                    const data = JSON.parse(message.toString());
+                    const data = JSON.parse(raw);
                     this.handleDeviceData(topic, data);
                 } catch (e) {
                     // Ignore non-JSON messages
@@ -54,10 +75,18 @@ class MqttClient extends EventEmitter {
 
             this.client.on('error', (err) => {
                 console.error('MQTT Client Error:', err);
+                this.debug.isConnected = false;
+                this.debug.lastError = err.message;
+                this.debug.lastErrorAt = new Date();
             });
 
             this.client.on('offline', () => {
                 console.log('MQTT Client offline');
+                this.debug.isConnected = false;
+            });
+
+            this.client.on('reconnect', () => {
+                console.log('MQTT Client reconnecting...');
             });
 
         } catch (error) {
@@ -127,6 +156,13 @@ class MqttClient extends EventEmitter {
 
     getMachines() {
         return this.machines;
+    }
+
+    getDebugStatus() {
+        return {
+            ...this.debug,
+            clientState: this.client ? this.client.connected ? 'connected' : 'disconnected' : 'not initialized'
+        };
     }
 }
 
