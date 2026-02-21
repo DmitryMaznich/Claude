@@ -1007,14 +1007,29 @@ document.addEventListener('DOMContentLoaded', () => {
             const iconEls = document.querySelectorAll(`[data-machine-id="${machine.id}"]`);
             iconEls.forEach(el => {
                 const svg = el.querySelector('svg');
+
+                // Find or create the timer badge
+                let badge = el.querySelector('.machine-timer-badge');
+                if (!badge) {
+                    badge = document.createElement('div');
+                    badge.className = 'machine-timer-badge';
+                    el.appendChild(badge);
+                }
+
                 if (machine.isRunning) {
                     el.classList.remove('machine-free');
                     el.classList.add('machine-busy');
                     if (svg) svg.unpauseAnimations();
+
+                    const elapsed = machine.startedAt
+                        ? Math.floor((Date.now() - new Date(machine.startedAt)) / 60000)
+                        : 0;
+                    badge.textContent = elapsed > 0 ? `⏱ ${elapsed} min` : '⏱ < 1 min';
                 } else {
                     el.classList.remove('machine-busy');
                     el.classList.add('machine-free');
                     if (svg) svg.pauseAnimations();
+                    badge.textContent = '';
                 }
             });
         });

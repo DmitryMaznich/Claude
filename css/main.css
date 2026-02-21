@@ -2481,6 +2481,23 @@
             animation-play-state: paused !important;
         }
 
+        .machine-timer-badge {
+            display: none;
+            margin-top: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            color: white;
+            background: #EF4444;
+            border-radius: 50px;
+            padding: 2px 8px;
+            white-space: nowrap;
+            text-align: center;
+        }
+
+        .amenity-group[data-machine-id].machine-busy .machine-timer-badge {
+            display: block;
+        }
+
         @keyframes tumbleBottom {
             from {
                 transform: rotate(0deg);
