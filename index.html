@@ -21,8 +21,18 @@
     <link rel="apple-touch-icon" href="NewLogo.svg">
     <style>
         @media (min-width: 769px) {
-            .instruction-tabs { display: flex !important; width: 100% !important; }
-            .instruction-tabs .tab-button { flex: 1 1 0% !important; min-width: 0 !important; justify-content: center !important; overflow: hidden !important; gap: 5px !important; }
+            .instruction-tabs {
+                display: flex !important;
+                width: 100% !important;
+            }
+
+            .instruction-tabs .tab-button {
+                flex: 1 1 0% !important;
+                min-width: 0 !important;
+                justify-content: center !important;
+                overflow: hidden !important;
+                gap: 5px !important;
+            }
         }
     </style>
 
@@ -3485,37 +3495,58 @@
                                             <span class="lang-en">Put your card to the terminal</span>
                                         </div>
                                         <!-- Card tap to terminal illustration -->
-                                        <svg width="100%" height="72" viewBox="0 0 220 72" style="margin-top: 6px; max-width: 260px; display: block;">
+                                        <svg width="100%" height="72" viewBox="0 0 220 72"
+                                            style="margin-top: 6px; max-width: 260px; display: block;">
                                             <!-- CARD (tilted, approaching) -->
-                                            <g transform="translate(25, 0) rotate(-8, 55, 36) translate(52, 40) scale(0.7) translate(-52, -40)">
-                                                <rect x="8" y="12" width="88" height="56" rx="7" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.75)" stroke-width="1.5"/>
-                                                <rect x="8" y="22" width="88" height="10" fill="rgba(0,0,0,0.2)"/>
-                                                <rect x="18" y="37" width="18" height="14" rx="3" fill="rgba(255,255,255,0.55)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-                                                <line x1="27" y1="37" x2="27" y2="51" stroke="rgba(100,100,100,0.35)" stroke-width="0.8"/>
-                                                <line x1="18" y1="44" x2="36" y2="44" stroke="rgba(100,100,100,0.35)" stroke-width="0.8"/>
-                                                <circle cx="44" cy="50" r="2.2" fill="rgba(255,255,255,0.6)"/>
-                                                <circle cx="51" cy="50" r="2.2" fill="rgba(255,255,255,0.6)"/>
-                                                <circle cx="58" cy="50" r="2.2" fill="rgba(255,255,255,0.6)"/>
-                                                <circle cx="65" cy="50" r="2.2" fill="rgba(255,255,255,0.6)"/>
-                                                <path d="M76 42 Q80 38 76 34" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                                                <path d="M79 44 Q85 38 79 32" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                            <g
+                                                transform="translate(25, 0) rotate(-8, 55, 36) translate(52, 40) scale(0.7) translate(-52, -40)">
+                                                <rect x="8" y="12" width="88" height="56" rx="7"
+                                                    fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.75)"
+                                                    stroke-width="1.5" />
+                                                <rect x="8" y="22" width="88" height="10" fill="rgba(0,0,0,0.2)" />
+                                                <rect x="18" y="37" width="18" height="14" rx="3"
+                                                    fill="rgba(255,255,255,0.55)" stroke="rgba(255,255,255,0.3)"
+                                                    stroke-width="1" />
+                                                <line x1="27" y1="37" x2="27" y2="51" stroke="rgba(100,100,100,0.35)"
+                                                    stroke-width="0.8" />
+                                                <line x1="18" y1="44" x2="36" y2="44" stroke="rgba(100,100,100,0.35)"
+                                                    stroke-width="0.8" />
+                                                <circle cx="44" cy="50" r="2.2" fill="rgba(255,255,255,0.6)" />
+                                                <circle cx="51" cy="50" r="2.2" fill="rgba(255,255,255,0.6)" />
+                                                <circle cx="58" cy="50" r="2.2" fill="rgba(255,255,255,0.6)" />
+                                                <circle cx="65" cy="50" r="2.2" fill="rgba(255,255,255,0.6)" />
+                                                <path d="M76 42 Q80 38 76 34" stroke="rgba(255,255,255,0.8)"
+                                                    stroke-width="1.5" fill="none" stroke-linecap="round" />
+                                                <path d="M79 44 Q85 38 79 32" stroke="rgba(255,255,255,0.55)"
+                                                    stroke-width="1.5" fill="none" stroke-linecap="round" />
                                             </g>
                                             <!-- CONTACTLESS WAVES -->
-                                            <path d="M 128 52 Q 135 36 128 20" stroke="rgba(255,255,255,0.9)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-                                            <path d="M 134 54 Q 143 33 134 14" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none" stroke-linecap="round"/>
-                                            <path d="M 140 56 Q 151 30 140 8" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" stroke-linecap="round"/>
+                                            <path d="M 128 52 Q 135 36 128 20" stroke="rgba(255,255,255,0.9)"
+                                                stroke-width="2.2" fill="none" stroke-linecap="round" />
+                                            <path d="M 134 54 Q 143 33 134 14" stroke="rgba(255,255,255,0.6)"
+                                                stroke-width="2" fill="none" stroke-linecap="round" />
+                                            <path d="M 140 56 Q 151 30 140 8" stroke="rgba(255,255,255,0.3)"
+                                                stroke-width="2" fill="none" stroke-linecap="round" />
                                             <!-- TERMINAL body -->
-                                            <rect x="155" y="4" width="54" height="66" rx="7" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.65)" stroke-width="1.5"/>
-                                            <rect x="161" y="9" width="42" height="24" rx="3" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
-                                            <rect x="165" y="14" width="28" height="2.5" rx="1" fill="rgba(255,255,255,0.4)"/>
-                                            <rect x="165" y="20" width="20" height="2.5" rx="1" fill="rgba(255,255,255,0.25)"/>
-                                            <rect x="161" y="36" width="14" height="8" rx="2" fill="rgba(255,255,255,0.35)" stroke="rgba(255,255,255,0.5)" stroke-width="0.8"/>
-                                            <circle cx="167" cy="52" r="2.8" fill="rgba(255,255,255,0.45)"/>
-                                            <circle cx="176" cy="52" r="2.8" fill="rgba(255,255,255,0.45)"/>
-                                            <circle cx="185" cy="52" r="2.8" fill="rgba(255,255,255,0.45)"/>
-                                            <circle cx="167" cy="61" r="2.8" fill="rgba(255,255,255,0.45)"/>
-                                            <circle cx="176" cy="61" r="2.8" fill="rgba(255,255,255,0.6)"/>
-                                            <circle cx="185" cy="61" r="2.8" fill="rgba(255,255,255,0.45)"/>
+                                            <rect x="155" y="4" width="54" height="66" rx="7"
+                                                fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.65)"
+                                                stroke-width="1.5" />
+                                            <rect x="161" y="9" width="42" height="24" rx="3"
+                                                fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.35)"
+                                                stroke-width="1" />
+                                            <rect x="165" y="14" width="28" height="2.5" rx="1"
+                                                fill="rgba(255,255,255,0.4)" />
+                                            <rect x="165" y="20" width="20" height="2.5" rx="1"
+                                                fill="rgba(255,255,255,0.25)" />
+                                            <rect x="161" y="36" width="14" height="8" rx="2"
+                                                fill="rgba(255,255,255,0.35)" stroke="rgba(255,255,255,0.5)"
+                                                stroke-width="0.8" />
+                                            <circle cx="167" cy="52" r="2.8" fill="rgba(255,255,255,0.45)" />
+                                            <circle cx="176" cy="52" r="2.8" fill="rgba(255,255,255,0.45)" />
+                                            <circle cx="185" cy="52" r="2.8" fill="rgba(255,255,255,0.45)" />
+                                            <circle cx="167" cy="61" r="2.8" fill="rgba(255,255,255,0.45)" />
+                                            <circle cx="176" cy="61" r="2.8" fill="rgba(255,255,255,0.6)" />
+                                            <circle cx="185" cy="61" r="2.8" fill="rgba(255,255,255,0.45)" />
                                         </svg>
 
                                     </div>
@@ -3549,24 +3580,24 @@
                                                 <span class="lang-si">Vsak pritisk SEL:</span>
                                                 <span class="lang-en">Each SEL press:</span>
                                             </div>
-                                            <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 3px;">
-                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">1</span>
-                                                <span style="opacity: 0.5; font-size: 9px;">›</span>
-                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">2</span>
-                                                <span style="opacity: 0.5; font-size: 9px;">›</span>
-                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">3</span>
-                                                <span style="opacity: 0.5; font-size: 9px;">›</span>
-                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">4</span>
-                                                <span style="opacity: 0.5; font-size: 9px;">›</span>
-                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">5</span>
-                                                <span style="opacity: 0.5; font-size: 9px;">›</span>
-                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">8</span>
-                                                <span style="opacity: 0.5; font-size: 9px;">›</span>
-                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">10</span>
-                                                <span style="opacity: 0.5; font-size: 9px;">›</span>
-                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">20</span>
-                                                <span style="opacity: 0.5; font-size: 9px;">›</span>
-                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 7px; border-radius: 20px; font-weight: 700; font-size: 12px;">50</span>
+                                            <div style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">1</span>
+                                                <span style="font-size: 14px; font-weight: 900; opacity: 1; color: rgba(255,255,255,0.85);">›</span>
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">2</span>
+                                                <span style="font-size: 14px; font-weight: 900; opacity: 1; color: rgba(255,255,255,0.85);">›</span>
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">3</span>
+                                                <span style="font-size: 14px; font-weight: 900; opacity: 1; color: rgba(255,255,255,0.85);">›</span>
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">4</span>
+                                                <span style="font-size: 14px; font-weight: 900; opacity: 1; color: rgba(255,255,255,0.85);">›</span>
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">5</span>
+                                                <span style="font-size: 14px; font-weight: 900; opacity: 1; color: rgba(255,255,255,0.85);">›</span>
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">8</span>
+                                                <span style="font-size: 14px; font-weight: 900; opacity: 1; color: rgba(255,255,255,0.85);">›</span>
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">10</span>
+                                                <span style="font-size: 14px; font-weight: 900; opacity: 1; color: rgba(255,255,255,0.85);">›</span>
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">20</span>
+                                                <span style="font-size: 14px; font-weight: 900; opacity: 1; color: rgba(255,255,255,0.85);">›</span>
+                                                <span style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">50</span>
                                             </div>
                                         </div>
 
@@ -3612,34 +3643,55 @@
                                             <span class="lang-en">Put your card to the terminal again</span>
                                         </div>
                                         <!-- Card tap to terminal illustration -->
-                                        <svg width="100%" height="72" viewBox="0 0 220 72" style="margin-top: 6px; max-width: 260px; display: block;">
-                                            <g transform="translate(25, 0) rotate(-8, 55, 36) translate(52, 40) scale(0.7) translate(-52, -40)">
-                                                <rect x="8" y="12" width="88" height="56" rx="7" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.75)" stroke-width="1.5"/>
-                                                <rect x="8" y="22" width="88" height="10" fill="rgba(0,0,0,0.2)"/>
-                                                <rect x="18" y="37" width="18" height="14" rx="3" fill="rgba(255,255,255,0.55)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-                                                <line x1="27" y1="37" x2="27" y2="51" stroke="rgba(100,100,100,0.35)" stroke-width="0.8"/>
-                                                <line x1="18" y1="44" x2="36" y2="44" stroke="rgba(100,100,100,0.35)" stroke-width="0.8"/>
-                                                <circle cx="44" cy="50" r="2.2" fill="rgba(255,255,255,0.6)"/>
-                                                <circle cx="51" cy="50" r="2.2" fill="rgba(255,255,255,0.6)"/>
-                                                <circle cx="58" cy="50" r="2.2" fill="rgba(255,255,255,0.6)"/>
-                                                <circle cx="65" cy="50" r="2.2" fill="rgba(255,255,255,0.6)"/>
-                                                <path d="M76 42 Q80 38 76 34" stroke="rgba(255,255,255,0.8)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
-                                                <path d="M79 44 Q85 38 79 32" stroke="rgba(255,255,255,0.55)" stroke-width="1.5" fill="none" stroke-linecap="round"/>
+                                        <svg width="100%" height="72" viewBox="0 0 220 72"
+                                            style="margin-top: 6px; max-width: 260px; display: block;">
+                                            <g
+                                                transform="translate(25, 0) rotate(-8, 55, 36) translate(52, 40) scale(0.7) translate(-52, -40)">
+                                                <rect x="8" y="12" width="88" height="56" rx="7"
+                                                    fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.75)"
+                                                    stroke-width="1.5" />
+                                                <rect x="8" y="22" width="88" height="10" fill="rgba(0,0,0,0.2)" />
+                                                <rect x="18" y="37" width="18" height="14" rx="3"
+                                                    fill="rgba(255,255,255,0.55)" stroke="rgba(255,255,255,0.3)"
+                                                    stroke-width="1" />
+                                                <line x1="27" y1="37" x2="27" y2="51" stroke="rgba(100,100,100,0.35)"
+                                                    stroke-width="0.8" />
+                                                <line x1="18" y1="44" x2="36" y2="44" stroke="rgba(100,100,100,0.35)"
+                                                    stroke-width="0.8" />
+                                                <circle cx="44" cy="50" r="2.2" fill="rgba(255,255,255,0.6)" />
+                                                <circle cx="51" cy="50" r="2.2" fill="rgba(255,255,255,0.6)" />
+                                                <circle cx="58" cy="50" r="2.2" fill="rgba(255,255,255,0.6)" />
+                                                <circle cx="65" cy="50" r="2.2" fill="rgba(255,255,255,0.6)" />
+                                                <path d="M76 42 Q80 38 76 34" stroke="rgba(255,255,255,0.8)"
+                                                    stroke-width="1.5" fill="none" stroke-linecap="round" />
+                                                <path d="M79 44 Q85 38 79 32" stroke="rgba(255,255,255,0.55)"
+                                                    stroke-width="1.5" fill="none" stroke-linecap="round" />
                                             </g>
-                                            <path d="M 128 52 Q 135 36 128 20" stroke="rgba(255,255,255,0.9)" stroke-width="2.2" fill="none" stroke-linecap="round"/>
-                                            <path d="M 134 54 Q 143 33 134 14" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none" stroke-linecap="round"/>
-                                            <path d="M 140 56 Q 151 30 140 8" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none" stroke-linecap="round"/>
-                                            <rect x="155" y="4" width="54" height="66" rx="7" fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.65)" stroke-width="1.5"/>
-                                            <rect x="161" y="9" width="42" height="24" rx="3" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.35)" stroke-width="1"/>
-                                            <rect x="165" y="14" width="28" height="2.5" rx="1" fill="rgba(255,255,255,0.4)"/>
-                                            <rect x="165" y="20" width="20" height="2.5" rx="1" fill="rgba(255,255,255,0.25)"/>
-                                            <rect x="161" y="36" width="14" height="8" rx="2" fill="rgba(255,255,255,0.35)" stroke="rgba(255,255,255,0.5)" stroke-width="0.8"/>
-                                            <circle cx="167" cy="52" r="2.8" fill="rgba(255,255,255,0.45)"/>
-                                            <circle cx="176" cy="52" r="2.8" fill="rgba(255,255,255,0.45)"/>
-                                            <circle cx="185" cy="52" r="2.8" fill="rgba(255,255,255,0.45)"/>
-                                            <circle cx="167" cy="61" r="2.8" fill="rgba(255,255,255,0.45)"/>
-                                            <circle cx="176" cy="61" r="2.8" fill="rgba(255,255,255,0.6)"/>
-                                            <circle cx="185" cy="61" r="2.8" fill="rgba(255,255,255,0.45)"/>
+                                            <path d="M 128 52 Q 135 36 128 20" stroke="rgba(255,255,255,0.9)"
+                                                stroke-width="2.2" fill="none" stroke-linecap="round" />
+                                            <path d="M 134 54 Q 143 33 134 14" stroke="rgba(255,255,255,0.6)"
+                                                stroke-width="2" fill="none" stroke-linecap="round" />
+                                            <path d="M 140 56 Q 151 30 140 8" stroke="rgba(255,255,255,0.3)"
+                                                stroke-width="2" fill="none" stroke-linecap="round" />
+                                            <rect x="155" y="4" width="54" height="66" rx="7"
+                                                fill="rgba(255,255,255,0.15)" stroke="rgba(255,255,255,0.65)"
+                                                stroke-width="1.5" />
+                                            <rect x="161" y="9" width="42" height="24" rx="3"
+                                                fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.35)"
+                                                stroke-width="1" />
+                                            <rect x="165" y="14" width="28" height="2.5" rx="1"
+                                                fill="rgba(255,255,255,0.4)" />
+                                            <rect x="165" y="20" width="20" height="2.5" rx="1"
+                                                fill="rgba(255,255,255,0.25)" />
+                                            <rect x="161" y="36" width="14" height="8" rx="2"
+                                                fill="rgba(255,255,255,0.35)" stroke="rgba(255,255,255,0.5)"
+                                                stroke-width="0.8" />
+                                            <circle cx="167" cy="52" r="2.8" fill="rgba(255,255,255,0.45)" />
+                                            <circle cx="176" cy="52" r="2.8" fill="rgba(255,255,255,0.45)" />
+                                            <circle cx="185" cy="52" r="2.8" fill="rgba(255,255,255,0.45)" />
+                                            <circle cx="167" cy="61" r="2.8" fill="rgba(255,255,255,0.45)" />
+                                            <circle cx="176" cy="61" r="2.8" fill="rgba(255,255,255,0.6)" />
+                                            <circle cx="185" cy="61" r="2.8" fill="rgba(255,255,255,0.45)" />
                                         </svg>
 
                                     </div>
@@ -3669,9 +3721,10 @@
 
                     <!-- Column 2: Cash Payment -->
                     <div class="payment-method"
-                        style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); border-radius: 20px; padding: 14px; color: white; box-shadow: 0 8px 24px rgba(17, 153, 142, 0.3);">
+                        style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); border-radius: 20px; padding: var(--card-padding, 20px); color: white; box-shadow: 0 8px 24px rgba(17, 153, 142, 0.3); display: flex; flex-direction: column;">
+
                         <h4
-                            style="font-size: 20px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
+                            style="font-size: 20px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
                             <span style="font-size: 28px;">💵</span>
                             <span>
                                 <span class="lang-si">Z gotovino</span>
@@ -3681,30 +3734,30 @@
 
                         <!-- Accepted Money -->
                         <div
-                            style="background: rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 8px; margin-bottom: 8px; backdrop-filter: blur(10px);">
-                            <div style="font-weight: 600; margin-bottom: 5px; font-size: 15px;">
+                            style="background: rgba(255, 255, 255, 0.2); border-radius: 12px; padding: 10px 12px; margin-bottom: 12px; backdrop-filter: blur(10px);">
+                            <div style="font-weight: 600; margin-bottom: 8px; font-size: 15px;">
                                 <span class="lang-si">Aparat sprejema:</span>
                                 <span class="lang-en">The changer accepts:</span>
                             </div>
 
                             <!-- Bills -->
-                            <div style="margin-bottom: 6px;">
-                                <div style="font-size: 13px; opacity: 0.9; margin-bottom: 3px;">
+                            <div style="margin-bottom: 10px;">
+                                <div style="font-size: 13px; opacity: 0.9; margin-bottom: 4px;">
                                     <span class="lang-si">💶 Bankovci:</span>
                                     <span class="lang-en">💶 Bills:</span>
                                 </div>
                                 <div style="display: flex; gap: 6px; flex-wrap: wrap;">
                                     <div
-                                        style="background: #FFA726; color: white; padding: 3px 5px; border-radius: 6px; font-weight: 700; font-size: 13px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+                                        style="background: #FFA726; color: white; padding: 4px 8px; border-radius: 6px; font-weight: 700; font-size: 13px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
                                         50€</div>
                                     <div
-                                        style="background: #EF5350; color: white; padding: 6px 10px; border-radius: 6px; font-weight: 700; font-size: 13px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+                                        style="background: #EF5350; color: white; padding: 4px 8px; border-radius: 6px; font-weight: 700; font-size: 13px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
                                         20€</div>
                                     <div
-                                        style="background: #42A5F5; color: white; padding: 6px 10px; border-radius: 6px; font-weight: 700; font-size: 13px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+                                        style="background: #42A5F5; color: white; padding: 4px 8px; border-radius: 6px; font-weight: 700; font-size: 13px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
                                         10€</div>
                                     <div
-                                        style="background: #9E9E9E; color: white; padding: 6px 10px; border-radius: 6px; font-weight: 700; font-size: 13px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
+                                        style="background: #9E9E9E; color: white; padding: 4px 8px; border-radius: 6px; font-weight: 700; font-size: 13px; box-shadow: 0 2px 6px rgba(0,0,0,0.2);">
                                         5€</div>
                                 </div>
                             </div>
@@ -3717,20 +3770,20 @@
                                 </div>
                                 <div style="display: flex; gap: 6px; flex-wrap: wrap;">
                                     <div
-                                        style="background: #FFD700; color: #333; padding: 3px 5px; border-radius: 50%; font-weight: 700; box-shadow: 0 2px 6px rgba(0,0,0,0.2); width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; font-size: 13px;">
+                                        style="background: #FFD700; color: #333; padding: 0; border-radius: 50%; font-weight: 700; box-shadow: 0 2px 6px rgba(0,0,0,0.2); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 13px;">
                                         2€</div>
                                     <div
-                                        style="background: #FFD700; color: #333; padding: 6px 10px; border-radius: 50%; font-weight: 700; box-shadow: 0 2px 6px rgba(0,0,0,0.2); width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; font-size: 13px;">
+                                        style="background: #FFD700; color: #333; padding: 0; border-radius: 50%; font-weight: 700; box-shadow: 0 2px 6px rgba(0,0,0,0.2); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 13px;">
                                         1€</div>
                                     <div
-                                        style="background: #FFD700; color: #333; padding: 6px 10px; border-radius: 50%; font-weight: 700; box-shadow: 0 2px 6px rgba(0,0,0,0.2); width: 42px; height: 42px; display: flex; align-items: center; justify-content: center; font-size: 12px;">
+                                        style="background: #FFD700; color: #333; padding: 0; border-radius: 50%; font-weight: 700; box-shadow: 0 2px 6px rgba(0,0,0,0.2); width: 36px; height: 36px; display: flex; align-items: center; justify-content: center; font-size: 12px;">
                                         0.5€</div>
                                 </div>
                             </div>
                         </div>
 
                         <!-- Cash Steps -->
-                        <div class="payment-steps">
+                        <div class="payment-steps" style="flex-grow: 1; display: flex; flex-direction: column;">
                             <!-- Step 1 -->
                             <div
                                 style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 7px; margin-bottom: 6px; backdrop-filter: blur(10px);">
@@ -3772,17 +3825,20 @@
                                 </div>
                             </div>
 
+                            <!-- Spacer to push warning to bottom if needed -->
+                            <div style="flex-grow: 1;"></div>
+
                             <!-- Important Warning -->
                             <div
-                                style="background: rgba(255, 193, 7, 0.3); border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 12px; padding: 7px; backdrop-filter: blur(10px);">
+                                style="background: rgba(255, 193, 7, 0.3); border: 2px solid rgba(255, 255, 255, 0.5); border-radius: 12px; padding: 7px; margin-top: auto; backdrop-filter: blur(10px);">
                                 <div style="display: flex; align-items: start; gap: 10px;">
-                                    <div style="font-size: 20px; flex-shrink: 0;">⚠️</div>
+                                    <div style="font-size: 18px; flex-shrink: 0;">⚠️</div>
                                     <div>
-                                        <div style="font-weight: 700; margin-bottom: 2px; font-size: 14px;">
-                                            <span class="lang-si">Če menjalec ne sprejema vašega denarja</span>
-                                            <span class="lang-en">If the changer doesn't accept your money</span>
+                                        <div style="font-weight: 700; margin-bottom: 2px; font-size: 13px;">
+                                            <span class="lang-si">Če menjalec ne sprejema denarja</span>
+                                            <span class="lang-en">If it doesn't accept money</span>
                                         </div>
-                                        <div style="font-size: 13px; opacity: 0.95;">
+                                        <div style="font-size: 12px; opacity: 0.95;">
                                             <span class="lang-si">Poskusite ponovno (obrnite bankovec ali močneje
                                                 potisnite kovanec)</span>
                                             <span class="lang-en">Try again (flip the bill or push the coin
@@ -3792,6 +3848,7 @@
                                 </div>
                             </div>
                         </div>
+
                         <!-- Video Instructions Cash Payment -->
                         <div class="video-container"
                             style="background: rgba(0, 0, 0, 0.2); border-radius: 12px; height: 160px; display: flex; align-items: center; justify-content: center; margin-top: 10px; transition: background 0.2s; position: relative;">
