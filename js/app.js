@@ -1007,7 +1007,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     async function fetchMachineStatus() {
         try {
-            const response = await fetch('/api/laundry-status');
+            const response = await fetch(`${API_URL}/api/laundry-status`);
             if (!response.ok) throw new Error('Network response was not ok');
             const machines = await response.json();
 
