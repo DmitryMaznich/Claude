@@ -20,8 +20,10 @@
     <link rel="icon" type="image/svg+xml" href="NewLogo.svg">
     <link rel="apple-touch-icon" href="NewLogo.svg">
     <style>
-        .instruction-tabs { display: flex !important; width: 100% !important; }
-        .instruction-tabs .tab-button { flex: 1 1 0% !important; min-width: 0 !important; justify-content: center !important; overflow: hidden !important; }
+        @media (min-width: 769px) {
+            .instruction-tabs { display: flex !important; width: 100% !important; }
+            .instruction-tabs .tab-button { flex: 1 1 0% !important; min-width: 0 !important; justify-content: center !important; overflow: hidden !important; }
+        }
     </style>
 
     <!-- Open Graph / Facebook -->
@@ -52,7 +54,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Cabinet+Grotesk:wght@400;500;700;800;900&family=Work+Sans:wght@300;400;600&display=swap"
         rel="stylesheet">
-<link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/main.css">
 
     <!-- Structured Data (Schema.org) - Organization -->
     <script type="application/ld+json">
@@ -2821,6 +2823,30 @@
         </div>
     </section>
 
+    <!-- MACHINE STATUS -->
+    <section id="machine-status">
+        <div class="section-bg-shape shape-2 size-md"></div>
+        <div class="section-bg-shape shape-5 size-sm"></div>
+        <div class="section-header">
+            <h2 class="section-title">
+                <span class="lang-si">Status Pralnih Strojev</span>
+                <span class="lang-en">Washing Machine Status</span>
+            </h2>
+            <p class="section-subtitle">
+                <span class="lang-si">Preverite razpoložljivost strojev v realnem času.</span>
+                <span class="lang-en">Check real-time machine availability.</span>
+            </p>
+        </div>
+        <div id="machine-list" class="machine-grid"
+            style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.5rem; max-width: 1200px; margin: 0 auto; padding: 0 5%;">
+            <!-- Machine status cards will be loaded here by JavaScript -->
+            <div style="text-align: center; grid-column: 1 / -1; padding: 2rem;">
+                <span class="lang-si">Nalaganje statusa...</span>
+                <span class="lang-en">Loading status...</span>
+            </div>
+        </div>
+    </section>
+
     <!-- INSTRUCTIONS -->
     <section id="instructions">
         <div class="section-bg-shape shape-1 size-lg"></div>
@@ -3558,7 +3584,8 @@
                                             </div>
 
                                             <!-- Arrow looping back under -->
-                                            <svg width="100%" height="20" viewBox="0 0 100 20" preserveAspectRatio="none"
+                                            <svg width="100%" height="20" viewBox="0 0 100 20"
+                                                preserveAspectRatio="none"
                                                 style="position: absolute; bottom: 0; left: 0; overflow: visible; pointer-events: none;">
                                                 <defs>
                                                     <marker id="arrowhead-loop" markerWidth="6" markerHeight="6"
@@ -4276,7 +4303,7 @@
         </div>
     </div>
 
-<script src="js/app.js" defer></script>
+    <script src="js/app.js" defer></script>
 </body>
 
 </html>
