@@ -100,8 +100,9 @@ class MqttClient extends EventEmitter {
             for (let key in data.params) {
                 if (key.startsWith('em:')) {
                     const channelStr = key.split(':')[1];
-                    const channel = parseInt(channelStr, 10) + 1; // Refoss uses 0-indexed em:0..em:5, machines are 1..6
+                    const channel = parseInt(channelStr, 10); // Refoss sends em:1..em:6, machines are keyed 1..6
                     const power = data.params[key].power;
+                    console.log(`[MQTT] em:${channelStr} → channel=${channel}, power=${power}`);
                     if (!isNaN(channel) && power !== undefined) {
                         this.updateMachineStatus(channel, power);
                     }
@@ -137,6 +138,7 @@ class MqttClient extends EventEmitter {
 
         machine.power = currentPower;
 
+        // Power is in Watts (confirmed: V × I × pf matches the power field value)
         // If power > 10W -> Machine is running
         if (currentPower > 10) {
             // Cancel any pending stop timers
