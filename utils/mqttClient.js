@@ -95,6 +95,21 @@ class MqttClient extends EventEmitter {
     }
 
     handleDeviceData(topic, data) {
+        // Handle Refoss EM06P specific payload format with 'method': 'NotifyStatus'
+        if (data.method === 'NotifyStatus' && data.params) {
+            for (let key in data.params) {
+                if (key.startsWith('em:')) {
+                    const channelStr = key.split(':')[1];
+                    const channel = parseInt(channelStr, 10) + 1; // Refoss uses 0-indexed em:0..em:5, machines are 1..6
+                    const power = data.params[key].power;
+                    if (!isNaN(channel) && power !== undefined) {
+                        this.updateMachineStatus(channel, power);
+                    }
+                }
+            }
+            return;
+        }
+
         // Handle standard Refoss structured payload
         let channel = data.channel || data.Channel;
         let power = data.power || data.Power || data.active_power || data.ActivePower;
