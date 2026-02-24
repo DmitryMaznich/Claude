@@ -47,7 +47,10 @@ class MqttClient extends EventEmitter {
     _loadStats() {
         try {
             if (fs.existsSync(STATS_FILE)) {
-                return JSON.parse(fs.readFileSync(STATS_FILE, 'utf8'));
+                const content = fs.readFileSync(STATS_FILE, 'utf8').trim();
+                if (content.length > 0) {
+                    return JSON.parse(content);
+                }
             }
         } catch (e) {
             console.error('[Stats] Failed to load stats file:', e.message);
@@ -177,9 +180,14 @@ class MqttClient extends EventEmitter {
 
         machine.power = currentPower;
 
+        // Different machines have different idle power usage levels.
+        // Dryers (Channels 5 & 6) have a high inactive power draw (gas dryers can show 65W+ while idle).
+        const isDryer = (channel == 5 || channel == 6);
+        const startThreshold = isDryer ? 100 : 10; // 100W for dryers, 10W for washers
+        const stopThreshold = isDryer ? 50 : 5;    // 50W for dryers, 5W for washers
+
         // Power is in Watts (confirmed: V × I × pf matches the power field value)
-        // If power > 10W -> Machine is running
-        if (currentPower > 10) {
+        if (currentPower > startThreshold) {
             // Cancel any pending stop timers
             if (this.stopTimers[channel]) {
                 clearTimeout(this.stopTimers[channel]);
@@ -189,7 +197,7 @@ class MqttClient extends EventEmitter {
             if (!machine.isRunning) {
                 machine.isRunning = true;
                 machine.startedAt = new Date();
-                console.log(`📠 [MQTT] ${machine.name} STARTED at ${currentPower}W`);
+                console.log(`📠 [MQTT] ${machine.name} STARTED at ${currentPower}W (Threshold: >${startThreshold}W)`);
 
                 // Record start in daily stats
                 const today = this._today();
@@ -200,8 +208,7 @@ class MqttClient extends EventEmitter {
                 this.emit('machineStarted', machine);
             }
         }
-        // If power < 5W -> Machine might be stopped
-        else if (currentPower < 5 && machine.isRunning) {
+        else if (currentPower < stopThreshold && machine.isRunning) {
             // Don't stop immediately, start a short timer to ignore brief operational pauses
             if (!this.stopTimers[channel]) {
                 const STOP_DELAY_MS = 60 * 1000; // 1 minute
@@ -219,7 +226,7 @@ class MqttClient extends EventEmitter {
 
                     machine.isRunning = false;
                     machine.startedAt = null;
-                    console.log(`📠 [MQTT] ${machine.name} STOPPED (power=${currentPower}W maintained for 3 mins)`);
+                    console.log(`📠 [MQTT] ${machine.name} STOPPED (power=${currentPower}W maintained <${stopThreshold}W for 1 min)`);
                     this.emit('machineStopped', machine);
                     this.stopTimers[channel] = null;
                 }, STOP_DELAY_MS);
