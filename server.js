@@ -467,6 +467,8 @@ async function translateToLanguage(text, targetLanguage) {
 app.get('/api/laundry-status', (req, res) => {
     try {
         const machines = mqttClient.getMachines();
+        const running = Object.values(machines).filter(m => m.isRunning).map(m => m.name);
+        console.log(`[Laundry] Polled. Running: ${running.length > 0 ? running.join(', ') : 'none'}`);
         res.json(machines);
     } catch (error) {
         console.error('Error serving laundry status:', error);
@@ -1784,6 +1786,12 @@ app.get('/api/debug/mqtt', (req, res) => {
         ...mqttClient.getDebugStatus(),
         machines: mqttClient.getMachines()
     });
+});
+
+// Machine usage statistics endpoint
+app.get('/api/stats', (req, res) => {
+    const days = parseInt(req.query.days) || 30;
+    res.json(mqttClient.getStats(days));
 });
 
 // Debug endpoint to check loaded website content

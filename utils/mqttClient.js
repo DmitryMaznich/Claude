@@ -1,5 +1,9 @@
 const mqtt = require('mqtt');
 const EventEmitter = require('events');
+const fs = require('fs');
+const path = require('path');
+
+const STATS_FILE = path.join(__dirname, '../data/stats.json');
 
 class MqttClient extends EventEmitter {
     constructor() {
@@ -19,6 +23,9 @@ class MqttClient extends EventEmitter {
         // Timers to avoid false positives on short power drops (e.g. during a wash cycle pause)
         this.stopTimers = {};
 
+        // Daily stats: { "2026-02-23": { 1: { starts: 3, runtimeMs: 7200000 }, ... } }
+        this.stats = this._loadStats();
+
         // Debug tracking
         this.debug = {
             isConnected: false,
@@ -31,6 +38,38 @@ class MqttClient extends EventEmitter {
             lastMessagePayload: null,
             brokerUrl: null
         };
+    }
+
+    _today() {
+        return new Date().toISOString().slice(0, 10); // "2026-02-23"
+    }
+
+    _loadStats() {
+        try {
+            if (fs.existsSync(STATS_FILE)) {
+                return JSON.parse(fs.readFileSync(STATS_FILE, 'utf8'));
+            }
+        } catch (e) {
+            console.error('[Stats] Failed to load stats file:', e.message);
+        }
+        return {};
+    }
+
+    _saveStats() {
+        try {
+            const dir = path.dirname(STATS_FILE);
+            if (!fs.existsSync(dir)) fs.mkdirSync(dir, { recursive: true });
+            fs.writeFileSync(STATS_FILE, JSON.stringify(this.stats, null, 2));
+        } catch (e) {
+            console.error('[Stats] Failed to save stats file:', e.message);
+        }
+    }
+
+    _ensureDayEntry(date, channel) {
+        if (!this.stats[date]) this.stats[date] = {};
+        if (!this.stats[date][channel]) {
+            this.stats[date][channel] = { starts: 0, runtimeMs: 0 };
+        }
     }
 
     connect(brokerUrl, options) {
@@ -151,6 +190,13 @@ class MqttClient extends EventEmitter {
                 machine.isRunning = true;
                 machine.startedAt = new Date();
                 console.log(`📠 [MQTT] ${machine.name} STARTED at ${currentPower}W`);
+
+                // Record start in daily stats
+                const today = this._today();
+                this._ensureDayEntry(today, channel);
+                this.stats[today][channel].starts++;
+                this._saveStats();
+
                 this.emit('machineStarted', machine);
             }
         }
@@ -159,8 +205,18 @@ class MqttClient extends EventEmitter {
             // Don't stop immediately, start a 3-minute timer to ignore short operational pauses
             if (!this.stopTimers[channel]) {
                 const STOP_DELAY_MS = 3 * 60 * 1000; // 3 minutes
+                const startedAt = machine.startedAt;
 
                 this.stopTimers[channel] = setTimeout(() => {
+                    // Record runtime in daily stats
+                    if (startedAt) {
+                        const runtimeMs = Date.now() - startedAt.getTime();
+                        const today = this._today();
+                        this._ensureDayEntry(today, channel);
+                        this.stats[today][channel].runtimeMs += runtimeMs;
+                        this._saveStats();
+                    }
+
                     machine.isRunning = false;
                     machine.startedAt = null;
                     console.log(`📠 [MQTT] ${machine.name} STOPPED (power=${currentPower}W maintained for 3 mins)`);
@@ -173,6 +229,35 @@ class MqttClient extends EventEmitter {
 
     getMachines() {
         return this.machines;
+    }
+
+    getStats(days = 30) {
+        const result = {};
+        const cutoff = new Date();
+        cutoff.setDate(cutoff.getDate() - days);
+
+        for (const date of Object.keys(this.stats).sort()) {
+            if (new Date(date) >= cutoff) {
+                result[date] = {};
+                for (const [channel, data] of Object.entries(this.stats[date])) {
+                    const machine = this.machines[channel];
+                    result[date][channel] = {
+                        name: machine ? machine.name : `Channel ${channel}`,
+                        starts: data.starts,
+                        runtimeMs: data.runtimeMs,
+                        runtimeHuman: this._formatDuration(data.runtimeMs)
+                    };
+                }
+            }
+        }
+        return result;
+    }
+
+    _formatDuration(ms) {
+        if (!ms) return '0m';
+        const h = Math.floor(ms / 3600000);
+        const m = Math.floor((ms % 3600000) / 60000);
+        return h > 0 ? `${h}h ${m}m` : `${m}m`;
     }
 
     getDebugStatus() {
