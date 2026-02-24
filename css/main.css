@@ -2362,14 +2362,14 @@
             opacity: 0.3;
         }
 
-        /* Galjevica (card 2) has status badges below labels — raise line accordingly */
+        /* Galjevica (card 2): raise line above labels which sit at padding-bottom level */
         .location-card:nth-child(2) .location-amenities-new::after {
-            bottom: 61px;
+            bottom: 47px;
         }
 
-        /* Raise disinfection icon to match washer/dryer level (no badge = 23px lower) */
+        /* Align disinfection icon with machine groups (both have same padding-bottom) */
         .location-card:nth-child(2) .amenity-group:not([data-machine-id]) {
-            padding-bottom: 23px;
+            padding-bottom: 25px;
         }
 
         .amenity-group {
@@ -2481,6 +2481,7 @@
         /* Machine availability status on location card icons */
         .amenity-group[data-machine-id] {
             position: relative;
+            padding-bottom: 25px;
         }
 
         .amenity-group[data-machine-id] .amenity-icon-animated {
@@ -2495,20 +2496,22 @@
             animation-play-state: paused !important;
         }
 
-        /* Status badge — always visible, below the icon, forms a horizontal row via flex-end parent */
+        /* Status badge — absolute positioned so it never affects icon group width */
         .machine-timer-badge {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
             display: block;
-            margin-top: 5px;
             font-size: 9px;
             font-weight: 700;
             color: white;
             border-radius: 50px;
-            padding: 2px 6px;
+            padding: 2px 7px;
             white-space: nowrap;
             text-align: center;
             letter-spacing: 0;
             text-transform: uppercase;
-            max-width: 56px;
             transition: background 0.4s ease;
         }
 
@@ -3185,7 +3188,7 @@
             }
 
             .location-card:nth-child(2) .location-amenities-new::after {
-                bottom: 66px !important;
+                bottom: 52px !important;
             }
 
             /* Увеличение иконок на 20% */

@@ -1021,10 +1021,10 @@ document.addEventListener('DOMContentLoaded', () => {
                     el.classList.add('machine-busy');
                     if (svg) svg.unpauseAnimations();
 
-                    const elapsed = machine.startedAt
-                        ? Math.floor((Date.now() - new Date(machine.startedAt)) / 60000)
-                        : 0;
-                    badge.textContent = elapsed > 0 ? `⏱ ${elapsed}m` : '⏱ <1m';
+                    const elapsedMs = machine.startedAt ? Date.now() - new Date(machine.startedAt) : 0;
+                    const elapsedMin = Math.floor(elapsedMs / 60000);
+                    const elapsedSec = Math.floor((elapsedMs % 60000) / 1000);
+                    badge.textContent = elapsedMin > 0 ? `⏱ ${elapsedMin}m` : `⏱ ${elapsedSec}s`;
                 } else {
                     el.classList.remove('machine-busy');
                     el.classList.add('machine-free');
