@@ -4169,6 +4169,32 @@
                 margin-left: 5px !important;
             }
 
+            /* Galjevica card: shrink icons so all fit on mobile screen (~288px vs 382px) */
+            .location-card:nth-child(2) .amenity-icon-animated svg {
+                width: 38px !important;
+                height: auto !important;
+            }
+
+            .location-card:nth-child(2) .amenity-group:not([data-machine-id]) .amenity-icon-animated svg {
+                width: 50px !important;
+            }
+
+            .location-card:nth-child(2) .amenity-icon-animated {
+                height: 150px !important;
+            }
+
+            .location-card:nth-child(2) .amenity-group {
+                min-height: 190px !important;
+            }
+
+            .location-card:nth-child(2) .amenity-label-new {
+                font-size: 11px !important;
+            }
+
+            .location-card:nth-child(2) .location-amenities-new::after {
+                bottom: 40px !important;
+            }
+
             .location-info-item {
                 padding: 10px 0;
                 border-bottom: 1px solid rgba(0, 151, 218, 0.1);
