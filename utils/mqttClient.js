@@ -202,9 +202,9 @@ class MqttClient extends EventEmitter {
         }
         // If power < 5W -> Machine might be stopped
         else if (currentPower < 5 && machine.isRunning) {
-            // Don't stop immediately, start a 3-minute timer to ignore short operational pauses
+            // Don't stop immediately, start a short timer to ignore brief operational pauses
             if (!this.stopTimers[channel]) {
-                const STOP_DELAY_MS = 3 * 60 * 1000; // 3 minutes
+                const STOP_DELAY_MS = 60 * 1000; // 1 minute
                 const startedAt = machine.startedAt;
 
                 this.stopTimers[channel] = setTimeout(() => {

@@ -1029,7 +1029,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     el.classList.remove('machine-busy');
                     el.classList.add('machine-free');
                     if (svg) svg.pauseAnimations();
-                    badge.textContent = '';
+                    badge.textContent = 'free';
                 }
             });
         });
@@ -1049,7 +1049,7 @@ document.addEventListener('DOMContentLoaded', () => {
     // Initial fetch
     fetchMachineStatus();
 
-    // Fetch every 10 seconds
-    setInterval(fetchMachineStatus, 10000);
+    // Fetch every 5 seconds
+    setInterval(fetchMachineStatus, 5000);
 });
 

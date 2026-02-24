@@ -2362,6 +2362,16 @@
             opacity: 0.3;
         }
 
+        /* Galjevica (card 2) has status badges below labels — raise line accordingly */
+        .location-card:nth-child(2) .location-amenities-new::after {
+            bottom: 61px;
+        }
+
+        /* Raise disinfection icon to match washer/dryer level (no badge = 23px lower) */
+        .location-card:nth-child(2) .amenity-group:not([data-machine-id]) {
+            padding-bottom: 23px;
+        }
+
         .amenity-group {
             display: flex;
             flex-direction: column;
@@ -2473,49 +2483,6 @@
             position: relative;
         }
 
-        /* LED indicator — ::after on amenity-group (outside filtered container) */
-        .amenity-group[data-machine-id]::after {
-            content: '';
-            position: absolute;
-            width: 7px;
-            height: 7px;
-            border-radius: 50%;
-            background: transparent;
-            z-index: 10;
-            transition: background 0.4s ease, box-shadow 0.4s ease;
-            /* default position: small washers (scale 1.1, SVG 73px, screen at y=8.5) */
-            top: 145px;
-            left: 26px;
-        }
-
-        /* Large washer: CSS override svg to 52x83, scale 1.2 → screen shifts up */
-        .amenity-group[data-machine-id]:has(.amenity-icon-large)::after {
-            top: 128px;
-            left: 34px;
-        }
-
-        /* Dryers: scale 1.05 + translateY(-54px) → panel at cy=55.5 visually ~90px */
-        .amenity-group[data-machine-id]:has(.amenity-icon-dryer)::after {
-            top: 90px;
-            left: 44px;
-        }
-
-        .amenity-group[data-machine-id].machine-free::after {
-            background: #22C55E;
-            box-shadow: 0 0 4px #22C55E, 0 0 1px #fff;
-        }
-
-        .amenity-group[data-machine-id].machine-busy::after {
-            background: #EF4444;
-            box-shadow: 0 0 5px #EF4444, 0 0 1px #fff;
-            animation: indicatorPulse 1.5s ease-in-out infinite;
-        }
-
-        @keyframes indicatorPulse {
-            0%, 100% { box-shadow: 0 0 3px #EF4444, 0 0 1px #fff; }
-            50%       { box-shadow: 0 0 9px #EF4444, 0 0 2px #fff; }
-        }
-
         .amenity-group[data-machine-id] .amenity-icon-animated {
             transition: filter 0.5s ease;
         }
@@ -2528,21 +2495,29 @@
             animation-play-state: paused !important;
         }
 
+        /* Status badge — always visible, below the icon, forms a horizontal row via flex-end parent */
         .machine-timer-badge {
-            display: none;
-            margin-top: 4px;
+            display: block;
+            margin-top: 5px;
             font-size: 11px;
-            font-weight: 600;
+            font-weight: 700;
             color: white;
-            background: #EF4444;
             border-radius: 50px;
-            padding: 2px 8px;
+            padding: 2px 10px;
             white-space: nowrap;
             text-align: center;
+            letter-spacing: 0.05em;
+            text-transform: uppercase;
+            min-width: 44px;
+            transition: background 0.4s ease;
+        }
+
+        .amenity-group[data-machine-id].machine-free .machine-timer-badge {
+            background: #22C55E;
         }
 
         .amenity-group[data-machine-id].machine-busy .machine-timer-badge {
-            display: block;
+            background: #EF4444;
         }
 
         @keyframes tumbleBottom {
@@ -3207,6 +3182,10 @@
             .location-amenities-new::after {
                 bottom: 28px !important;
                 width: 150%;
+            }
+
+            .location-card:nth-child(2) .location-amenities-new::after {
+                bottom: 66px !important;
             }
 
             /* Увеличение иконок на 20% */
