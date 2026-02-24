@@ -1024,7 +1024,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const elapsed = machine.startedAt
                         ? Math.floor((Date.now() - new Date(machine.startedAt)) / 60000)
                         : 0;
-                    badge.textContent = elapsed > 0 ? `⏱ ${elapsed} min` : '⏱ < 1 min';
+                    badge.textContent = elapsed > 0 ? `⏱ ${elapsed}m` : '⏱ <1m';
                 } else {
                     el.classList.remove('machine-busy');
                     el.classList.add('machine-free');
