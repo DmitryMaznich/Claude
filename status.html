@@ -125,10 +125,18 @@
             50% { opacity: 0.3; }
         }
 
-        .machine-power {
+        .machine-stats {
             margin-top: 8px;
+            display: flex;
+            gap: 10px;
+            font-size: 12px;
+            color: #666;
+        }
+
+        .machine-power {
+            margin-top: 4px;
             font-size: 11px;
-            color: #555;
+            color: #444;
         }
 
         .footer-info {
@@ -198,22 +206,38 @@
         return `${s}s`;
     }
 
+    function formatTime(iso) {
+        if (!iso) return '–';
+        return new Date(iso).toLocaleTimeString('sl-SI', { hour: '2-digit', minute: '2-digit' });
+    }
+
+    let todayStats = {};
+
     function renderMachines(machines) {
         grid.innerHTML = '';
+        const today = new Date().toISOString().slice(0, 10);
+        const dayStats = todayStats[today] || {};
+
         for (let id = 1; id <= 6; id++) {
             const m = machines[id];
             if (!m) continue;
 
             const elapsed = m.isRunning ? formatElapsed(m.startedAt) : '';
-            const busyClass = m.isRunning ? 'busy' : '';
+            const stat = dayStats[id] || {};
+            const startsToday = stat.starts || 0;
+            const lastStart = m.lastStartedAt || null;
 
             const card = document.createElement('div');
-            card.className = `machine-card ${busyClass}`;
+            card.className = `machine-card ${m.isRunning ? 'busy' : ''}`;
             card.innerHTML = `
                 <div class="machine-name">${MACHINE_NAMES[id] || m.name}</div>
                 <div class="status-badge ${m.isRunning ? 'busy' : 'free'}">
                     <span class="status-dot"></span>
                     ${m.isRunning ? `Zasedena · ${elapsed}` : 'Prosta'}
+                </div>
+                <div class="machine-stats">
+                    <span title="Puskov danes">🔁 ${startsToday}×</span>
+                    <span title="Zadnji zagon">${lastStart ? '🕐 ' + formatTime(lastStart) : ''}</span>
                 </div>
                 <div class="machine-power">${m.power > 0 ? m.power.toFixed(1) + ' W' : ''}</div>
             `;
@@ -227,9 +251,13 @@
 
     async function fetchStatus() {
         try {
-            const res = await fetch(`${API_URL}/api/laundry-status`);
-            if (!res.ok) throw new Error('HTTP ' + res.status);
-            const machines = await res.json();
+            const [statusRes, statsRes] = await Promise.all([
+                fetch(`${API_URL}/api/laundry-status`),
+                fetch(`${API_URL}/api/stats?days=1`)
+            ]);
+            if (!statusRes.ok) throw new Error('HTTP ' + statusRes.status);
+            const machines = await statusRes.json();
+            if (statsRes.ok) todayStats = await statsRes.json();
             renderMachines(machines);
             document.getElementById('last-updated').textContent =
                 new Date().toLocaleTimeString('sl-SI', { hour: '2-digit', minute: '2-digit', second: '2-digit' });

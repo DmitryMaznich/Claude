@@ -12,12 +12,12 @@ class MqttClient extends EventEmitter {
 
         // Structure for storing machines (Galjevica location)
         this.machines = {
-            1: { id: 1, name: "Pralnik 9kg", power: 0, isRunning: false, startedAt: null },
-            2: { id: 2, name: "Pralnik 9kg (+Ozon)", power: 0, isRunning: false, startedAt: null },
-            3: { id: 3, name: "Pralnik 15kg (+Ozon)", power: 0, isRunning: false, startedAt: null },
-            4: { id: 4, name: "Pralnik 20kg", power: 0, isRunning: false, startedAt: null },
-            5: { id: 5, name: "Sušilnik (blok 1)", power: 0, isRunning: false, startedAt: null },
-            6: { id: 6, name: "Sušilnik (blok 2)", power: 0, isRunning: false, startedAt: null }
+            1: { id: 1, name: "Pralnik 9kg", power: 0, isRunning: false, startedAt: null, lastStartedAt: null },
+            2: { id: 2, name: "Pralnik 9kg (+Ozon)", power: 0, isRunning: false, startedAt: null, lastStartedAt: null },
+            3: { id: 3, name: "Pralnik 15kg (+Ozon)", power: 0, isRunning: false, startedAt: null, lastStartedAt: null },
+            4: { id: 4, name: "Pralnik 20kg", power: 0, isRunning: false, startedAt: null, lastStartedAt: null },
+            5: { id: 5, name: "Sušilnik (blok 1)", power: 0, isRunning: false, startedAt: null, lastStartedAt: null },
+            6: { id: 6, name: "Sušilnik (blok 2)", power: 0, isRunning: false, startedAt: null, lastStartedAt: null }
         };
 
         // Timers to avoid false positives on short power drops (e.g. during a wash cycle pause)
@@ -197,6 +197,7 @@ class MqttClient extends EventEmitter {
             if (!machine.isRunning) {
                 machine.isRunning = true;
                 machine.startedAt = new Date();
+                machine.lastStartedAt = machine.startedAt;
                 console.log(`📠 [MQTT] ${machine.name} STARTED at ${currentPower}W (Threshold: >${startThreshold}W)`);
 
                 // Record start in daily stats
