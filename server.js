@@ -463,6 +463,11 @@ async function translateToLanguage(text, targetLanguage) {
     return translationService.translateToLanguage(text, targetLanguage);
 }
 
+// Machine status page
+app.get('/status', (req, res) => {
+    res.sendFile(path.join(__dirname, 'status.html'));
+});
+
 // Device Status Endpoint
 app.get('/api/laundry-status', (req, res) => {
     try {

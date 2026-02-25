@@ -2362,15 +2362,6 @@
             opacity: 0.3;
         }
 
-        /* Galjevica (card 2): raise line above labels which sit at padding-bottom level */
-        .location-card:nth-child(2) .location-amenities-new::after {
-            bottom: 47px;
-        }
-
-        /* Align disinfection icon with machine groups (both have same padding-bottom) */
-        .location-card:nth-child(2) .amenity-group:not([data-machine-id]) {
-            padding-bottom: 25px;
-        }
 
         .amenity-group {
             display: flex;
@@ -3185,10 +3176,6 @@
             .location-amenities-new::after {
                 bottom: 28px !important;
                 width: 150%;
-            }
-
-            .location-card:nth-child(2) .location-amenities-new::after {
-                bottom: 52px !important;
             }
 
             /* Увеличение иконок на 20% */

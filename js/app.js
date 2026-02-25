@@ -1046,10 +1046,10 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     }
 
-    // Initial fetch
-    fetchMachineStatus();
-
-    // Fetch every 5 seconds
-    setInterval(fetchMachineStatus, 5000);
+    // Only poll if there are machine status elements on the page
+    if (document.querySelectorAll('[data-machine-id]').length > 0) {
+        fetchMachineStatus();
+        setInterval(fetchMachineStatus, 5000);
+    }
 });
 

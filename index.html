@@ -2068,7 +2068,7 @@
                                             </span>
                                         </div>
                                         <!-- First 10kg washing machine -->
-                                        <div class="amenity-group machine-free" data-machine-id="1">
+                                        <div class="amenity-group">
                                             <div class="amenity-icon-animated amenity-icon-small-wash">
                                                 <svg width="48" height="73" viewBox="0 0 48 73" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -2138,7 +2138,7 @@
                                         </div>
 
                                         <!-- Second 10kg washing machine -->
-                                        <div class="amenity-group machine-free" data-machine-id="2">
+                                        <div class="amenity-group">
                                             <div class="amenity-icon-animated amenity-icon-small-wash">
                                                 <svg width="48" height="73" viewBox="0 0 48 73" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -2208,7 +2208,7 @@
                                         </div>
 
                                         <!-- Third 10kg washing machine -->
-                                        <div class="amenity-group machine-free" data-machine-id="3">
+                                        <div class="amenity-group">
                                             <div class="amenity-icon-animated amenity-icon-small-wash">
                                                 <svg width="48" height="73" viewBox="0 0 48 73" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -2278,7 +2278,7 @@
                                         </div>
 
                                         <!-- One 20kg washing machine (20% larger) -->
-                                        <div class="amenity-group machine-free" data-machine-id="4">
+                                        <div class="amenity-group">
                                             <div class="amenity-icon-animated amenity-icon-large">
                                                 <svg width="87" height="138" viewBox="0 0 48 76" fill="none"
                                                     xmlns="http://www.w3.org/2000/svg">
@@ -2361,7 +2361,7 @@
                                             style="display: flex; flex-direction: column; align-items: center; transform: translateY(0px);">
                                             <!-- First 20kg dryer -->
                                             <div style="display: flex; gap: 5px;">
-                                                <div class="amenity-group machine-free" data-machine-id="5">
+                                                <div class="amenity-group">
                                                     <div class="amenity-icon-animated amenity-icon-dryer">
                                                         <svg width="52" height="126" viewBox="0 0 52 126" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -2496,7 +2496,7 @@
                                                 </div>
 
                                                 <!-- Second 20kg dryer -->
-                                                <div class="amenity-group machine-free" data-machine-id="6">
+                                                <div class="amenity-group">
                                                     <div class="amenity-icon-animated amenity-icon-dryer">
                                                         <svg width="52" height="126" viewBox="0 0 52 126" fill="none"
                                                             xmlns="http://www.w3.org/2000/svg">
@@ -3409,426 +3409,506 @@
 
             <!-- Tab 4: BUY TOKENS -->
             <div class="tab-content" id="tokens">
-                <!-- 3-Column Layout: Card | Cash | Photo -->
+                <!-- 2-Column Layout: Card payment | Cash payment -->
+                <style>
+#tokens .token-purchase-grid{grid-template-columns:1fr;align-items:stretch}
+@media(min-width:640px){#tokens .token-purchase-grid{grid-template-columns:1fr 1fr}}
+#tokens .token-purchase-grid>div{--card-padding:14px}
+@media(min-width:640px){#tokens .token-purchase-grid>div{--card-padding:20px}}
+                </style>
                 <div class="token-purchase-grid">
 
-                    <!-- Column 1: Card/Smartphone Payment -->
-                    <div class="payment-method"
-                        style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 20px; padding: 14px; color: white; box-shadow: 0 8px 24px rgba(102, 126, 234, 0.3);">
-                        <h4
-                            style="font-size: 20px; font-weight: 700; margin-bottom: 10px; display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 28px;">💳</span>
-                            <span>
-                                <span class="lang-si">S kartico / smartfonom</span>
-                                <span class="lang-en">With card / smartphone</span>
+                    <!-- Column 1: Card / phone payment -->
+                    <div style="background: linear-gradient(135deg, #1a2a6c 0%, #2255a4 100%); border-radius: 20px; padding: var(--card-padding, 20px); color: white; box-shadow: 0 8px 24px rgba(26,42,108,0.3); display: flex; flex-direction: column;">
+                        <h4 style="font-size: 20px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+                            <span style="display:flex;align-items:center;gap:10px;">
+                                <span style="font-size: 28px;">💳</span>
+                                <span>
+                                    <span class="lang-si">S kartico ali telefonom</span>
+                                    <span class="lang-en">Card or phone</span>
+                                </span>
+                            </span>
+                            <span style="display:flex;gap:4px;flex-shrink:0;">
+                                <button id="piBtnPrev" class="ctrl-btn">⏮</button>
+                                <button id="piBtnPlay" class="ctrl-btn">⏸</button>
+                                <button id="piBtnNext" class="ctrl-btn">⏭</button>
                             </span>
                         </h4>
+                        <style>
+#piWidget{font-family:'Courier New',monospace;color:#fff}
+#piWidget .pi-step-ind{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding:10px 12px;background:rgba(255,255,255,0.15);border-radius:8px;border:1px solid rgba(255,255,255,0.2);transition:border-color .4s;min-height:100px}
+#piWidget .pi-step-num{font-size:52px;font-weight:900;flex-shrink:0;line-height:1;font-family:'Courier New',monospace;transition:color .4s cubic-bezier(.34,1.56,.64,1)}
+#piWidget .pi-step-label{font-size:20px;font-weight:bold;line-height:1.3;transition:opacity .3s}
+#piWidget .pi-svg-wrap{border-radius:10px;overflow:hidden;margin-bottom:12px}
+#piWidget .pi-svg-wrap svg{display:block;width:100%}
+#piWidget .pi-prog{height:2px;background:rgba(255,255,255,0.25);border-radius:2px;overflow:hidden;margin-bottom:8px}
+#piWidget .pi-prog-fill{height:100%;border-radius:2px;transition:width .08s linear}
+#piWidget .pi-controls{text-align:center}
+#piWidget .pi-btn{background:transparent;border:1px solid rgba(255,255,255,0.4);color:rgba(255,255,255,0.8);border-radius:5px;padding:4px 14px;cursor:pointer;font-size:9px;font-family:inherit;letter-spacing:.1em}
+#piWidget .pi-tip{margin-top:10px;text-align:center;color:rgba(255,255,255,0.6);font-size:8px;line-height:1.6}
+@keyframes piNfc{0%{r:3;opacity:.9}100%{r:20;opacity:0}}
+#piWidget .nfc-wave{fill:none;stroke:#4a9eff;stroke-width:1.4}
+#piWidget .nfc-wave.w0{animation:piNfc 8s ease-out 0s infinite}
+#piWidget .nfc-wave.w1{animation:piNfc 8s ease-out 2s infinite}
+#piWidget .nfc-wave.w2{animation:piNfc 8s ease-out 4s infinite}
+#piWidget .btn-ok-inner,#piWidget .btn-sel-inner{transform-origin:center;transition:transform .6s cubic-bezier(.34,1.56,.64,1)}
+#piWidget .btn-ok-inner.pressed,#piWidget .btn-sel-inner.pressed{transform:scale(1.08,.82)}
+#piWidget .hand-group{transition:transform 4.4s cubic-bezier(.34,1.38,.64,1)}
+#piWidget .card-slot-group{transition:transform 2.8s cubic-bezier(.34,1.38,.64,1),opacity .4s}
+#piWidget .finger-group{transition:transform .88s cubic-bezier(.34,1.7,.64,1)}
+#piWidget .lcd-text{transition:opacity 1s ease,fill 1s ease}
+@keyframes piCb0{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes piCb1{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes piCb2{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes piCb3{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes piCb4{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes piCb5{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+#piWidget .pi-coin{opacity:0;transition:opacity 1.6s}
+#piWidget .pi-coin.visible{opacity:1}
+#piWidget .pi-coin.c0{animation:piCb0 3.6s ease-in-out 0s infinite}
+#piWidget .pi-coin.c1{animation:piCb1 3.6s ease-in-out .48s infinite}
+#piWidget .pi-coin.c2{animation:piCb2 3.6s ease-in-out .96s infinite}
+#piWidget .pi-coin.c3{animation:piCb3 3.6s ease-in-out .24s infinite}
+#piWidget .pi-coin.c4{animation:piCb4 3.6s ease-in-out .72s infinite}
+#piWidget .pi-coin.c5{animation:piCb5 3.6s ease-in-out 1.44s infinite}
+#piWidget .pi-coin.c6{animation:piCb0 3.6s ease-in-out 1.2s infinite}
+#piWidget .pi-coin.c7{animation:piCb2 3.6s ease-in-out 1.92s infinite}
+#piWidget .nfc-glow{transition:opacity .5s ease}
+@keyframes piOkRing{0%{r:6;opacity:.5}100%{r:18;opacity:0}}
+#piWidget .ok-ring{animation:piOkRing 4s ease-out infinite}
+@keyframes piLabelIn{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
+.ctrl-btn{background:transparent;border:1px solid rgba(255,255,255,0.4);color:rgba(255,255,255,0.85);border-radius:5px;padding:3px 9px;cursor:pointer;font-size:13px;line-height:1.2;font-family:inherit}.ctrl-btn:hover{background:rgba(255,255,255,0.15)}
+                        </style>
 
-                        <div class="payment-steps">
-                            <!-- Step 1 -->
-                            <div
-                                style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 7px; margin-bottom: 6px; backdrop-filter: blur(10px);">
-                                <div style="display: flex; align-items: start; gap: 12px;">
-                                    <div
-                                        style="background: white; color: #667eea; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0;">
-                                        1</div>
-                                    <div>
-                                        <div style="font-weight: 600; margin-bottom: 2px; font-size: 14px;">
-                                            <span class="lang-si">Pritisnite gumb "SEL"</span>
-                                            <span class="lang-en">Press the "SEL" button</span>
-                                        </div>
-                                        <div style="display: inline-flex; gap: 6px; margin-top: 3px;">
-                                            <div
-                                                style="background: #6C757D; color: white; padding: 3px 6px; border-radius: 6px; font-weight: 700; font-size: 13px; opacity: 0.5;">
-                                                OK</div>
-                                            <div
-                                                style="background: #DC3545; color: white; padding: 3px 6px; border-radius: 6px; font-weight: 700; font-size: 13px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
-                                                SEL</div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Step 2 -->
-                            <div
-                                style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 7px; margin-bottom: 12px; backdrop-filter: blur(10px);">
-                                <div style="display: flex; align-items: start; gap: 12px;">
-                                    <div
-                                        style="background: white; color: #667eea; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0;">
-                                        2</div>
-                                    <div>
-                                        <div style="font-weight: 600; font-size: 14px;">
-                                            <span class="lang-si">Pristavite kartico k terminalu</span>
-                                            <span class="lang-en">Put your card to the terminal</span>
-                                        </div>
-                                        <!-- Card tap to terminal illustration -->
-                                        <svg width="100%" height="72" viewBox="0 0 220 72"
-                                            style="margin-top: 6px; max-width: 260px; display: block;">
-                                            <!-- CARD (tilted, approaching) -->
-                                            <g
-                                                transform="translate(25, 0) rotate(-8, 55, 36) translate(52, 40) scale(0.7) translate(-52, -40)">
-                                                <rect x="8" y="12" width="88" height="56" rx="7"
-                                                    fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.75)"
-                                                    stroke-width="1.5" />
-                                                <text x="52" y="22" font-family="Arial, sans-serif" font-size="8" font-weight="700" fill="rgba(255,255,255,0.85)" text-anchor="middle">YOUR BANK</text>
-                                                <rect x="18" y="31" width="18" height="14" rx="3"
-                                                    fill="rgba(255,255,255,0.55)" stroke="rgba(255,255,255,0.3)"
-                                                    stroke-width="1" />
-                                                <line x1="27" y1="31" x2="27" y2="45" stroke="rgba(100,100,100,0.35)"
-                                                    stroke-width="0.8" />
-                                                <line x1="18" y1="38" x2="36" y2="38" stroke="rgba(100,100,100,0.35)"
-                                                    stroke-width="0.8" />
-                                                <circle cx="44" cy="50" r="2.2" fill="rgba(255,255,255,0.6)" />
-                                                <circle cx="51" cy="50" r="2.2" fill="rgba(255,255,255,0.6)" />
-                                                <circle cx="58" cy="50" r="2.2" fill="rgba(255,255,255,0.6)" />
-                                                <circle cx="65" cy="50" r="2.2" fill="rgba(255,255,255,0.6)" />
-                                                <path d="M76 42 Q80 38 76 34" stroke="rgba(255,255,255,0.8)"
-                                                    stroke-width="1.5" fill="none" stroke-linecap="round" />
-                                                <path d="M79 44 Q85 38 79 32" stroke="rgba(255,255,255,0.55)"
-                                                    stroke-width="1.5" fill="none" stroke-linecap="round" />
-                                            </g>
-                                            <!-- CONTACTLESS WAVES -->
-                                            <path d="M 128 52 Q 135 36 128 20" stroke="rgba(255,255,255,0.9)"
-                                                stroke-width="2.2" fill="none" stroke-linecap="round" />
-                                            <path d="M 134 54 Q 143 33 134 14" stroke="rgba(255,255,255,0.6)"
-                                                stroke-width="2" fill="none" stroke-linecap="round" />
-                                            <path d="M 140 56 Q 151 30 140 8" stroke="rgba(255,255,255,0.3)"
-                                                stroke-width="2" fill="none" stroke-linecap="round" />
-                                            <!-- TERMINAL photo -->
-                                            <image href="terminal_card.png" x="158" y="3" width="49" height="66" preserveAspectRatio="xMidYMid meet"/>
-                                        </svg>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Step 3 -->
-                            <div
-                                style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 7px; margin-bottom: 12px; backdrop-filter: blur(10px);">
-                                <div style="display: flex; align-items: start; gap: 12px;">
-                                    <div
-                                        style="background: white; color: #667eea; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0;">
-                                        3</div>
-                                    <div>
-                                        <div style="font-weight: 600; margin-bottom: 4px; font-size: 14px;">
-                                            <span class="lang-si">Z gumbom "SEL" izberite število žetonov</span>
-                                            <span class="lang-en">Press "SEL" to select number of tokens</span>
-                                        </div>
-                                        <!-- Buttons: OK (inactive) and SEL (active) -->
-                                        <div style="display: inline-flex; gap: 6px; margin-top: 4px;">
-                                            <div
-                                                style="background: #6C757D; color: white; padding: 3px 6px; border-radius: 6px; font-weight: 700; font-size: 13px; opacity: 0.5;">
-                                                OK</div>
-                                            <div
-                                                style="background: #DC3545; color: white; padding: 3px 6px; border-radius: 6px; font-weight: 700; font-size: 13px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
-                                                SEL</div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <!-- Token quantity cycle display — full width -->
-                                <div
-                                    style="margin-top: 8px; background: rgba(0,0,0,0.15); border-radius: 10px; padding: 8px 10px;">
-                                    <div
-                                        style="font-size: 10px; opacity: 0.7; margin-bottom: 5px; letter-spacing: 0.5px; text-transform: uppercase;">
-                                        <span class="lang-si">Vsak pritisk SEL:</span>
-                                        <span class="lang-en">Each SEL press:</span>
-                                    </div>
-                                    <div
-                                        style="display: flex; align-items: center; justify-content: space-between; width: 100%;">
-                                        <span
-                                            style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">1</span>
-                                        <span
-                                            style="font-size: 14px; font-weight: 900; opacity: 1; color: rgba(255,255,255,0.85);">›</span>
-                                        <span
-                                            style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">2</span>
-                                        <span
-                                            style="font-size: 14px; font-weight: 900; opacity: 1; color: rgba(255,255,255,0.85);">›</span>
-                                        <span
-                                            style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">3</span>
-                                        <span
-                                            style="font-size: 14px; font-weight: 900; opacity: 1; color: rgba(255,255,255,0.85);">›</span>
-                                        <span
-                                            style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">4</span>
-                                        <span
-                                            style="font-size: 14px; font-weight: 900; opacity: 1; color: rgba(255,255,255,0.85);">›</span>
-                                        <span
-                                            style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">5</span>
-                                        <span
-                                            style="font-size: 14px; font-weight: 900; opacity: 1; color: rgba(255,255,255,0.85);">›</span>
-                                        <span
-                                            style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">8</span>
-                                        <span
-                                            style="font-size: 14px; font-weight: 900; opacity: 1; color: rgba(255,255,255,0.85);">›</span>
-                                        <span
-                                            style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">10</span>
-                                        <span
-                                            style="font-size: 14px; font-weight: 900; opacity: 1; color: rgba(255,255,255,0.85);">›</span>
-                                        <span
-                                            style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">20</span>
-                                        <span
-                                            style="font-size: 14px; font-weight: 900; opacity: 1; color: rgba(255,255,255,0.85);">›</span>
-                                        <span
-                                            style="background: rgba(255,255,255,0.25); border: 1.5px solid rgba(255,255,255,0.5); padding: 2px 6px; border-radius: 20px; font-weight: 700; font-size: 12px;">50</span>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Step 4 -->
-                            <div
-                                style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 7px; margin-bottom: 6px; backdrop-filter: blur(10px);">
-                                <div style="display: flex; align-items: start; gap: 12px;">
-                                    <div
-                                        style="background: white; color: #667eea; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0;">
-                                        4</div>
-                                    <div>
-                                        <div style="font-weight: 600; margin-bottom: 2px; font-size: 14px;">
-                                            <span class="lang-si">Potrdite z gumbom "OK"</span>
-                                            <span class="lang-en">Press "OK" to confirm</span>
-                                        </div>
-                                        <div style="display: inline-flex; gap: 6px; margin-top: 3px;">
-                                            <div
-                                                style="background: #28A745; color: white; padding: 3px 6px; border-radius: 6px; font-weight: 700; font-size: 13px; box-shadow: 0 2px 8px rgba(0,0,0,0.2);">
-                                                OK</div>
-                                            <div
-                                                style="background: #6C757D; color: white; padding: 3px 6px; border-radius: 6px; font-weight: 700; font-size: 13px; opacity: 0.5;">
-                                                SEL</div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Step 5 -->
-                            <div
-                                style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 7px; backdrop-filter: blur(10px);">
-                                <div style="display: flex; align-items: start; gap: 12px;">
-                                    <div
-                                        style="background: white; color: #667eea; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 700; font-size: 16px; flex-shrink: 0;">
-                                        5</div>
-                                    <div>
-                                        <div style="font-weight: 600; font-size: 14px;">
-                                            <span class="lang-si">Pristavite kartico k terminalu ponovno</span>
-                                            <span class="lang-en">Put your card to the terminal again</span>
-                                        </div>
-                                        <!-- Card tap to terminal illustration -->
-                                        <svg width="100%" height="72" viewBox="0 0 220 72"
-                                            style="margin-top: 6px; max-width: 260px; display: block;">
-                                            <g
-                                                transform="translate(25, 0) rotate(-8, 55, 36) translate(52, 40) scale(0.7) translate(-52, -40)">
-                                                <rect x="8" y="12" width="88" height="56" rx="7"
-                                                    fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.75)"
-                                                    stroke-width="1.5" />
-                                                <text x="52" y="22" font-family="Arial, sans-serif" font-size="8" font-weight="700" fill="rgba(255,255,255,0.85)" text-anchor="middle">YOUR BANK</text>
-                                                <rect x="18" y="31" width="18" height="14" rx="3"
-                                                    fill="rgba(255,255,255,0.55)" stroke="rgba(255,255,255,0.3)"
-                                                    stroke-width="1" />
-                                                <line x1="27" y1="31" x2="27" y2="45" stroke="rgba(100,100,100,0.35)"
-                                                    stroke-width="0.8" />
-                                                <line x1="18" y1="38" x2="36" y2="38" stroke="rgba(100,100,100,0.35)"
-                                                    stroke-width="0.8" />
-                                                <circle cx="44" cy="50" r="2.2" fill="rgba(255,255,255,0.6)" />
-                                                <circle cx="51" cy="50" r="2.2" fill="rgba(255,255,255,0.6)" />
-                                                <circle cx="58" cy="50" r="2.2" fill="rgba(255,255,255,0.6)" />
-                                                <circle cx="65" cy="50" r="2.2" fill="rgba(255,255,255,0.6)" />
-                                                <path d="M76 42 Q80 38 76 34" stroke="rgba(255,255,255,0.8)"
-                                                    stroke-width="1.5" fill="none" stroke-linecap="round" />
-                                                <path d="M79 44 Q85 38 79 32" stroke="rgba(255,255,255,0.55)"
-                                                    stroke-width="1.5" fill="none" stroke-linecap="round" />
-                                            </g>
-                                            <path d="M 128 52 Q 135 36 128 20" stroke="rgba(255,255,255,0.9)"
-                                                stroke-width="2.2" fill="none" stroke-linecap="round" />
-                                            <path d="M 134 54 Q 143 33 134 14" stroke="rgba(255,255,255,0.6)"
-                                                stroke-width="2" fill="none" stroke-linecap="round" />
-                                            <path d="M 140 56 Q 151 30 140 8" stroke="rgba(255,255,255,0.3)"
-                                                stroke-width="2" fill="none" stroke-linecap="round" />
-                                            <!-- TERMINAL photo -->
-                                            <image href="terminal_card.png" x="158" y="3" width="49" height="66" preserveAspectRatio="xMidYMid meet"/>
-                                        </svg>
-
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Tip: chip fallback -->
-                            <div style="margin-top: 8px; background: rgba(255, 193, 7, 0.15); border: 1.5px solid rgba(255, 193, 7, 0.55); border-radius: 12px; padding: 7px; backdrop-filter: blur(10px);">
-                                <div style="display: flex; align-items: start; gap: 12px;">
-                                    <div style="background: rgba(255, 193, 7, 0.35); width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 16px; flex-shrink: 0;">⚠️</div>
-                                    <div style="flex: 1; min-width: 0;">
-                                        <div style="font-weight: 600; font-size: 14px; margin-bottom: 4px;">
-                                            <span class="lang-si">Kartica ne dela brezstično?</span>
-                                            <span class="lang-en">Card not working contactless?</span>
-                                        </div>
-                                        <div style="font-size: 12px; opacity: 0.9; line-height: 1.45;">
-                                            <span class="lang-si">Vstavite kartico v režo na dnu terminala — čip obrnjen navzgor in proti vam.</span>
-                                            <span class="lang-en">Insert the card into the slot at the bottom of the terminal — chip facing up and toward you.</span>
-                                        </div>
-                                        <!-- Card insertion: terminal on top, card portrait below, arrows up -->
-                                        <svg width="100%" height="115" viewBox="0 0 220 115" style="margin-top: 6px; max-width: 260px; display: block;">
-                                            <!-- TERMINAL photo — same size as Steps 2/5 (49×66) -->
-                                            <image href="terminal_card.png" x="86" y="2" width="49" height="66" preserveAspectRatio="xMidYMid meet"/>
-                                            <!-- UPWARD ARROWS flanking card -->
-                                            <line x1="88" y1="112" x2="88" y2="78" stroke="rgba(255,255,255,0.8)" stroke-width="2.2" stroke-linecap="round"/>
-                                            <polygon points="88,69 84,78 92,78" fill="rgba(255,255,255,0.8)"/>
-                                            <line x1="132" y1="112" x2="132" y2="78" stroke="rgba(255,255,255,0.8)" stroke-width="2.2" stroke-linecap="round"/>
-                                            <polygon points="132,69 128,78 136,78" fill="rgba(255,255,255,0.8)"/>
-                                            <!-- CARD portrait (26×40, chip at top enters slot first) -->
-                                            <rect x="97" y="72" width="26" height="40" rx="4" fill="rgba(255,255,255,0.22)" stroke="rgba(255,255,255,0.75)" stroke-width="1.5"/>
-                                            <!-- YOUR BANK label -->
-                                            <text x="110" y="78" font-family="Arial, sans-serif" font-size="4.5" font-weight="700" fill="rgba(255,255,255,0.85)" text-anchor="middle">YOUR BANK</text>
-                                            <!-- Chip near top -->
-                                            <rect x="103" y="81" width="11" height="9" rx="2" fill="rgba(255,255,255,0.55)" stroke="rgba(255,255,255,0.3)" stroke-width="1"/>
-                                            <line x1="108" y1="81" x2="108" y2="90" stroke="rgba(100,100,100,0.35)" stroke-width="0.8"/>
-                                            <line x1="103" y1="85" x2="114" y2="85" stroke="rgba(100,100,100,0.35)" stroke-width="0.8"/>
-                                            <!-- Number dots near bottom -->
-                                            <circle cx="103" cy="107" r="1.8" fill="rgba(255,255,255,0.6)"/>
-                                            <circle cx="108" cy="107" r="1.8" fill="rgba(255,255,255,0.6)"/>
-                                            <circle cx="113" cy="107" r="1.8" fill="rgba(255,255,255,0.6)"/>
-                                            <circle cx="118" cy="107" r="1.8" fill="rgba(255,255,255,0.6)"/>
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-
+                        <div id="piWidget">
+                          <div class="pi-step-ind" id="piStepBox">
+                            <div class="pi-step-num" id="piStepNum">1</div>
+                            <div><div class="pi-step-label" id="piStepLabel"></div></div>
+                          </div>
+                          <div class="pi-svg-wrap">
+                            <svg viewBox="0 0 180 233" xmlns="http://www.w3.org/2000/svg">
+                              <defs>
+                                <clipPath id="piTrayClip"><rect x="22" y="204" width="136" height="21" rx="3"/></clipPath>
+                                <clipPath id="piSlotClip"><rect x="14" y="136" width="70" height="200"/></clipPath>
+                              </defs>
+                              <rect x="18" y="8" width="144" height="192" rx="7" fill="#1c1c1c" stroke="#3a3a3a" stroke-width="1.5"/>
+                              <rect x="18" y="8" width="144" height="9" rx="4" fill="#f5c400"/>
+                              <text x="90" y="14" text-anchor="middle" fill="#111" font-size="4" font-family="monospace" font-weight="bold">THIS MACHINE DOESN'T GIVE CHANGE</text>
+                              <rect x="18" y="21" width="144" height="42" fill="#111"/>
+                              <text x="29" y="24" text-anchor="middle" fill="#555" font-size="4" font-family="monospace">OK</text>
+                              <rect x="20" y="25" width="22" height="18" rx="3" id="piOkOuter" fill="#001166" stroke="#4488ff" stroke-width="1.5"/>
+                              <g class="btn-ok-inner" id="piOkInner" style="transform-origin:31px 34px">
+                                <rect x="22" y="27" width="18" height="14" rx="2" id="piOkFace" fill="#0055cc"/>
+                                <text x="31" y="37" text-anchor="middle" fill="white" font-size="7" font-family="monospace" font-weight="bold">OK</text>
+                                <rect x="22" y="27" width="18" height="14" rx="2" id="piOkShine" fill="white" opacity="0"/>
+                              </g>
+                              <text x="57" y="24" text-anchor="middle" fill="#555" font-size="4" font-family="monospace">SEL</text>
+                              <rect x="48" y="25" width="22" height="18" rx="3" id="piSelOuter" fill="#002200" stroke="#33cc33" stroke-width="1.5"/>
+                              <g class="btn-sel-inner" id="piSelInner" style="transform-origin:59px 34px">
+                                <rect x="50" y="27" width="18" height="14" rx="2" id="piSelFace" fill="#009900"/>
+                                <text x="59" y="37" text-anchor="middle" fill="white" font-size="6.5" font-family="monospace" font-weight="bold">SEL</text>
+                                <rect x="50" y="27" width="18" height="14" rx="2" id="piSelShine" fill="white" opacity="0"/>
+                              </g>
+                              <rect x="78" y="24" width="82" height="26" rx="3" fill="#000066" stroke="#2222aa" stroke-width="1"/>
+                              <rect x="80" y="26" width="78" height="22" rx="2" id="piLcdBg" fill="#000099"/>
+                              <text id="piLcdLine1" x="119" y="39" text-anchor="middle" fill="#8899ff" font-size="6.5" font-family="monospace" font-weight="bold" letter-spacing="0.4" class="lcd-text">CHANGEONE</text>
+                              <text id="piLcdLine2" x="119" y="44" text-anchor="middle" fill="#8899ff" font-size="6" font-family="monospace" font-weight="bold" letter-spacing="0.4" class="lcd-text" opacity="0"></text>
+                              <rect x="18" y="63" width="144" height="4" fill="#0a0a0a"/>
+                              <rect x="18" y="67" width="144" height="103" fill="#1c1c1c"/>
+                              <rect x="22" y="72" width="52" height="64" rx="5" fill="#f5c400" stroke="#c8a000" stroke-width="1.5"/>
+                              <rect x="24" y="75" width="48" height="38" rx="3" fill="#080812"/>
+                              <rect x="27" y="78" width="18" height="10" rx="1" fill="#1a44a8"/>
+                              <text x="36" y="86" text-anchor="middle" fill="white" font-size="5" font-family="serif" font-weight="bold" font-style="italic">VISA</text>
+                              <circle cx="49" cy="83" r="5" fill="#eb001b" opacity="0.85"/>
+                              <circle cx="54" cy="83" r="5" fill="#f79e1b" opacity="0.85"/>
+                              <text x="48" y="97" text-anchor="middle" fill="#888" font-size="3.5" font-family="sans-serif">Samsung Pay  Apple Pay</text>
+                              <rect x="27" y="100" width="42" height="10" rx="2" fill="#0a0a18"/>
+                              <text x="48" y="107" text-anchor="middle" fill="#444" font-size="6.5" font-family="monospace">‹  ≡  ›</text>
+                              <text x="48" y="126" text-anchor="middle" fill="#555" font-size="4" font-family="sans-serif" font-weight="bold">NAYAX</text>
+                              <rect x="24" y="117" width="48" height="14" rx="3" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+                              <ellipse cx="48" cy="124" rx="15" ry="4.5" fill="#141428"/>
+                              <ellipse id="piNfcGlow" cx="48" cy="124" rx="15" ry="4.5" fill="none" stroke="#4a9eff" stroke-width="1.4" class="nfc-glow" opacity="0"/>
+                              <g id="piNfcWaves" opacity="0" style="transition:opacity .4s">
+                                <circle class="nfc-wave w0" cx="48" cy="90" r="3"/>
+                                <circle class="nfc-wave w1" cx="48" cy="90" r="3"/>
+                                <circle class="nfc-wave w2" cx="48" cy="90" r="3"/>
+                              </g>
+                              <rect x="80" y="72" width="54" height="22" rx="3" fill="#090909" stroke="#2a2a2a" stroke-width="1"/>
+                              <rect x="82" y="74" width="50" height="18" rx="2" fill="#111"/>
+                              <circle cx="86" cy="83" r="3" fill="#0055ff" opacity="0.7"/>
+                              <circle cx="97" cy="83" r="3" fill="#0055ff" opacity="0.7"/>
+                              <circle cx="108" cy="83" r="3" fill="#0055ff" opacity="0.7"/>
+                              <circle cx="119" cy="83" r="3" fill="#0055ff" opacity="0.7"/>
+                              <circle cx="130" cy="83" r="3" fill="#0055ff" opacity="0.7"/>
+                              <text x="107" y="101" text-anchor="middle" fill="#333" font-size="3.5" font-family="monospace">① BILL ACCEPTOR</text>
+                              <text x="107" y="118" text-anchor="middle" fill="#aaa" font-size="12" font-family="sans-serif" font-weight="bold" font-style="italic">HIRA</text>
+                              <line x1="84" y1="121" x2="130" y2="121" stroke="#666" stroke-width="0.7"/>
+                              <text x="107" y="133" text-anchor="middle" fill="#999" font-size="10" font-family="sans-serif">1</text>
+                              <ellipse cx="150" cy="117" rx="10" ry="32" fill="#5a5a5a" stroke="#888" stroke-width="1.3"/>
+                              <ellipse cx="150" cy="117" rx="8" ry="30" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="0.7"/>
+                              <rect x="147" y="95" width="6" height="14" rx="3" fill="#080808" stroke="#3a3a3a" stroke-width="0.5"/>
+                              <rect x="146" y="113" width="8" height="8" rx="1.5" fill="#2a2a2a" stroke="#555" stroke-width="0.8"/>
+                              <rect x="147" y="114" width="6" height="6" rx="1" fill="#333"/>
+                              <rect x="147" y="125" width="6" height="14" rx="3" fill="#080808" stroke="#3a3a3a" stroke-width="0.5"/>
+                              <rect x="18" y="170" width="144" height="9" fill="#bb2200"/>
+                              <text x="90" y="175" text-anchor="middle" fill="white" font-size="4.5" font-family="monospace" font-weight="bold">POZOR! APARAT NE VRAČA DROBIŽ</text>
+                              <rect x="18" y="179" width="144" height="8" fill="#1133aa"/>
+                              <text x="90" y="185" text-anchor="middle" fill="white" font-size="3.4" font-family="monospace">THE MACHINE DOES NOT GIVE CHANGE</text>
+                              <rect x="24" y="187" width="132" height="6" rx="2" fill="#111"/>
+                              <rect x="18" y="200" width="144" height="29" rx="5" fill="#2a2a2a" stroke="#555" stroke-width="1.3"/>
+                              <rect x="22" y="203" width="136" height="23" rx="4" fill="#111" stroke="#333" stroke-width="0.8"/>
+                              <rect x="65" y="199" width="50" height="5" rx="1" fill="#1e1e1e" stroke="#444" stroke-width="0.5"/>
+                              <rect x="18" y="200" width="144" height="2" rx="2" fill="#444" opacity="0.5"/>
+                              <text x="90" y="216" text-anchor="middle" fill="#3a3a3a" font-size="4" font-family="monospace" letter-spacing="1">TOKENS</text>
+                              <g clip-path="url(#piTrayClip)">
+                                <circle class="pi-coin c0" cx="35"  cy="215" r="4"   fill="#d4d4d4" stroke="#888" stroke-width="0.8"/>
+                                <circle class="pi-coin c1" cx="50"  cy="216" r="3.5" fill="#b8b8b8" stroke="#888" stroke-width="0.8"/>
+                                <circle class="pi-coin c2" cx="64"  cy="215" r="4"   fill="#d4d4d4" stroke="#888" stroke-width="0.8"/>
+                                <circle class="pi-coin c3" cx="78"  cy="216" r="3.5" fill="#b8b8b8" stroke="#888" stroke-width="0.8"/>
+                                <circle class="pi-coin c4" cx="92"  cy="215" r="4"   fill="#d4d4d4" stroke="#888" stroke-width="0.8"/>
+                                <circle class="pi-coin c5" cx="106" cy="216" r="3.5" fill="#b8b8b8" stroke="#888" stroke-width="0.8"/>
+                                <circle class="pi-coin c6" cx="120" cy="215" r="4"   fill="#d4d4d4" stroke="#888" stroke-width="0.8"/>
+                                <circle class="pi-coin c7" cx="134" cy="216" r="3"   fill="#b8b8b8" stroke="#888" stroke-width="0.8"/>
+                              </g>
+                              <circle id="piOkRing" cx="31" cy="34" r="6" fill="#4488ff" opacity="0"/>
+                              <g clip-path="url(#piSlotClip)">
+                                <g id="piCardSlot" class="card-slot-group" opacity="0" style="transform:translateY(28px)">
+                                  <rect x="37" y="120" width="22" height="34" rx="2" fill="#0a1428" stroke="#c8d8ff" stroke-width="1.3"/>
+                                  <rect x="40" y="123" width="9" height="6" rx="1" fill="#c8a000" stroke="#f5c400" stroke-width="0.5" opacity="0.9"/>
+                                  <line x1="42" y1="123" x2="42" y2="129" stroke="#a08000" stroke-width="0.5" opacity="0.5"/>
+                                  <line x1="45" y1="123" x2="45" y2="129" stroke="#a08000" stroke-width="0.5" opacity="0.5"/>
+                                  <rect x="37" y="148" width="22" height="4" fill="#1a2a50" opacity="0.7"/>
+                                  <line x1="48" y1="162" x2="48" y2="157" stroke="#f5a623" stroke-width="1.4" stroke-linecap="round" opacity="0.9"/>
+                                  <polygon points="48,154 44,159 52,159" fill="#f5a623" opacity="0.9"/>
+                                </g>
+                              </g>
+                              <g class="finger-group" id="piFinger" opacity="0">
+                                <g transform="translate(-8,-4.5)" fill="none" stroke="#f5c5a3" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                                  <path d="M8 13v-8.5a1.5 1.5 0 0 1 3 0v7.5"/>
+                                  <path d="M11 11.5v-2a1.5 1.5 0 1 1 3 0v2.5"/>
+                                  <path d="M14 10.5a1.5 1.5 0 0 1 3 0v1.5"/>
+                                  <path d="M17 11.5a1.5 1.5 0 0 1 3 0v4.5a6 6 0 0 1-6 6h-2h.208a6 6 0 0 1-5.012-2.7a69.74 69.74 0 0 1-.196-.3c-.312-.479-1.407-2.388-3.286-5.728a1.5 1.5 0 0 1 .536-2.022a1.867 1.867 0 0 1 2.28.28l1.47 1.47"/>
+                                </g>
+                              </g>
+                              <g class="hand-group" id="piHand" opacity="0" style="transform:translateY(28px)">
+                                <g transform="rotate(12,48,90)">
+                                  <rect x="26" y="76" width="44" height="28" rx="3" fill="#0a1428" stroke="#c8d8ff" stroke-width="1.4"/>
+                                  <rect x="30" y="82" width="9" height="7" rx="1.5" fill="#1a2a50" stroke="#c8d8ff" stroke-width="1" opacity="0.8"/>
+                                  <line x1="32" y1="84" x2="39" y2="84" stroke="#c8d8ff" stroke-width="0.6" opacity="0.5"/>
+                                  <line x1="32" y1="86" x2="39" y2="86" stroke="#c8d8ff" stroke-width="0.6" opacity="0.5"/>
+                                  <path d="M44 87 Q46.5 84 44 81" fill="none" stroke="#4a9eff" stroke-width="1.2" stroke-linecap="round" opacity="0.9"/>
+                                  <path d="M46.5 89 Q51 84 46.5 79" fill="none" stroke="#4a9eff" stroke-width="1.2" stroke-linecap="round" opacity="0.65"/>
+                                  <path d="M49 91 Q55.5 84 49 77" fill="none" stroke="#4a9eff" stroke-width="1.2" stroke-linecap="round" opacity="0.4"/>
+                                  <rect x="26" y="96" width="44" height="4" fill="#1a2a50" opacity="0.6"/>
+                                </g>
+                              </g>
+                            </svg>
+                          </div>
                         </div>
-                        <!-- Video Instructions Card Payment -->
-                        <div class="video-container"
-                            style="background: rgba(0, 0, 0, 0.2); border-radius: 12px; height: 160px; display: flex; align-items: center; justify-content: center; margin-top: 10px; transition: background 0.2s; position: relative;">
-                            <div style="text-align: center; color: white;">
-                                <div style="font-size: 40px; margin-bottom: 6px; opacity: 0.8;">▶️</div>
-                                <div style="font-size: 16px; font-weight: 700; margin-bottom: 2px;">
-                                    <span class="lang-si">Video navodila</span>
-                                    <span class="lang-en">Video instructions</span>
-                                </div>
-                                <div style="font-size: 13px; opacity: 0.8; color: rgba(255, 255, 255, 0.9);">
-                                    <span class="lang-si">Plačilo s kartico</span>
-                                    <span class="lang-en">Card payment</span>
-                                </div>
-                            </div>
-                            <div
-                                style="position: absolute; bottom: 12px; right: 12px; background: rgba(0, 0, 0, 0.6); padding: 4px 8px; border-radius: 6px; font-size: 11px; color: white; font-weight: 600;">
-                                1:30
-                            </div>
-                        </div>
+
+                        <script>
+(function(){
+const TOKEN_SEQ=[1,2,3,4,5,8,10,20,50];
+const STEPS=[
+  {id:1,label:'Pritisnite gumb "SEL"',color:"#33cc33"},
+  {id:2,label:"Pristavite kartico k terminalu",color:"#4a9eff"},
+  {id:3,label:'Z gumbom "SEL" izberite število žetonov',color:"#33cc33"},
+  {id:4,label:'Potrdite z gumbom "OK"',color:"#4488ff"},
+  {id:5,label:"Znova pristavite kartico k terminalu",color:"#4a9eff"},
+  {id:6,label:"Kartica ne dela brezstično? Vstavite jo v režo na dnu terminala",color:"#f5a623"},
+];
+const STEP_MS=28800,TICK_MS=60,MAX_TICK=STEP_MS/TICK_MS;
+let step=0,tick=0,paused=false;
+const $=id=>document.getElementById(id);
+const piStepBox=$("piStepBox"),piStepNum=$("piStepNum"),piStepLabel=$("piStepLabel");
+const piOkOuter=$("piOkOuter"),piOkInner=$("piOkInner"),piOkFace=$("piOkFace"),piOkShine=$("piOkShine");
+const piSelOuter=$("piSelOuter"),piSelInner=$("piSelInner"),piSelFace=$("piSelFace"),piSelShine=$("piSelShine");
+const piLcdBg=$("piLcdBg"),piLcdLine1=$("piLcdLine1"),piLcdLine2=$("piLcdLine2");
+const piNfcWaves=$("piNfcWaves"),piNfcGlow=$("piNfcGlow");
+const piFinger=$("piFinger"),piHand=$("piHand"),piCardSlot=$("piCardSlot"),piOkRing=$("piOkRing");
+const piCoins=document.querySelectorAll("#piWidget .pi-coin");
+function setOK(p){piOkOuter.setAttribute("fill",p?"#002299":"#001166");piOkFace.setAttribute("fill",p?"#55aaff":"#0055cc");piOkShine.setAttribute("opacity",p?"0.18":"0");piOkInner.classList.toggle("pressed",p)}
+function setSEL(p){piSelOuter.setAttribute("fill",p?"#004400":"#002200");piSelFace.setAttribute("fill",p?"#44ee44":"#009900");piSelShine.setAttribute("opacity",p?"0.18":"0");piSelInner.classList.toggle("pressed",p)}
+function setLCD(t1,t2,ok){
+  piLcdBg.setAttribute("fill",ok?"#002200":"#000099");
+  const col=ok?"#44ee44":"#8899ff";
+  if(t2){piLcdLine1.setAttribute("y","34");piLcdLine1.setAttribute("font-size","6");piLcdLine2.setAttribute("opacity","1");piLcdLine2.textContent=t2}
+  else{piLcdLine1.setAttribute("y","39");piLcdLine1.setAttribute("font-size","6.5");piLcdLine2.setAttribute("opacity","0")}
+  piLcdLine1.setAttribute("fill",col);piLcdLine2.setAttribute("fill",col);
+  if(piLcdLine1.textContent!==t1){piLcdLine1.style.opacity="0";setTimeout(()=>{piLcdLine1.textContent=t1;piLcdLine1.style.opacity="1"},600)}
+}
+function setNFC(a){piNfcWaves.style.opacity=a?"1":"0";piNfcGlow.setAttribute("opacity",a?"0.9":"0")}
+function setHand(v,s){piHand.style.opacity=v?"1":"0";piHand.style.transform=v&&s?"translateY(0)":"translateY(28px)"}
+function setFinger(v,cx,cy){piFinger.style.opacity=v?"1":"0";piFinger.setAttribute("transform",`translate(${cx},${cy})`)}
+function setOKRing(a){if(a){piOkRing.style.animation="piOkRing 1s ease-out infinite";piOkRing.setAttribute("opacity","0")}else{piOkRing.style.animation="none";piOkRing.setAttribute("opacity","0")}}
+function setCoins(v){piCoins.forEach(c=>c.classList.toggle("visible",v))}
+function setCardInsert(v,s){piCardSlot.style.opacity=v?"1":"0";piCardSlot.style.transform=v&&s?"translateY(0)":"translateY(28px)"}
+function render(){
+  switch(step){
+    case 0:{const pr=tick>=60&&tick<120,dn=tick>=120;setSEL(pr);setOK(false);setLCD(dn||pr?"CHANGEONE":"","",false);setNFC(false);setHand(false,false);setFinger(!dn,59,pr?33:48);setOKRing(false);setCoins(false);setCardInsert(false,false);break}
+    case 1:{const ph=tick%384,nr=ph>180;setSEL(false);setOK(false);setLCD(nr?"READING...":"TAP CARD","",false);setNFC(nr);setHand(true,nr);setFinger(false,0,0);setOKRing(false);setCoins(false);setCardInsert(false,false);break}
+    case 2:{const idx=Math.min(Math.floor(tick/108),TOKEN_SEQ.length-1),cnt=TOKEN_SEQ[idx],pr=tick%108<54;setSEL(pr);setOK(false);setLCD(`TOK: ${cnt}`,"",false);setNFC(false);setHand(false,false);setFinger(true,59,pr?33:48);setOKRing(false);setCoins(false);setCardInsert(false,false);break}
+    case 3:{const ph=tick<120?"wait":tick<240?"press":"msg",pr=ph==="press",msg=ph==="msg";setOK(pr);setSEL(false);setLCD(msg?"PRISTAVITE":pr?"OK!":"CONFIRM?",msg?"KARTICO":"",false);setNFC(false);setHand(false,false);setFinger(!msg,31,pr?33:48);setOKRing(pr);setCoins(false);setCardInsert(false,false);break}
+    case 4:{const ph=tick%384,nr=ph>180,au=ph>264;setSEL(false);setOK(false);setLCD(au?"APPROVED!":nr?"AUTH...":"TAP CARD","",au);setNFC(nr);setHand(true,nr);setFinger(false,0,0);setOKRing(false);setCoins(au);setCardInsert(false,false);break}
+    case 5:{const ph=tick%420,nr=ph>160,au=ph>300;setSEL(false);setOK(false);setLCD(au?"APPROVED!":nr?"READING...":"INSERT CARD","",au);setNFC(false);setHand(false,false);setFinger(false,0,0);setOKRing(false);setCoins(au);setCardInsert(true,nr);break}
+  }
+}
+function updateStepUI(){
+  const s=STEPS[step];
+  piStepBox.style.borderColor=s.color+"33";
+  piStepNum.style.color=s.color;
+  piStepNum.textContent=s.id;
+  piStepLabel.style.animation="none";
+  piStepLabel.offsetHeight;
+  piStepLabel.style.animation="piLabelIn 1.4s cubic-bezier(.34,1.4,.64,1) forwards";
+  piStepLabel.textContent=s.label;
+}
+let lastStep=-1;
+function loop(){
+  if(!paused){tick++;if(tick>=MAX_TICK){tick=0;step=(step+1)%STEPS.length}}
+  if(step!==lastStep){updateStepUI();lastStep=step}
+  render();requestAnimationFrame(loop);
+}
+updateStepUI();requestAnimationFrame(loop);
+$("piBtnPlay").addEventListener("click",()=>{paused=!paused;$("piBtnPlay").textContent=paused?"▶":"⏸";});
+$("piBtnPrev").addEventListener("click",()=>{step=(step-1+STEPS.length)%STEPS.length;tick=0;lastStep=-1;paused=true;$("piBtnPlay").textContent="▶";});
+$("piBtnNext").addEventListener("click",()=>{step=(step+1)%STEPS.length;tick=0;lastStep=-1;paused=true;$("piBtnPlay").textContent="▶";});
+})();
+                        </script>
                     </div>
 
-                    <!-- Column 2: Cash Payment -->
+                    <!-- Column 2: Cash payment -->
                     <div class="payment-method"
                         style="background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%); border-radius: 20px; padding: var(--card-padding, 20px); color: white; box-shadow: 0 8px 24px rgba(17, 153, 142, 0.3); display: flex; flex-direction: column;">
 
-                        <h4
-                            style="font-size: 20px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 10px;">
-                            <span style="font-size: 28px;">💵</span>
-                            <span>
-                                <span class="lang-si">Z gotovino</span>
-                                <span class="lang-en">With cash</span>
+                        <h4 style="font-size: 20px; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; justify-content: space-between;">
+                            <span style="display:flex;align-items:center;gap:10px;">
+                                <span style="font-size: 28px;">💵</span>
+                                <span>
+                                    <span class="lang-si">Z gotovino</span>
+                                    <span class="lang-en">With cash</span>
+                                </span>
+                            </span>
+                            <span style="display:flex;gap:4px;flex-shrink:0;">
+                                <button id="ciBtnPrev" class="ctrl-btn">⏮</button>
+                                <button id="ciBtnPlay" class="ctrl-btn">⏸</button>
+                                <button id="ciBtnNext" class="ctrl-btn">⏭</button>
                             </span>
                         </h4>
 
-                        <!-- Accepted Money (Compact Redesign) -->
-                        <div
-                            style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 10px 12px; margin-bottom: 12px; backdrop-filter: blur(10px); display: flex; flex-direction: column; gap: 8px;">
+                        <!-- Cash Payment Infographic Widget -->
+                        <style>
+#ciWidget{font-family:'Courier New',monospace;color:#fff}
+#ciWidget .ci-step-ind{display:flex;align-items:center;gap:12px;margin-bottom:14px;padding:10px 12px;background:rgba(255,255,255,0.15);border-radius:8px;border:1px solid rgba(255,255,255,0.2);transition:border-color .4s;min-height:100px}
+#ciWidget .ci-step-num{font-size:52px;font-weight:900;flex-shrink:0;line-height:1;font-family:'Courier New',monospace;transition:color .4s cubic-bezier(.34,1.56,.64,1)}
+#ciWidget .ci-step-label{font-size:20px;font-weight:bold;line-height:1.3;transition:opacity .3s}
+#ciWidget .ci-svg-wrap{border-radius:10px;overflow:hidden;margin-bottom:12px}
+#ciWidget .ci-svg-wrap svg{display:block;width:100%}
+#ciWidget .ci-prog{height:2px;background:rgba(255,255,255,0.25);border-radius:2px;overflow:hidden;margin-bottom:8px}
+#ciWidget .ci-prog-fill{height:100%;border-radius:2px;transition:width .08s linear}
+#ciWidget .ci-controls{text-align:center}
+#ciWidget .ci-btn{background:transparent;border:1px solid rgba(255,255,255,0.4);color:rgba(255,255,255,0.8);border-radius:5px;padding:4px 14px;cursor:pointer;font-size:9px;font-family:inherit;letter-spacing:.1em}
+#ciWidget .ci-lcd-text{transition:opacity 1s ease,fill 1s ease}
+#ciWidget .ci-bill-group{transition:transform 3s cubic-bezier(.34,1.38,.64,1),opacity .4s}
+#ciWidget .ci-coin-group{transition:transform 3s cubic-bezier(.34,1.38,.64,1),opacity .4s}
+#ciWidget .ci-token{opacity:0;transition:opacity 1.6s}
+#ciWidget .ci-token.visible{opacity:1}
+@keyframes ciCb0{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes ciCb1{0%,100%{transform:translateY(0)}50%{transform:translateY(-9px)}}
+@keyframes ciCb2{0%,100%{transform:translateY(0)}50%{transform:translateY(-5px)}}
+@keyframes ciCb3{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+@keyframes ciCb4{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+@keyframes ciCb5{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+#ciWidget .ci-token.t0{animation:ciCb0 3.6s ease-in-out 0s infinite}
+#ciWidget .ci-token.t1{animation:ciCb1 3.6s ease-in-out .48s infinite}
+#ciWidget .ci-token.t2{animation:ciCb2 3.6s ease-in-out .96s infinite}
+#ciWidget .ci-token.t3{animation:ciCb3 3.6s ease-in-out .24s infinite}
+#ciWidget .ci-token.t4{animation:ciCb4 3.6s ease-in-out .72s infinite}
+#ciWidget .ci-token.t5{animation:ciCb5 3.6s ease-in-out 1.44s infinite}
+#ciWidget .ci-token.t6{animation:ciCb0 3.6s ease-in-out 1.2s infinite}
+#ciWidget .ci-token.t7{animation:ciCb2 3.6s ease-in-out 1.92s infinite}
+@keyframes ciLabelIn{0%{opacity:0;transform:translateY(6px)}100%{opacity:1;transform:translateY(0)}}
+#ciWidget circle.ci-led{fill:#0055ff;opacity:0.7}
+#ciWidget .ci-slot-strip{fill:#001188;opacity:0.8}
+@keyframes ciLedFlicker{0%{fill:#0055ff;opacity:0.7}20%{fill:#aa44ff;opacity:1}40%{fill:#eeeeff;opacity:0.95}60%{fill:#44ddff;opacity:1}80%{fill:#8833ff;opacity:0.85}100%{fill:#0055ff;opacity:0.7}}
+@keyframes ciStripFlicker{0%{fill:#001188;opacity:0.8}20%{fill:#cc44ff;opacity:1}40%{fill:#ffffff;opacity:0.9}60%{fill:#44eeff;opacity:1}80%{fill:#8833ff;opacity:0.85}100%{fill:#001188;opacity:0.8}}
+#ciWidget circle.ci-led.ci-active{animation:ciLedFlicker 1.8s ease-in-out infinite}
+#ciWidget #ciLed0.ci-active{animation-delay:0s}
+#ciWidget #ciLed1.ci-active{animation-delay:0.15s}
+#ciWidget #ciLed2.ci-active{animation-delay:0.30s}
+#ciWidget #ciLed3.ci-active{animation-delay:0.45s}
+#ciWidget #ciLed4.ci-active{animation-delay:0.60s}
+#ciWidget .ci-slot-strip.ci-active{animation:ciStripFlicker 1.4s ease-in-out infinite}
+</style>
+<div id="ciWidget">
+  <div class="ci-step-ind" id="ciStepBox">
+    <div class="ci-step-num" id="ciStepNum">1</div>
+    <div><div class="ci-step-label" id="ciStepLabel"></div></div>
+  </div>
+  <div class="ci-svg-wrap">
+    <svg viewBox="0 0 180 233" xmlns="http://www.w3.org/2000/svg">
+      <defs>
+        <clipPath id="ciTrayClip"><rect x="22" y="204" width="136" height="21" rx="3"/></clipPath>
+        <clipPath id="ciBillClip"><rect x="89" y="95" width="36" height="65"/></clipPath>
+      </defs>
+      <!-- Static machine -->
+      <rect x="18" y="8" width="144" height="192" rx="7" fill="#1c1c1c" stroke="#3a3a3a" stroke-width="1.5"/>
+      <rect x="18" y="8" width="144" height="9" rx="4" fill="#f5c400"/>
+      <text x="90" y="14" text-anchor="middle" fill="#111" font-size="4" font-family="monospace" font-weight="bold">THIS MACHINE DOESN'T GIVE CHANGE</text>
+      <rect x="18" y="21" width="144" height="42" fill="#111"/>
+      <!-- OK Button -->
+      <text x="29" y="24" text-anchor="middle" fill="#555" font-size="4" font-family="monospace">OK</text>
+      <rect x="20" y="25" width="22" height="18" rx="3" fill="#001166" stroke="#4488ff" stroke-width="1.5"/>
+      <rect x="22" y="27" width="18" height="14" rx="2" fill="#0055cc"/>
+      <text x="31" y="37" text-anchor="middle" fill="white" font-size="7" font-family="monospace" font-weight="bold">OK</text>
+      <!-- SEL Button -->
+      <text x="57" y="24" text-anchor="middle" fill="#555" font-size="4" font-family="monospace">SEL</text>
+      <rect x="48" y="25" width="22" height="18" rx="3" fill="#002200" stroke="#33cc33" stroke-width="1.5"/>
+      <rect x="50" y="27" width="18" height="14" rx="2" fill="#009900"/>
+      <text x="59" y="37" text-anchor="middle" fill="white" font-size="6.5" font-family="monospace" font-weight="bold">SEL</text>
+      <!-- LCD -->
+      <rect x="78" y="24" width="82" height="26" rx="3" fill="#000066" stroke="#2222aa" stroke-width="1"/>
+      <rect x="80" y="26" width="78" height="22" rx="2" id="ciLcdBg" fill="#000099"/>
+      <text id="ciLcdLine1" x="119" y="39" text-anchor="middle" fill="#8899ff" font-size="6.5" font-family="monospace" font-weight="bold" letter-spacing="0.4" class="ci-lcd-text">CHANGEONE</text>
+      <text id="ciLcdLine2" x="119" y="44" text-anchor="middle" fill="#8899ff" font-size="6" font-family="monospace" font-weight="bold" letter-spacing="0.4" class="ci-lcd-text" opacity="0"></text>
+      <!-- Separator + main panel -->
+      <rect x="18" y="63" width="144" height="4" fill="#0a0a0a"/>
+      <rect x="18" y="67" width="144" height="103" fill="#1c1c1c"/>
+      <!-- NAYAX terminal -->
+      <rect x="22" y="72" width="52" height="64" rx="5" fill="#f5c400" stroke="#c8a000" stroke-width="1.5"/>
+      <rect x="24" y="75" width="48" height="38" rx="3" fill="#080812"/>
+      <rect x="27" y="78" width="18" height="10" rx="1" fill="#1a44a8"/>
+      <text x="36" y="86" text-anchor="middle" fill="white" font-size="5" font-family="serif" font-weight="bold" font-style="italic">VISA</text>
+      <circle cx="49" cy="83" r="5" fill="#eb001b" opacity="0.85"/>
+      <circle cx="54" cy="83" r="5" fill="#f79e1b" opacity="0.85"/>
+      <text x="48" y="97" text-anchor="middle" fill="#888" font-size="3.5" font-family="sans-serif">Samsung Pay  Apple Pay</text>
+      <rect x="27" y="100" width="42" height="10" rx="2" fill="#0a0a18"/>
+      <text x="48" y="107" text-anchor="middle" fill="#444" font-size="6.5" font-family="monospace">‹  ≡  ›</text>
+      <text x="48" y="126" text-anchor="middle" fill="#555" font-size="4" font-family="sans-serif" font-weight="bold">NAYAX</text>
+      <rect x="24" y="117" width="48" height="14" rx="3" fill="#111" stroke="#2a2a2a" stroke-width="1"/>
+      <ellipse cx="48" cy="124" rx="15" ry="4.5" fill="#141428"/>
+      <!-- Bill acceptor -->
+      <rect x="80" y="72" width="54" height="22" rx="3" fill="#090909" stroke="#2a2a2a" stroke-width="1"/>
+      <rect x="82" y="74" width="50" height="18" rx="2" fill="#111"/>
+      <circle id="ciLed0" class="ci-led" cx="86"  cy="83" r="3" fill="#0055ff" opacity="0.7"/>
+      <circle id="ciLed1" class="ci-led" cx="97"  cy="83" r="3" fill="#0055ff" opacity="0.7"/>
+      <circle id="ciLed2" class="ci-led" cx="108" cy="83" r="3" fill="#0055ff" opacity="0.7"/>
+      <circle id="ciLed3" class="ci-led" cx="119" cy="83" r="3" fill="#0055ff" opacity="0.7"/>
+      <circle id="ciLed4" class="ci-led" cx="130" cy="83" r="3" fill="#0055ff" opacity="0.7"/>
+      <!-- Glowing insertion strip -->
+      <rect class="ci-slot-strip" id="ciSlotStrip" x="83" y="88" width="48" height="5" rx="1" fill="#001188" opacity="0.8"/>
+      <!-- Badge 1 — Bill acceptor -->
+      <rect x="133" y="71" width="11" height="9" rx="2" fill="#0044cc"/>
+      <text x="138.5" y="77.5" text-anchor="middle" fill="white" font-size="6.5" font-family="sans-serif" font-weight="bold">1</text>
+      <!-- HIRA branding -->
+      <text x="107" y="118" text-anchor="middle" fill="#aaa" font-size="12" font-family="sans-serif" font-weight="bold" font-style="italic">HIRA</text>
+      <line x1="84" y1="121" x2="130" y2="121" stroke="#666" stroke-width="0.7"/>
+      <text x="107" y="133" text-anchor="middle" fill="#999" font-size="10" font-family="sans-serif">1</text>
+      <!-- Coin acceptor -->
+      <ellipse cx="150" cy="117" rx="10" ry="32" fill="#5a5a5a" stroke="#888" stroke-width="1.3"/>
+      <ellipse cx="150" cy="117" rx="8"  ry="30" fill="#1a1a1a" stroke="#3a3a3a" stroke-width="0.7"/>
+      <rect x="147" y="95"  width="6" height="14" rx="3" fill="#080808" stroke="#3a3a3a" stroke-width="0.5"/>
+      <rect x="146" y="113" width="8" height="8"  rx="1.5" fill="#2a2a2a" stroke="#555" stroke-width="0.8"/>
+      <rect x="147" y="114" width="6" height="6"  rx="1"   fill="#333"/>
+      <rect x="147" y="125" width="6" height="14" rx="3" fill="#080808" stroke="#3a3a3a" stroke-width="0.5"/>
+      <!-- Badge 2 — Coin acceptor -->
+      <rect x="144" y="83" width="11" height="9" rx="2" fill="#0044cc"/>
+      <text x="149.5" y="89.5" text-anchor="middle" fill="white" font-size="6.5" font-family="sans-serif" font-weight="bold">2</text>
+      <!-- Warning strips -->
+      <rect x="18" y="170" width="144" height="9" fill="#bb2200"/>
+      <text x="90" y="175" text-anchor="middle" fill="white" font-size="4.5" font-family="monospace" font-weight="bold">POZOR! APARAT NE VRAČA DROBIŽ</text>
+      <rect x="18" y="179" width="144" height="8" fill="#1133aa"/>
+      <text x="90" y="185" text-anchor="middle" fill="white" font-size="3.4" font-family="monospace">THE MACHINE DOES NOT GIVE CHANGE</text>
+      <rect x="24" y="187" width="132" height="6" rx="2" fill="#111"/>
+      <!-- Token tray -->
+      <rect x="18" y="200" width="144" height="29" rx="5" fill="#2a2a2a" stroke="#555" stroke-width="1.3"/>
+      <rect x="22" y="203" width="136" height="23" rx="4" fill="#111" stroke="#333" stroke-width="0.8"/>
+      <rect x="65" y="199" width="50"  height="5"  rx="1" fill="#1e1e1e" stroke="#444" stroke-width="0.5"/>
+      <rect x="18" y="200" width="144" height="2"  rx="2" fill="#444" opacity="0.5"/>
+      <text x="90" y="216" text-anchor="middle" fill="#3a3a3a" font-size="4" font-family="monospace" letter-spacing="1">TOKENS</text>
+      <!-- Dynamic: Tokens in tray (step 3) -->
+      <g clip-path="url(#ciTrayClip)">
+        <circle class="ci-token t0" cx="35"  cy="215" r="4"   fill="#d4d4d4" stroke="#888" stroke-width="0.8"/>
+        <circle class="ci-token t1" cx="50"  cy="216" r="3.5" fill="#b8b8b8" stroke="#888" stroke-width="0.8"/>
+        <circle class="ci-token t2" cx="64"  cy="215" r="4"   fill="#d4d4d4" stroke="#888" stroke-width="0.8"/>
+        <circle class="ci-token t3" cx="78"  cy="216" r="3.5" fill="#b8b8b8" stroke="#888" stroke-width="0.8"/>
+        <circle class="ci-token t4" cx="92"  cy="215" r="4"   fill="#d4d4d4" stroke="#888" stroke-width="0.8"/>
+        <circle class="ci-token t5" cx="106" cy="216" r="3.5" fill="#b8b8b8" stroke="#888" stroke-width="0.8"/>
+        <circle class="ci-token t6" cx="120" cy="215" r="4"   fill="#d4d4d4" stroke="#888" stroke-width="0.8"/>
+        <circle class="ci-token t7" cx="134" cy="216" r="3"   fill="#b8b8b8" stroke="#888" stroke-width="0.8"/>
+      </g>
+      <!-- Banknote entering bill acceptor from below (portrait, slides up) -->
+      <g clip-path="url(#ciBillClip)">
+        <g id="ciBillGroup" class="ci-bill-group" opacity="0" style="transform:translateY(45px)">
+          <image href="euro20_bill.png" x="91" y="44" width="32" height="50" preserveAspectRatio="none"/>
+        </g>
+      </g>
+      <!-- Dynamic: Coin dropping into upper coin slot -->
+      <g id="ciCoinGroup" class="ci-coin-group" opacity="0" style="transform:translateY(-36px)">
+        <circle cx="150" cy="91" r="4.5" fill="#c8a000" stroke="#f5c400" stroke-width="0.8"/>
+        <circle cx="150" cy="91" r="2.5" fill="#e8c000" opacity="0.55"/>
+        <text x="150" y="92.5" text-anchor="middle" fill="#7a5000" font-size="3" font-family="monospace" font-weight="bold">€</text>
+        <line x1="150" y1="97"  x2="150" y2="101" stroke="#f5c400" stroke-width="1.3" stroke-linecap="round" opacity="0.9"/>
+        <polygon points="150,104 147.2,100 152.8,100" fill="#f5c400" opacity="0.9"/>
+      </g>
+    </svg>
+  </div>
+</div>
+<script>
+(function(){
+const STEPS_CI=[
+  {id:1,label:'Vstavite bankovec v režo 1 (zgoraj)',color:"#ffffff"},
+  {id:2,label:'Vstavite kovanec v režo 2 (spodaj)', color:"#ffffff"},
+  {id:3,label:'Žetoni se sprostijo v pladenj',       color:"#d4d4d4"},
+];
+const STEP_MS=24000,TICK_MS=60,MAX_TICK=STEP_MS/TICK_MS;
+let step=0,tick=0,paused=false;
+const $=id=>document.getElementById(id);
+const ciStepBox=$("ciStepBox"),ciStepNum=$("ciStepNum"),ciStepLabel=$("ciStepLabel");
+const ciLcdBg=$("ciLcdBg"),ciLcdLine1=$("ciLcdLine1"),ciLcdLine2=$("ciLcdLine2");
+const ciBillGroup=$("ciBillGroup"),ciCoinGroup=$("ciCoinGroup");
+const ciLeds=[0,1,2,3,4].map(i=>$("ciLed"+i));
+const ciTokens=document.querySelectorAll("#ciWidget .ci-token");
+function setLCD(t1,t2,ok){
+  ciLcdBg.setAttribute("fill",ok?"#002200":"#000099");
+  const col=ok?"#44ee44":"#8899ff";
+  if(t2){ciLcdLine1.setAttribute("y","34");ciLcdLine1.setAttribute("font-size","6");ciLcdLine2.setAttribute("opacity","1");ciLcdLine2.textContent=t2;}
+  else{ciLcdLine1.setAttribute("y","39");ciLcdLine1.setAttribute("font-size","6.5");ciLcdLine2.setAttribute("opacity","0");}
+  ciLcdLine1.setAttribute("fill",col);ciLcdLine2.setAttribute("fill",col);
+  if(ciLcdLine1.textContent!==t1){ciLcdLine1.style.opacity="0";setTimeout(()=>{ciLcdLine1.textContent=t1;ciLcdLine1.style.opacity="1";},600);}
+}
+function setLeds(active){ciLeds.forEach(l=>l.classList.toggle("ci-active",active));const strip=document.getElementById("ciSlotStrip");if(strip)strip.classList.toggle("ci-active",active);}
+function setBill(v,n){ciBillGroup.style.opacity=v?"1":"0";ciBillGroup.style.transform=v&&n?"translateY(0)":"translateY(45px)";}
+function setCoin(v,n){ciCoinGroup.style.opacity=v?"1":"0";ciCoinGroup.style.transform=v&&n?"translateY(0)":"translateY(-36px)";}
+function setTokens(v){ciTokens.forEach(t=>t.classList.toggle("visible",v));}
+function render(){
+  switch(step){
+    case 0:{const ph=tick%360,near=ph>120,done=ph>270;setLCD(done?"ACCEPTED!":near?"READING...":"INSERT BILL","",done);setLeds(near&&!done);setBill(!done,near);setCoin(false,false);setTokens(false);break;}
+    case 1:{const ph=tick%360,near=ph>120,done=ph>270;setLCD(done?"ACCEPTED!":near?"READING...":"INSERT COIN","",done);setLeds(false);setBill(false,false);setCoin(!done,near);setTokens(false);break;}
+    case 2:{setLCD("APPROVED!","",true);setLeds(false);setBill(false,false);setCoin(false,false);setTokens(true);break;}
+  }
+}
+function updateStepUI(){const s=STEPS_CI[step];ciStepBox.style.borderColor=s.color+"33";ciStepNum.style.color=s.color;ciStepNum.textContent=s.id;ciStepLabel.style.animation="none";ciStepLabel.offsetHeight;ciStepLabel.style.animation="ciLabelIn 1.4s cubic-bezier(.34,1.4,.64,1) forwards";ciStepLabel.textContent=s.label;}
+let lastStep=-1;
+function loop(){if(!paused){tick++;if(tick>=MAX_TICK){tick=0;step=(step+1)%STEPS_CI.length;}}if(step!==lastStep){updateStepUI();lastStep=step;}render();requestAnimationFrame(loop);}
+updateStepUI();requestAnimationFrame(loop);
+$("ciBtnPlay").addEventListener("click",()=>{paused=!paused;$("ciBtnPlay").textContent=paused?"▶":"⏸";});
+$("ciBtnPrev").addEventListener("click",()=>{step=(step-1+STEPS_CI.length)%STEPS_CI.length;tick=0;lastStep=-1;paused=true;$("ciBtnPlay").textContent="▶";});
+$("ciBtnNext").addEventListener("click",()=>{step=(step+1)%STEPS_CI.length;tick=0;lastStep=-1;paused=true;$("ciBtnPlay").textContent="▶";});
+})();
+</script>
+
+                        <!-- Accepted Money -->
+                        <div style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 10px 12px; margin-top: 12px; backdrop-filter: blur(10px); display: flex; flex-direction: column; gap: 8px;">
                             <div style="font-weight: 600; font-size: 14px; opacity: 0.95;">
                                 <span class="lang-si">Aparat sprejema:</span>
                                 <span class="lang-en">The changer accepts:</span>
                             </div>
-                            <!-- Denominations image (title cropped out) -->
                             <img src="cash_accepted_clean.png" style="width: 100%; display: block; border-radius: 6px;">
                         </div>
-
-                        <!-- Cash Steps -->
-                        <div class="payment-steps"
-                            style="flex-grow: 1; display: flex; flex-direction: column; gap: 8px;">
-                            <!-- Consolidated Step 1 & 2 -->
-                            <div
-                                style="background: rgba(255, 255, 255, 0.15); border-radius: 12px; padding: 10px; backdrop-filter: blur(10px); display: flex; align-items: center; gap: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.05);">
-                                <div
-                                    style="background: white; color: #11998e; width: 36px; height: 36px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-weight: 800; font-size: 18px; flex-shrink: 0; box-shadow: 0 2px 8px rgba(0,0,0,0.1);">
-                                    1</div>
-                                <div>
-                                    <div style="font-weight: 600; font-size: 15px; margin-bottom: 2px;">
-                                        <span class="lang-si">Vstavite denar</span>
-                                        <span class="lang-en">Insert money</span>
-                                    </div>
-                                    <div style="font-size: 12px; opacity: 0.9; margin-bottom: 6px;">
-                                        <span class="lang-si">Bankovec zgoraj, kovanec spodaj.</span>
-                                        <span class="lang-en">Bill in top slot, coin in bottom slot.</span>
-                                    </div>
-                                    <div style="display: flex; gap: 8px; align-items: center;">
-                                        <div
-                                            style="background: rgba(255,255,255,0.2); border-radius: 6px; padding: 4px 8px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 4px;">
-                                            <img src="icon_bill.png" style="height: 22px; width: auto;"> <span>➡️</span> 📥
-                                        </div>
-                                        <div
-                                            style="font-size: 11px; font-weight: 700; color: rgba(255,255,255,0.8); display: flex; align-items: center;">
-                                            <span class="lang-si">ALI</span><span class="lang-en">OR</span>
-                                        </div>
-                                        <div
-                                            style="background: rgba(255,255,255,0.2); border-radius: 6px; padding: 4px 8px; font-size: 13px; font-weight: 600; display: flex; align-items: center; gap: 6px;">
-                                            <img src="icon_coin.png" style="height: 22px; width: auto;"> <span>➡️</span> 📥
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div style="flex-grow: 1;"></div> <!-- Spacer so warning is at bottom -->
-
-                            <!-- Important Warning -->
-                            <div
-                                style="background: rgba(255, 193, 7, 0.2); border: 1px solid rgba(255, 193, 7, 0.4); border-radius: 12px; padding: 10px; margin-top: auto; backdrop-filter: blur(10px);">
-                                <div style="display: flex; align-items: start; gap: 10px;">
-                                    <div style="font-size: 20px; flex-shrink: 0;">⚠️</div>
-                                    <div>
-                                        <div
-                                            style="font-weight: 700; margin-bottom: 2px; font-size: 13px; color: #fff;">
-                                            <span class="lang-si">Če menjalec ne sprejema</span>
-                                            <span class="lang-en">If it doesn't accept money</span>
-                                        </div>
-                                        <div style="font-size: 12px; opacity: 0.95; line-height: 1.3;">
-                                            <span class="lang-si">Poskusite ponovno (obrnite bankovec ali močneje
-                                                potisnite kovanec).</span>
-                                            <span class="lang-en">Try again (flip the bill or push the coin
-                                                harder).</span>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Video Instructions Cash Payment -->
-                        <div class="video-container"
-                            style="background: rgba(0, 0, 0, 0.2); border-radius: 12px; height: 160px; display: flex; align-items: center; justify-content: center; margin-top: 10px; transition: background 0.2s; position: relative;">
-                            <div style="text-align: center; color: white;">
-                                <div style="font-size: 40px; margin-bottom: 6px; opacity: 0.8;">▶️</div>
-                                <div style="font-size: 16px; font-weight: 700; margin-bottom: 2px;">
-                                    <span class="lang-si">Video navodila</span>
-                                    <span class="lang-en">Video instructions</span>
-                                </div>
-                                <div style="font-size: 13px; opacity: 0.8; color: rgba(255, 255, 255, 0.9);">
-                                    <span class="lang-si">Plačilo z gotovino</span>
-                                    <span class="lang-en">Cash payment</span>
-                                </div>
-                            </div>
-                            <div
-                                style="position: absolute; bottom: 12px; right: 12px; background: rgba(0, 0, 0, 0.6); padding: 4px 8px; border-radius: 6px; font-size: 11px; color: white; font-weight: 600;">
-                                1:30
-                            </div>
-                        </div>
                     </div>
-
-                    <!-- Column 3: Token Machine Photo -->
-                    <div style="position: sticky; top: 20px;">
-                        <div style="text-align: center;">
-                            <img src="menjalec.jpg" alt="Token Machine"
-                                style="width: 100%; height: auto; border-radius: 16px; box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);">
-                        </div>
-                    </div>
-
-
-
                 </div>
             </div>
-
 
             <!-- Tab 5: TROUBLESHOOTING -->
             <div class="tab-content" id="problems">
