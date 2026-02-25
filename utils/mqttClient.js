@@ -12,12 +12,12 @@ class MqttClient extends EventEmitter {
 
         // Structure for storing machines (Galjevica location)
         this.machines = {
-            1: { id: 1, name: "Pralnik 9kg", power: 0, isRunning: false, startedAt: null, lastStartedAt: null },
-            2: { id: 2, name: "Pralnik 9kg (+Ozon)", power: 0, isRunning: false, startedAt: null, lastStartedAt: null },
-            3: { id: 3, name: "Pralnik 15kg (+Ozon)", power: 0, isRunning: false, startedAt: null, lastStartedAt: null },
-            4: { id: 4, name: "Pralnik 20kg", power: 0, isRunning: false, startedAt: null, lastStartedAt: null },
-            5: { id: 5, name: "Sušilnik (blok 1)", power: 0, isRunning: false, startedAt: null, lastStartedAt: null },
-            6: { id: 6, name: "Sušilnik (blok 2)", power: 0, isRunning: false, startedAt: null, lastStartedAt: null }
+            1: { id: 1, name: "Pralnik 10kg #1", power: 0, isRunning: false, startedAt: null, lastStartedAt: null },
+            2: { id: 2, name: "Pralnik 10kg #2", power: 0, isRunning: false, startedAt: null, lastStartedAt: null },
+            3: { id: 3, name: "Pralnik 10kg #3", power: 0, isRunning: false, startedAt: null, lastStartedAt: null },
+            4: { id: 4, name: "Pralnik 18kg", power: 0, isRunning: false, startedAt: null, lastStartedAt: null },
+            5: { id: 5, name: "Sušilnik #1", power: 0, isRunning: false, startedAt: null, lastStartedAt: null },
+            6: { id: 6, name: "Sušilnik #2", power: 0, isRunning: false, startedAt: null, lastStartedAt: null }
         };
 
         // Timers to avoid false positives on short power drops (e.g. during a wash cycle pause)
