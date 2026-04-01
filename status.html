@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Smart Wash – Stanje naprav</title>
+    <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%23C0251C'/%3E%3Ctext x='16' y='21' text-anchor='middle' fill='white' font-family='Arial Black%2CArial%2Csans-serif' font-weight='900' font-size='13'%3ESW%3C/text%3E%3C/svg%3E">
     <style>
         * {
             box-sizing: border-box;
@@ -44,6 +45,102 @@
             letter-spacing: 0.3px;
         }
 
+        .stats-bar {
+            background: #0a0c14;
+            border-bottom: 1px solid #1e2130;
+            padding: 14px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .stats-summary {
+            display: flex;
+            gap: 28px;
+        }
+
+        .stat-item {
+            display: flex;
+            flex-direction: column;
+            gap: 3px;
+        }
+
+        .stat-label {
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .stat-val {
+            font-size: 15px;
+            font-weight: 600;
+            color: #e0e0e0;
+        }
+
+        .stats-revenue {
+            display: flex;
+            gap: 24px;
+            align-items: flex-start;
+        }
+
+        .rev-item {
+            display: flex;
+            flex-direction: column;
+            align-items: flex-end;
+            gap: 3px;
+        }
+
+        .rev-label {
+            font-size: 10px;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 0.06em;
+        }
+
+        .rev-val {
+            font-size: 26px;
+            font-weight: 700;
+            color: #22C55E;
+        }
+
+        .rev-val.yesterday {
+            font-size: 20px;
+            color: #aaa;
+        }
+
+        .rev-delta {
+            font-size: 11px;
+            font-weight: 600;
+            padding: 1px 6px;
+            border-radius: 20px;
+            margin-top: 2px;
+        }
+
+        .rev-delta.up {
+            background: rgba(34, 197, 94, 0.15);
+            color: #22C55E;
+        }
+
+        .rev-delta.down {
+            background: rgba(239, 68, 68, 0.15);
+            color: #EF4444;
+        }
+
+        .rev-delta.same {
+            background: rgba(255, 255, 255, 0.05);
+            color: #666;
+        }
+
+        .rev-divider {
+            width: 1px;
+            background: #1e2130;
+            align-self: stretch;
+            margin: 0 4px;
+        }
+
         main {
             max-width: 600px;
             margin: 0 auto;
@@ -58,7 +155,7 @@
 
         .location-label {
             font-size: 13px;
-            color: #999;
+            color: #bbb;
             margin-bottom: 20px;
         }
 
@@ -68,16 +165,87 @@
             gap: 10px;
         }
 
-        @media (max-width: 400px) {
+        @media (max-width: 480px) {
+            .stats-bar {
+                padding: 10px 14px;
+                gap: 10px;
+            }
+
+            .stats-summary {
+                gap: 16px;
+            }
+
+            .stat-val {
+                font-size: 13px;
+            }
+
+            .rev-val {
+                font-size: 20px;
+            }
+
+            .rev-val.yesterday {
+                font-size: 16px;
+            }
+
+            main {
+                padding: 12px 10px 24px;
+            }
+
+            .page-title {
+                font-size: 16px;
+                margin-bottom: 2px;
+            }
+
+            .location-label {
+                font-size: 11px;
+                margin-bottom: 12px;
+            }
+
             .machines-grid {
-                grid-template-columns: 1fr;
+                gap: 6px;
+            }
+
+            .machine-card {
+                padding: 8px 10px;
+                display: flex;
+                flex-direction: column;
+                gap: 4px;
+            }
+
+            .machine-name {
+                font-size: 11px;
+                margin-bottom: 0;
+                line-height: 1.2;
+            }
+
+            .status-badge {
+                font-size: 10px;
+                padding: 3px 8px;
+                gap: 4px;
+                align-self: flex-start;
+            }
+
+            .status-dot {
+                width: 5px;
+                height: 5px;
+            }
+
+            .machine-stats {
+                margin-top: 0;
+                font-size: 10px;
+                gap: 6px;
+            }
+
+            .machine-power {
+                margin-top: 0;
+                font-size: 9px;
             }
         }
 
         .machine-card {
             background: #1a1d27;
-            border-radius: 12px;
-            padding: 16px;
+            border-radius: 10px;
+            padding: 12px 14px;
             border: 1px solid #2a2d3a;
             transition: border-color 0.3s;
         }
@@ -89,8 +257,8 @@
         .machine-name {
             font-size: 13px;
             font-weight: 600;
-            color: #ccc;
-            margin-bottom: 10px;
+            color: #e8e8e8;
+            margin-bottom: 6px;
             line-height: 1.3;
         }
 
@@ -149,24 +317,24 @@
             display: flex;
             gap: 10px;
             font-size: 12px;
-            color: #666;
+            color: #aaa;
         }
 
         .machine-power {
             margin-top: 4px;
             font-size: 11px;
-            color: #444;
+            color: #888;
         }
 
         .footer-info {
             margin-top: 24px;
             text-align: center;
             font-size: 12px;
-            color: #444;
+            color: #888;
         }
 
         #last-updated {
-            color: #555;
+            color: #aaa;
         }
 
         .error-msg {
@@ -187,6 +355,36 @@
         <span class="logo">⚡ Smart Wash</span>
         <a href="/">← Nazaj na stran</a>
     </header>
+
+    <div class="stats-bar">
+        <div class="stats-summary">
+            <div class="stat-item">
+                <span class="stat-label">Pranja danes</span>
+                <span class="stat-val" id="stat-washes">–</span>
+            </div>
+            <div class="stat-item">
+                <span class="stat-label">Sušenje danes</span>
+                <span class="stat-val" id="stat-drying">–</span>
+            </div>
+        </div>
+        <div class="stats-revenue">
+            <div class="rev-item">
+                <span class="rev-label">Danes</span>
+                <span class="rev-val" id="stat-rev-today">–</span>
+                <span class="rev-delta same" id="stat-rev-delta"></span>
+            </div>
+            <div class="rev-divider"></div>
+            <div class="rev-item">
+                <span class="rev-label">Včeraj</span>
+                <span class="rev-val yesterday" id="stat-rev-yesterday">–</span>
+            </div>
+            <div class="rev-divider"></div>
+            <div class="rev-item">
+                <span class="rev-label">Mesec</span>
+                <span class="rev-val" id="stat-rev-month">–</span>
+            </div>
+        </div>
+    </div>
 
     <main>
         <div class="page-title">Stanje naprav</div>
@@ -213,7 +411,7 @@
             8: 'Sušilnik B2'
         };
 
-        const API_URL = 'https://claude-production-e0ea.up.railway.app';
+        const API_URL = '';
         const grid = document.getElementById('machines-grid');
 
         function formatElapsed(startedAt) {
@@ -233,7 +431,80 @@
             return new Date(iso).toLocaleTimeString('sl-SI', { hour: '2-digit', minute: '2-digit' });
         }
 
+        function formatDuration(ms) {
+            if (!ms || ms <= 0) return '0m';
+            const totalMin = Math.floor(ms / 60000);
+            return `${totalMin}m`;
+        }
+
         let todayStats = {};
+        let monthStats = {};
+
+        function calcStats(statsData, monthPrefix) {
+            let washCount = 0;
+            let dryMs = 0;
+            let revenue = 0;
+
+            for (const [date, dayData] of Object.entries(statsData)) {
+                if (monthPrefix && !date.startsWith(monthPrefix)) continue;
+                const s1 = dayData[1]?.starts || 0;
+                const s2 = dayData[2]?.starts || 0;
+                const s3 = dayData[3]?.starts || 0;
+                const s4 = dayData[4]?.starts || 0;
+                revenue += (s1 + s2 + s3) * 5 + s4 * 8;
+                washCount += s1 + s2 + s3 + s4;
+                const dry = [5, 6, 7, 8].reduce((sum, ch) => sum + (dayData[ch]?.runtimeMs || 0), 0);
+                revenue += dry / 360000; // €1 per 6 min = €10/h
+                dryMs += dry;
+            }
+
+            return { washCount, dryMs, revenue };
+        }
+
+        function updateStatsBar() {
+            const today = new Date().toISOString().slice(0, 10);
+            const month = today.slice(0, 7);
+
+            // Yesterday's date string
+            const yDate = new Date();
+            yDate.setDate(yDate.getDate() - 1);
+            const yesterday = yDate.toISOString().slice(0, 10);
+
+            const t = calcStats({ [today]: todayStats[today] || {} }, null);
+            const y = calcStats({ [yesterday]: monthStats[yesterday] || {} }, null);
+            const mon = calcStats(monthStats, month);
+
+            document.getElementById('stat-washes').textContent = t.washCount + '×';
+            document.getElementById('stat-drying').textContent = formatDuration(t.dryMs);
+            document.getElementById('stat-rev-today').textContent = '€' + Math.round(t.revenue);
+            document.getElementById('stat-rev-month').textContent = '€' + Math.round(mon.revenue);
+
+            // Yesterday
+            const yEl = document.getElementById('stat-rev-yesterday');
+            yEl.textContent = '€' + Math.round(y.revenue);
+
+            // Delta badge vs yesterday
+            const deltaEl = document.getElementById('stat-rev-delta');
+            const todayRev = Math.round(t.revenue);
+            const yestRev = Math.round(y.revenue);
+            if (yestRev === 0) {
+                deltaEl.textContent = '';
+                deltaEl.className = 'rev-delta same';
+            } else {
+                const diff = todayRev - yestRev;
+                const pct = Math.round((diff / yestRev) * 100);
+                if (diff > 0) {
+                    deltaEl.textContent = `▲ ${pct}%`;
+                    deltaEl.className = 'rev-delta up';
+                } else if (diff < 0) {
+                    deltaEl.textContent = `▼ ${Math.abs(pct)}%`;
+                    deltaEl.className = 'rev-delta down';
+                } else {
+                    deltaEl.textContent = '– 0%';
+                    deltaEl.className = 'rev-delta same';
+                }
+            }
+        }
 
         function renderMachines(machines) {
             grid.innerHTML = '';
@@ -248,6 +519,17 @@
                 const stat = dayStats[id] || {};
                 const startsToday = stat.starts || 0;
                 const lastStart = m.lastStartedAt || null;
+                const isDryer = id >= 5 && id <= 8;
+
+                // For dryers: show total running time today (runtimeMs + current session if running)
+                let dryerTimeToday = '';
+                if (isDryer) {
+                    let msToday = stat.runtimeMs || 0;
+                    if (m.isRunning && m.startedAt) {
+                        msToday += Date.now() - new Date(m.startedAt).getTime();
+                    }
+                    dryerTimeToday = formatDuration(msToday);
+                }
 
                 const card = document.createElement('div');
                 card.className = `machine-card ${m.isRunning ? 'busy' : ''}`;
@@ -258,7 +540,10 @@
                     ${m.isRunning ? `Zasedena · ${elapsed}` : 'Prosta'}
                 </div>
                 <div class="machine-stats">
-                    <span title="Puskov danes">🔁 ${startsToday}×</span>
+                    ${isDryer
+                        ? `<span title="Skupaj čas sušenja danes">⏱ ${dryerTimeToday || '0m'}</span>`
+                        : `<span title="Zagonov danes">🔁 ${startsToday}×</span>`
+                    }
                     <span title="Zadnji zagon">${lastStart ? '🕐 ' + formatTime(lastStart) : ''}</span>
                 </div>
                 <div class="machine-power">${m.power > 0 ? m.power.toFixed(1) + ' W' : ''}</div>
@@ -273,14 +558,17 @@
 
         async function fetchStatus() {
             try {
-                const [statusRes, statsRes] = await Promise.all([
+                const [statusRes, statsRes, monthRes] = await Promise.all([
                     fetch(`${API_URL}/api/laundry-status`),
-                    fetch(`${API_URL}/api/stats?days=1`)
+                    fetch(`${API_URL}/api/stats?days=1`),
+                    fetch(`${API_URL}/api/stats?days=30`)
                 ]);
                 if (!statusRes.ok) throw new Error('HTTP ' + statusRes.status);
                 const machines = await statusRes.json();
                 if (statsRes.ok) todayStats = await statsRes.json();
+                if (monthRes.ok) monthStats = await monthRes.json();
                 renderMachines(machines);
+                updateStatsBar();
                 document.getElementById('last-updated').textContent =
                     new Date().toLocaleTimeString('sl-SI', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
             } catch (e) {

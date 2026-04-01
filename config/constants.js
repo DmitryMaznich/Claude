@@ -1,7 +1,7 @@
 const CONSTANTS = {
     WEBSITE_URL: 'https://www.smart-wash.si',
     UPLOADS_DIR: 'uploads',
-    ANTHROPIC_MODEL: 'claude-3-haiku-20240307',
+    ANTHROPIC_MODEL: 'claude-3-5-haiku-20241022',
     FILE_LIMITS: {
         MAX_SIZE: 5 * 1024 * 1024, // 5MB
         ALLOWED_EXTENSIONS: /\.(jpg|jpeg|png|webp|gif)$/i,

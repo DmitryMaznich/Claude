@@ -126,6 +126,21 @@ mqttClient.on('machineStopped', (machine) => {
 // Actually attempt connection
 if (process.env.MQTT_BROKER_URL) {
     mqttClient.connect(process.env.MQTT_BROKER_URL, mqttOptions);
+
+    // Watchdog: if no messages for 5 min and disconnected → force reconnect
+    setInterval(() => {
+        const debug = mqttClient.debug;
+        if (debug.isConnected) return;
+        const lastMsg = debug.lastMessageAt ? new Date(debug.lastMessageAt) : null;
+        const silentMs = lastMsg ? Date.now() - lastMsg.getTime() : Infinity;
+        if (silentMs > 5 * 60 * 1000) {
+            console.warn('[MQTT Watchdog] Disconnected >5min, forcing reconnect...');
+            try {
+                if (mqttClient.client) mqttClient.client.end(true);
+            } catch (e) {}
+            setTimeout(() => mqttClient.connect(process.env.MQTT_BROKER_URL, mqttOptions), 2000);
+        }
+    }, 60 * 1000);
 } else {
     console.log('⚠️ Skipping MQTT initialization: Missing MQTT_BROKER_URL in .env');
 }
@@ -1878,40 +1893,48 @@ app.listen(PORT, '0.0.0.0', async () => {
     console.log(`💬 Chat API ready`);
     console.log(`🌐 Environment: ${process.env.NODE_ENV || 'development'}`);
 
-    // Set up Telegram webhook
+    // Set up Telegram polling (no public HTTPS needed)
     if (bot) {
-        const webhookUrl = `https://claude-production-e0ea.up.railway.app/telegram/webhook`;
         try {
-            await bot.setWebHook(webhookUrl);
-            console.log(`📱 Telegram webhook set to: ${webhookUrl}`);
-
-            // Set up bot commands for operator chat (group)
-            if (OPERATOR_CHAT_ID) {
-                const operatorCommands = [
-                    { command: 'start', description: 'Show bot info and Chat ID' },
-                    { command: 'menu', description: 'Open operator control panel' },
-                    { command: 'sessions', description: 'Show active sessions' },
-                    { command: 'reply', description: 'Reply to user: /reply [sessionId] [message]' },
-                    { command: 'close', description: 'Close session: /close [sessionId]' },
-                    { command: 'closeall', description: 'Close all sessions' }
-                ];
-
-                await bot.setMyCommands(operatorCommands, {
-                    scope: { type: 'chat', chat_id: OPERATOR_CHAT_ID }
-                });
-                console.log(`📋 Bot commands set for operator chat: ${OPERATOR_CHAT_ID}`);
-                console.log(`   Commands: ${operatorCommands.map(c => '/' + c.command).join(', ')}`);
-            }
-
-            // Clear commands for other chats (so menu button doesn't appear there)
-            await bot.setMyCommands([]);
-            console.log(`📋 Bot commands cleared for other chats`);
-
-            console.log(`💬 Bot ready to receive notifications`);
-        } catch (error) {
-            console.error('Failed to set Telegram webhook:', error.message);
-            console.log(`📱 Telegram bot: notifications may not work`);
+            await bot.deleteWebHook({ drop_pending_updates: true });
+            console.log(`📱 Telegram webhook deleted, starting polling mode`);
+        } catch (e) {
+            console.error('deleteWebHook error:', e.message);
         }
+
+        // Manual long-polling using node-fetch (bypasses SSL issues)
+        const _fetch2 = require('node-fetch');
+        let _pollOffset = 0;
+        async function _doPoll() {
+            try {
+                const token = process.env.TELEGRAM_BOT_TOKEN;
+                const agent = new (require('https').Agent)({ rejectUnauthorized: false });
+                const r = await _fetch2(
+                    `https://api.telegram.org/bot${token}/getUpdates?offset=${_pollOffset + 1}&timeout=25`,
+                    { agent, timeout: 30000 }
+                );
+                const d = await r.json();
+                if (d.ok && d.result && d.result.length > 0) {
+                    for (const upd of d.result) {
+                        _pollOffset = upd.update_id;
+                        try {
+                            await _fetch2(`http://localhost:${PORT}/telegram/webhook`, {
+                                method: 'POST',
+                                headers: { 'Content-Type': 'application/json' },
+                                body: JSON.stringify(upd),
+                                timeout: 10000
+                            });
+                        } catch (e) { console.error('[Poll] forward error:', e.message); }
+                    }
+                }
+            } catch (e) {
+                if (!e.message.includes('timeout') && !e.message.includes('aborted'))
+                    console.error('[Poll]', e.message);
+            }
+            setTimeout(_doPoll, 500);
+        }
+        setTimeout(_doPoll, 1500);
+        console.log(`📱 Telegram polling started`);
     } else {
         console.log(`📱 Telegram bot: disabled`);
     }
@@ -1919,4 +1942,30 @@ app.listen(PORT, '0.0.0.0', async () => {
     // Start checking for inactive sessions every minute
     setInterval(checkInactiveSessions, 60 * 1000);
     console.log(`⏰ Inactivity checker started: sessions will auto-close after 5 minutes of user inactivity`);
+
+    // Push machine status to smart-wash.si hosting every 10 seconds
+    const WEBTASY_PUSH_URL = 'https://smart-wash.si/status-push.php';
+    const WEBTASY_SECRET   = 'SW_Push_2026';
+    async function pushToWebtasy() {
+        try {
+            const fetch2 = require('node-fetch');
+            const https  = require('https');
+            const agent  = new https.Agent({ rejectUnauthorized: false });
+            const opts   = { method: 'POST', agent,
+                             headers: { 'Content-Type': 'application/json', 'X-SW-Secret': WEBTASY_SECRET } };
+            // Push status
+            const machines = mqttClient.getMachines();
+            await fetch2(WEBTASY_PUSH_URL + '?endpoint=status',
+                { ...opts, body: JSON.stringify(machines) });
+            // Push stats (last 30 days)
+            const stats = mqttClient.getStats(30);
+            await fetch2(WEBTASY_PUSH_URL + '?endpoint=stats',
+                { ...opts, body: JSON.stringify(stats) });
+        } catch (e) {
+            // Silent - don't spam logs
+        }
+    }
+    setInterval(pushToWebtasy, 10 * 1000);
+    pushToWebtasy(); // push immediately on start
+    console.log(`📡 Webtasy push started → ${WEBTASY_PUSH_URL}`);
 });
